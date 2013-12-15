@@ -3,7 +3,7 @@ package ze.component.core;
 import ze.component.physics.Collider;
 import ze.component.rendering.Render;
 import ze.object.GameObject;
-import ze.object.Object;
+import ze.object.Node;
 import ze.object.Scene;
 
 /**
@@ -11,12 +11,12 @@ import ze.object.Scene;
  * @author Goh Zi He
  */
 
-class Component extends Object
+class Component extends Node
 {
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
 	public var render(get, null):Render;
-	public var gameObject(default, null):GameObject;
+	public var gameObject(get, null):GameObject;
 	public var scene(get, null):Scene;
 	
 	public function new()
@@ -42,66 +42,46 @@ class Component extends Object
 	
 	private function get_transform():Transform
 	{
-		if (transform == null)
-		{
-			transform = gameObject.transform;
-		}
-		return transform;
+		return gameObject.transform;
 	}
 	
 	private function get_collider():Collider
 	{
-		if (collider == null)
-		{
-			collider = gameObject.collider;
-		}
-		return collider;
+		return gameObject.collider;
 	}
 	
 	private function get_render():Render
 	{
-		if (render == null)
-		{
-			render = gameObject.render;
-		}
-		return render;
+		return gameObject.render;
 	}
 	
-	override public function add<T:Object>(object:T):T 
+	public function addComponent<T:Node>(node:T):T 
 	{
-		if (Std.is(object, Component))
-		{
-			if (gameObject != null)
-			{
-				return gameObject.add(object);
-			}
-		}
-		else if (Std.is(object, GameObject))
-		{
-			if (scene != null)
-			{
-				return scene.add(object);
-			}
-		}
-		trace("Not Added");
-		return null;
+		return addNode(node);
 	}
 	
-	override public function remove(object:Object):Void 
+	public function removeComponent(node:Node):Void 
 	{
-		if (Std.is(object, Component))
-		{
-			gameObject.remove(object);
-		}
-		else if (Std.is(object, GameObject))
-		{
-			scene.remove(object);
-		}
-		return null;
+		removeNode(node);
+	}
+	
+	private function get_gameObject():GameObject
+	{
+		return cast (_parent, GameObject);
 	}
 	
 	private function get_scene():Scene
 	{
 		return gameObject.scene;
 	}
+	
+	//override private function removeNext():Void
+	//{
+		//var child:Component = cast(_child, Component);
+		//if (child != null)
+		//{
+			//child.removeNext();
+		//}
+		//super.removeNext();
+	//}
 }

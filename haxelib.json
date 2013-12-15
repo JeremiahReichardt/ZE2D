@@ -8,6 +8,6 @@
 	"releasenote": "Updated ze file path",
 	"contributors": [ "zine92" ],
 	"dependencies": {
-		"openfl": "1.1.1"
+		"openfl": "1.2.0"
 	}
 }

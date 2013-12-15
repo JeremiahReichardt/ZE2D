@@ -5,7 +5,7 @@ import ze.component.core.Transform;
 import ze.component.physics.Collider;
 import ze.component.rendering.Animation;
 import ze.component.rendering.Render;
-import ze.object.Object;
+import ze.Engine;
 
 /**
  * Base object with a default set of components (Transform, Render)
@@ -13,14 +13,15 @@ import ze.object.Object;
  * @author Goh Zi He
  */
 
-class GameObject extends Object
+class GameObject extends Node
 {
 	public var selected(default, default):Bool;
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
 	public var render(get, null):Render;
 	public var animation(get, null):Animation;
-	public var scene(default, null):Scene;
+	public var scene(get, null):Scene;
+	public var name(default, default):String;
 	
 	public function new(name:String = "", x:Float = 0, y:Float = 0) 
 	{
@@ -29,58 +30,67 @@ class GameObject extends Object
 		enable = true;
 		transform = new Transform();
 		transform.setPos(x, y);
-		add(transform);
+		addComponent(transform);
 	}
 	
-	override private function removed():Void
+	override private function update():Void 
 	{
-		removeAllComponents();
+		super.update();
+		
+		var first:Node = _child.getFirstNode();
+		for (node in first)
+		{
+			node.update();
+		}
 	}
 	
 	public function getComponent<T:Component>(componentType:Class<T>):T
 	{
-		for (component in _objects)
+		var node:Node = _child;
+		while (node._next != null)
 		{
-			if (Std.is(component, componentType))
+			if (Std.is(node, componentType))
 			{
-				return cast component;
+				return cast node;
 			}
+			node = node._next;
 		}
+		
+		node = _child;
+		while (node._previous != null)
+		{
+			if (Std.is(node, componentType))
+			{
+				return cast node;
+			}
+			node = node._previous;
+		}
+		
 		return null;
 	}
 	
-	override public function add<T:Object>(object:T):T 
+	public function addComponent<T:Node>(node:T):T 
 	{
-		if (Std.is(object, Component)) 
+		if (_child == null)
 		{
-			Reflect.setProperty(object, "gameObject", this);
-			return super.add(object);
+			addChild(node);
 		}
-		else if (Std.is(object, GameObject))
+		else
 		{
-			return scene.add(object);
+			_child.addNode(node);
 		}
-		trace("Not component or gameobject");
-		return null;
+		return node;
 	}
 	
-	override public function remove(object:Object):Void 
+	public function removeComponent(node:Node):Void 
 	{
-		if (Std.is(object, Component)) 
+		if (_child == node)
 		{
-			super.remove(object);
+			removeChild(node);
 		}
-		else if (Std.is(object, GameObject))
+		else
 		{
-			return scene.remove(object);
-		}
-	}
-	
-	private function removeAllComponents():Void
-	{
-		for (component in _objects)
-		{
-			remove(component);
+			_child.addNode(node);
 		}
 	}
 	
@@ -118,5 +128,62 @@ class GameObject extends Object
 			animation = getComponent(Animation);
 		}
 		return animation;
+	}
+	
+	private function get_scene():Scene
+	{
+		return cast (Engine.getEngine()._child, Scene);
+	}
+	
+	override private function removeNext():Void 
+	{
+		var next:GameObject = cast(_next, GameObject);
+		var child:Component = cast(_child, Component);
+		
+		if (next != null)
+		{
+			next.removeNext();
+		}
+		
+		if (_child != null)
+		{
+			child.removeNext();
+		}
+		
+		super.removeNext();
+	}
+	
+	override private function removed():Void 
+	{
+		var node:Node = _child;
+		while (node._next != null)
+		{
+			node.removed();
+			node = node._next;
+		}
+		
+		node = _child;
+		//while (node._previous != null)
+		//{
+			//node.removed();
+			//node = node._previous;
+		//}
+		//
+		//var iter:Node = node = _child._next;
+		//while (node._next != null)
+		//{
+			//iter = node._next;
+			//node.cleanup();
+			//node = iter;
+		//}
+		//
+		//iter = node = _child._previous;
+		//while (node._previous != null)
+		//{
+			//iter = node._next;
+			//node.cleanup();
+			//node = iter;
+		//}
+		//_child.cleanup();
 	}
 }

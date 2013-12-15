@@ -4,7 +4,7 @@ import flash.display.MovieClip;
 import flash.events.Event;
 import flash.Lib;
 import flash.system.System;
-import ze.object.Object;
+import ze.object.Node;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
@@ -14,20 +14,20 @@ import ze.util.Time;
  * ...
  * @author Goh Zi He
  */
-class Engine extends Object 
+class Engine extends Node 
 {
 	private static var _engine:Engine;
 	
 	public function new(initScene:Scene) 
 	{
 		super();
-		_engine = engine = this;
+		_engine = this;
 		
-		add(initScene);
 		var current:MovieClip = Lib.current;
+		current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		Input.init(current.stage);
 		
-		current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+		addChild(initScene);
 	}
 	
 	private function onEnterFrame(e:Event):Void 
@@ -38,7 +38,7 @@ class Engine extends Object
 	
 	override private function update():Void 
 	{
-		super.update();
+		_child.update();
 		if (Input.keyPressed(Key.ESCAPE)) 
 		{
 			System.exit(0);
@@ -46,18 +46,11 @@ class Engine extends Object
 		Input.update();
 	}
 	
-	override public function add<T:Object>(object:T):T 
+	public function addScene(scene:Scene):Scene
 	{
-		if (Std.is(object, Scene))
-		{
-			var prevScene:Object = _objects[0];
-			if (prevScene != null) 
-			{
-				remove(prevScene);
-			}
-			return super.add(object);
-		}
-		return null;
+		removeChild(_child);
+		addChild(scene);
+		return scene;
 	}
 	
 	public static function getEngine():Engine

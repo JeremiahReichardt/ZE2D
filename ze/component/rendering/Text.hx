@@ -29,6 +29,8 @@ class Text extends Render
 		_textField.embedFonts = true;
 		_textField.setTextFormat(_format);
 		_textField.autoSize = TextFieldAutoSize.CENTER;
+		_textField.selectable = false;
+		_textField.cacheAsBitmap = true;
 	}
 	
 	public function setFont(fontPath:String):Void

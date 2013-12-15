@@ -23,6 +23,8 @@ class Input
 	private static var _currentKeyPressed:Int;
 	private static var _currentKeyReleased:Int;
 	private static var _lastKeyPressed:Int;
+	private static var _keyCode:Int;
+	
 	private static var _keys:Array<Bool>;
 	
 	private static var _leftMouseDown:Bool;
@@ -32,7 +34,7 @@ class Input
 	private static var _rightMousePressed:Bool;
 	private static var _rightMouseReleased:Bool;
 	
-	private static var _keyMap:Map<String, Array<Int>>;
+	private static var _keyMap:Map < String, Array<Int> > ;
 	
 	public static function init(stage:Stage):Void
 	{
@@ -46,7 +48,7 @@ class Input
 		_keys = [];
 		_stage = stage;
 		_keyMap = new Map < String, Array<Int> > ();
-		_currentKeyPressed = -1;
+		_currentKeyPressed = _keyCode = -1;
 		
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownEvent);
 		stage.addEventListener(KeyboardEvent.KEY_UP, keyUpEvent);
@@ -108,7 +110,7 @@ class Input
 	
 	private static function keyDownEvent(event:KeyboardEvent):Void
 	{
-		_currentKeyPressed = event.keyCode;
+		_currentKeyPressed = _keyCode = event.keyCode;
 		_keys[event.keyCode] = true;
 	}
 	
@@ -145,17 +147,17 @@ class Input
 		return false;
 	}
 	
-	//public static function anyKeyPressed():Bool 
-	//{
-		//for (key in _keys)
-		//{
-			//if (key)
-			//{
-				//return key;
-			//}
-		//}
-		//return false;
-	//}
+	public static function anyKeyPressed():Bool 
+	{
+		for (key in _keys)
+		{
+			if (key)
+			{
+				return key;
+			}
+		}
+		return false;
+	}
 	
 	private static function checkKeyPressed(key:Int):Bool
 	{
@@ -272,6 +274,11 @@ class Input
 		{
 			return false;
 		}
+	}
+	
+	public static function keyCode():Int
+	{
+		return _keyCode;
 	}
 	
 	private static function get_mouseX():Float

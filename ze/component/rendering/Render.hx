@@ -35,6 +35,7 @@ class Render extends Component
 		super.added();
 		displayObject.cacheAsBitmap = true;
 		scene.screen.addRender(this);
+		update();
 	}
 	
 	override private function update():Void 

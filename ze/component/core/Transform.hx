@@ -114,7 +114,7 @@ class Transform extends Component
 			yDir -= _direction;
 		}
 		
-		// Ensure that collider is back in position before calling moveBy again
+		//Ensure that collider is back in position before calling moveBy again
 		collider.setPos(x, y);
 	}
 	

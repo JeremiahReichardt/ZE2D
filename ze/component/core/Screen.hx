@@ -18,10 +18,15 @@ class Screen extends Component
 {
 	public var offsetX(default, null):Float;
 	public var offsetY(default, null):Float;
+	
 	public var top(get, null):Float;
 	public var bottom(get, null):Float;
 	public var left(get, null):Float;
 	public var right(get, null):Float;
+	
+	public var midX(get, null):Float;
+	public var midY(get, null):Float;
+	
 	
 	private var _sprite:Sprite;
 	private var _current:MovieClip;
@@ -47,27 +52,6 @@ class Screen extends Component
 		_fps = new FPS( -offsetX, -offsetY, 24, 0xFFFFFF);
 		_sprite.addChild(_fps);
 		_layers = [[]];
-	}
-	
-	
-	private function get_top():Float
-	{
-		return transform.y;
-	}
-	
-	private function get_bottom():Float
-	{
-		return transform.y + _current.stage.stageHeight;
-	}
-	
-	private function get_left():Float
-	{
-		return transform.x;
-	}
-	
-	private function get_right():Float
-	{
-		return transform.x + _current.stage.stageWidth;
 	}
 	
 	override private function update():Void 
@@ -145,10 +129,44 @@ class Screen extends Component
 	{
 		super.removed();
 		_current.removeChild(_sprite);
-		
+	}
+	
+	override private function cleanup():Void 
+	{
+		super.cleanup();
 		_sprite = null;
 		_current = null;
 		_fps = null;
 		_layers = null;
+	}
+	
+	private function get_top():Float
+	{
+		return transform.y;
+	}
+	
+	private function get_bottom():Float
+	{
+		return (transform.y + _current.stage.stageHeight);
+	}
+	
+	private function get_left():Float
+	{
+		return transform.x;
+	}
+	
+	private function get_right():Float
+	{
+		return (transform.x + _current.stage.stageWidth);
+	}
+	
+	private function get_midX():Float
+	{
+		return (right * 0.5);
+	}
+	
+	private function get_midY():Float
+	{
+		return (bottom * 0.5);
 	}
 }
