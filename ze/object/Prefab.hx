@@ -1,4 +1,5 @@
 package ze.object;
+
 import ze.Engine;
 
 /**

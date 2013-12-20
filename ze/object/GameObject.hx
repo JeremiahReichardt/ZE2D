@@ -5,7 +5,6 @@ import ze.component.core.Transform;
 import ze.component.physics.Collider;
 import ze.component.rendering.Animation;
 import ze.component.rendering.Render;
-import ze.Engine;
 
 /**
  * Base object with a default set of components (Transform, Render)
@@ -71,27 +70,13 @@ class GameObject extends Node
 	
 	public function addComponent<T:Node>(node:T):T 
 	{
-		if (_child == null)
-		{
-			addChild(node);
-		}
-		else
-		{
-			_child.addNode(node);
-		}
+		addChild(node);
 		return node;
 	}
 	
 	public function removeComponent(node:Node):Void 
 	{
-		if (_child == node)
-		{
-			removeChild(node);
-		}
-		else
-		{
-			_child.addNode(node);
-		}
+		removeChild(node);
 	}
 	
 	private function get_transform():Transform
@@ -132,58 +117,13 @@ class GameObject extends Node
 	
 	private function get_scene():Scene
 	{
-		return cast (Engine.getEngine()._child, Scene);
-	}
-	
-	override private function removeNext():Void 
-	{
-		var next:GameObject = cast(_next, GameObject);
-		var child:Component = cast(_child, Component);
-		
-		if (next != null)
-		{
-			next.removeNext();
-		}
-		
-		if (_child != null)
-		{
-			child.removeNext();
-		}
-		
-		super.removeNext();
+		return cast (_parent, Scene);
 	}
 	
 	override private function removed():Void 
 	{
-		var node:Node = _child;
-		while (node._next != null)
-		{
-			node.removed();
-			node = node._next;
-		}
-		
-		node = _child;
-		//while (node._previous != null)
-		//{
-			//node.removed();
-			//node = node._previous;
-		//}
-		//
-		//var iter:Node = node = _child._next;
-		//while (node._next != null)
-		//{
-			//iter = node._next;
-			//node.cleanup();
-			//node = iter;
-		//}
-		//
-		//iter = node = _child._previous;
-		//while (node._previous != null)
-		//{
-			//iter = node._next;
-			//node.cleanup();
-			//node = iter;
-		//}
-		//_child.cleanup();
+		super.removed();
+		_child.removeAll();
+		scene.engine.addToRemoveList(this);
 	}
 }

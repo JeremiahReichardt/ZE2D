@@ -17,7 +17,7 @@ import ze.object.Node;
 class Scene extends Node
 {
 	public var screen(default, null):Screen;
-	private var engine(default, null):Engine;
+	public var engine(default, null):Engine;
 	
 	override private function added():Void 
 	{
@@ -46,15 +46,7 @@ class Scene extends Node
 	
 	public function addGameObject(gameObject:GameObject):GameObject
 	{
-		if (_child == null)
-		{
-			addChild(gameObject);
-		}
-		else
-		{
-			_child.addNode(gameObject);
-		}
-		
+		addChild(gameObject);
 		return gameObject;
 	}
 	
@@ -64,15 +56,9 @@ class Scene extends Node
 		return createGameObject(label, [image], x, y);
 	}
 	
-	override private function removed():Void
-	{
-		_child.removeNext();
-		super.removed();
-	}
-	
 	public function removeGameObject(gameObject:GameObject):Void 
 	{
-		_child.removeNode(gameObject);
+		removeChild(gameObject);
 	}
 	
 	public function getGameObjectByName(name:String):GameObject
@@ -154,5 +140,12 @@ class Scene extends Node
 		{
 			node.update();
 		}
+	}
+	
+	override private function removed():Void 
+	{
+		super.removed();
+		_child.removeAll();
+		engine.addToRemoveList(this);
 	}
 }

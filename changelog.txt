@@ -1,0 +1,11 @@
+###Changelog###
+DD/MM/YY
+
+(20/12/12)
+- Continue fixing bug where object isn't removed properly. Added new destroyed function to set values to null.
+- Merged addChild and addNode into one function.
+
+(15/12/13)
+- Rewrote core object system, now uses linked list node system.
+- All core objects inherit from node instead of object.
+- Seperated add() objects funtions to 4 core functions, mainly engine.addScene(), scene.addGameObject, gameObject.addComponent and component.addComponent.

@@ -27,7 +27,6 @@ class Screen extends Component
 	public var midX(get, null):Float;
 	public var midY(get, null):Float;
 	
-	
 	private var _sprite:Sprite;
 	private var _current:MovieClip;
 	private var _fps:FPS;
@@ -131,9 +130,9 @@ class Screen extends Component
 		_current.removeChild(_sprite);
 	}
 	
-	override private function cleanup():Void 
+	override private function destroyed():Void 
 	{
-		super.cleanup();
+		super.destroyed();
 		_sprite = null;
 		_current = null;
 		_fps = null;

@@ -61,6 +61,11 @@ class Render extends Component
 	{
 		super.removed();
 		scene.screen.removeRender(this);
+	}
+	
+	override private function destroyed():Void 
+	{
+		super.destroyed();
 		displayObject = null;
 	}
 	

@@ -4,8 +4,7 @@ import ze.component.core.Component;
 import ze.util.Color;
 
 /**
- * How to add Collision to Component, remember to use registerCallback() to register the various
- * functions
+ * ...
  * @author Goh Zi He
  */
 

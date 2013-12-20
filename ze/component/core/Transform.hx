@@ -1,7 +1,6 @@
 package ze.component.core;
 
 import ze.component.core.Transform;
-import ze.component.physics.Collider;
 
 /**
  * ...

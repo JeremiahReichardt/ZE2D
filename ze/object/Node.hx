@@ -1,5 +1,7 @@
 package ze.object;
 
+import ze.Engine;
+
 /**
  * ...
  * @author Goh Zi He
@@ -12,38 +14,43 @@ class Node
 	private var _parent:Node;
 	private var _child:Node;
 	
-	private var enable(default, set):Bool;
+	private var enable(default, default):Bool;
 	
 	public function new() 
 	{
 		_i = this;
 	}
 	
-	private function addNode<T:Node>(node:T):T
+	public function addChild<T:Node>(node:T):T
 	{
-		var last:Node = getLastNode();
-		last._next = node;
-		node._previous = last;
-		node._parent = _parent;
-		node.added();
-		return node;
-	}
-	
-	private function addChild<T:Node>(node:T):T
-	{
-		_child = node;
-		node._parent = this;
-		
-		var first:Node = _child.getFirstNode();
-		for (n in first)
+		if (Std.is(node, Type.typeof(this)))
 		{
-			n._parent = this;
+			var last:Node = getLastNode();
+			last._next = node;
+			node._previous = last;
+			node._parent = _parent;
 		}
+		else
+		{
+			if (_child == null)
+			{
+				_child = node;
+			}
+			else
+			{
+				var last:Node = _child.getLastNode();
+				last._next = node;
+				node._previous = last;
+			}
+			
+			node._parent = this;
+		}
+		
 		node.added();
 		return node;
 	}
 	
-	private function removeNode(node:Node):Void
+	public function removeChild(node:Node):Void
 	{
 		var prev:Node = node._previous;
 		var next:Node = node._next;
@@ -52,48 +59,46 @@ class Node
 		{
 			prev._next = next;
 		}
+		
 		if (next != null)
 		{
 			next._previous = prev;
 		}
 		
-		node.removed();	
-	}
-	
-	private function removeChild(node:Node):Void
-	{
-		node._parent = null;
-		var first:Node = _child.getFirstNode();
-		for (n in first)
+		if (!Std.is(node, Type.typeof(this)))
 		{
-			cast(n, Node)._parent = null;
+			if (node == _child)
+			{
+				_child = next;
+			}
 		}
 		
-		_child = null;
-		node.removed();
+		node.removed();	
 	}
 	
 	public function getLastNode():Node
 	{
-		if (_next != null)
+		var node:Node = this;
+		while (true)
 		{
-			return _next.getLastNode();
-		}
-		else
-		{
-			return this;
+			if (node._next == null)
+			{
+				return node;
+			}
+			node = node._next;
 		}
 	}
 	
 	public function getFirstNode():Node
 	{
-		if (_previous != null)
+		var node:Node = this;
+		while (true)
 		{
-			return _previous.getFirstNode();
-		}
-		else
-		{
-			return this;
+			if (node._previous == null)
+			{
+				return node;
+			}
+			node = node._previous;
 		}
 	}
 	
@@ -107,36 +112,36 @@ class Node
 	
 	private function removed():Void
 	{
+		
 	}
 	
-	private function cleanup():Void
+	private function removeAll():Void
 	{
+		var node:Node = _next;
+		while (node != null)
+		{
+			node.removed();
+			node = node._next;
+		}
+		
+		var node:Node = _previous;
+		while (node != null)
+		{
+			node.removed();
+			node = node._next;
+		}
+		
+		removed();
+	}
+	
+	private function destroyed():Void
+	{
+		enable = false;
 		_next = null;
 		_previous = null;
 		_parent = null;
 		_child = null;
 		_i = null;
-		enable = false;
-	}
-	
-	private function set_enable(value:Bool):Bool
-	{
-		enable = value;
-		
-		if (_child != null)
-		{
-			var first:Node = getFirstNode();
-			for (node in first)
-			{
-				node.enable = true;
-			}
-		}
-		return value;
-	}
-	
-	private function removeNext():Void
-	{
-		removed();
 	}
 	
 	/**

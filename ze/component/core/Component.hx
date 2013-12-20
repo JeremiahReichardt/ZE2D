@@ -57,12 +57,12 @@ class Component extends Node
 	
 	public function addComponent<T:Node>(node:T):T 
 	{
-		return addNode(node);
+		return addChild(node);
 	}
 	
-	public function removeComponent(node:Node):Void 
+	public function removeComponent(component:Node):Void 
 	{
-		removeNode(node);
+		removeChild(component);
 	}
 	
 	private function get_gameObject():GameObject
@@ -75,13 +75,9 @@ class Component extends Node
 		return gameObject.scene;
 	}
 	
-	//override private function removeNext():Void
-	//{
-		//var child:Component = cast(_child, Component);
-		//if (child != null)
-		//{
-			//child.removeNext();
-		//}
-		//super.removeNext();
-	//}
+	override private function removed():Void 
+	{
+		super.removed();
+		scene.engine.addToRemoveList(this);
+	}
 }

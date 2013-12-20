@@ -1,4 +1,5 @@
 package ze.component.ui;
+
 import ze.component.core.Component;
 import ze.util.Input;
 

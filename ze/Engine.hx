@@ -17,11 +17,13 @@ import ze.util.Time;
 class Engine extends Node 
 {
 	private static var _engine:Engine;
+	private static var removeList:Array<Node>;
 	
 	public function new(initScene:Scene) 
 	{
 		super();
 		_engine = this;
+		removeList = [];
 		
 		var current:MovieClip = Lib.current;
 		current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -43,6 +45,12 @@ class Engine extends Node
 		{
 			System.exit(0);
 		}
+		
+		while (removeList.length > 0)
+		{
+			removeList[removeList.length - 1].destroyed();
+			removeList.pop();
+		}
 		Input.update();
 	}
 	
@@ -56,5 +64,10 @@ class Engine extends Node
 	public static function getEngine():Engine
 	{
 		return _engine;
+	}
+	
+	public function addToRemoveList(node:Node):Void
+	{
+		removeList.push(node);
 	}
 }
