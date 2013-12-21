@@ -9,6 +9,15 @@ class CharacterController extends Component
 	public var isGrounded(default, null):Bool;
 	public var hitTop(default, null):Bool;
 	
+	override private function added():Void 
+	{
+		super.added();
+		if (render == null)
+		{
+			trace("Add a render component");
+		}
+	}
+	
 	override private function update():Void 
 	{
 		super.update();

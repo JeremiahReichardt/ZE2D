@@ -63,28 +63,29 @@ class Scene extends Node
 	
 	public function getGameObjectByName(name:String):GameObject
 	{
-		var first:Node = _child.getFirstNode();
-		for (node in first)
+		var first:Node = _child.first;
+		var gameObject:GameObject = null;
+		for (go in first)
 		{
-			var gameObject:GameObject = cast node;
-			if (gameObject.name == name)
+			var current:GameObject = cast (go, GameObject);
+			if (current.name == name)
 			{
-				return gameObject;
+				gameObject = current;
 			}
 		}
-		return null;
+		return gameObject;
 	}
 	
 	public function getGameObjectsByName(name:String):Array<GameObject>
 	{
+		var first:Node = _child.first;
 		var gameObjectsWithName:Array<GameObject> = [];
-		var first:Node = _child.getFirstNode();
-		for (node in first)
+		for (go in first)
 		{
-			var gameObject:GameObject = cast node;
-			if (gameObject.name == name)
+			var current:GameObject = cast (go, GameObject);
+			if (current.name == name)
 			{
-				gameObjectsWithName.push(gameObject);
+				gameObjectsWithName.push(current);
 			}
 		}
 		return gameObjectsWithName;
@@ -93,25 +94,23 @@ class Scene extends Node
 	public function getGameObjectByComponent(component:Class<Component>):GameObject
 	{
 		var gameObject:GameObject = null;
-		var first:Node = _child.getFirstNode();
+		var first:Node = _child.first;
 		for (go in first)
 		{
-			gameObject = cast(go, GameObject);
-			trace(gameObject, component);
-			trace(gameObject.getComponent(component));
-			if (gameObject.getComponent(component) != null)
+			var current:GameObject = cast(go, GameObject);
+			if (current.getComponent(component) != null)
 			{
-				return gameObject;
+				gameObject = current;
 			}
 		}
-		return null;
+		return gameObject;
 	}
 	
 	public function getGameObjectsByComponent(component:Class<Component>):Array<GameObject>
 	{
 		var gameObjects:Array<GameObject> = [];
 		var gameObject:GameObject;
-		var first:Node = _child.getFirstNode();
+		var first:Node = _child.first;
 		for (go in first)
 		{
 			gameObject = cast(go, GameObject);
@@ -135,7 +134,7 @@ class Scene extends Node
 	{
 		super.update();
 		
-		var first:Node = _child.getFirstNode();
+		var first:Node = _child.first;
 		for (node in first)
 		{
 			node.update();

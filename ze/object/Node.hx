@@ -19,13 +19,14 @@ class Node
 	public function new() 
 	{
 		_i = this;
+		last = first = this;
 	}
 	
 	public function addChild<T:Node>(node:T):T
 	{
 		if (Std.is(node, Type.typeof(this)))
 		{
-			var last:Node = getLastNode();
+			var last:Node = last;
 			last._next = node;
 			node._previous = last;
 			node._parent = _parent;
@@ -38,7 +39,7 @@ class Node
 			}
 			else
 			{
-				var last:Node = _child.getLastNode();
+				var last:Node = _child.last;
 				last._next = node;
 				node._previous = last;
 			}
@@ -76,30 +77,32 @@ class Node
 		node.removed();	
 	}
 	
-	public function getLastNode():Node
+	
+	var first(get, null):Node;
+	var last(get, null):Node;
+	
+	function get_first():Node
 	{
-		var node:Node = this;
-		while (true)
+		if (first != null && first._previous != null)
 		{
-			if (node._next == null)
+			if (_previous != null)
 			{
-				return node;
+				first = _previous.get_first();
 			}
-			node = node._next;
 		}
+		return first;
 	}
 	
-	public function getFirstNode():Node
+	function get_last():Node
 	{
-		var node:Node = this;
-		while (true)
+		if (last != null && last._next != null)
 		{
-			if (node._previous == null)
+			if (_next != null)
 			{
-				return node;
+				last = _next.get_last();
 			}
-			node = node._previous;
 		}
+		return last;
 	}
 	
 	private function added():Void
@@ -112,7 +115,6 @@ class Node
 	
 	private function removed():Void
 	{
-		
 	}
 	
 	private function removeAll():Void
@@ -145,7 +147,8 @@ class Node
 	}
 	
 	/**
-	 * For iterator to use
+	 * For iterator to use. 
+	 * Note: when iterating a for loop, do not break. If not _i value would not be properly resetted
 	 */
 	private var _i:Node;
 	public function next():Node

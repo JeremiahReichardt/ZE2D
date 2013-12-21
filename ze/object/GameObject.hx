@@ -36,7 +36,7 @@ class GameObject extends Node
 	{
 		super.update();
 		
-		var first:Node = _child.getFirstNode();
+		var first:Node = _child.first;
 		for (node in first)
 		{
 			node.update();
@@ -45,27 +45,17 @@ class GameObject extends Node
 	
 	public function getComponent<T:Component>(componentType:Class<T>):T
 	{
-		var node:Node = _child;
-		while (node._next != null)
+		var component:Component = null;
+		var first:Node = _child.first;
+		for (comp in first)
 		{
-			if (Std.is(node, componentType))
+			var current:Component = cast(comp, Component);
+			if (Std.is(current, componentType))
 			{
-				return cast node;
+				component = current;
 			}
-			node = node._next;
 		}
-		
-		node = _child;
-		while (node._previous != null)
-		{
-			if (Std.is(node, componentType))
-			{
-				return cast node;
-			}
-			node = node._previous;
-		}
-		
-		return null;
+		return cast component;
 	}
 	
 	public function addComponent<T:Node>(node:T):T 
