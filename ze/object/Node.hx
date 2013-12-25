@@ -22,7 +22,7 @@ class Node
 		last = first = this;
 	}
 	
-	public function addChild<T:Node>(node:T):T
+	private function addChild<T:Node>(node:T):T
 	{
 		if (Std.is(node, Type.typeof(this)))
 		{
@@ -51,7 +51,7 @@ class Node
 		return node;
 	}
 	
-	public function removeChild(node:Node):Void
+	private function removeChild(node:Node):Void
 	{
 		var prev:Node = node._previous;
 		var next:Node = node._next;

@@ -10,8 +10,8 @@ import ze.util.Time;
  */
 class PlayerMovement extends Component
 {
-	var xSpeed:Float;
-	var ySpeed:Float;
+	private var xSpeed:Float;
+	private var ySpeed:Float;
 	
 	static inline var speed:Float = 100;
 	static inline var maxSpeed:Float = 400;
@@ -48,10 +48,5 @@ class PlayerMovement extends Component
 		ySpeed *= 0.8;
 		
 		transform.moveBy(xSpeed * Time.deltaTime, ySpeed * Time.deltaTime);
-	}
-	
-	override private function removed():Void 
-	{
-		super.removed();
 	}
 }

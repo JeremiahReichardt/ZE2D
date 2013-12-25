@@ -1,4 +1,4 @@
-package scene;
+package scenes;
 
 import ze.component.rendering.Text;
 import ze.object.GameObject;

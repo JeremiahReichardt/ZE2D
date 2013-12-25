@@ -18,7 +18,6 @@ class GameObject extends Node
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
 	public var render(get, null):Render;
-	public var animation(get, null):Animation;
 	public var scene(get, null):Scene;
 	public var name(default, default):String;
 	
@@ -58,10 +57,23 @@ class GameObject extends Node
 		return cast component;
 	}
 	
-	public function addComponent<T:Node>(node:T):T 
+	public function addComponent<T:Node>(component:T):T 
 	{
-		addChild(node);
-		return node;
+		addChild(component);
+		if (Std.is(component, Render))
+		{
+			render = cast(component, Render);
+		}
+		else if (Std.is(component, Transform))
+		{
+			transform = cast(component, Transform);
+		}
+		else if (Std.is(component, Collider))
+		{
+			collider = cast(component, Collider);
+		}
+		
+		return component;
 	}
 	
 	public function removeComponent(node:Node):Void 
@@ -94,15 +106,6 @@ class GameObject extends Node
 			render = getComponent(Render);
 		}
 		return render;
-	}
-	
-	private function get_animation():Animation
-	{
-		if (animation == null)
-		{
-			animation = getComponent(Animation);
-		}
-		return animation;
 	}
 	
 	private function get_scene():Scene

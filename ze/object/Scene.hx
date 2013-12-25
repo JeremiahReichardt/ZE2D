@@ -24,7 +24,7 @@ class Scene extends Node
 		super.added();
 		engine = Engine.getEngine();
 		screen = new Screen();
-		addGameObject(createGameObject("screen", screen, 0, 0));
+		createGameObject("screen", screen, 0, 0);
 	}
 	
 	public function createGameObject(name:String, component:Component = null, components:Array<Component> = null, x:Float = 0, y:Float = 0):GameObject
@@ -41,19 +41,19 @@ class Scene extends Node
 				gameObject.addChild(component);
 			}
 		}
-		return gameObject;
+		return addGameObject(gameObject);
+	}
+	
+	public function createImage(label:String, imagePath:String = "", imageData:BitmapData = null, rectangle:Rectangle = null, x:Float = 0, y:Float = 0):GameObject
+	{
+		var image:Image = new Image(label, imagePath, imageData, rectangle);
+		return createGameObject(label, [image], x, y);
 	}
 	
 	public function addGameObject(gameObject:GameObject):GameObject
 	{
 		addChild(gameObject);
 		return gameObject;
-	}
-	
-	public function addImage(label:String, imagePath:String = "", imageData:BitmapData = null, rectangle:Rectangle = null, x:Float = 0, y:Float = 0):GameObject
-	{
-		var image:Image = new Image(label, imagePath, imageData, rectangle);
-		return createGameObject(label, [image], x, y);
 	}
 	
 	public function removeGameObject(gameObject:GameObject):Void 

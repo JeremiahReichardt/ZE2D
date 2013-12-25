@@ -1,6 +1,6 @@
 package action;
 
-import object.Bullet;
+import objects.Bullet;
 import ze.component.core.Component;
 import ze.util.Input;
 

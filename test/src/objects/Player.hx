@@ -1,4 +1,4 @@
-package object;
+package objects;
 
 import action.PlayerGun;
 import action.PlayerMovement;
@@ -25,5 +25,6 @@ class Player extends GameObject
 		addComponent(new BoxCollider(32, 32));
 		addComponent(new PlayerMovement());
 		addComponent(new PlayerGun());
+		
 	}
 }

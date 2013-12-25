@@ -19,3 +19,23 @@ Aims to create a simple and working proof of concept engine/framework for easy u
 1. Download ze2d from haxelib.
 2. For learning, look in test folder for examples on how to create a simple project.
 3. Or unzip template.zip and start using it.
+
+###Supports Ogmo Editor
+Feels free to use the ogmo editor to create levels and import with OgmoLoader component.
+
+    var _ogmoLoader:OgmoLoader = new OgmoLoader();
+    _ogmoLoader.setOEL("level/LevelName.oel");
+    _ogmoLoader.setLayer("Entities");
+    _ogmoLoader.setEntity("Player", PlayerObject);
+    _ogmoLoader.loadAll();
+    
+----
+
+    class PlayerObject extends GameObject
+    {
+        //Custom Param here
+    	public function new(params:Dynamic)
+    	{
+    		super();
+    	}
+    }

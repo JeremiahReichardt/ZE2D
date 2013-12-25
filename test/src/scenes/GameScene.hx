@@ -1,9 +1,9 @@
-package scene;
+package scenes;
 
 import action.PlayerGun;
 import flash.display.BitmapData;
-import object.Bullet;
-import object.Player;
+import objects.Bullet;
+import objects.Player;
 import ze.component.rendering.Image;
 import ze.object.GameObject;
 import ze.object.Scene;
@@ -27,11 +27,5 @@ class GameScene extends Scene
 		
 		var player:Player = new Player();
 		addGameObject(player);
-		//removeGameObject(player);
-	}
-	
-	override private function update():Void 
-	{
-		super.update();
 	}
 }

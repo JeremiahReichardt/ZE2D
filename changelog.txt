@@ -1,7 +1,17 @@
 ###Changelog###
 DD/MM/YY
 
-(20/12/12)
+(25/12/13)
+- Merry Christmas. Some bugfixes and maintenance.
+- Oops. Fixed timestamp in changelog.
+- Rewrote the ogmo loading procedure. OgmoLoader is now a component and no prefab is needed.
+- Some bug fix for Tests.
+- Renamed scene to scenes and object to objects to avoid confusion when coding in FlashDevelop
+
+(21/12/13)
+- Fixed getGameObject and getComponent
+
+(20/12/13)
 - Continue fixing bug where object isn't removed properly. Added new destroyed function to set values to null.
 - Merged addChild and addNode into one function.
 
