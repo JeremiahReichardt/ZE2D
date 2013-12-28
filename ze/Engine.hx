@@ -40,7 +40,11 @@ class Engine extends Node
 	
 	override private function update():Void 
 	{
-		_child.update();
+		if (_child.enable)
+		{
+			_child.update();
+		}
+		
 		if (Input.keyPressed(Key.ESCAPE)) 
 		{
 			System.exit(0);

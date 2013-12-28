@@ -19,6 +19,7 @@ class Node
 	public function new() 
 	{
 		last = first = this;
+		enable = true;
 	}
 	
 	private function addChild<T:Node>(node:T):T

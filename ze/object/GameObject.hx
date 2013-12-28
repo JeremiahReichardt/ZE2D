@@ -37,7 +37,10 @@ class GameObject extends Node
 		var node:Node = _child.first;
 		while (node != null)
 		{
-			node.update();
+			if (node.enable)
+			{
+				node.update();
+			}
 			node = node._next;
 		}
 	}
