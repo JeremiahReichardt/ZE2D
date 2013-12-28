@@ -3,7 +3,6 @@ package ze.object;
 import ze.component.core.Component;
 import ze.component.core.Transform;
 import ze.component.physics.Collider;
-import ze.component.rendering.Animation;
 import ze.component.rendering.Render;
 
 /**
@@ -35,24 +34,26 @@ class GameObject extends Node
 	{
 		super.update();
 		
-		var first:Node = _child.first;
-		for (node in first)
+		var node:Node = _child.first;
+		while (node != null)
 		{
 			node.update();
+			node = node._next;
 		}
 	}
 	
 	public function getComponent<T:Component>(componentType:Class<T>):T
 	{
 		var component:Component = null;
-		var first:Node = _child.first;
-		for (comp in first)
+		var node:Node = _child.first;
+		while (node != null)
 		{
-			var current:Component = cast(comp, Component);
-			if (Std.is(current, componentType))
+			component = cast(node, Component);
+			if (Std.is(component, componentType))
 			{
-				component = current;
+				break;
 			}
+			node = node._next;
 		}
 		return cast component;
 	}

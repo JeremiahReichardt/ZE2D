@@ -9,8 +9,8 @@ import flash.Lib;
 
 class Time 
 {
-	public static var deltaTime(default, null):Float;
-	public static var currentTime(default, null):Int;
+	public static var deltaTime(default, null):Float = 0;
+	public static var currentTime(default, null):Int = 0;
 	
 	private static var _lastTime:Int;
 	

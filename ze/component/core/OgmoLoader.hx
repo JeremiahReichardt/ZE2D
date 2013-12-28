@@ -47,6 +47,7 @@ class OgmoLoader extends Component
 			}
 		}
 		
+		_current = _layers.length;
 		_layers.push(layer);
 	}
 	
@@ -77,6 +78,7 @@ class OgmoLoader extends Component
 			return;
 		}
 		
+		_current = 0;
 		for (layer in _layers)
 		{
 			for (x in _levelXML.elementsNamed(layer))
@@ -99,6 +101,8 @@ class OgmoLoader extends Component
 					}
 				}
 			}
+			
+			++_current;
 		}
 	}
 }

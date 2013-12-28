@@ -18,7 +18,6 @@ class Node
 	
 	public function new() 
 	{
-		_i = this;
 		last = first = this;
 	}
 	
@@ -143,27 +142,5 @@ class Node
 		_previous = null;
 		_parent = null;
 		_child = null;
-		_i = null;
-	}
-	
-	/**
-	 * For iterator to use. 
-	 * Note: when iterating a for loop, do not break. If not _i value would not be properly resetted
-	 */
-	private var _i:Node;
-	public function next():Node
-	{
-		var next:Node = _i;
-		_i = _i._next;
-		return next;
-	}
-	public function hasNext():Bool
-	{
-		if (_i == null)
-		{
-			_i = this;
-			return false;
-		}
-		return true;
 	}
 }

@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"tags": ["openFL", "2d", "flash", "game"],
 	"description": "An openfl gameobject/component system game framework for Haxe. Inspired by FlashPunk and Unity",
-	"version": "0.1.2",
-	"releasenote": "New Node system",
+	"version": "0.1.3",
+	"releasenote": "Rewritten Ogmo Loader system",
 	"contributors": [ "zine92" ],
 	"dependencies": {
 		"openfl": "1.2.1",
