@@ -1,12 +1,19 @@
 ###Changelog###
 DD/MM/YY
 
+(28/12/13)
+- Fixed some rendering stuff where setting layer after adding it will cause crash.
+- Correctly update objects if enabled.
+- Removed iterator and uses while loop for looping instead.
+- Fixed OgmoLoader only loading one layer.
+- Added new project to demo how to use OgmoLoader.
+
 (25/12/13)
 - Merry Christmas. Some bugfixes and maintenance.
 - Oops. Fixed timestamp in changelog.
 - Rewrote the ogmo loading procedure. OgmoLoader is now a component and no prefab is needed.
 - Some bug fix for Tests.
-- Renamed scene to scenes and object to objects to avoid confusion when coding in FlashDevelop
+- Renamed scene to scenes and object to objects to avoid confusion when coding in FlashDevelop.
 
 (21/12/13)
 - Fixed getGameObject and getComponent
