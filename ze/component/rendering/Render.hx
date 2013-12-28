@@ -13,7 +13,7 @@ class Render extends Component
 	public var alpha(get, set):Float;
 	public var flipped(default, set):Bool;
 	public var height(get, set):Float;
-	public var layer(default, default):Int;
+	public var layer(default, set):Int;
 	public var mask(default, set):Render;
 	public var scrollRect(default, set):Rectangle;
 	public var visible(get, set):Bool;
@@ -137,6 +137,21 @@ class Render extends Component
 	private function set_scrollRect(value:Rectangle):Rectangle
 	{
 		scrollRect = displayObject.scrollRect = value;
+		return value;
+	}
+	
+	private function set_layer(value:Int):Int
+	{
+		if (gameObject != null && scene != null)
+		{
+			scene.screen.removeRender(this);
+			layer = value;
+			scene.screen.addRender(this);
+		}
+		else
+		{
+			layer = value;
+		}
 		return value;
 	}
 }
