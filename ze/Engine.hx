@@ -5,6 +5,7 @@ import flash.events.Event;
 import flash.Lib;
 import flash.system.System;
 import ze.object.Node;
+import ze.object.Object;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
@@ -18,6 +19,8 @@ class Engine extends Node
 {
 	private static var _engine:Engine;
 	private static var removeList:Array<Node>;
+	
+	public var scene(get, null):Scene;
 	
 	public function new(initScene:Scene) 
 	{
@@ -40,7 +43,7 @@ class Engine extends Node
 	
 	override private function update():Void 
 	{
-		if (_child.enable)
+		if (cast(_child, Object).enable)
 		{
 			_child.update();
 		}
@@ -73,5 +76,10 @@ class Engine extends Node
 	public function addToRemoveList(node:Node):Void
 	{
 		removeList.push(node);
+	}
+	
+	private function get_scene():Scene
+	{
+		return cast(_child, Scene);
 	}
 }

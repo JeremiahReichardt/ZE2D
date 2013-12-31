@@ -5,7 +5,6 @@ import flash.geom.Rectangle;
 import ze.component.core.Component;
 import ze.component.core.Screen;
 import ze.component.rendering.Image;
-import ze.Engine;
 import ze.object.GameObject;
 import ze.object.Node;
 
@@ -14,15 +13,13 @@ import ze.object.Node;
  * @author Goh Zi He
  */
 
-class Scene extends Node
+class Scene extends Object
 {
 	public var screen(default, null):Screen;
-	public var engine(default, null):Engine;
 	
 	override private function added():Void 
 	{
 		super.added();
-		engine = Engine.getEngine();
 		screen = new Screen();
 		createGameObject("screen", screen, 0, 0);
 	}
@@ -30,18 +27,20 @@ class Scene extends Node
 	public function createGameObject(name:String, component:Component = null, components:Array<Component> = null, x:Float = 0, y:Float = 0):GameObject
 	{
 		var gameObject:GameObject = new GameObject(name, x, y);
+		addGameObject(gameObject);
+		
 		if (component != null)
 		{
-			gameObject.addChild(component);
+			gameObject.addComponent(component);
 		}
 		else if (components != null)
 		{
 			for (component in components)
 			{
-				gameObject.addChild(component);
+				gameObject.addComponent(component);
 			}
 		}
-		return addGameObject(gameObject);
+		return gameObject;
 	}
 	
 	public function createImage(label:String, imagePath:String = "", imageData:BitmapData = null, rectangle:Rectangle = null, x:Float = 0, y:Float = 0):GameObject
@@ -140,7 +139,7 @@ class Scene extends Node
 		var node:Node = _child.first;
 		while (node != null)
 		{
-			if (node.enable)
+			if (cast(node, Object).enable)
 			{
 				node.update();
 			}

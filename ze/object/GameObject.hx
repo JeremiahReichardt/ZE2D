@@ -11,7 +11,7 @@ import ze.component.rendering.Render;
  * @author Goh Zi He
  */
 
-class GameObject extends Node
+class GameObject extends Object
 {
 	public var selected(default, default):Bool;
 	public var transform(get, null):Transform;
@@ -37,7 +37,7 @@ class GameObject extends Node
 		var node:Node = _child.first;
 		while (node != null)
 		{
-			if (node.enable)
+			if (cast(node, Object).enable)
 			{
 				node.update();
 			}

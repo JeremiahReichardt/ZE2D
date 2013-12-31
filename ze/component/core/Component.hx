@@ -4,6 +4,7 @@ import ze.component.physics.Collider;
 import ze.component.rendering.Render;
 import ze.object.GameObject;
 import ze.object.Node;
+import ze.object.Object;
 import ze.object.Scene;
 
 /**
@@ -11,7 +12,7 @@ import ze.object.Scene;
  * @author Goh Zi He
  */
 
-class Component extends Node
+class Component extends Object
 {
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
@@ -57,7 +58,7 @@ class Component extends Node
 	
 	public function addComponent<T:Node>(node:T):T 
 	{
-		return addChild(node);
+		return gameObject.addChild(node);
 	}
 	
 	public function removeComponent(component:Node):Void 
@@ -72,12 +73,16 @@ class Component extends Node
 	
 	private function get_scene():Scene
 	{
-		return gameObject.scene;
+		if (scene == null)
+		{
+			scene = engine.scene;
+		}
+		return scene;
 	}
 	
 	override private function removed():Void 
 	{
 		super.removed();
-		scene.engine.addToRemoveList(this);
+		engine.addToRemoveList(this);
 	}
 }

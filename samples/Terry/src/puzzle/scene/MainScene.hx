@@ -31,7 +31,6 @@ class MainScene extends Scene
 	{
 		super.added();
 		
-		//_level = 1;
 		screen.hideFPS();
 		startLevel();
 	}

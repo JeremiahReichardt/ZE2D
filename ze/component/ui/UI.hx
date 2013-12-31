@@ -13,6 +13,8 @@ class UI extends Component
 	private var _height:Float;
 	private var _entered:Bool;
 	
+	private var _name:String;
+	
 	public function new(width:Float, height:Float)
 	{
 		super();

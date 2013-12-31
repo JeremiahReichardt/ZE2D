@@ -14,38 +14,25 @@ class Node
 	private var _parent:Node;
 	private var _child:Node;
 	
-	private var enable(default, default):Bool;
-	
 	public function new() 
 	{
 		last = first = this;
-		enable = true;
 	}
 	
 	private function addChild<T:Node>(node:T):T
 	{
-		if (Std.is(node, Type.typeof(this)))
+		if (_child == null)
 		{
-			var last:Node = last;
-			last._next = node;
-			node._previous = last;
-			node._parent = _parent;
+			_child = node;
 		}
 		else
 		{
-			if (_child == null)
-			{
-				_child = node;
-			}
-			else
-			{
-				var last:Node = _child.last;
-				last._next = node;
-				node._previous = last;
-			}
-			
-			node._parent = this;
+			var last:Node = _child.last;
+			last._next = node;
+			node._previous = last;
 		}
+		
+		node._parent = this;
 		
 		node.added();
 		return node;
@@ -138,7 +125,6 @@ class Node
 	
 	private function destroyed():Void
 	{
-		enable = false;
 		_next = null;
 		_previous = null;
 		_parent = null;
