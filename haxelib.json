@@ -8,7 +8,7 @@
 	"releasenote": "Able to change layer event after adding it, and a minor ogmoloader fix",
 	"contributors": [ "zine92" ],
 	"dependencies": {
-		"openfl": "1.2.1",
-		"lime": "0.9.1"
+		"openfl": "1.2.2",
+		"lime": "0.9.2"
 	}
 }
