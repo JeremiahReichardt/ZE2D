@@ -24,18 +24,24 @@ class Switch extends Component
 	{
 		super.added();
 		collider.registerCallback(hitSwitch);
-		_gate = getGameObjectByName("gate" + _switchIndex);
 	}
 	
 	private function hitSwitch(collider:Collider):Void
 	{
+		_gate = getGameObjectByName("gate" + _switchIndex);
+		
 		if (_gate != null)
 		{
 			if (collider.gameObject.name == "player")
 			{
 				scene.removeGameObject(_gate);
 				_gate = null;
-				cast(render, Animation).playOnce("idle", 2);
+				
+				var animation:Animation = cast (render, Animation);
+				if (animation.currentFrameLabel != "idle")
+				{
+					animation.playOnce("idle", 2);
+				}
 			}
 		}
 	}

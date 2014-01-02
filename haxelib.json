@@ -4,11 +4,12 @@
 	"license": "MIT",
 	"tags": ["openFL", "2d", "flash", "game"],
 	"description": "An openfl gameobject/component system game framework for Haxe. Inspired by FlashPunk and Unity",
-	"version": "0.1.4",
-	"releasenote": "Able to change layer event after adding it, and a minor ogmoloader fix",
+	"version": "0.1.6",
+	"releasenote": "Some minor Terry Fixes, Enjoy the game.",
 	"contributors": [ "zine92" ],
 	"dependencies": {
 		"openfl": "1.2.2",
-		"lime": "0.9.2"
+		"lime": "0.9.2",
+		"lime-tools" : "1.2.6"
 	}
 }

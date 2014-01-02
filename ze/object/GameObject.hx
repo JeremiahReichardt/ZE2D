@@ -114,11 +114,7 @@ class GameObject extends Object
 	
 	private function get_scene():Scene
 	{
-		if (scene == null)
-		{
-			scene = engine.scene;
-		}
-		return scene;
+		return (cast(_parent, Scene));
 	}
 	
 	override private function removed():Void 

@@ -63,17 +63,16 @@ class Scene extends Object
 	public function getGameObjectByName(name:String):GameObject
 	{
 		var node:Node = _child.first;
-		var gameObject:GameObject = null;
 		while (node != null)
 		{
-			gameObject = cast (node, GameObject);
+			var gameObject:GameObject = cast (node, GameObject);
 			if (gameObject.name == name)
 			{
-				break;
+				return gameObject;
 			}
 			node = node._next;
 		}
-		return cast gameObject;
+		return null;
 	}
 	
 	public function getGameObjectsByName(name:String):Array<GameObject>
@@ -94,18 +93,17 @@ class Scene extends Object
 	
 	public function getGameObjectByComponent(component:Class<Component>):GameObject
 	{
-		var gameObject:GameObject = null;
 		var node:Node = _child.first;
 		while (node != null)
 		{
-			gameObject = cast(node, GameObject);
+			var gameObject:GameObject = cast(node, GameObject);
 			if (gameObject.getComponent(component) != null)
 			{
-				break;
+				return gameObject;
 			}
 			node = node._next;
 		}
-		return gameObject;
+		return null;
 	}
 	
 	public function getGameObjectsByComponent(component:Class<Component>):Array<GameObject>

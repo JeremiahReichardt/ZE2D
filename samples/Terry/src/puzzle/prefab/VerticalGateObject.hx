@@ -3,6 +3,7 @@ package puzzle.prefab;
 import ze.component.physics.BoxCollider;
 import ze.component.rendering.Image;
 import ze.object.GameObject;
+import ze.util.Input;
 
 /**
  * ...
@@ -20,6 +21,9 @@ class VerticalGateObject extends GameObject
 		super.added();
 		
 		addComponent(new BoxCollider(32, 64));
-		addComponent(new Image("VerticalGate", "gfx/VerticalGate.png"));
+		
+		var image:Image = new Image("VerticalGate", "gfx/VerticalGate.png");
+		image.layer = 1;
+		addComponent(image);
 	}
 }

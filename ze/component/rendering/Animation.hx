@@ -15,12 +15,12 @@ import ze.util.Time;
 class Animation extends Graphic
 {
 	public var currentFrame(default, null):Int;
+	public var currentFrameLabel(default, null):String;
 	public var playing(default, null):Bool;
 	
 	private var _timer:Float;
 	private var _elapsed:Float;
 	private var _lastTime:Int;
-	private var _lastLabel:String;
 	private var _animationData:AnimationData;
 	private var _playOnce:Bool;
 	
@@ -78,9 +78,9 @@ class Animation extends Graphic
 	{
 		_animationData.setCurrentAnimation(label);
 		_animationData.fps = fps;
-		_lastLabel = label;
 		_lastTime = Time.currentTime;
 		currentFrame = startFrame;
+		currentFrameLabel = label;
 		playing = true;
 		return this;
 	}
@@ -93,7 +93,7 @@ class Animation extends Graphic
 	
 	public function playLast(fps:Int = 30):Void
 	{
-		play(_lastLabel, fps);
+		play(currentFrameLabel, fps);
 	}
 	
 	/**

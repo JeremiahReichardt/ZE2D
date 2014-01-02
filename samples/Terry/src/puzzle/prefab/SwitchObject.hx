@@ -4,6 +4,7 @@ import puzzle.actions.Switch;
 import ze.component.physics.BoxCollider;
 import ze.component.rendering.Animation;
 import ze.object.GameObject;
+import ze.util.Input;
 
 /**
  * ...
