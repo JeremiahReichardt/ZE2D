@@ -27,6 +27,9 @@ class Screen extends Component
 	public var midX(get, null):Float;
 	public var midY(get, null):Float;
 	
+	public var width(get, null):Float;
+	public var height(get, null):Float;
+	
 	private var _sprite:Sprite;
 	private var _current:MovieClip;
 	private var _fps:FPS;
@@ -167,5 +170,15 @@ class Screen extends Component
 	private function get_midY():Float
 	{
 		return (bottom * 0.5);
+	}
+	
+	private function get_width():Float
+	{
+		return _current.stage.stageWidth;
+	}
+	
+	private function get_height():Float
+	{
+		return _current.stage.stageHeight;
 	}
 }

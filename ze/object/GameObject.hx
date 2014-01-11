@@ -54,11 +54,11 @@ class GameObject extends Object
 			component = cast(node, Component);
 			if (Std.is(component, componentType))
 			{
-				break;
+				return cast component;
 			}
 			node = node._next;
 		}
-		return cast component;
+		return null;
 	}
 	
 	public function addComponent<T:Node>(component:T):T 
