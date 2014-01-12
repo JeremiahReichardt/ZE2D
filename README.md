@@ -1,4 +1,4 @@
-ZE2D
+ZE2D [![Build Status](https://travis-ci.org/zine92/ZE2D.png?branch=master)](https://travis-ci.org/zine92/ZE2D)
 ====
 
 An openfl gameobject/component system game framework for Haxe. Inspired by FlashPunk, Unity.
