@@ -39,7 +39,7 @@ class SignObject extends GameObject
 			case 2:
 				_sign.addText("Press W to aim up.");
 			case 3:
-				_sign.addText("Shoot and touch the spikes. Press shoot again.");
+				_sign.addText("Shoot up, shoot left, before you die, press up again.\nYou can still press space after respawn.");
 		}
 	}
 }

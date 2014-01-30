@@ -21,10 +21,10 @@ class CharacterController extends Component
 	override private function update():Void 
 	{
 		super.update();
-		collider.set(transform.x, transform.y + 1, render.width, render.height);
+		collider.setPos(transform.x, transform.y + 1);
 		isGrounded = (collider.checkCollisionWith() != null);
 		
-		collider.set(transform.x, transform.y - 1, render.width, render.height);
+		collider.setPos(transform.x, transform.y - 1);
 		hitTop = collider.checkCollisionWith() != null;
 	}
 }

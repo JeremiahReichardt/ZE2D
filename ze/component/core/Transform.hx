@@ -1,5 +1,4 @@
 package ze.component.core;
-
 import ze.component.core.Transform;
 
 /**
@@ -66,8 +65,6 @@ class Transform extends Component
 			return;
 		}
 		
-		collider.setPos(x, y);
-		
 		_moveX += xDir;
 		_moveY += yDir;
 		
@@ -80,8 +77,7 @@ class Transform extends Component
 		_direction = xDir > 0 ? 1 : -1;
 		while (xDir != 0)
 		{
-			collider.x = x + _direction;
-			collider.y = y;
+			collider.setPos(x + _direction, y);
 			
 			if (collider.checkCollisionWith() == null)
 			{
@@ -98,8 +94,7 @@ class Transform extends Component
 		_direction = yDir > 0 ? 1 : -1;
 		while (yDir != 0)
 		{
-			collider.x = x;
-			collider.y = y + _direction;
+			collider.setPos(x, y + _direction);
 			
 			if (collider.checkCollisionWith() == null)
 			{
@@ -112,9 +107,6 @@ class Transform extends Component
 			
 			yDir -= _direction;
 		}
-		
-		//Ensure that collider is back in position before calling moveBy again
-		collider.setPos(x, y);
 	}
 	
 	public function attachTo(toTransform:Transform):Void

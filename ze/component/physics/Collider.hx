@@ -2,6 +2,7 @@ package ze.component.physics;
 
 import ze.component.core.Component;
 import ze.util.Color;
+import ze.util.Ops;
 
 /**
  * ...
@@ -11,22 +12,17 @@ import ze.util.Color;
 class Collider extends Component
 {
 	public var isTrigger(default, null):Bool;
-	public var x(default, default):Float;
-	public var y(default, default):Float;
-	public var width(default, null):Float;
-	public var height(default, null):Float;
+	public var x(default, null):Float;
+	public var y(default, null):Float;
 	
 	private var _colliderList:Array<Collider>;
 	private var _enterCallback:Collider -> Void;
 	private var _exitCallback:Collider -> Void;
 	private var _stayCallback:Collider -> Void;
 	
-	private static inline var NOCOLLISION:Int = Color.GREEN;
-	private static inline var COLLISION:Int = Color.RED;
-	
 	private static var allColliders:Array<Collider> = [];
 	
-	private function new(width:Float, height:Float, trigger:Bool = false)
+	private function new(trigger:Bool = false)
 	{
 		super();
 		_colliderList = [];
@@ -34,8 +30,6 @@ class Collider extends Component
 		
 		x = 0;
 		y = 0;
-		this.width = width;
-		this.height = height;
 	}
 	
 	override private function added():Void 
@@ -157,39 +151,41 @@ class Collider extends Component
 		super.removed();
 	}
 	
-	public function hitTest(otherCollider:Collider):Bool
+	private function hitTest(collider:Collider):Bool
 	{
-		if (x + width > otherCollider.x)
+		if (Std.is(this, BoxCollider) && Std.is(collider, BoxCollider))
 		{
-			if (x < otherCollider.x + otherCollider.width)
-			{
-				if (y + height > otherCollider.y)
-				{
-					if (y < otherCollider.y + otherCollider.height)
-					{
-						return true;
-					}
-				}
-			}
+			var colliderA:BoxCollider = cast (this, BoxCollider);
+			var colliderB:BoxCollider = cast (collider, BoxCollider);
+			
+			if (colliderA.right <= colliderB.left) return false;
+			if (colliderA.bottom <= colliderB.top) return false;
+			if (colliderA.left >= colliderB.right) return false;
+			if (colliderA.top >= colliderB.bottom) return false;
+			return true;
+		}
+		else if (Std.is(this, CircleCollider) && Std.is(collider, CircleCollider))
+		{
+			var colliderA:CircleCollider = cast (this, CircleCollider);
+			var colliderB:CircleCollider = cast (collider, CircleCollider);
+			if (Ops.distance(x, y, collider.x, collider.y) >= colliderA.radius + colliderB.radius) return false;
+		}
+		else if (Std.is(this, BoxCollider) && Std.is(collider, GridCollider))
+		{
+			var gridCollider:GridCollider = cast (collider, GridCollider);
+			return (gridCollider.getGridAt(x, y) == GridCollider.COLLISION_LAYER);
+		}
+		else if (Std.is(this, GridCollider) && Std.is(collider, BoxCollider))
+		{
+			var gridCollider:GridCollider = cast (this, GridCollider);
+			return (gridCollider.getGridAt(collider.x, collider.y) == GridCollider.COLLISION_LAYER);
 		}
 		return false;
-	}
-	
-	public function set(x:Float, y:Float, width:Float, height:Float):Void
-	{
-		setPos(x, y);
-		setSize(width, height);
 	}
 	
 	public function setPos(x:Float, y:Float):Void
 	{
 		this.x = x;
 		this.y = y;
-	}
-	
-	public function setSize(width:Float, height:Float):Void
-	{
-		this.width = width;
-		this.height = height;
 	}
 }

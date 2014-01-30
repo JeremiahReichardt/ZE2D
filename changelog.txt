@@ -1,6 +1,11 @@
 ###Changelog###
 DD/MM/YY
 
+(30/1/14)
+- Reorganized collision handling code, all the collision handling in base Collider class and property store in sub class.
+- Random.float() moved to Ops.randomFloat().
+- Edited Terry's level, pressing N continuosly will jump back to level 1.
+
 (2/1/14)
 - Reverted GameObject's scene property (scene will be null for GameObject when removed).
 - Fixed Scene's getGameObjectByName and by Component not returning null if no name/component is found.

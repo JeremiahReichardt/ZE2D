@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?><project>	<app main="ze.Main" file="Game" swf-version="11.8" />	<window width="800" height="800" fps="30" background="0x000000" />		<source path="ze" />		<haxelib name="openfl" />	<haxelib name="ze2d" /></project>
+<?xml version="1.0" encoding="utf-8"?><project>	<app main="ze.Main" file="Game" swf-version="11.8" />	<window width="800" height="800" fps="30" background="0x000000" />		<source path="ze" />		<haxelib name="openfl" /></project>

@@ -17,7 +17,7 @@ class GridCollider extends Collider
 	
 	public function new(row:Int, column:Int, width:Float, height:Float, trigger:Bool = false)
 	{
-		super(width * column, height * row, trigger);
+		super(trigger);
 		
 		_tileWidth = width;
 		_tileHeight = height;
@@ -54,19 +54,7 @@ class GridCollider extends Collider
 		}
 	}
 	
-	override public function hitTest(collider:Collider):Bool 
-	{
-		if (super.hitTest(collider))
-		{
-			if (Std.is(collider, BoxCollider))
-			{
-				return (getGridAt(collider.x, collider.y) == COLLISION_LAYER);
-			}
-		}
-		return false;
-	}
-	
-	private function getGridAt(x:Float, y:Float):Int
+	public function getGridAt(x:Float, y:Float):Int
 	{
 		var cx:Float = x - collider.x;
 		var cy:Float = y - collider.y;

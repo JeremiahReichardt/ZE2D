@@ -6,7 +6,7 @@ import ze.component.physics.BoxCollider;
 import ze.component.rendering.Image;
 import ze.object.GameObject;
 import ze.object.Node;
-import ze.util.Random;
+import ze.util.Ops;
 
 /**
  * ...
@@ -30,8 +30,8 @@ class ItemManager extends Component
 		--column;
 		while (true)
 		{
-			x = Random.float(column, 0) * 32;
-			y = Random.float(row, 0) * 32;
+			x = Ops.randomFloat(column, 0) * 32;
+			y = Ops.randomFloat(row, 0) * 32;
 			
 			if (getGameObjectAt(x, y))
 			{

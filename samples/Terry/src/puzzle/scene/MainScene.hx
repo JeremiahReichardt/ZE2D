@@ -1,5 +1,6 @@
 package puzzle.scene;
 
+import openfl.Assets;
 import puzzle.actions.Grid;
 import puzzle.prefab.ColliderObject;
 import puzzle.prefab.ExitObject;
@@ -42,6 +43,8 @@ class MainScene extends Scene
 		
 		var _ogmoLoader:OgmoLoader = new OgmoLoader();
 		createGameObject("OgmoLoader", _ogmoLoader);
+		
+		if (!Assets.exists("level/Puzzle " + _level + ".oel")) _level = 1;
 		
 		_ogmoLoader.setOEL("level/Puzzle " + _level + ".oel");
 		

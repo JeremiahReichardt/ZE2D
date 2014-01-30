@@ -74,7 +74,7 @@ class CharacterController extends Component
 	override private function update():Void 
 	{
 		super.update();
-		collider.set(transform.x, transform.y + 1, render.width, render.height);
+		collider.setPos(transform.x, transform.y + 1);// , render.width, render.height);
 		_isGrounded = (collider.checkCollisionWith() != null);
 		
 		if (_isGrounded) 
@@ -89,7 +89,7 @@ class CharacterController extends Component
 			{
 				if (Input.keyDown(_keyLeft))
 				{
-					collider.set(transform.x - 1, transform.y, render.width, render.height);
+					collider.setPos(transform.x - 1, transform.y);
 					if (collider.checkCollisionWith() != null)
 					{
 						_gravity = 0;
@@ -98,7 +98,7 @@ class CharacterController extends Component
 				}
 				else if (Input.keyDown(_keyRight))
 				{
-					collider.set(transform.x + 1, transform.y, render.width, render.height);
+					collider.setPos(transform.x + 1, transform.y);
 					if (collider.checkCollisionWith() != null)
 					{
 						_gravity = 0;
@@ -115,7 +115,7 @@ class CharacterController extends Component
 			_jumpSfx.play(0.2);
 		}
 		
-		collider.set(transform.x, transform.y - 1, render.width, render.height);
+		collider.setPos(transform.x, transform.y - 1);
 		_hitTop = collider.checkCollisionWith() != null;
 		
 		if (_hitTop)
