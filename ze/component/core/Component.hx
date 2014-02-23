@@ -85,4 +85,15 @@ class Component extends Object
 		super.removed();
 		engine.addToRemoveList(this);
 	}
+	
+	override private function destroyed():Void 
+	{
+		super.destroyed();
+		
+		transform = null;
+		collider = null;
+		render = null;
+		scene = null;
+		gameObject = null;
+	}
 }

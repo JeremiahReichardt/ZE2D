@@ -66,6 +66,7 @@ class Render extends Component
 	override private function destroyed():Void 
 	{
 		super.destroyed();
+		
 		displayObject = null;
 	}
 	

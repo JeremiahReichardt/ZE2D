@@ -1,6 +1,11 @@
 ###Changelog###
 DD/MM/YY
 
+(23/2/14)
+- Added activated/deactivated event handling to engine.
+- Added new Blank class for creating simple image that do not need names and not cached.
+- Added new sample game (Simple flappy bird clone).
+
 (30/1/14)
 - Reorganized collision handling code, all the collision handling in base Collider class and property store in sub class.
 - Random.float() moved to Ops.randomFloat().

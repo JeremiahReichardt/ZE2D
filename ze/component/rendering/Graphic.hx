@@ -22,4 +22,12 @@ class Graphic extends Render
 	{
 		_bitmap.bitmapData = bitmapData;
 	}
+	
+	override private function destroyed():Void 
+	{
+		super.destroyed();
+		
+		_bitmap.bitmapData = null;
+		_bitmap = null;
+	}
 }

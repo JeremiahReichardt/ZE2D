@@ -21,15 +21,21 @@ class Engine extends Node
 	private static var removeList:Array<Node>;
 	
 	public var scene(get, null):Scene;
+	private var _engineRunning:Bool;
 	
 	public function new(initScene:Scene) 
 	{
 		super();
+		_engineRunning = true;
 		_engine = this;
 		removeList = [];
 		
 		var current:MovieClip = Lib.current;
+		
 		current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+		current.addEventListener(Event.DEACTIVATE, deactivate);
+		current.addEventListener(Event.ACTIVATE, activate);
+		
 		Input.init(current.stage);
 		
 		addChild(initScene);
@@ -43,6 +49,11 @@ class Engine extends Node
 	
 	override private function update():Void 
 	{
+		if (!_engineRunning)
+		{
+			return;
+		}
+		
 		if (cast(_child, Object).enable)
 		{
 			_child.update();
@@ -81,5 +92,15 @@ class Engine extends Node
 	private function get_scene():Scene
 	{
 		return cast(_child, Scene);
+	}
+	
+	private function activate(event:Event):Void
+	{
+		_engineRunning = true;
+	}
+	
+	private function deactivate(event:Event):Void
+	{
+		_engineRunning = false;
 	}
 }

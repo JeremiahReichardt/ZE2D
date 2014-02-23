@@ -16,6 +16,12 @@ class BoxCollider extends Collider
 	public var top(get, null):Float;
 	public var bottom(get, null):Float;
 	
+	/**
+	 * Simple box collider with support for triggers
+	 * @param	width		The width of the box collider
+	 * @param	height		The height of the box collider 
+	 * @param	trigger		Set to false to register callbacks
+	 */
 	public function new(width:Float, height:Float, trigger:Bool = false) 
 	{
 		super(trigger);
