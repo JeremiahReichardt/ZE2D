@@ -6,7 +6,7 @@ import ze.Engine;
  * ...
  * @author Goh Zi He
  */
-class Node
+class Node extends Object
 {
 	private var _next:Node;
 	private var _previous:Node;
@@ -14,8 +14,12 @@ class Node
 	private var _parent:Node;
 	private var _child:Node;
 	
+	private var first(get, null):Node;
+	private var last(get, null):Node;
+	
 	public function new() 
 	{
+		super();
 		last = first = this;
 	}
 	
@@ -64,11 +68,7 @@ class Node
 		node.removed();	
 	}
 	
-	
-	var first(get, null):Node;
-	var last(get, null):Node;
-	
-	function get_first():Node
+	private function get_first():Node
 	{
 		if (first != null && first._previous != null)
 		{
@@ -80,7 +80,7 @@ class Node
 		return first;
 	}
 	
-	function get_last():Node
+	private function get_last():Node
 	{
 		if (last != null && last._next != null)
 		{
@@ -123,11 +123,13 @@ class Node
 		removed();
 	}
 	
-	private function destroyed():Void
+	override private function destroyed():Void
 	{
 		_next = null;
 		_previous = null;
 		_parent = null;
 		_child = null;
+		first = null;
+		last = null;
 	}
 }

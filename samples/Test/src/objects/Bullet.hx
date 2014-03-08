@@ -1,7 +1,6 @@
 package objects;
 
-import flash.display.BitmapData;
-import ze.component.rendering.Image;
+import ze.component.rendering.Blank;
 import ze.object.GameObject;
 import ze.util.Color;
 import ze.util.Time;
@@ -12,24 +11,21 @@ import ze.util.Time;
  */
 class Bullet extends GameObject
 {
-	var dirX:Float;
-	var dirY:Float;
-	static inline var speed:Float = 100;
-	public static var g:GameObject;
+	private var dirX:Float;
+	private var dirY:Float;
+	private static inline var speed:Float = 100;
 	
 	public function new(x:Float = 0, y:Float = 0, dirX:Float = 0, dirY:Float = 0)
 	{
 		super("Bullet", x, y);
 		this.dirX = dirX;
 		this.dirY = dirY;
-		
-		g = this;
 	}
 	
 	override private function added():Void 
 	{
 		super.added();
-		addComponent(new Image("bullet", new BitmapData(8, 8, Color.GREEN)));
+		addComponent(new Blank(8, 8, Color.GREEN));
 	}
 	
 	override private function update():Void 

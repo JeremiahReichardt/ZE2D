@@ -1,14 +1,9 @@
 package scenes;
 
-import action.PlayerGun;
-import flash.display.BitmapData;
-import objects.Bullet;
 import objects.Player;
-import ze.component.rendering.Image;
+import ze.component.debug.GDebug;
 import ze.object.GameObject;
 import ze.object.Scene;
-import ze.util.Input;
-import ze.util.Key;
 
 /**
  * ...
@@ -16,16 +11,20 @@ import ze.util.Key;
  */
 class GameScene extends Scene
 {
-	public function new() 
-	{
-		super();
-	}
-	
 	override private function added():Void 
 	{
 		super.added();
 		
 		var player:Player = new Player();
 		addGameObject(player);
+		
+		var gDebug:GDebug = new GDebug();
+		gDebug.registerCallBack(showSelectedXY);
+		createGameObject("GDebug", gDebug);
+	}
+	
+	private function showSelectedXY(gameObject:GameObject):Void
+	{
+		trace("X: " + gameObject.transform.x, " Y: " + gameObject.transform.y);
 	}
 }

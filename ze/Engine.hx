@@ -21,12 +21,10 @@ class Engine extends Node
 	private static var removeList:Array<Node>;
 	
 	public var scene(get, null):Scene;
-	private var _engineRunning:Bool;
 	
 	public function new(initScene:Scene) 
 	{
 		super();
-		_engineRunning = true;
 		_engine = this;
 		removeList = [];
 		
@@ -49,7 +47,7 @@ class Engine extends Node
 	
 	override private function update():Void 
 	{
-		if (!_engineRunning)
+		if (!enable)
 		{
 			return;
 		}
@@ -96,11 +94,11 @@ class Engine extends Node
 	
 	private function activate(event:Event):Void
 	{
-		_engineRunning = true;
+		enable = true;
 	}
 	
 	private function deactivate(event:Event):Void
 	{
-		_engineRunning = false;
+		enable = false;
 	}
 }

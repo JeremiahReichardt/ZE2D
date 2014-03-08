@@ -12,7 +12,8 @@ import ze.util.Key;
  */
 class MainScene extends Scene
 {
-	var text:Text;
+	private var text:Text;
+	
 	override private function added():Void 
 	{
 		super.added();

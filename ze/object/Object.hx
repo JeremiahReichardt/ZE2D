@@ -1,19 +1,16 @@
 package ze.object;
 
-import ze.object.Node;
-
 /**
  * ...
  * @author Goh Zi He
  */
-class Object extends Node
+class Object
 {
 	public var enable(default, default):Bool;
 	private var engine(get, null):Engine;
 	
 	public function new() 
 	{
-		super();
 		enable = true;
 	}
 	
@@ -22,9 +19,8 @@ class Object extends Node
 		return Engine.getEngine();
 	}
 	
-	override private function destroyed():Void 
+	private function destroyed():Void 
 	{
-		super.destroyed();
 		enable = false;
 	}
 }

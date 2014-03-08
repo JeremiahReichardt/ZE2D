@@ -12,19 +12,13 @@ import ze.object.Scene;
  * @author Goh Zi He
  */
 
-class Component extends Object
+class Component extends Node
 {
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
 	public var render(get, null):Render;
 	public var gameObject(get, null):GameObject;
 	public var scene(get, null):Scene;
-	
-	public function new()
-	{
-		super();
-		enable = true;
-	}
 	
 	public function getComponent<T:Component>(componentType:Class<T>):T
 	{

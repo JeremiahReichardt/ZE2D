@@ -77,9 +77,17 @@ class Player extends Component
 			}
 		}
 		
-		if (Input.keyPressed(Key.ENTER) || Input.keyPressed(Key.SPACEBAR))
+		if (Input.keyPressed(Key.Z) || Input.keyPressed(Key.SPACEBAR))
 		{
 			shoot(direction);
+		}
+		else if (Input.keyPressed(Key.C))
+		{
+			if (bullet != null)
+			{
+				scene.removeGameObject(bullet);
+				disableBullet();
+			}
 		}
 	}
 	

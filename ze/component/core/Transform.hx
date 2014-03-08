@@ -147,4 +147,11 @@ class Transform extends Component
 		scaleX += sizeX;
 		scaleY += sizeY;
 	}
+	
+	override private function removed():Void 
+	{
+		super.removed();
+		
+		_attached = null;
+	}
 }

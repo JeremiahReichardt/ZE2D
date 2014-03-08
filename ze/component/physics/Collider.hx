@@ -142,15 +142,6 @@ class Collider extends Component
 		return null;
 	}
 	
-	override private function removed():Void 
-	{
-		allColliders.remove(this);
-		_enterCallback = null;
-		_exitCallback = null;
-		_stayCallback = null;
-		super.removed();
-	}
-	
 	private function hitTest(collider:Collider):Bool
 	{
 		if (Std.is(this, BoxCollider) && Std.is(collider, BoxCollider))
@@ -187,5 +178,22 @@ class Collider extends Component
 	{
 		this.x = x;
 		this.y = y;
+	}
+	
+	override private function removed():Void 
+	{
+		super.removed();
+		
+		allColliders.remove(this);
+	}
+	
+	override private function destroyed():Void 
+	{
+		super.destroyed();
+		
+		_enterCallback = null;
+		_exitCallback = null;
+		_stayCallback = null;
+		_colliderList = null;
 	}
 }

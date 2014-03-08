@@ -13,7 +13,7 @@ import ze.object.Node;
  * @author Goh Zi He
  */
 
-class Scene extends Object
+class Scene extends Node
 {
 	public var screen(default, null):Screen;
 	
@@ -132,12 +132,17 @@ class Scene extends Object
 	
 	override private function update():Void 
 	{
+		if (!enable)
+		{
+			return;
+		}
+			
 		super.update();
 		
 		var node:Node = _child.first;
 		while (node != null)
 		{
-			if (cast(node, Object).enable)
+			if (node.enable)
 			{
 				node.update();
 			}
@@ -148,6 +153,7 @@ class Scene extends Object
 	override private function removed():Void 
 	{
 		super.removed();
+		
 		_child.removeAll();
 		engine.addToRemoveList(this);
 	}

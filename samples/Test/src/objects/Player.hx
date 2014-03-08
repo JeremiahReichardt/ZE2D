@@ -2,9 +2,8 @@ package objects;
 
 import action.PlayerGun;
 import action.PlayerMovement;
-import flash.display.BitmapData;
 import ze.component.physics.BoxCollider;
-import ze.component.rendering.Image;
+import ze.component.rendering.Animation;
 import ze.object.GameObject;
 
 /**
@@ -21,7 +20,12 @@ class Player extends GameObject
 	override private function added():Void 
 	{
 		super.added();
-		addComponent(new Image("Player", new BitmapData(32, 32)));
+		
+		var animation:Animation = new Animation("Square", "gfx/Square.png", 32, 32);
+		animation.addAnimationFromFrame("idle", 0, 10);
+		animation.play("idle");
+		
+		addComponent(animation);
 		addComponent(new BoxCollider(32, 32));
 		addComponent(new PlayerMovement());
 		addComponent(new PlayerGun());

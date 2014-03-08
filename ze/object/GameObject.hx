@@ -6,14 +6,11 @@ import ze.component.physics.Collider;
 import ze.component.rendering.Render;
 
 /**
- * Base object with a default set of components (Transform, Render)
- * Cannot be instantiated with new, must be created from Scene.createGameObject() method
  * @author Goh Zi He
  */
 
-class GameObject extends Object
+class GameObject extends Node
 {
-	public var selected(default, default):Bool;
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
 	public var render(get, null):Render;
@@ -32,12 +29,17 @@ class GameObject extends Object
 	
 	override private function update():Void 
 	{
+		if (!enable)
+		{
+			return;
+		}
+		
 		super.update();
 		
 		var node:Node = _child.first;
 		while (node != null)
 		{
-			if (cast(node, Object).enable)
+			if (node.enable)
 			{
 				node.update();
 			}

@@ -118,9 +118,20 @@ class Animation extends Graphic
 		playing = true;
 	}
 	
-	public function addAnimation(animationName:String, animation:Array<Int>):Animation
+	public function addAnimationFromFrame(animationName:String, startFrame:Int = 0, endFrame:Int = 1):Animation
 	{
-		_animationData.addAnimation(animationName, animation);
+		var animationArray:Array<Int> = [];
+		for (i in startFrame ... endFrame)
+		{
+			animationArray[i] = i;
+		}
+		_animationData.addAnimation(animationName, animationArray);
+		return this;
+	}
+	
+	public function addAnimation(animationName:String, animationArray:Array<Int>):Animation
+	{
+		_animationData.addAnimation(animationName, animationArray);
 		return this;
 	}
 	
@@ -158,10 +169,11 @@ class Animation extends Graphic
 		return animationData;
 	}
 	
-	override private function removed():Void 
+	override private function destroyed():Void 
 	{
-		//_animationData = null;
-		super.removed();
+		super.destroyed();
+		
+		_animationData = null;
 	}
 }
 
