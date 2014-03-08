@@ -15,6 +15,7 @@ class Player extends GameObject
 	public function new() 
 	{
 		super("Player", 200, 200);
+		id = "Player";
 	}
 	
 	override private function added():Void 
@@ -29,6 +30,5 @@ class Player extends GameObject
 		addComponent(new BoxCollider(32, 32));
 		addComponent(new PlayerMovement());
 		addComponent(new PlayerGun());
-		
 	}
 }

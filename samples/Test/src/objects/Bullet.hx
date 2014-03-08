@@ -15,11 +15,15 @@ class Bullet extends GameObject
 	private var dirY:Float;
 	private static inline var speed:Float = 100;
 	
+	private static var index:Int;
+	
 	public function new(x:Float = 0, y:Float = 0, dirX:Float = 0, dirY:Float = 0)
 	{
 		super("Bullet", x, y);
 		this.dirX = dirX;
 		this.dirY = dirY;
+		++index;
+		id = "Bullet " + index;
 	}
 	
 	override private function added():Void 
@@ -31,6 +35,7 @@ class Bullet extends GameObject
 	override private function update():Void 
 	{
 		super.update();
+		
 		transform.move(dirX * speed * Time.deltaTime, dirY * speed * Time.deltaTime);
 		
 		if (transform.x < 0 || transform.x > scene.screen.right)
@@ -39,7 +44,7 @@ class Bullet extends GameObject
 		}
 		else if (transform.y < 0 || transform.y > scene.screen.bottom)
 		{
-			scene.removeGameObject(this);
+			//scene.removeGameObject(this);
 		}
 	}
 }

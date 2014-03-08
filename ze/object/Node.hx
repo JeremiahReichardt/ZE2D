@@ -14,8 +14,10 @@ class Node extends Object
 	private var _parent:Node;
 	private var _child:Node;
 	
-	private var first(get, null):Node;
-	private var last(get, null):Node;
+	private var first(get, set):Node;
+	private var last(get, set):Node;
+	
+	private var id:String = "";
 	
 	public function new() 
 	{
@@ -57,6 +59,18 @@ class Node extends Object
 			next._previous = prev;
 		}
 		
+		if (_child != null)
+		{
+			if (_child.last == node)
+			{
+				_child.last = prev;
+			}
+			else if (_child.first == node)
+			{
+				_child.first = next;
+			}
+		}
+		
 		if (!Std.is(node, Type.typeof(this)))
 		{
 			if (node == _child)
@@ -70,26 +84,39 @@ class Node extends Object
 	
 	private function get_first():Node
 	{
-		if (first != null && first._previous != null)
+		first = _parent._child;
+		return _parent._child;
+	}
+	
+	private function set_first(value:Node):Node
+	{
+		if (_next != null)
 		{
-			if (_previous != null)
-			{
-				first = _previous.get_first();
-			}
+			_next.first = value;
 		}
-		return first;
+		return value;
 	}
 	
 	private function get_last():Node
 	{
-		if (last != null && last._next != null)
+		if (_next == null)
 		{
-			if (_next != null)
-			{
-				last = _next.get_last();
-			}
+			last = this;
+			return this;
 		}
-		return last;
+		else
+		{
+			return _next.last;
+		}
+	}
+	
+	private function set_last(value:Node):Node
+	{
+		if (_next != null)
+		{
+			_next.last = value;
+		}
+		return value;
 	}
 	
 	private function added():Void
@@ -102,6 +129,11 @@ class Node extends Object
 	
 	private function removed():Void
 	{
+		enable = false;
+		_next = null;
+		_previous = null;
+		_parent = null;
+		_child = null;
 	}
 	
 	private function removeAll():Void
@@ -125,10 +157,6 @@ class Node extends Object
 	
 	override private function destroyed():Void
 	{
-		_next = null;
-		_previous = null;
-		_parent = null;
-		_child = null;
 		first = null;
 		last = null;
 	}

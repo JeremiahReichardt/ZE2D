@@ -2,6 +2,7 @@ package action;
 
 import objects.Bullet;
 import ze.component.core.Component;
+import ze.component.sounds.Audio;
 import ze.util.Input;
 
 /**
@@ -10,9 +11,13 @@ import ze.util.Input;
  */
 class PlayerGun extends Component
 {
+	private var _laserAudio:Audio;
+	
 	override private function added():Void 
 	{
 		super.added();
+		
+		_laserAudio = new Audio("Laser", "sfx/Laser_Shoot3.wav");
 	}
 	
 	override private function update():Void 
@@ -21,6 +26,8 @@ class PlayerGun extends Component
 		
 		if (Input.leftMousePressed())
 		{
+			_laserAudio.play();
+			
 			var dirX:Float = Input.mouseX - transform.x;
 			var dirY:Float = Input.mouseY - transform.y;
 			var magnitude:Float = Math.sqrt((dirX * dirX) + (dirY * dirY));

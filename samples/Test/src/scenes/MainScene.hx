@@ -1,6 +1,7 @@
 package scenes;
 
 import ze.component.rendering.Text;
+import ze.component.ui.Button;
 import ze.object.GameObject;
 import ze.object.Scene;
 import ze.util.Color;
@@ -29,6 +30,9 @@ class MainScene extends Scene
 		text = new Text("Press something!", Color.WHITE);
 		
 		gameObject.addComponent(text);
+		
+		var button:Button = new Button("PlayButton", "gfx/Button.png", 64, 32, [0], [1], [0]);
+		createGameObject("", button, screen.midX - 64, screen.midY - 32);
 	}
 	
 	override private function update():Void 

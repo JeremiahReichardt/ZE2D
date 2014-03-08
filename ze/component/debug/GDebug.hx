@@ -55,7 +55,7 @@ class GDebug extends Component
 				selectGameObject();
 			}
 			
-			if (Input.leftMouseDown())
+			if (Input.leftMouseDown() && Input.keyDown(Key.Z))
 			{
 				if (_selectedGameObject != null)
 				{
