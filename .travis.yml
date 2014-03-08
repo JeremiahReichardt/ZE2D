@@ -11,7 +11,7 @@ before_install:
   - haxelib -notimeout install hxlibc
   - haxelib -notimeout install lime
   - haxelib -notimeout install lime-tools
-  - haxelib -notimeout install ze2d
+  - haxelib -notimeout git ze2d https://github.com/zine92/ZE2D
   - cd $(pwd)/samples/
   
 script:
