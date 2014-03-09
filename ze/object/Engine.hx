@@ -1,6 +1,8 @@
-package ze;
+package ze.object;
 
 import flash.display.MovieClip;
+import flash.display.StageAlign;
+import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.Lib;
 import flash.system.System;
@@ -21,15 +23,18 @@ class Engine extends Node
 	private static var removeList:Array<Node>;
 	
 	public var scene(get, null):Scene;
+	public var current(default, null):MovieClip;
 	
 	public function new(initScene:Scene) 
 	{
 		super();
+		
 		_engine = this;
 		removeList = [];
 		
-		var current:MovieClip = Lib.current;
-		
+		current = Lib.current;
+		current.stage.align = StageAlign.LEFT;
+		current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		current.addEventListener(Event.DEACTIVATE, deactivate);
 		current.addEventListener(Event.ACTIVATE, activate);

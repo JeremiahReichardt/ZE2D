@@ -1,14 +1,9 @@
 package ze.component.core;
 
-import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.display.Stage;
-import flash.display.StageAlign;
-import flash.display.StageScaleMode;
-import flash.Lib;
 import ze.component.core.Component;
 import ze.component.rendering.Render;
-import ze.util.FPS;
 
 /**
  * ...
@@ -23,16 +18,12 @@ class Screen extends Component
 	public var bottom(get, null):Float;
 	public var left(get, null):Float;
 	public var right(get, null):Float;
-	
 	public var midX(get, null):Float;
 	public var midY(get, null):Float;
-	
 	public var width(get, null):Float;
 	public var height(get, null):Float;
 	
-	private var _sprite:Sprite;
-	private var _current:MovieClip;
-	private var _fps:FPS;
+	private var _root:Sprite;
 	
 	private var _layers:Array<Array<Render>>;
 	private var _maxLayer:Int;
@@ -40,29 +31,23 @@ class Screen extends Component
 	public function new()
 	{
 		super();
-		_current = Lib.current;
-		_sprite = new Sprite();
-		_current.addChild(_sprite);
 		
-		var stage:Stage = _current.stage;
-		stage.align = StageAlign.LEFT;
-		stage.scaleMode = StageScaleMode.NO_SCALE;
-		
-		_sprite.x = offsetX = stage.stageWidth >> 1;
-		_sprite.y = offsetY = stage.stageHeight >> 1;
-		
-		_fps = new FPS( -offsetX, -offsetY, 24, 0xFFFFFF);
-		_sprite.addChild(_fps);
 		_layers = [[]];
+		_root = new Sprite();
+		engine.current.addChild(_root);
+		
+		var stage:Stage = engine.current.stage;
+		_root.x = offsetX = midX = stage.stageWidth >> 1;
+		_root.y = offsetY = midY = stage.stageHeight >> 1;
 	}
 	
 	override private function update():Void 
 	{
 		super.update();
 		
-		_sprite.x = transform.x + offsetX;
-		_sprite.y = transform.y + offsetY;
-		_sprite.rotation = transform.rotation;
+		_root.x = transform.x + offsetX;
+		_root.y = transform.y + offsetY;
+		_root.rotation = transform.rotation;
 		
 		for (i in 0 ... _maxLayer + 1)
 		{
@@ -80,16 +65,6 @@ class Screen extends Component
 				}
 			}
 		}
-	}
-	
-	public function hideFPS():Void
-	{
-		_fps.visible = false;
-	}
-	
-	public function showFPS():Void
-	{
-		_fps.visible = true;
 	}
 	
 	public function addRender(render:Render):Void
@@ -113,7 +88,7 @@ class Screen extends Component
 			
 			index += _layers[i].length;
 		}
-		_sprite.addChildAt(render.displayObject, index);
+		_root.addChildAt(render.displayObject, index);
 		_layers[render.layer].push(render);
 	}
 	
@@ -123,22 +98,22 @@ class Screen extends Component
 		{
 			return;
 		}
-		_sprite.removeChild(render.displayObject);
+		_root.removeChild(render.displayObject);
 		_layers[render.layer].remove(render);
 	}
 	
 	override private function removed():Void 
 	{
 		super.removed();
-		_current.removeChild(_sprite);
+		
+		engine.current.removeChild(_root);
 	}
 	
 	override private function destroyed():Void 
 	{
 		super.destroyed();
-		_sprite = null;
-		_current = null;
-		_fps = null;
+		
+		_root = null;
 		_layers = null;
 	}
 	
@@ -149,7 +124,7 @@ class Screen extends Component
 	
 	private function get_bottom():Float
 	{
-		return (transform.y + _current.stage.stageHeight);
+		return (transform.y + engine.current.stage.stageHeight);
 	}
 	
 	private function get_left():Float
@@ -159,7 +134,7 @@ class Screen extends Component
 	
 	private function get_right():Float
 	{
-		return (transform.x + _current.stage.stageWidth);
+		return (transform.x + engine.current.stage.stageWidth);
 	}
 	
 	private function get_midX():Float
@@ -174,11 +149,11 @@ class Screen extends Component
 	
 	private function get_width():Float
 	{
-		return _current.stage.stageWidth;
+		return engine.current.stage.stageWidth;
 	}
 	
 	private function get_height():Float
 	{
-		return _current.stage.stageHeight;
+		return engine.current.stage.stageHeight;
 	}
 }

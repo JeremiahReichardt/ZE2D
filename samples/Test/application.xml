@@ -3,6 +3,7 @@
 	<app main="Main" file="Game" swf-version="11.8" />
 	<window width="600" height="600" fps="30" background="0x000000" />
 	
+	
 	<source path="src" />
 	
 	<haxelib name="openfl" />

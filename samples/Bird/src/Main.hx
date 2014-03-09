@@ -1,6 +1,6 @@
 package;
 
-import ze.Engine;
+import ze.object.Engine;
 
 /**
  * ...

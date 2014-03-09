@@ -41,7 +41,7 @@ Aims to create a simple and working proof of concept engine/framework for easy u
 There you have your first attempt at using Ze2D.
 
 
-###To create new gameObjects, just extend gameObject. (Extending from above).
+###To create new GameObjects, just extend GameObject. (Extending from above).
 1. Create a blank Player.hx.
 
 

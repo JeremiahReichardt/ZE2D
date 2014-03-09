@@ -1,5 +1,7 @@
 package ze.component.debug;
 
+import flash.system.System;
+import haxe.Timer;
 import ze.component.core.Component;
 import ze.component.rendering.Text;
 import ze.object.GameObject;
@@ -17,23 +19,39 @@ class GDebug extends Component
 	private var _debugMode:Bool;
 	private var _debugText:Text;
 	private var _debugCallBack:GameObject -> Void;
+	
 	private var _selectedGameObject:GameObject;
+	
+	private var _fpsText:Text;
+	private var _times:Array<Float>;
+	private var _memory:Float;
 	
 	override private function added():Void 
 	{
 		super.added();
 		
-		_debugMode = false;
+		_times = [];
+		
+		transform.x = scene.screen.left;
+		transform.y = scene.screen.top;
+		
+		_fpsText = new Text("FPS: ", Color.WHITE);
+		addComponent(_fpsText);
+		
 		_debugText = new Text("Paused", Color.WHITE);
+		_debugText.offsetX = scene.screen.right - 75;
+		
 		addComponent(_debugText);
-		_debugText.transform.x = scene.screen.right - 75;
-		_debugText.transform.y = scene.screen.top;
+		
+		_debugMode = false;
 		_debugText.visible = _debugMode;
 	}
 	
 	override private function update():Void 
 	{
 		super.update();
+		
+		showFPS();
 		
 		if (Input.keyPressed(Key.TAB))
 		{
@@ -70,6 +88,20 @@ class GDebug extends Component
 				_selectedGameObject = null;
 			}
 		}
+	}
+	
+	private function showFPS() 
+	{
+		var now:Float = Timer.stamp();
+		_times.push(now);
+		
+		while (_times[0] < now - 1)
+		{
+			_times.shift();
+		}
+		
+		_memory = Math.ffloor(System.totalMemory / 1024 / 512);
+		_fpsText.setText("FPS: " + _times.length + " Memory: " + _memory + " MB");
 	}
 	
 	private function selectGameObject():Void

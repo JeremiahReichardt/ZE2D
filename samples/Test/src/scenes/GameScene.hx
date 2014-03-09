@@ -27,11 +27,4 @@ class GameScene extends Scene
 	{
 		trace("X: " + gameObject.transform.x, " Y: " + gameObject.transform.y);
 	}
-	
-	override private function update():Void 
-	{
-		super.update();
-		
-		//trace(_child.last.id);
-	}
 }

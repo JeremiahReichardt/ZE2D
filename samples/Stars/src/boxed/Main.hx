@@ -1,7 +1,7 @@
 package boxed;
 
 import boxed.scene.MainScene;
-import ze.Engine;
+import ze.object.Engine;
 
 /**
  * ...

@@ -27,7 +27,6 @@ class Scene extends Node
 	public function createGameObject(name:String, component:Component = null, components:Array<Component> = null, x:Float = 0, y:Float = 0):GameObject
 	{
 		var gameObject:GameObject = new GameObject(name, x, y);
-		gameObject.id = name;
 		addGameObject(gameObject);
 		
 		if (component != null)

@@ -1,6 +1,12 @@
 ###Changelog###
 DD/MM/YY
 
+(9/3/14)
+- Removed ID, used for debugging a bug for yesterday.
+- Moved some codes from Screen.hx to Engine.hx.
+- Engine.hx is now in object folder.
+- Removed FPS.hx, moves all FPS codes to GDebug.hx.
+
 (8/3/14)
 - Added a new GDebug class for debugging game.
 - Includes pausing all gameObject and moving gameObject around (GDebug).
@@ -10,6 +16,7 @@ DD/MM/YY
 - Added a new rotating square animation for Test sample poject.
 - Minor Terry level fix, removed spikes at some places.
 - Some minor tweaks (hopefully) to improve the performance of the engine (Setting vars to null in destroyed and removed). 
+- Fixed a bug where the last node is not correctly set to the last node resulting in irresponsive items in Test project.
 
 (23/2/14)
 - Added activated/deactivated event handling to engine.

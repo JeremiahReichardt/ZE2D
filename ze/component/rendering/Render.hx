@@ -25,6 +25,7 @@ class Render extends Component
 	public function new()
 	{
 		super();
+		
 		offsetX = 0;
 		offsetY = 0;
 		layer = 0;
@@ -33,6 +34,7 @@ class Render extends Component
 	override private function added():Void 
 	{
 		super.added();
+		
 		displayObject.cacheAsBitmap = true;
 		scene.screen.addRender(this);
 		update();
@@ -60,6 +62,7 @@ class Render extends Component
 	override private function removed():Void 
 	{
 		super.removed();
+		
 		scene.screen.removeRender(this);
 	}
 	

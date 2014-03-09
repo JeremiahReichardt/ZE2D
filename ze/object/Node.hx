@@ -1,6 +1,6 @@
 package ze.object;
 
-import ze.Engine;
+import ze.object.Engine;
 
 /**
  * ...
@@ -16,8 +16,6 @@ class Node extends Object
 	
 	private var first(get, set):Node;
 	private var last(get, set):Node;
-	
-	private var id:String = "";
 	
 	public function new() 
 	{
@@ -130,10 +128,6 @@ class Node extends Object
 	private function removed():Void
 	{
 		enable = false;
-		_next = null;
-		_previous = null;
-		_parent = null;
-		_child = null;
 	}
 	
 	private function removeAll():Void
@@ -157,6 +151,10 @@ class Node extends Object
 	
 	override private function destroyed():Void
 	{
+		_next = null;
+		_previous = null;
+		_parent = null;
+		_child = null;
 		first = null;
 		last = null;
 	}

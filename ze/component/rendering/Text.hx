@@ -20,6 +20,7 @@ class Text extends Render
 	public function new(text:String = "", color:Int = Color.BLACK, size:Float = 20)
 	{
 		super();
+		
 		_textField = new TextField();
 		displayObject = _textField;
 		
@@ -42,5 +43,13 @@ class Text extends Render
 	{
 		_textField.text = text;
 		_textField.setTextFormat(_format);
+	}
+	
+	override private function destroyed():Void 
+	{
+		super.destroyed();
+		
+		_textField = null;
+		_format = null;
 	}
 }

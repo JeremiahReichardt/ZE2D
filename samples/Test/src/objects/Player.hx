@@ -15,7 +15,6 @@ class Player extends GameObject
 	public function new() 
 	{
 		super("Player", 200, 200);
-		id = "Player";
 	}
 	
 	override private function added():Void 
