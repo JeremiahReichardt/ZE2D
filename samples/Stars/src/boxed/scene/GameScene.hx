@@ -51,6 +51,10 @@ class GameScene extends Scene
 	{
 		super.update();
 		
+		if (Input.rightMousePressed())
+		{
+			trace(1);
+		}
 		if (Input.keyPressed(Key.DIGIT_1)) { level = 1; engine.addScene(new GameScene()); }
 		if (Input.keyPressed(Key.DIGIT_2)) { level = 2; engine.addScene(new GameScene()); }
 		if (Input.keyPressed(Key.DIGIT_3)) { level = 3; engine.addScene(new GameScene()); }

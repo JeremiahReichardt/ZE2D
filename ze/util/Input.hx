@@ -53,11 +53,11 @@ class Input
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownEvent);
 		stage.addEventListener(KeyboardEvent.KEY_UP, keyUpEvent);
 		
-		stage.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownEvent);
-		stage.addEventListener(MouseEvent.MOUSE_UP, mouseUpEvent);
+		stage.addEventListener(MouseEvent.MOUSE_DOWN, leftMouseDownEvent);
+		stage.addEventListener(MouseEvent.MOUSE_UP, leftMouseUpEvent);
 		
-		//stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, rightMouseDownEvent);
-		//stage.addEventListener(MouseEvent.RIGHT_MOUSE_UP, rightMouseUpEvent);
+		stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, rightMouseDownEvent);
+		stage.addEventListener(MouseEvent.RIGHT_MOUSE_UP, rightMouseUpEvent);
 		
 		addKey("left", [Key.A, Key.LEFT]);
 	}
@@ -74,15 +74,15 @@ class Input
 			_leftMouseReleased = false;
 		}
 		
-		//if (_rightMousePressed)
-		//{
-			//_rightMousePressed = false;
-		//}
-		//
-		//if (_rightMouseReleased)
-		//{
-			//_rightMouseReleased = false;
-		//}
+		if (_rightMousePressed)
+		{
+			_rightMousePressed = false;
+		}
+		
+		if (_rightMouseReleased)
+		{
+			_rightMouseReleased = false;
+		}
 		
 		_mouseX = _stage.mouseX;
 		_mouseY = _stage.mouseY;
@@ -204,28 +204,28 @@ class Input
 		}
 	}
 	
-	private static function mouseDownEvent(event:MouseEvent):Void
+	private static function leftMouseDownEvent(event:MouseEvent):Void
 	{
 		_leftMouseDown = true;
 		_leftMousePressed = true;
 		_leftMouseReleased = false;
 	}
 	
-	private static function mouseUpEvent(event:MouseEvent):Void
+	private static function leftMouseUpEvent(event:MouseEvent):Void
 	{
 		_leftMouseDown = false;
 		_leftMousePressed = false;
 		_leftMouseReleased = true;
 	}
 	
-	private static function rightMouseUpEvent(event:MouseEvent):Void 
+	private static function rightMouseDownEvent(event:MouseEvent):Void 
 	{
 		_rightMouseDown = true;
 		_rightMousePressed = true;
 		_rightMouseReleased = false;
 	}
 	
-	private static function rightMouseDownEvent(event:MouseEvent):Void 
+	private static function rightMouseUpEvent(event:MouseEvent):Void 
 	{
 		_rightMouseDown = false;
 		_rightMousePressed = false;
@@ -247,20 +247,20 @@ class Input
 		return _leftMousePressed;
 	}
 	
-	//public static function rightMouseReleased():Bool
-	//{
-		//return _rightMouseReleased;
-	//}
-	//
-	//public static function rightMouseDown():Bool
-	//{
-		//return _rightMouseDown;
-	//}
-	//
-	//public static function rightMousePressed():Bool
-	//{
-		//return _rightMousePressed;
-	//}
+	public static function rightMouseReleased():Bool
+	{
+		return _rightMouseReleased;
+	}
+	
+	public static function rightMouseDown():Bool
+	{
+		return _rightMouseDown;
+	}
+	
+	public static function rightMousePressed():Bool
+	{
+		return _rightMousePressed;
+	}
 	
 	public static function mouseMoved():Bool
 	{
