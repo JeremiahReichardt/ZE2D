@@ -12,10 +12,10 @@ import puzzle.prefab.SpikeObject;
 import puzzle.prefab.SwitchObject;
 import puzzle.prefab.TileObject;
 import puzzle.prefab.VerticalGateObject;
-import ze.component.core.OgmoLoader;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
+import ze.util.OgmoLoader;
 
 /**
  * ...
@@ -40,8 +40,7 @@ class MainScene extends Scene
 		grid = new Grid(800, 800, 32);
 		createGameObject("grid", grid);
 		
-		var _ogmoLoader:OgmoLoader = new OgmoLoader();
-		createGameObject("OgmoLoader", _ogmoLoader);
+		var _ogmoLoader:OgmoLoader = new OgmoLoader(this);
 		
 		if (!Assets.exists("level/Puzzle " + _level + ".oel")) _level = 1;
 		

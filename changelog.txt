@@ -1,6 +1,12 @@
 ###Changelog###
 DD/MM/YY
 
+(28/3/14)
+- OgmoLoader reverted back to utils again, not a component anymore.
+
+(22/3/14)
+- Added back right mouse click for Inputs.
+
 (9/3/14)
 - Removed ID, used for debugging a bug for yesterday.
 - Moved some codes from Screen.hx to Engine.hx.

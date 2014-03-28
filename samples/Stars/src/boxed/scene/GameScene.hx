@@ -5,11 +5,11 @@ import boxed.prefab.ColliderObject;
 import boxed.prefab.PlayerObject;
 import boxed.prefab.TileObject;
 import flash.display.BitmapData;
-import ze.component.core.OgmoLoader;
 import ze.component.sounds.Audio;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
+import ze.util.OgmoLoader;
 /**
  * ...
  * @author Goh Zi He
@@ -30,8 +30,7 @@ class GameScene extends Scene
 		
 		createGameObject("item_manager", new ItemManager());
 		
-		_ogmoLoader = new OgmoLoader();
-		createGameObject("OgmoLoader", _ogmoLoader);
+		_ogmoLoader = new OgmoLoader(this);
 		
 		_ogmoLoader.setOEL("level/Level " + level + ".oel");
 		

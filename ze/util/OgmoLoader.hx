@@ -1,14 +1,14 @@
-package ze.component.core;
+package ze.util;
 
 import openfl.Assets;
-import ze.component.core.Component;
 import ze.object.GameObject;
+import ze.object.Scene;
 
 /**
  * ...
  * @author Goh Zi He
  */
-class OgmoLoader extends Component
+class OgmoLoader
 {
 	private var _levelDirectory:String;
 	private var _levelXML:Xml;
@@ -17,9 +17,13 @@ class OgmoLoader extends Component
 	private var _layers:Array<String>;
 	private var _entities:Array<Array<EntityProperties>>;
 	
-	public function new()
+	private var _scene:Scene;
+	
+	public function new(scene:Scene)
 	{
-		super();
+		//super();
+		
+		_scene = scene;
 		_layers = [];
 		_entities = [];
 	}
@@ -96,7 +100,7 @@ class OgmoLoader extends Component
 							{
 								Reflect.setProperty(params, attribute, Std.parseInt(element.get(attribute)));
 							}
-							scene.addGameObject(Type.createInstance(cls, [params]));
+							_scene.addGameObject(Type.createInstance(cls, [params]));
 						}
 					}
 				}
