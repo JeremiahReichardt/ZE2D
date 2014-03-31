@@ -21,8 +21,6 @@ class OgmoLoader
 	
 	public function new(scene:Scene)
 	{
-		//super();
-		
 		_scene = scene;
 		_layers = [];
 		_entities = [];

@@ -8,34 +8,15 @@ import sys.io.File;
  */
 class RunScript
 {
-	private static inline var ZE2D_VERSION:String = "0.1.9";
-
 	public function new()
 	{
 		var args:Array<String> = Sys.args();
-		switch (args.length)
+		showAllCommands();
+		
+		switch (args[0])
 		{
-			case 2:
-				switch (args[0])
-				{
-					case "list":
-						showAllCommands();
-					case "version":
-						printVersion();
-					default:
-						showAllCommands();
-				}
-			case 4:
-				switch (args[0])
-				{
-					case "new":
-						createNewProject(args[1], args[2]);
-					default:
-						showAllCommands();
-				}
-			
-			default:
-				showAllCommands();
+			case "new":
+			createNewProject(args[1], args[2]);
 		}
 		
 		echo("");
@@ -83,17 +64,10 @@ class RunScript
 		echo("    Usage: haxelib run ze2d [argument]                          ");
 		echo("                                                                ");
 		echo("    Available Commands:                                         ");
-		echo("    list - List All commands.                                   ");
 		echo("    new - Create a new project with path you specify.           ");
-		echo("    version - Show current version of ZE2D.                     ");
 		echo("                                                                ");
 		echo("    E.g. haxelib run ze2d new MyProjectName C:\\Projects\\      ");
-		echo("         will create a MyProjectName folder at C:\\Projects\\   ");
-	}
-	
-	function printVersion():Void
-	{
-		echo("Version: " + ZE2D_VERSION);
+		echo("    E.g. haxelib run ze2d new MyProjectName 				      ");
 	}
 	
 	function echo(v:Dynamic):Void
