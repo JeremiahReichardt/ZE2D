@@ -1,6 +1,11 @@
 ###Changelog###
 DD/MM/YY
 
+(31/3/14)
+- Cleaned up OgmoLoader. 
+- Template now provide correct Main.hx to point to Engine.
+- Fixed some irrelevant stuff in command line tools.
+
 (28/3/14)
 - OgmoLoader reverted back to utils again, not a component anymore.
 
