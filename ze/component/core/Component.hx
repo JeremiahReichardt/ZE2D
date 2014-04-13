@@ -1,10 +1,8 @@
 package ze.component.core;
-
 import ze.component.physics.Collider;
 import ze.component.rendering.Render;
 import ze.object.GameObject;
 import ze.object.Node;
-import ze.object.Object;
 import ze.object.Scene;
 
 /**

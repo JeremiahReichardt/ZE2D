@@ -1,5 +1,4 @@
 package ze.component.rendering;
-
 import flash.display.BitmapData;
 import flash.geom.Point;
 import flash.geom.Rectangle;

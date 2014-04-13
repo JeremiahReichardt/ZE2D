@@ -1,13 +1,9 @@
 package ze.object;
-
-import flash.display.BitmapData;
-import flash.geom.Rectangle;
 import ze.component.core.Component;
 import ze.component.core.Screen;
-import ze.component.rendering.Image;
 import ze.object.GameObject;
 import ze.object.Node;
-
+import ze.system.TSScreen;
 /**
  * Handle adding/removing gameObjects, remove all gameObjects when scene changes
  * @author Goh Zi He
@@ -16,12 +12,14 @@ import ze.object.Node;
 class Scene extends Node
 {
 	public var screen(default, null):Screen;
+	public var screenTileSheet(default, null):TSScreen;
 	
 	override private function added():Void 
 	{
 		super.added();
 		screen = new Screen();
-		createGameObject("screen", screen, 0, 0);
+		createGameObject("screen", screen);
+		screenTileSheet = new TSScreen();
 	}
 	
 	public function createGameObject(name:String, component:Component = null, components:Array<Component> = null, x:Float = 0, y:Float = 0):GameObject
@@ -41,12 +39,6 @@ class Scene extends Node
 			}
 		}
 		return gameObject;
-	}
-	
-	public function createImage(label:String, imagePath:String = "", imageData:BitmapData = null, rectangle:Rectangle = null, x:Float = 0, y:Float = 0):GameObject
-	{
-		var image:Image = new Image(label, imagePath, imageData, rectangle);
-		return createGameObject(label, [image], x, y);
 	}
 	
 	public function addGameObject(gameObject:GameObject):GameObject
@@ -122,23 +114,16 @@ class Scene extends Node
 		return gameObjects;
 	}
 	
-	public function loadImage(name:String, x:Float = 0, y:Float = 0):Void
-	{
-		var gameObject:GameObject = new GameObject(name, x, y);
-		var image:Image = new Image(name, "gfx/" + name + ".png");
-		gameObject.addComponent(image);
-		addGameObject(gameObject);
-	}
-	
 	override private function update():Void 
 	{
-		if (!enable)
+		if (!enable || _child == null)
 		{
 			return;
 		}
 		
 		super.update();
 		var node:Node = _child.first;
+		
 		while (node != null)
 		{
 			if (node.enable)
@@ -147,6 +132,8 @@ class Scene extends Node
 			}
 			node = node._next;
 		}
+		
+		screenTileSheet.draw();
 	}
 	
 	override private function removed():Void 

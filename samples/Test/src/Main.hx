@@ -1,7 +1,7 @@
 package;
 
 import scenes.MainScene;
-import ze.object.Engine;
+import ze.Engine;
 
 /**
  * ...

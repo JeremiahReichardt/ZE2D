@@ -1,6 +1,12 @@
 ###Changelog###
 DD/MM/YY
 
+(13/4/14)
+- Added tilesheet drawing capability, mainly TSImage and TSAnimation.
+- Added spritesheet loader, currently support TexturePacker and ShoeBox.
+- Added new sample, DrawTile to show how to use the new TSImage and TSAnimation
+- Added a check in Text to check for missing font in project.
+
 (31/3/14)
 - Cleaned up OgmoLoader. 
 - Template now provide correct Main.hx to point to Engine.
@@ -80,3 +86,6 @@ DD/MM/YY
 - Rewrote core object system, now uses linked list node system.
 - All core objects inherit from node instead of object.
 - Seperated add() objects funtions to 4 core functions, mainly engine.addScene(), scene.addGameObject, gameObject.addComponent and component.addComponent.
+
+(20/5/12)
+- Project was born.

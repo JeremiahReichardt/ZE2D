@@ -24,6 +24,10 @@ class Text extends Render
 		_textField = new TextField();
 		displayObject = _textField;
 		
+		if (Assets.getFont("font/GROBOLD.ttf") == null)
+		{
+			trace("Remember to put GROBOLD.ttf into assets/font/");
+		}
 		_format = new TextFormat(defaultFont, size, color);
 		
 		_textField.text = text;

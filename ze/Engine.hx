@@ -1,4 +1,4 @@
-package ze.object;
+package ze;
 
 import flash.display.MovieClip;
 import flash.display.StageAlign;

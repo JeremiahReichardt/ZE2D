@@ -1,16 +1,16 @@
-package boxed;
+package;
 
-import boxed.scene.MainScene;
 import ze.Engine;
 
 /**
  * ...
  * @author Goh Zi He
  */
-class Main
+
+class Main 
 {
 	public static function main() 
 	{
-		new Engine(new MainScene());
+		new Engine(new MyScene());
 	}
 }

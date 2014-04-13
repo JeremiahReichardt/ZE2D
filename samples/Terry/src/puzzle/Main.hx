@@ -1,7 +1,7 @@
 package puzzle;
 
 import puzzle.scene.MainScene;
-import ze.object.Engine;
+import ze.Engine;
 
 /**
  * ...

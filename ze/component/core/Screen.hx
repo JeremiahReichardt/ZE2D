@@ -1,5 +1,4 @@
 package ze.component.core;
-
 import flash.display.Sprite;
 import flash.display.Stage;
 import ze.component.core.Component;

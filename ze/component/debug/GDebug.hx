@@ -1,5 +1,4 @@
 package ze.component.debug;
-
 import flash.system.System;
 import haxe.Timer;
 import ze.component.core.Component;

@@ -1,9 +1,5 @@
 package ze.component.rendering;
-import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.geom.Point;
-import flash.geom.Rectangle;
-import openfl.Assets;
+import ze.component.core.Component;
 import ze.util.Time;
 
 /**
@@ -11,7 +7,7 @@ import ze.util.Time;
  * @author Goh Zi He
  */
 
-class Animation extends Graphic
+class TSAnimation extends TSGraphic
 {
 	public var currentFrame(default, null):Int;
 	public var currentFrameLabel(default, null):String;
@@ -19,28 +15,32 @@ class Animation extends Graphic
 	
 	private var _timer:Int;
 	private var _lastTime:Int;
-	private var _animationData:AnimationData;
+	private var _animationData:TSAnimationData;
 	private var _playOnce:Bool;
 	
-	private static var _animationCache:Map<String, AnimationData> = new Map<String, AnimationData>();
+	private var _tileIndices:Array<Int>;
 	
-	public function new(imageLabel:String, imagePath:String = "", animationWidth:Int = 1, animationHeight:Int = 1) 
+	private static var _animationCache:Map<String, TSAnimationData> = new Map<String, TSAnimationData>();
+	
+	public function new(label:String) 
 	{
 		super();
 		
-		var animationData:AnimationData = _animationCache.get(imageLabel);
+		var animationData:TSAnimationData = _animationCache.get(label);
 		if (animationData == null)
 		{
-			animationData = createAnimation(imageLabel, imagePath, animationWidth, animationHeight);
+			_tileIndices = scene.screenTileSheet.getTileIndices(label);
+			animationData = createAnimation(label, _tileIndices);
 		}
 		
 		_animationData = animationData.cloneAnimationData();
-		setBitmapData(animationData.getFrame(currentFrame));
+		_tileIndex = _animationData.getFrame(currentFrame);
 	}
 	
 	override private function update():Void 
 	{
 		super.update();
+		
 		if (!playing)
 		{
 			return;
@@ -66,11 +66,12 @@ class Animation extends Graphic
 					currentFrame = (_animationData.totalFrames - currentFrame);
 				}
 			}
-			setBitmapData(_animationData.getFrame(currentFrame));
 		}
+		
+		_tileIndex = _animationData.getFrame(currentFrame);
 	}
 	
-	public function play(label:String, fps:Int = 30, startFrame:Int = 0):Animation
+	public function play(label:String, fps:Int = 30, startFrame:Int = 0):TSAnimation
 	{
 		_animationData.setCurrentAnimation(label);
 		_animationData.fps = fps;
@@ -81,7 +82,7 @@ class Animation extends Graphic
 		return this;
 	}
 	
-	public function playOnce(label:String, fps:Int = 30):Animation
+	public function playOnce(label:String, fps:Int = 30):TSAnimation
 	{
 		_playOnce = true;
 		return play(label, fps);
@@ -114,7 +115,7 @@ class Animation extends Graphic
 		playing = true;
 	}
 	
-	public function addAnimationFromFrame(animationName:String, startFrame:Int = 0, endFrame:Int = 1):Animation
+	public function addAnimationFromFrame(animationName:String, startFrame:Int = 0, endFrame:Int = 1):TSAnimation
 	{
 		var animationArray:Array<Int> = [];
 		for (i in startFrame ... endFrame)
@@ -125,42 +126,16 @@ class Animation extends Graphic
 		return this;
 	}
 	
-	public function addAnimation(animationName:String, animationArray:Array<Int>):Animation
+	public function addAnimation(animationName:String, animationArray:Array<Int>):TSAnimation
 	{
 		_animationData.addAnimation(animationName, animationArray);
 		return this;
 	}
 	
-	private static function createAnimation(imageLabel:String, imagePath:String, animationWidth:Int, animationHeight:Int):AnimationData
-	{
-		// Get the name of the image and then cache it so all the same animations can use it
-		if (_animationCache.exists(imagePath))
-		{
-			trace("Animation already existed, removing first animation");
-			_animationCache.remove(imagePath);
-		}
-		
-		var bitmap:Bitmap = new Bitmap(Assets.getBitmapData(imagePath));
-		var row:Int = Math.floor(bitmap.width / animationWidth);
-		var column:Int = Math.floor(bitmap.height / animationHeight);
-		var bitmapDataArray:Array<BitmapData> = [];
-		var animationData:AnimationData;
-		
-		for (i in 0 ... row)
-		{
-			for (j in 0 ... column)
-			{
-				var bitmapData:BitmapData = new BitmapData(animationWidth, animationHeight);
-				var sourceRect:Rectangle = new Rectangle(i * animationWidth, j * animationHeight, animationWidth, animationHeight);
-				var destPoint:Point = new Point(0, 0);
-				
-				bitmapData.copyPixels(bitmap.bitmapData, sourceRect, destPoint);
-				bitmapDataArray.push(bitmapData);
-			}
-		}
-		
-		animationData = new AnimationData(bitmapDataArray);
-		_animationCache.set(imageLabel, animationData);
+	private static function createAnimation(label:String, tileIndices:Array<Int>):TSAnimationData
+	{	
+		var animationData:TSAnimationData = new TSAnimationData(tileIndices);
+		_animationCache.set(label, animationData);
 		
 		return animationData;
 	}
@@ -174,17 +149,17 @@ class Animation extends Graphic
 	}
 }
 
-class AnimationData
+class TSAnimationData
 {
 	public var totalFrames(get, null):Int;
 	public var fps(default, default):Int;
 	public var timePerFrame(get, null):Float;
 	
-	private var _animationData:Array<BitmapData>;
+	private var _animationData:Array<Int>;
 	private var _animationFrames:Array<Int>;
 	private var _animationLabel:Map<String, Array<Int>>;
 	
-	public function new(animationData:Array<BitmapData>)
+	public function new(animationData:Array<Int>)
 	{
 		_animationData = animationData;
 		_animationFrames = [];
@@ -209,7 +184,7 @@ class AnimationData
 		}
 		else
 		{
-			trace("Warning: Animation label [" + animation + "] don't exist, using random animation.");
+			trace("Warning: TSAnimation label [" + animation + "] don't exist, using random animation.");
 			for (anim in _animationLabel.iterator())
 			{
 				_animationFrames = anim;
@@ -217,12 +192,12 @@ class AnimationData
 		}
 	}
 	
-	public function getFrame(currentFrame:Int):BitmapData
+	public function getFrame(currentFrame:Int):Int
 	{
 		return _animationData[_animationFrames[currentFrame]];
 	}
 	
-	public function addAnimation(animationName:String, frames:Array<Int>):AnimationData
+	public function addAnimation(animationName:String, frames:Array<Int>):TSAnimationData
 	{
 		if (_animationLabel.exists(animationName))
 		{
@@ -232,14 +207,9 @@ class AnimationData
 		return this;
 	}
 	
-	/**
-	 * Returns a new instance of AnimationData so that different gameObject will have independent animation
-	 * if not animation will all be affected
-	 * @return
-	 */
-	public function cloneAnimationData():AnimationData
+	public function cloneAnimationData():TSAnimationData
 	{
-		var newAnimData:AnimationData = new AnimationData(_animationData);
+		var newAnimData:TSAnimationData = new TSAnimationData(_animationData);
 		newAnimData._animationLabel = _animationLabel;
 		return newAnimData;
 	}
