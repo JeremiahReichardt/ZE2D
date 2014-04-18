@@ -17,7 +17,9 @@ class MyScene extends Scene
 		//SpriteLoader.loadFromTexturePacker("atlas/atlas.xml");
 		SpriteLoader.loadFromShoeBox("atlas/sheet.xml");
 		createGameObject("", new TSImage("Blue"));
-		createGameObject("", new TSImage("Red"), 100);
+		
+		//Demo how layers are used
+		createGameObject("", new TSImage("Red", 2), 100);
 		
 		for (i in 0 ... 10)
 		{
@@ -25,8 +27,8 @@ class MyScene extends Scene
 			{
 				var anim = new TSAnimation("Sprite");
 				anim.addAnimation("idle", [0, 1, 2, 1, 0]);
-				anim.play("idle", 3);
-				anim.layer = 1;
+				anim.play("idle", 8);
+				anim.layer = 0;
 				createGameObject("", anim, i * 80 + 5, j * 80 + 5);
 			}
 		}

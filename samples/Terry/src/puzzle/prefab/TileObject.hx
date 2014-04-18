@@ -1,5 +1,4 @@
 package puzzle.prefab;
-
 import flash.display.BitmapData;
 import flash.geom.Rectangle;
 import openfl.Assets;

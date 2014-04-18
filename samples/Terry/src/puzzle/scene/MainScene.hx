@@ -1,5 +1,4 @@
 package puzzle.scene;
-
 import openfl.Assets;
 import puzzle.actions.Grid;
 import puzzle.prefab.ColliderObject;

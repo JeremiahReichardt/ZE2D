@@ -1,8 +1,6 @@
 package puzzle.actions;
 import flash.geom.Point;
 import ze.component.core.Component;
-import ze.util.Input;
-import ze.util.Key;
 
 /**
  * ...
