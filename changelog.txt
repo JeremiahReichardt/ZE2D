@@ -1,6 +1,9 @@
 ###Changelog###
 DD/MM/YY
 
+(18/4/14)
+- Fixed TSGraphic's layering system
+
 (13/4/14)
 - Added tilesheet drawing capability, mainly TSImage and TSAnimation.
 - Added spritesheet loader, currently support TexturePacker and ShoeBox.

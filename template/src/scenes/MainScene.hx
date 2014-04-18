@@ -1,5 +1,4 @@
 package;
-
 import ze.object.Scene;
 
 /**

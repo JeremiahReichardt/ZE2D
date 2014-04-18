@@ -1,5 +1,4 @@
 package ze.util;
-
 import openfl.Assets;
 import ze.object.GameObject;
 import ze.object.Scene;

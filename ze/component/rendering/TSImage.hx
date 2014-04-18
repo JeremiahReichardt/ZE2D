@@ -1,6 +1,4 @@
 package ze.component.rendering;
-import ze.component.core.Component;
-import ze.util.SpriteLoader;
 
 /**
  * ...
@@ -9,9 +7,9 @@ import ze.util.SpriteLoader;
 
 class TSImage extends TSGraphic
 {
-	public function new(label:String) 
+	public function new(label:String, layer:Int = 0) 
 	{
-		super();
+		super(layer);
 		_tileIndex = scene.screenTileSheet.getTileIndex(label);
 	}
 }

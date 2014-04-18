@@ -25,8 +25,12 @@ class TSScreen
 		_section = new StringMap<Int>();
 	}
 	
-	public function addToDraw(layer:Int, drawData):Void
+	public function addToDraw(layer:Int, drawData:Array<Float>):Void
 	{
+		if (_layers[layer] == null)
+		{
+			_layers[layer] = [];
+		}
 		_layers[layer] = _layers[layer].concat(drawData);
 	}
 	
@@ -37,9 +41,9 @@ class TSScreen
 			return;
 		}
 		
+		_graphics.clear();
 		for (i in 0 ... _layers.length)
 		{
-			_graphics.clear();
 			_tileSheet.drawTiles(_graphics, _layers[i]);
 			_layers[i] = [];
 		}
@@ -81,5 +85,10 @@ class TSScreen
 		}
 		
 		return indices;
+	}
+	
+	public function getHighestLayer():Int
+	{
+		return _layers.length - 1;
 	}
 }
