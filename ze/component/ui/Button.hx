@@ -55,7 +55,7 @@ class Button extends UI
 		{
 			_enterCallback();
 		}
-		cast(render, Image).setImage(_name + "_overGfx");
+		cast(draw, Image).setImage(_name + "_overGfx");
 	}
 	
 	override private function onExit():Void 
@@ -65,7 +65,7 @@ class Button extends UI
 		{
 			_exitCallback();
 		}
-		cast(render, Image).setImage(_name + "_exitGfx");
+		cast(draw, Image).setImage(_name + "_exitGfx");
 	}
 	
 	override private function onOver():Void 

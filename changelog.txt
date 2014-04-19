@@ -10,6 +10,7 @@ DD/MM/YY
 - GDebug now showing properly for Tilesheet rendered gameObject.
 - Tilesheet and displayObject now sharing common inheritance Draw.hx
 - Removed unused property in Render.hx
+- Fixed samples still using Render instead of Draw
 
 (18/4/14)
 - Fixed TSGraphic's layering system

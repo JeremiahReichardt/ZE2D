@@ -127,12 +127,12 @@ class CharacterController extends Component
 		if (Input.keyDown(_keyLeft))
 		{
 			_moveX = -1;
-			render.flipped = true;
+			draw.flipped = true;
 		}
 		else if (Input.keyDown(_keyRight))
 		{
 			_moveX = 1;
-			render.flipped = false;
+			draw.flipped = false;
 		}
 		
 		_moveX *= WALKING_SPEED;
@@ -149,18 +149,18 @@ class CharacterController extends Component
 		{
 			transform.y = scene.screen.top;
 		}
-		else if (transform.y + render.height < scene.screen.top)
+		else if (transform.y + draw.height < scene.screen.top)
 		{
-			transform.y = scene.screen.bottom - render.height;
+			transform.y = scene.screen.bottom - draw.height;
 		}
 		else if (transform.x > scene.screen.right)
 		{
 			transform.x = scene.screen.left;
 			transform.y -= 5;
 		}
-		else if (transform.x + render.width < scene.screen.left)
+		else if (transform.x + draw.width < scene.screen.left)
 		{
-			transform.x = scene.screen.right - render.width;
+			transform.x = scene.screen.right - draw.width;
 			transform.y -= 5;
 		}
 	}

@@ -48,7 +48,7 @@ class Player extends Component
 		_characterController = getComponent(CharacterController);
 		_grid = getGameObjectByName("grid").getComponent(Grid);
 		
-		render.flipped = flippedRender;
+		draw.flipped = flippedRender;
 		
 		_shootSfx = new Audio("Shoot", "sfx/Laser_Shoot3.wav");
 		_teleportSfx = new Audio("Teleported", "sfx/Pickup_Coin.wav");
@@ -67,7 +67,7 @@ class Player extends Component
 		}
 		else
 		{
-			if (render.flipped)
+			if (draw.flipped)
 			{
 				direction = Bullet.BulletDirection.LEFT;
 			}
@@ -107,12 +107,12 @@ class Player extends Component
 		if (Input.keyDown(Key.A) || Input.keyDown(Key.LEFT))
 		{
 			_moveX = -1;
-			render.flipped = true;
+			draw.flipped = true;
 		}
 		else if (Input.keyDown(Key.D) || Input.keyDown(Key.RIGHT))
 		{
 			_moveX = 1;
-			render.flipped = false;
+			draw.flipped = false;
 		}
 		
 		_moveX *= WALKING_SPEED;
@@ -130,7 +130,7 @@ class Player extends Component
 	{
 		if (bullet == null)
 		{
-			var x:Float = transform.x + (render.width * 0.5) - 2.5;
+			var x:Float = transform.x + (draw.width * 0.5) - 2.5;
 			var y:Float = transform.y;
 			
 			bullet = new GameObject("bullet", x, y);
@@ -143,7 +143,7 @@ class Player extends Component
 		}
 		else
 		{
-			var x:Float = bullet.transform.x - (render.width * 0.5) + 2.5;
+			var x:Float = bullet.transform.x - (draw.width * 0.5) + 2.5;
 			var y:Float = bullet.transform.y;
 			
 			if (!_grid.hasGridCollision(x, y))
@@ -190,7 +190,7 @@ class Player extends Component
 		}
 		_dieSfx.play();
 		teleportToRespawn();
-		flippedRender = render.flipped;
+		flippedRender = draw.flipped;
 	}
 	
 	private function teleportToRespawn():Void

@@ -37,7 +37,7 @@ class Switch extends Component
 				scene.removeGameObject(_gate);
 				_gate = null;
 				
-				var animation:Animation = cast (render, Animation);
+				var animation:Animation = cast (draw, Animation);
 				if (animation.currentFrameLabel != "idle")
 				{
 					animation.playOnce("idle", 2);

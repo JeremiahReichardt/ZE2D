@@ -41,7 +41,7 @@ class TSAnimation extends TSGraphic
 	{
 		super.update();
 		
-		if (!playing)
+		if (!playing || !visible)
 		{
 			return;
 		}

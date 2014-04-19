@@ -21,7 +21,7 @@ class MouseSelectMovement extends Component
 	
 	override private function update():Void 
 	{
-		if (collider == null && render == null)
+		if (collider == null && draw == null)
 		{
 			trace("No collider/render found on entity for MouseSelect to work");
 			return;
@@ -52,8 +52,8 @@ class MouseSelectMovement extends Component
 		var y:Float = transform.y;
 		var mx:Float = Input.mouseX;
 		var my:Float = Input.mouseY;
-		var width:Float = render.width;
-		var height:Float = render.height;
+		var width:Float = draw.width;
+		var height:Float = draw.height;
 		return (mx > x && mx < x + width && my > y && y < y + height);
 	}
 }

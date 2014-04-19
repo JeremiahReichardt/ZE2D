@@ -22,6 +22,11 @@ class TSGraphic extends Draw
 		{
 			return;
 		}
+		addToDraw();
+	}
+	
+	public function addToDraw():Void
+	{
 		scene.screenTileSheet.addToDraw(layer, [transform.x + scene.screenTileSheet.x, transform.y + scene.screenTileSheet.y, _tileIndex]);
 	}
 	

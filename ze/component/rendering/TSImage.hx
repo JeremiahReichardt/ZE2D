@@ -12,9 +12,4 @@ class TSImage extends TSGraphic
 		_tileIndex = scene.screenTileSheet.getTileIndex(label);
 		super();
 	}
-	
-	override function update():Void 
-	{
-		super.update();
-	}
 }

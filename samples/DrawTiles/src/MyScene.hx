@@ -1,4 +1,5 @@
 package;
+import ze.component.debug.GDebug;
 import ze.component.rendering.TSAnimation;
 import ze.component.rendering.TSImage;
 import ze.object.Scene;
@@ -16,12 +17,12 @@ class MyScene extends Scene
 		
 		//SpriteLoader.loadFromTexturePacker("atlas/atlas.xml");
 		SpriteLoader.loadFromShoeBox("atlas/sheet.xml");
-		createGameObject("blue", new TSImage("Blue"));
+		createGameObject("blue", new TSImage("Blue"), 50, 50);
 		
 		//Demo how layers are used
 		var red:TSImage = new TSImage("Red");
 		red.layer = 2;
-		createGameObject("red", red, 100);
+		createGameObject("red", red, 130, 50);
 		
 		for (i in 0 ... 10)
 		{
@@ -31,8 +32,10 @@ class MyScene extends Scene
 				anim.addAnimation("idle", [0, 1, 2, 1, 0]);
 				anim.play("idle", 8);
 				anim.layer = 0;
-				createGameObject("", anim, i * 80 + 5, j * 80 + 5);
+				createGameObject("", anim, i * 80 + 30, j * 80 + 50);
 			}
 		}
+		
+		createGameObject("GDebug", new GDebug());
 	}
 }
