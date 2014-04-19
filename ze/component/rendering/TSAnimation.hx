@@ -22,9 +22,9 @@ class TSAnimation extends TSGraphic
 	
 	private static var _animationCache:Map<String, TSAnimationData> = new Map<String, TSAnimationData>();
 	
-	public function new(label:String, layer:Int = 0) 
+	public function new(label:String) 
 	{
-		super(layer);
+		super();
 		
 		var animationData:TSAnimationData = _animationCache.get(label);
 		if (animationData == null)

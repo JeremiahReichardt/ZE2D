@@ -41,7 +41,7 @@ class Engine extends Node
 		
 		Input.init(current.stage);
 		
-		addChild(initScene);
+		addChildNode(initScene);
 	}
 	
 	private function onEnterFrame(e:Event):Void 
@@ -77,8 +77,8 @@ class Engine extends Node
 	
 	public function addScene(scene:Scene):Scene
 	{
-		removeChild(_child);
-		addChild(scene);
+		removeChildNode(_child);
+		addChildNode(scene);
 		return scene;
 	}
 	

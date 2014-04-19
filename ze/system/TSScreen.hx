@@ -18,11 +18,16 @@ class TSScreen
 	private var _layers:Array<Array<Float>>;
 	private var _section:StringMap<Int>;
 	
+	public var x(default, default):Float;
+	public var y(default, default):Float;
+	
 	public function new() 
 	{
 		_layers = [[]];
 		_graphics = Engine.getEngine().current.graphics;
 		_section = new StringMap<Int>();
+		x = 0;
+		y = 0;
 	}
 	
 	public function addToDraw(layer:Int, drawData:Array<Float>):Void
@@ -87,8 +92,21 @@ class TSScreen
 		return indices;
 	}
 	
+	public function getTileRect(index:Int):Rectangle
+	{
+		return _tileSheet.getTileRect(index);
+	}
+	
 	public function getHighestLayer():Int
 	{
 		return _layers.length - 1;
+	}
+	
+	public function destroy():Void
+	{
+		_tileSheet = null;
+		_graphics = null;
+		_layers = null;
+		_section = null;
 	}
 }

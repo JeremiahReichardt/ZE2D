@@ -1,9 +1,8 @@
 package ze.object;
-
 import ze.component.core.Component;
 import ze.component.core.Transform;
 import ze.component.physics.Collider;
-import ze.component.rendering.Render;
+import ze.component.rendering.Draw;
 
 /**
  * @author Goh Zi He
@@ -13,7 +12,7 @@ class GameObject extends Node
 {
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
-	public var render(get, null):Render;
+	public var draw(get, null):Draw;
 	public var scene(get, null):Scene;
 	public var name(default, default):String;
 	
@@ -65,10 +64,10 @@ class GameObject extends Node
 	
 	public function addComponent<T:Node>(component:T):T 
 	{
-		addChild(component);
-		if (Std.is(component, Render))
+		addChildNode(component);
+		if (Std.is(component, Draw))
 		{
-			render = cast(component, Render);
+			draw = cast(component, Draw);
 		}
 		else if (Std.is(component, Transform))
 		{
@@ -84,7 +83,7 @@ class GameObject extends Node
 	
 	public function removeComponent(node:Node):Void 
 	{
-		removeChild(node);
+		removeChildNode(node);
 	}
 	
 	private function get_transform():Transform
@@ -105,13 +104,13 @@ class GameObject extends Node
 		return collider;
 	}
 	
-	private function get_render():Render
+	private function get_draw():Draw
 	{
-		if (render == null)
+		if (draw == null)
 		{
-			render = getComponent(Render);
+			draw = getComponent(Draw);
 		}
-		return render;
+		return draw;
 	}
 	
 	private function get_scene():Scene
@@ -133,7 +132,7 @@ class GameObject extends Node
 		
 		transform = null;
 		collider = null;
-		render = null;
+		draw = null;
 		scene = null;
 	}
 }

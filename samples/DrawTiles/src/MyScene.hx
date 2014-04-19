@@ -16,10 +16,12 @@ class MyScene extends Scene
 		
 		//SpriteLoader.loadFromTexturePacker("atlas/atlas.xml");
 		SpriteLoader.loadFromShoeBox("atlas/sheet.xml");
-		createGameObject("", new TSImage("Blue"));
+		createGameObject("blue", new TSImage("Blue"));
 		
 		//Demo how layers are used
-		createGameObject("", new TSImage("Red", 2), 100);
+		var red:TSImage = new TSImage("Red");
+		red.layer = 2;
+		createGameObject("red", red, 100);
 		
 		for (i in 0 ... 10)
 		{

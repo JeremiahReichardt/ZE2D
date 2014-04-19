@@ -21,7 +21,13 @@ class SpriteLoader
 	
 	private static function parseXml(xmlFile:String, imagePath:String, x:String, y:String, width:String, height:String, name:String):Void
 	{
-		var xml:Xml = Xml.parse(Assets.getText(xmlFile));
+		var xmlString:String = Assets.getText(xmlFile);
+		if (xmlString == null)
+		{
+			trace("Please specify a proper xml file");
+			return;
+		}
+		var xml:Xml = Xml.parse(xmlString);
 		var root:Xml = xml.firstElement();
 		var imagePath:String = root.get(imagePath);
 		var screen:TSScreen = Engine.getEngine().scene.screenTileSheet;

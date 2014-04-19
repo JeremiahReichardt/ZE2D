@@ -1,32 +1,31 @@
 package ze.component.rendering;
-import ze.component.core.Component;
 
 /**
  * ...
  * @author Goh Zi He
  */
-class TSGraphic extends Component
+class TSGraphic extends Draw
 {
-	/**
-	 * Lower layer are rendered first. (Higher layer appears on top)
-	 */
-	public var layer(default, set):Int;
-	
 	private var _tileIndex:Int;
 	
-	public function new(layer:Int = 0)
+	public function new()
 	{
 		super();
-		this.layer = layer;
+		width = scene.screenTileSheet.getTileRect(_tileIndex).width;
+		height = scene.screenTileSheet.getTileRect(_tileIndex).height;
 	}
 	
 	override function update():Void 
 	{
 		super.update();
-		scene.screenTileSheet.addToDraw(layer, [transform.x, transform.y, _tileIndex]);
+		if (!visible)
+		{
+			return;
+		}
+		scene.screenTileSheet.addToDraw(layer, [transform.x + scene.screenTileSheet.x, transform.y + scene.screenTileSheet.y, _tileIndex]);
 	}
 	
-	private function set_layer(value:Int):Int
+	override private function set_layer(value:Int):Int
 	{
 		var highestLayer:Int = scene.screenTileSheet.getHighestLayer();
 		if (value > highestLayer)

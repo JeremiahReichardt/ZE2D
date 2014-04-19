@@ -11,7 +11,7 @@ import ze.object.Scene;
  */
 class GameScene extends Scene
 {
-	override private function added():Void 
+	override private function added():Void
 	{
 		super.added();
 		

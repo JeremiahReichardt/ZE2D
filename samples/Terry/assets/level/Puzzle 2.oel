@@ -219,6 +219,7 @@
     <tile x="10" y="23" tx="6" ty="1" />
     <tile x="10" y="24" tx="2" ty="0" />
     <tile x="11" y="0" tx="2" ty="1" />
+    <tile x="11" y="3" tx="7" ty="1" />
     <tile x="11" y="4" tx="7" ty="1" />
     <tile x="11" y="6" tx="6" ty="1" />
     <tile x="11" y="7" tx="2" ty="0" />

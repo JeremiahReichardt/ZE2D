@@ -1,5 +1,4 @@
 package ze.component.rendering;
-
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;

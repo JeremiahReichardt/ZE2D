@@ -1,9 +1,8 @@
 package entities;
-import flash.display.BitmapData;
 import motion.Actuate;
 import ze.component.physics.BoxCollider;
 import ze.component.physics.Collider;
-import ze.component.rendering.Image;
+import ze.component.rendering.Blank;
 import ze.object.GameObject;
 import ze.util.Color;
 
@@ -25,7 +24,7 @@ class Bird extends GameObject
 	override private function added():Void 
 	{
 		super.added();
-		addComponent(new Image("Bird", new BitmapData(32, 32, Color.GREEN)));
+		addComponent(new Blank(32, 32, Color.GREEN));
 		addComponent(new BoxCollider(32, 32, true));
 		collider.registerCallback(hitBird);
 	}

@@ -1,5 +1,5 @@
 package ze;
-import ze.object.Engine;
+import ze.Engine;
 import ze.object.Scene;
 
 /**

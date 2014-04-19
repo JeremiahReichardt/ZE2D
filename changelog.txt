@@ -2,6 +2,16 @@
 DD/MM/YY
 
 (18/4/14)
+- Added a RunAll batch file to run all the samples
+- Edited Star's map
+- Used Blank instead of image in Bird's sample
+- Included a check in SpriteLoader for null XML
+- Can't set the layer for TSAnimation and TSImage through constructor, just like Image and Animation.
+- GDebug now showing properly for Tilesheet rendered gameObject.
+- Tilesheet and displayObject now sharing common inheritance Draw.hx
+- Removed unused property in Render.hx
+
+(18/4/14)
 - Fixed TSGraphic's layering system
 - Edited DrawTiles to include layers
 

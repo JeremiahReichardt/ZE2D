@@ -12,7 +12,6 @@ class Screen extends Component
 {
 	public var offsetX(default, null):Float;
 	public var offsetY(default, null):Float;
-	
 	public var top(get, null):Float;
 	public var bottom(get, null):Float;
 	public var left(get, null):Float;
@@ -23,14 +22,12 @@ class Screen extends Component
 	public var height(get, null):Float;
 	
 	private var _root:Sprite;
-	
 	private var _layers:Array<Array<Render>>;
 	private var _maxLayer:Int;
 	
 	public function new()
 	{
 		super();
-		
 		_layers = [[]];
 		_root = new Sprite();
 		engine.current.addChild(_root);
@@ -43,7 +40,6 @@ class Screen extends Component
 	override private function update():Void 
 	{
 		super.update();
-		
 		_root.x = transform.x + offsetX;
 		_root.y = transform.y + offsetY;
 		_root.rotation = transform.rotation;
@@ -104,14 +100,12 @@ class Screen extends Component
 	override private function removed():Void 
 	{
 		super.removed();
-		
 		engine.current.removeChild(_root);
 	}
 	
 	override private function destroyed():Void 
 	{
 		super.destroyed();
-		
 		_root = null;
 		_layers = null;
 	}

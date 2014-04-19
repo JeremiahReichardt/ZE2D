@@ -22,7 +22,12 @@ class Node extends Object
 		last = first = this;
 	}
 	
-	private function addChild<T:Node>(node:T):T
+	/**
+	 * Don't call this directly unless you know what is happening,
+	 * Use addGameObject/addComponent instead
+	 * @param	node
+	 */
+	private function addChildNode<T:Node>(node:T):T
 	{
 		if (_child == null)
 		{
@@ -41,7 +46,12 @@ class Node extends Object
 		return node;
 	}
 	
-	private function removeChild(node:Node):Void
+	/**
+	 * Don't call this directly unless you know what is happening
+	 * Use removeGameObject/removeComponent instead
+	 * @param	node
+	 */
+	private function removeChildNode(node:Node):Void
 	{
 		var prev:Node = node._previous;
 		var next:Node = node._next;

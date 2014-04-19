@@ -43,13 +43,13 @@ class Scene extends Node
 	
 	public function addGameObject(gameObject:GameObject):GameObject
 	{
-		addChild(gameObject);
+		addChildNode(gameObject);
 		return gameObject;
 	}
 	
 	public function removeGameObject(gameObject:GameObject):Void 
 	{
-		removeChild(gameObject);
+		removeChildNode(gameObject);
 	}
 	
 	public function getGameObjectByName(name:String):GameObject
@@ -138,9 +138,9 @@ class Scene extends Node
 	
 	override private function removed():Void 
 	{
+		screenTileSheet.destroy();
 		_child.removeAll();
 		engine.addToRemoveList(this);
-		
 		super.removed();
 	}
 }

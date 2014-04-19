@@ -7,9 +7,14 @@ package ze.component.rendering;
 
 class TSImage extends TSGraphic
 {
-	public function new(label:String, layer:Int = 0) 
+	public function new(label:String) 
 	{
-		super(layer);
 		_tileIndex = scene.screenTileSheet.getTileIndex(label);
+		super();
+	}
+	
+	override function update():Void 
+	{
+		super.update();
 	}
 }

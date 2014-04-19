@@ -2,6 +2,7 @@ package ze.component.debug;
 import flash.system.System;
 import haxe.Timer;
 import ze.component.core.Component;
+import ze.component.rendering.Draw;
 import ze.component.rendering.Text;
 import ze.object.GameObject;
 import ze.object.Node;
@@ -49,8 +50,9 @@ class GDebug extends Component
 	override private function update():Void 
 	{
 		super.update();
-		
+		drawTileSheet();
 		showFPS();
+		
 		
 		if (Input.keyPressed(Key.TAB))
 		{
@@ -72,13 +74,13 @@ class GDebug extends Component
 				selectGameObject();
 			}
 			
-			if (Input.leftMouseDown() && Input.keyDown(Key.Z))
+			if (Input.leftMouseDown() && (Input.keyDown(Key.Z) || Input.keyDown(Key.SHIFT)))
 			{
 				if (_selectedGameObject != null)
 				{
-					_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.render.width * 0.5);
-					_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.render.height * 0.5);
-					_selectedGameObject.render.update();
+					_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.draw.width * 0.5);
+					_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.draw.height * 0.5);
+					_selectedGameObject.draw.update();
 				}
 			}
 			
@@ -89,7 +91,7 @@ class GDebug extends Component
 		}
 	}
 	
-	private function showFPS() 
+	private function showFPS():Void
 	{
 		var now:Float = Timer.stamp();
 		_times.push(now);
@@ -111,13 +113,13 @@ class GDebug extends Component
 		var node:Node = scene._child.first;
 		while (node != null)
 		{
-			var gameObject:GameObject = cast (node, GameObject);
-			if (gameObject.render != null)
+			var current:GameObject = cast (node, GameObject);
+			if (current.draw != null)
 			{
-				var x:Float = gameObject.transform.x;
-				var y:Float = gameObject.transform.y;
-				var width:Float = gameObject.render.width;
-				var height:Float = gameObject.render.height;
+				var x:Float = current.transform.x;
+				var y:Float = current.transform.y;
+				var width:Float = current.draw.width;
+				var height:Float = current.draw.height;
 				
 				if (mouseX > x)
 				{
@@ -127,20 +129,35 @@ class GDebug extends Component
 						{
 							if (mouseY < y + height)
 							{
+								_selectedGameObject = current;
 								if (_debugCallBack != null)
 								{
-									_selectedGameObject = gameObject;
-									_debugCallBack(gameObject);
-									return;
+									_debugCallBack(current);
 								}
 								else
 								{
-									trace(gameObject.name);
+									//trace(gameObject.name);
 								}
+								return;
 							}
 						}
 					}
 				}
+			}
+			node = node._next;
+		}
+		return null;
+	}
+	
+	private function drawTileSheet():Void
+	{
+		var node:Node = scene._child.first;
+		while (node != null)
+		{
+			var draw:Draw = cast(node, GameObject).draw;
+			if (draw != null)
+			{
+				draw.update();
 			}
 			node = node._next;
 		}

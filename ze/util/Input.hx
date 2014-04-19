@@ -50,6 +50,9 @@ class Input
 		_keyMap = new Map < String, Array<Int> > ();
 		_currentKeyPressed = _keyCode = -1;
 		
+		mouseX = 0;
+		mouseY = 0;
+		
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownEvent);
 		stage.addEventListener(KeyboardEvent.KEY_UP, keyUpEvent);
 		
