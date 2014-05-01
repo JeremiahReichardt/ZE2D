@@ -1,7 +1,0 @@
-<TextureAtlas imagePath="sheet.png">
-	<SubTexture name="Blue.png" x="0" y="68" width="32" height="32"/>
-	<SubTexture name="Red.png" x="34" y="0" width="32" height="32"/>
-	<SubTexture name="Sprite1.png" x="34" y="34" width="32" height="32"/>
-	<SubTexture name="Sprite2.png" x="0" y="34" width="32" height="32"/>
-	<SubTexture name="Sprite3.png" x="0" y="0" width="32" height="32"/>
-</TextureAtlas>

@@ -3,7 +3,6 @@ import ze.component.core.Component;
 import ze.component.core.Screen;
 import ze.object.GameObject;
 import ze.object.Node;
-import ze.system.TSScreen;
 /**
  * Handle adding/removing gameObjects, remove all gameObjects when scene changes
  * @author Goh Zi He
@@ -12,14 +11,12 @@ import ze.system.TSScreen;
 class Scene extends Node
 {
 	public var screen(default, null):Screen;
-	public var screenTileSheet(default, null):TSScreen;
 	
 	override private function added():Void 
 	{
 		super.added();
 		screen = new Screen();
 		createGameObject("screen", screen);
-		screenTileSheet = new TSScreen();
 	}
 	
 	public function createGameObject(name:String, component:Component = null, components:Array<Component> = null, x:Float = 0, y:Float = 0):GameObject
@@ -132,13 +129,10 @@ class Scene extends Node
 			}
 			node = node._next;
 		}
-		
-		screenTileSheet.draw();
 	}
 	
 	override private function removed():Void 
 	{
-		screenTileSheet.destroy();
 		_child.removeAll();
 		engine.addToRemoveList(this);
 		super.removed();

@@ -2,9 +2,7 @@ package ze.component.debug;
 import flash.system.System;
 import haxe.Timer;
 import ze.component.core.Component;
-import ze.component.rendering.Draw;
 import ze.component.rendering.Text;
-import ze.component.rendering.TSGraphic;
 import ze.object.GameObject;
 import ze.object.Node;
 import ze.util.Color;
@@ -51,7 +49,6 @@ class GDebug extends Component
 	override private function update():Void 
 	{
 		super.update();
-		drawTileSheet();
 		showFPS();
 		
 		if (Input.keyPressed(Key.TAB))
@@ -139,21 +136,6 @@ class GDebug extends Component
 						}
 					}
 				}
-			}
-			node = node._next;
-		}
-		return null;
-	}
-	
-	private function drawTileSheet():Void
-	{
-		var node:Node = scene._child.first;
-		while (node != null)
-		{
-			var draw:Draw = cast(node, GameObject).draw;
-			if (draw != null && Std.is(draw, TSGraphic))
-			{
-				cast(draw, TSGraphic).addToDraw();
 			}
 			node = node._next;
 		}
