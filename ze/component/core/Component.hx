@@ -1,6 +1,6 @@
 package ze.component.core;
 import ze.component.physics.Collider;
-import ze.component.rendering.Draw;
+import ze.component.tilesheet.Graphic;
 import ze.object.GameObject;
 import ze.object.Node;
 import ze.object.Scene;
@@ -14,7 +14,7 @@ class Component extends Node
 {
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
-	public var draw(get, null):Draw;
+	public var graphic(get, null):Graphic;
 	public var gameObject(get, null):GameObject;
 	public var scene(get, null):Scene;
 	
@@ -43,9 +43,9 @@ class Component extends Node
 		return gameObject.collider;
 	}
 	
-	private function get_draw():Draw
+	private function get_graphic():Graphic
 	{
-		return gameObject.draw;
+		return gameObject.graphic;
 	}
 	
 	public function addComponent<T:Node>(node:T):T 
@@ -65,17 +65,13 @@ class Component extends Node
 	
 	private function get_scene():Scene
 	{
-		if (scene == null)
-		{
-			scene = engine.scene;
-		}
-		return scene;
+		return gameObject.scene;
 	}
 	
 	override private function removed():Void 
 	{
 		super.removed();
-		engine.addToRemoveList(this);
+		scene.engine.addToRemoveList(this);
 	}
 	
 	override private function destroyed():Void 
@@ -84,7 +80,7 @@ class Component extends Node
 		
 		transform = null;
 		collider = null;
-		draw = null;
+		graphic = null;
 		scene = null;
 		gameObject = null;
 	}

@@ -1,5 +1,4 @@
 package boxed.action.game;
-
 import boxed.action.player.CharacterController;
 import ze.component.core.Component;
 import ze.util.Input;
@@ -21,9 +20,9 @@ class MouseSelectMovement extends Component
 	
 	override private function update():Void 
 	{
-		if (collider == null && draw == null)
+		if (collider == null && graphic == null)
 		{
-			trace("No collider/render found on entity for MouseSelect to work");
+			trace("No collider/graphic found on entity for MouseSelect to work");
 			return;
 		}
 		
@@ -52,8 +51,8 @@ class MouseSelectMovement extends Component
 		var y:Float = transform.y;
 		var mx:Float = Input.mouseX;
 		var my:Float = Input.mouseY;
-		var width:Float = draw.width;
-		var height:Float = draw.height;
+		var width:Float = graphic.width;
+		var height:Float = graphic.height;
 		return (mx > x && mx < x + width && my > y && y < y + height);
 	}
 }

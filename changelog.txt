@@ -1,20 +1,29 @@
 ###Changelog###
 DD/MM/YY
 
+(4/5/14)
+- Decided to remove all the displayObject stuffs and reimplemented the rendering stuffs using only Tilesheet.
+- Removed useless samples, Bird and Test which uses displayObject rendering.
+- Image now becomes Sprite, and Animation becomes AnimatedSprite and an additional TileSprite for Tiled based sprite.
+- Some things are still incomplete like text rendering and in Stars, the star would not spawn correctly, it might spawn in tile area.
+
+(1/5/14)
+- Decided to remove Tilesheet implementation completely. It is very awkward to use.
+
 (18/4/14)
-- Added a RunAll batch file to run all the samples
-- Edited Star's map
-- Used Blank instead of image in Bird's sample
-- Included a check in SpriteLoader for null XML
+- Added a RunAll batch file to run all the samples.
+- Edited Star's map.
+- Used Blank instead of image in Bird's sample.
+- Included a check in SpriteLoader for null XML.
 - Can't set the layer for TSAnimation and TSImage through constructor, just like Image and Animation.
 - GDebug now showing properly for Tilesheet rendered gameObject.
 - Tilesheet and displayObject now sharing common inheritance Draw.hx
 - Removed unused property in Render.hx
-- Fixed samples still using Render instead of Draw
+- Fixed samples still using Render instead of Draw.
 
 (18/4/14)
-- Fixed TSGraphic's layering system
-- Edited DrawTiles to include layers
+- Fixed TSGraphic's layering system.
+- Edited DrawTiles to include layers.
 
 (13/4/14)
 - Added tilesheet drawing capability, mainly TSImage and TSAnimation.

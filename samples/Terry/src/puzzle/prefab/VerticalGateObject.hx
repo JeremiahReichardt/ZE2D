@@ -1,9 +1,7 @@
 package puzzle.prefab;
-
 import ze.component.physics.BoxCollider;
-import ze.component.rendering.Image;
+import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
-import ze.util.Input;
 
 /**
  * ...
@@ -19,11 +17,9 @@ class VerticalGateObject extends GameObject
 	override private function added():Void 
 	{
 		super.added();
-		
 		addComponent(new BoxCollider(32, 64));
-		
-		var image:Image = new Image("VerticalGate", "gfx/VerticalGate.png");
-		image.layer = 1;
+		var image:Sprite = new Sprite("VerticalGate");
 		addComponent(image);
+		image.layer = 1;
 	}
 }

@@ -12,9 +12,9 @@ class CharacterController extends Component
 	override private function added():Void 
 	{
 		super.added();
-		if (draw == null)
+		if (graphic == null)
 		{
-			trace("Add a draw component");
+			trace("Add a graphic component");
 		}
 	}
 	

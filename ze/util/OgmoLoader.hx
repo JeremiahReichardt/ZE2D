@@ -1,5 +1,6 @@
 package ze.util;
 import openfl.Assets;
+import ze.component.tilesheet.TiledSprite;
 import ze.object.GameObject;
 import ze.object.Scene;
 
@@ -69,6 +70,28 @@ class OgmoLoader
 			}
 		}
 		_entities[_current].push(new EntityProperties(entityName, cls));
+	}
+	
+	public function loadTiles():Void
+	{
+		var mapWidth:Float = Std.parseFloat(_levelXML.get("width"));
+		var mapHeight:Float = Std.parseFloat(_levelXML.get("height"));
+		var tileSprite:TiledSprite = new TiledSprite("Checker", 32, 32, mapWidth, mapHeight, 8, 8);
+		_scene.createGameObject("tiles", tileSprite);
+		
+		for (element in _levelXML.elementsNamed("Tiles"))
+		{
+			for (tiles in element.elements())
+			{
+				var x:Int = Std.parseInt(tiles.get("x"));
+				var y:Int = Std.parseInt(tiles.get("y"));
+				var tx:Int = Std.parseInt(tiles.get("tx"));
+				var ty:Int = Std.parseInt(tiles.get("ty"));
+				
+				tileSprite.setTile(x, y, tx, ty);
+				//trace(x, y, tx, ty);
+			}
+		}
 	}
 	
 	public function loadAll():Void

@@ -1,8 +1,7 @@
 package puzzle.prefab;
-
 import puzzle.actions.Exit;
 import ze.component.physics.BoxCollider;
-import ze.component.rendering.Animation;
+import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;
 
 /**
@@ -20,7 +19,7 @@ class ExitObject extends GameObject
 	{
 		super.added();
 		addComponent(new BoxCollider(32, 32, true));
-		var animation:Animation = new Animation("Exit", "gfx/Exit.png", 32, 32);
+		var animation:AnimatedSprite = new AnimatedSprite("Exit");
 		addComponent(animation);
 		animation.addAnimation("idle", [0, 1, 2, 3]);
 		animation.play("idle", 4);

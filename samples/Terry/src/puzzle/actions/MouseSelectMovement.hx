@@ -43,8 +43,8 @@ class MouseSelectMovement extends Component
 		var y:Float = transform.y;
 		var mx:Float = Input.mouseX;
 		var my:Float = Input.mouseY;
-		var width:Float = draw.width;
-		var height:Float = draw.height;
+		var width:Float = graphic.width;
+		var height:Float = graphic.height;
 		return (mx > x && mx < x + width && my > y && y < y + height);
 	}
 	

@@ -1,8 +1,7 @@
 package puzzle.prefab;
-
 import puzzle.actions.Sign;
 import ze.component.physics.BoxCollider;
-import ze.component.rendering.Image;
+import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
 
 /**
@@ -25,7 +24,7 @@ class SignObject extends GameObject
 		super.added();
 		
 		addComponent(new BoxCollider(32, 32, true));
-		addComponent(new Image("Sign", "gfx/Sign.png"));
+		addComponent(new Sprite("Sign"));
 		
 		_sign = new Sign();
 		addComponent(_sign);

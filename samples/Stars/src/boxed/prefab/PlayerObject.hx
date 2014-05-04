@@ -3,7 +3,7 @@ package boxed.prefab;
 import boxed.action.game.MouseSelectMovement;
 import boxed.action.player.CharacterController;
 import ze.component.physics.BoxCollider;
-import ze.component.rendering.Image;
+import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
 
 /**
@@ -26,7 +26,7 @@ class PlayerObject extends GameObject
 		
 		addComponent(new BoxCollider(32, 32, true));
 		addComponent(new CharacterController(_playerIndex));
-		addComponent(new Image("player", "gfx/Player.png"));
+		addComponent(new Sprite("Player"));
 		addComponent(new MouseSelectMovement());
 	}
 }

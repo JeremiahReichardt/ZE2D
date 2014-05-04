@@ -2,7 +2,7 @@ package ze.object;
 import ze.component.core.Component;
 import ze.component.core.Transform;
 import ze.component.physics.Collider;
-import ze.component.rendering.Draw;
+import ze.component.tilesheet.Graphic;
 
 /**
  * @author Goh Zi He
@@ -12,7 +12,7 @@ class GameObject extends Node
 {
 	public var transform(get, null):Transform;
 	public var collider(get, null):Collider;
-	public var draw(get, null):Draw;
+	public var graphic(get, null):Graphic;
 	public var scene(get, null):Scene;
 	public var name(default, default):String;
 	
@@ -65,9 +65,9 @@ class GameObject extends Node
 	public function addComponent<T:Node>(component:T):T 
 	{
 		addChildNode(component);
-		if (Std.is(component, Draw))
+		if (Std.is(component, Graphic))
 		{
-			draw = cast(component, Draw);
+			graphic = cast(component, Graphic);
 		}
 		else if (Std.is(component, Transform))
 		{
@@ -104,13 +104,13 @@ class GameObject extends Node
 		return collider;
 	}
 	
-	private function get_draw():Draw
+	private function get_graphic():Graphic
 	{
-		if (draw == null)
+		if (graphic == null)
 		{
-			draw = getComponent(Draw);
+			graphic = getComponent(Graphic);
 		}
-		return draw;
+		return graphic;
 	}
 	
 	private function get_scene():Scene
@@ -132,7 +132,7 @@ class GameObject extends Node
 		
 		transform = null;
 		collider = null;
-		draw = null;
+		graphic = null;
 		scene = null;
 	}
 }

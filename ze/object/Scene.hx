@@ -1,8 +1,8 @@
 package ze.object;
 import ze.component.core.Component;
-import ze.component.core.Screen;
 import ze.object.GameObject;
 import ze.object.Node;
+import ze.util.Screen;
 /**
  * Handle adding/removing gameObjects, remove all gameObjects when scene changes
  * @author Goh Zi He
@@ -11,12 +11,12 @@ import ze.object.Node;
 class Scene extends Node
 {
 	public var screen(default, null):Screen;
+	public var engine(default, null):Engine;
 	
 	override private function added():Void 
 	{
 		super.added();
-		screen = new Screen();
-		createGameObject("screen", screen);
+		screen = new Screen(this);
 	}
 	
 	public function createGameObject(name:String, component:Component = null, components:Array<Component> = null, x:Float = 0, y:Float = 0):GameObject
@@ -129,6 +129,8 @@ class Scene extends Node
 			}
 			node = node._next;
 		}
+		
+		screen.draw();
 	}
 	
 	override private function removed():Void 

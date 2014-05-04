@@ -1,9 +1,8 @@
 package puzzle.actions;
-
 import ze.component.core.Component;
 import ze.component.physics.Collider;
-import ze.component.rendering.Image;
-import ze.component.rendering.Text;
+//import ze.component.rendering.Text;
+import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
 
 /**
@@ -13,8 +12,8 @@ import ze.object.GameObject;
 class Sign extends Component
 {
 	private var _dialog:GameObject;
-	private var _text:Text;
-	private var _background:Image;
+	//private var _text:Text;
+	private var _background:Sprite;
 	
 	public function new()
 	{
@@ -27,14 +26,14 @@ class Sign extends Component
 		_dialog = new GameObject("dialog", 100, 250);
 		scene.addGameObject(_dialog);
 		
-		_text = new Text("");
-		_text.offsetX = 30;
-		_text.offsetY = 30;
-		_text.layer = 1;
-		_dialog.addComponent(_text);
+		//_text = new Text("");
+		//_text.offsetX = 30;
+		//_text.offsetY = 30;
+		//_text.layer = 1;
+		//_dialog.addComponent(_text);
 		
-		_background = new Image("Sign Text", "gfx/Dialog.png");
-		_background.layer = 1;
+		_background = new Sprite("Dialog");
+		_background.layer = 2;
 		_dialog.addComponent(_background);
 		
 		collider.registerCallback(hitSign, exitSign);
@@ -59,16 +58,18 @@ class Sign extends Component
 	
 	public function addText(text:String):Void
 	{
-		_text.setText(text);
+		//_text.setText(text);
 	}
 	
 	public function showDialog():Void
 	{
-		_background.visible = _text.visible = true;
+		_background.visible = true;
+		//_background.visible = _text.visible = true;
 	}
 	
 	public function hideDialog():Void
 	{
-		_background.visible = _text.visible = false;
+		_background.visible = false;
+		//_background.visible = _text.visible = false;
 	}
 }

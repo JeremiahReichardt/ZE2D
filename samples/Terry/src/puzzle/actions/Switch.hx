@@ -1,8 +1,7 @@
 package puzzle.actions;
-
 import ze.component.core.Component;
 import ze.component.physics.Collider;
-import ze.component.rendering.Animation;
+import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;
 
 /**
@@ -37,7 +36,7 @@ class Switch extends Component
 				scene.removeGameObject(_gate);
 				_gate = null;
 				
-				var animation:Animation = cast (draw, Animation);
+				var animation:AnimatedSprite = cast (graphic, AnimatedSprite);
 				if (animation.currentFrameLabel != "idle")
 				{
 					animation.playOnce("idle", 2);

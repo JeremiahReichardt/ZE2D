@@ -1,8 +1,7 @@
 package puzzle.prefab;
-
 import puzzle.actions.Respawn;
 import ze.component.physics.BoxCollider;
-import ze.component.rendering.Animation;
+import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;
 
 /**
@@ -19,8 +18,7 @@ class RespawnObject extends GameObject
 	override private function added():Void 
 	{
 		super.added();
-		
-		var animation:Animation = new Animation("respawn", "gfx/Respawn.png", 32, 8);
+		var animation:AnimatedSprite = new AnimatedSprite("Respawn");
 		addComponent(animation);
 		animation.addAnimation("idle", [0]);
 		animation.addAnimation("activated", [1]);

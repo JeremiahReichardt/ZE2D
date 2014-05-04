@@ -1,9 +1,8 @@
 package boxed.action.game;
-
 import boxed.action.item.PickStar;
 import ze.component.core.Component;
 import ze.component.physics.BoxCollider;
-import ze.component.rendering.Image;
+import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
 import ze.object.Node;
 import ze.util.Ops;
@@ -36,10 +35,10 @@ class ItemManager extends Component
 			if (getGameObjectAt(x, y))
 			{
 				var gameObject:GameObject = new GameObject("star", x, y);
-				gameObject.addComponent(new BoxCollider(32, 32, true));
-				gameObject.addComponent(new Image("star", "gfx/Star.png"));
-				gameObject.addComponent(new PickStar());
 				scene.addGameObject(gameObject);
+				gameObject.addComponent(new BoxCollider(32, 32, true));
+				gameObject.addComponent(new Sprite("Star"));
+				gameObject.addComponent(new PickStar());
 				break;
 			}
 		}

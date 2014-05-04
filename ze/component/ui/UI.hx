@@ -1,5 +1,4 @@
 package ze.component.ui;
-
 import ze.component.core.Component;
 import ze.util.Input;
 
@@ -12,8 +11,6 @@ class UI extends Component
 	private var _width:Float;
 	private var _height:Float;
 	private var _entered:Bool;
-	
-	private var _name:String;
 	
 	public function new(width:Float, height:Float)
 	{

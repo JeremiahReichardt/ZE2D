@@ -9,12 +9,12 @@ import puzzle.prefab.RespawnObject;
 import puzzle.prefab.SignObject;
 import puzzle.prefab.SpikeObject;
 import puzzle.prefab.SwitchObject;
-import puzzle.prefab.TileObject;
 import puzzle.prefab.VerticalGateObject;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
 import ze.util.OgmoLoader;
+import ze.util.TileSheetLoader;
 
 /**
  * ...
@@ -30,7 +30,12 @@ class MainScene extends Scene
 	override private function added():Void
 	{
 		super.added();
-		
+		var tsl:TileSheetLoader = new TileSheetLoader("atlas/sheet.xml", screen);
+		tsl.defineRegion("Checker", 32, 32);
+		tsl.defineRegion("Switch", 25, 13);
+		tsl.defineRegion("Exit", 32, 32);
+		tsl.defineRegion("Respawn", 32, 8);
+		tsl.loadAtlas();
 		startLevel();
 	}
 	
@@ -44,12 +49,9 @@ class MainScene extends Scene
 		if (!Assets.exists("level/Puzzle " + _level + ".oel")) _level = 1;
 		
 		_ogmoLoader.setOEL("level/Puzzle " + _level + ".oel");
-		
+		_ogmoLoader.loadTiles();
 		_ogmoLoader.setLayer("Collision");
 		_ogmoLoader.setEntity("rect", ColliderObject);
-		
-		_ogmoLoader.setLayer("Tiles");
-		_ogmoLoader.setEntity("tile", TileObject);
 		
 		_ogmoLoader.setLayer("Spikes");
 		_ogmoLoader.setEntity("rect", SpikeObject);
@@ -64,6 +66,7 @@ class MainScene extends Scene
 		_ogmoLoader.setEntity("Player", PlayerObject);
 		
 		_ogmoLoader.loadAll();
+		
 	}
 	
 	override private function update():Void 

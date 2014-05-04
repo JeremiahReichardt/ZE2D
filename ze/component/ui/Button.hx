@@ -1,7 +1,5 @@
 package ze.component.ui;
-
-import flash.geom.Rectangle;
-import ze.component.rendering.Image;
+import ze.component.tilesheet.AnimatedSprite;
 import ze.util.Input;
 
 /**
@@ -15,28 +13,38 @@ class Button extends UI
 	private var _overCallback:Void -> Void;
 	private var _clickCallback:Void -> Void;
 	
-	public function new(name:String, buttonGfx:String, width:Float, height:Float, exitGfxPos:Array<Int> = null, overGfxPos:Array<Int> = null, clickGfxPos:Array<Int> = null)
+	private var _animatedSprite:AnimatedSprite;
+	private var _name:String;
+	
+	public function new(name:String, width:Float, height:Float = null)
 	{
-		super(width, height);
 		_name = name;
-		
-		init(name + "_exitGfx", buttonGfx, width, height, exitGfxPos);
-		init(name + "_overGfx", buttonGfx, width, height, overGfxPos);
-		init(name + "_clickGfx", buttonGfx, width, height, clickGfxPos);
+		super(width, height);
 	}
 	
 	override private function added():Void 
 	{
 		super.added();
-		addComponent(new Image(_name + "_exitGfx"));
+		_animatedSprite = new AnimatedSprite(_name);
+		addComponent(_animatedSprite);
 	}
 	
-	private function init(name:String, buttonGfx:String, width:Float, height:Float, btnPos:Array<Int>):Void
+	public function addButtonState(state:ButtonState, frames:Array<Int>):Void
 	{
-		if (btnPos != null)
+		switch(state)
 		{
-			var rect:Rectangle = new Rectangle(width * btnPos[0], height * btnPos[1], width, height);
-			new Image(name, buttonGfx, rect);
+			case ENTER:
+				_animatedSprite.addAnimation("enter", frames);
+			
+			case OVER:
+				_animatedSprite.addAnimation("over", frames);
+			
+			case CLICK:
+				_animatedSprite.addAnimation("click", frames);
+			
+			case EXIT:
+				_animatedSprite.addAnimation("exit", frames);
+				_animatedSprite.play("exit");
 		}
 	}
 	
@@ -55,7 +63,7 @@ class Button extends UI
 		{
 			_enterCallback();
 		}
-		cast(draw, Image).setImage(_name + "_overGfx");
+		_animatedSprite.play("enter");
 	}
 	
 	override private function onExit():Void 
@@ -65,7 +73,7 @@ class Button extends UI
 		{
 			_exitCallback();
 		}
-		cast(draw, Image).setImage(_name + "_exitGfx");
+		_animatedSprite.play("exit");
 	}
 	
 	override private function onOver():Void 
@@ -89,4 +97,12 @@ class Button extends UI
 			_clickCallback();
 		}
 	}
+}
+
+enum ButtonState 
+{
+	ENTER;
+	EXIT;
+	OVER;
+	CLICK;
 }

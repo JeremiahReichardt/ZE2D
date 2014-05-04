@@ -1,9 +1,7 @@
 package puzzle.actions;
-
-import puzzle.prefab.RespawnObject;
 import ze.component.core.Component;
 import ze.component.physics.Collider;
-import ze.component.rendering.Animation;
+import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;
 
 /**
@@ -33,7 +31,7 @@ class Respawn extends Component
 		var respawnPoints:Array<GameObject> = scene.getGameObjectsByName("respawn");
 		for (go in respawnPoints)
 		{
-			var anim:Animation = go.getComponent(Animation);
+			var anim:AnimatedSprite = go.getComponent(AnimatedSprite);
 			if (go == gameObject)
 			{
 				anim.play("activated", 10);

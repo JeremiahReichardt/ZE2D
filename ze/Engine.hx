@@ -1,5 +1,4 @@
 package ze;
-
 import flash.display.MovieClip;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
@@ -7,7 +6,6 @@ import flash.events.Event;
 import flash.Lib;
 import flash.system.System;
 import ze.object.Node;
-import ze.object.Object;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
@@ -19,19 +17,14 @@ import ze.util.Time;
  */
 class Engine extends Node 
 {
-	private static var _engine:Engine;
 	private static var removeList:Array<Node>;
 	
-	public var scene(get, null):Scene;
 	public var current(default, null):MovieClip;
 	
 	public function new(initScene:Scene) 
 	{
 		super();
-		
-		_engine = this;
 		removeList = [];
-		
 		current = Lib.current;
 		current.stage.align = StageAlign.LEFT;
 		current.stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -40,7 +33,7 @@ class Engine extends Node
 		current.addEventListener(Event.ACTIVATE, activate);
 		
 		Input.init(current.stage);
-		
+		Reflect.setProperty(initScene, "engine", this);
 		addChildNode(initScene);
 	}
 	
@@ -57,7 +50,7 @@ class Engine extends Node
 			return;
 		}
 		
-		if (cast(_child, Object).enable)
+		if (_child.enable)
 		{
 			_child.update();
 		}
@@ -78,23 +71,14 @@ class Engine extends Node
 	public function addScene(scene:Scene):Scene
 	{
 		removeChildNode(_child);
+		Reflect.setProperty(scene, "engine", this);
 		addChildNode(scene);
 		return scene;
-	}
-	
-	public static function getEngine():Engine
-	{
-		return _engine;
 	}
 	
 	public function addToRemoveList(node:Node):Void
 	{
 		removeList.push(node);
-	}
-	
-	private function get_scene():Scene
-	{
-		return cast(_child, Scene);
 	}
 	
 	private function activate(event:Event):Void

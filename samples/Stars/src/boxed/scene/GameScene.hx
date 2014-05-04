@@ -1,15 +1,14 @@
 package boxed.scene;
-
 import boxed.action.game.ItemManager;
 import boxed.prefab.ColliderObject;
 import boxed.prefab.PlayerObject;
-import boxed.prefab.TileObject;
 import flash.display.BitmapData;
 import ze.component.sounds.Audio;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
 import ze.util.OgmoLoader;
+import ze.util.TileSheetLoader;
 /**
  * ...
  * @author Goh Zi He
@@ -25,6 +24,9 @@ class GameScene extends Scene
 	override private function added():Void
 	{
 		super.added();
+		var tsl:TileSheetLoader = new TileSheetLoader("atlas/sheet.xml", screen);
+		tsl.defineRegion("Checker", 32, 32);
+		tsl.loadAtlas();
 		
 		Audio.mute();
 		
@@ -34,8 +36,7 @@ class GameScene extends Scene
 		
 		_ogmoLoader.setOEL("level/Level " + level + ".oel");
 		
-		_ogmoLoader.setLayer("Tiles");
-		_ogmoLoader.setEntity("tile", TileObject);
+		_ogmoLoader.loadTiles();
 		
 		_ogmoLoader.setLayer("Entities");
 		_ogmoLoader.setEntity("Player", PlayerObject);
@@ -50,10 +51,6 @@ class GameScene extends Scene
 	{
 		super.update();
 		
-		if (Input.rightMousePressed())
-		{
-			trace(1);
-		}
 		if (Input.keyPressed(Key.DIGIT_1)) { level = 1; engine.addScene(new GameScene()); }
 		if (Input.keyPressed(Key.DIGIT_2)) { level = 2; engine.addScene(new GameScene()); }
 		if (Input.keyPressed(Key.DIGIT_3)) { level = 3; engine.addScene(new GameScene()); }

@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><project>	<app main="Main" file="Game" swf-version="11.8" />	<window width="800" height="800" fps="30" background="0x000000" />		<source path="src" />		<haxelib name="openfl" />	<haxelib name="ze2d" />	<haxelib name="actuate" />		<assets path="assets/font" rename="font" type="font" include="*.ttf" /></project>
