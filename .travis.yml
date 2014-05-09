@@ -17,4 +17,3 @@ before_install:
 script:
   - haxelib run openfl build Stars/application.xml flash
   - haxelib run openfl build Terry/application.xml flash
-  - haxelib run openfl build Test/application.xml flash
