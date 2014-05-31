@@ -1,8 +1,8 @@
-package boxed.scene;
-import flash.system.System;
+package scene;
+import openfl.system.System;
 import ze.component.ui.Button;
 import ze.object.Scene;
-import ze.util.TileSheetLoader;
+import ze.util.TileSheetLayer;
 
 /**
  * ...
@@ -15,10 +15,8 @@ class MainScene extends Scene
 	override private function added():Void
 	{
 		super.added();
-		var tsl:TileSheetLoader = new TileSheetLoader("atlas/sheet.xml", screen);
-		tsl.defineRegion("PlayBtn", 128, 32);
-		tsl.defineRegion("QuitBtn", 128, 32);
-		tsl.loadAtlas();
+		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
+		screen.addLayer(tileSheetLayer);
 		
 		var btn:Button = new Button("PlayBtn", 128, 32);
 		createGameObject("playBtn", btn, 1100, 700);

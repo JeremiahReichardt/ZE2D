@@ -1,10 +1,9 @@
 package ze.component.sounds;
-
-import flash.events.Event;
-import flash.media.Sound;
-import flash.media.SoundChannel;
-import flash.media.SoundTransform;
 import openfl.Assets;
+import openfl.events.Event;
+import openfl.media.Sound;
+import openfl.media.SoundChannel;
+import openfl.media.SoundTransform;
 import ze.component.core.Component;
 
 /**

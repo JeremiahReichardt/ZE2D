@@ -1,5 +1,5 @@
-package boxed.action.game;
-import boxed.action.player.CharacterController;
+package action.game;
+import action.player.CharacterController;
 import ze.component.core.Component;
 import ze.util.Input;
 

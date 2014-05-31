@@ -8,7 +8,7 @@ before_install:
   - mkdir ~/haxelib
   - haxelib setup ~/haxelib
   - haxelib -notimeout install openfl
-  - haxelib -notimeout install hxlibc
+  - haxelib -notimeout install hxcpp
   - haxelib -notimeout install lime
   - haxelib -notimeout install lime-tools
   - haxelib -notimeout git ze2d https://github.com/zine92/ZE2D
@@ -17,3 +17,4 @@ before_install:
 script:
   - haxelib run openfl build Stars/application.xml flash
   - haxelib run openfl build Terry/application.xml flash
+  - haxelib run openfl build TileSheetLayer/application.xml flash

@@ -6,12 +6,12 @@
     <movie input="" />
     <movie path="application.xml" />
     <movie fps="30" />
-    <movie width="1280" />
-    <movie height="800" />
+    <movie width="290" />
+    <movie height="100" />
     <movie version="3" />
     <movie minorVersion="0" />
     <movie platform="NME" />
-    <movie background="FFFFFF" />
+    <movie background="F5F5F5" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -30,7 +30,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;-swf-version 11.8" />
+    <option additional="--no-output&#xA;-swf-version 11.2" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

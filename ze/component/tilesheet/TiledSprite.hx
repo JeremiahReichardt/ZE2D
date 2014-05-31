@@ -38,15 +38,25 @@ class TiledSprite extends Graphic
 		}
 	}
 	
+	override function added():Void 
+	{
+		super.added();
+	}
+	
 	public function setTile(column:Int, row:Int, tx:Float, ty:Float):Void
 	{
-		var tiles:Array<Int> = _screen.getTileIndices(_name);
+		var tiles:Array<Int> = _tileSheetLayer.getSpriteIndices(_name);
 		_indices[row][column] = tiles[Math.floor(tx + (ty * _tileRow))];
 		_tileID = _indices[row][column];
 	}
 	
 	override function update():Void 
 	{
+		if (!visible || _tileSheetLayer == null)
+		{
+			return;
+		}
+		
 		var x:Float = transform.x;
 		var y:Float = transform.y;
 		
@@ -62,7 +72,7 @@ class TiledSprite extends Graphic
 				_tileData[index++] = x + (column * _tileWidth);
 				_tileData[index++] = y + (row * _tileHeight);
 				_tileData[index++] = _indices[row][column];
-				_screen.addToDraw(layer, _tileData);
+				_tileSheetLayer.addToDraw(layer, _tileData);
 			}
 		}
 	}

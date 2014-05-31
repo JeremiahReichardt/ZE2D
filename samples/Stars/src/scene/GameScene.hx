@@ -1,14 +1,14 @@
-package boxed.scene;
-import boxed.action.game.ItemManager;
-import boxed.prefab.ColliderObject;
-import boxed.prefab.PlayerObject;
-import flash.display.BitmapData;
+package scene;
+import action.game.ItemManager;
+import openfl.display.BitmapData;
+import prefab.ColliderObject;
+import prefab.PlayerObject;
 import ze.component.sounds.Audio;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
 import ze.util.OgmoLoader;
-import ze.util.TileSheetLoader;
+import ze.util.TileSheetLayer;
 /**
  * ...
  * @author Goh Zi He
@@ -24,16 +24,14 @@ class GameScene extends Scene
 	override private function added():Void
 	{
 		super.added();
-		var tsl:TileSheetLoader = new TileSheetLoader("atlas/sheet.xml", screen);
-		tsl.defineRegion("Checker", 32, 32);
-		tsl.loadAtlas();
+		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
+		screen.addLayer(tileSheetLayer);
 		
 		Audio.mute();
 		
 		createGameObject("item_manager", new ItemManager());
 		
 		_ogmoLoader = new OgmoLoader(this);
-		
 		_ogmoLoader.setOEL("level/Level " + level + ".oel");
 		
 		_ogmoLoader.loadTiles();

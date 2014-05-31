@@ -1,6 +1,5 @@
 package ze.util;
-
-import flash.Lib;
+import openfl.Lib;
 
 /**
  * ...

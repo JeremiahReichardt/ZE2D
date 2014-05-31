@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><project>	<app main="Main" file="Game" />	<window width="290" height="100" fps="30" background="0xF5F5F5" />		<source path="src" />		<haxelib name="openfl" />	<haxelib name="ze2d" />		<assets path="assets/atlas" rename="atlas" />	<assets path="assets/font" rename="font" /></project>

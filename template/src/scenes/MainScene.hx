@@ -1,4 +1,4 @@
-package;
+package scenes;
 import ze.object.Scene;
 
 /**

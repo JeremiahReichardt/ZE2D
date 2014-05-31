@@ -14,7 +14,7 @@ import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
 import ze.util.OgmoLoader;
-import ze.util.TileSheetLoader;
+import ze.util.TileSheetLayer;
 
 /**
  * ...
@@ -30,12 +30,10 @@ class MainScene extends Scene
 	override private function added():Void
 	{
 		super.added();
-		var tsl:TileSheetLoader = new TileSheetLoader("atlas/sheet.xml", screen);
-		tsl.defineRegion("Checker", 32, 32);
-		tsl.defineRegion("Switch", 25, 13);
-		tsl.defineRegion("Exit", 32, 32);
-		tsl.defineRegion("Respawn", 32, 8);
-		tsl.loadAtlas();
+		
+		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
+		screen.addLayer(tileSheetLayer);
+		
 		startLevel();
 	}
 	
@@ -49,7 +47,7 @@ class MainScene extends Scene
 		if (!Assets.exists("level/Puzzle " + _level + ".oel")) _level = 1;
 		
 		_ogmoLoader.setOEL("level/Puzzle " + _level + ".oel");
-		_ogmoLoader.loadTiles();
+		_ogmoLoader.loadTiles(setGrid);
 		_ogmoLoader.setLayer("Collision");
 		_ogmoLoader.setEntity("rect", ColliderObject);
 		
@@ -66,7 +64,11 @@ class MainScene extends Scene
 		_ogmoLoader.setEntity("Player", PlayerObject);
 		
 		_ogmoLoader.loadAll();
-		
+	}
+	
+	private function setGrid(x:Int, y:Int):Void
+	{
+		grid.setGrid(x, y);
 	}
 	
 	override private function update():Void 

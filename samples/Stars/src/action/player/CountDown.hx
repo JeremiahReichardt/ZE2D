@@ -1,5 +1,4 @@
-package boxed.action.player;
-
+package action.player;
 import ze.component.core.Component;
 import ze.util.Time;
 

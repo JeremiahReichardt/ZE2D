@@ -11,7 +11,7 @@ class Sprite extends Graphic
 	override function added():Void 
 	{
 		super.added();
-		_tileID = _screen.getTileID(_name);
+		_tileID = _tileSheetLayer.getSprite(_name);
 		update();
 	}
 }

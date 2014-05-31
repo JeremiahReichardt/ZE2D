@@ -1,7 +1,8 @@
 package ze.component.tilesheet;
-import flash.geom.Rectangle;
+import openfl.geom.Rectangle;
 import ze.component.core.Component;
 import ze.util.Screen;
+import ze.util.TileSheetLayer;
 
 /**
  * ...
@@ -19,6 +20,7 @@ class Graphic extends Component
 	private var _tileData:Array<Float>;
 	private var _name:String;
 	private var _tileID:Int;
+	private var _tileSheetLayer:TileSheetLayer;
 	
 	public function new(name:String) 
 	{
@@ -35,19 +37,20 @@ class Graphic extends Component
 	{
 		super.added();
 		_screen = scene.screen;
+		_tileSheetLayer = _screen.getLayer(_name);
 	}
 	
 	override function update():Void 
 	{
 		super.update();
-		if (!visible)
+		if (!visible || _tileSheetLayer == null)
 		{
 			return;
 		}
 		
 		if (width == 0 || height == 0)
 		{
-			var rect:Rectangle = _screen.getRect(_tileID);
+			var rect:Rectangle = _tileSheetLayer.getTileRect(_tileID);
 			width = rect.width;
 			height = rect.height;
 		}
@@ -57,6 +60,6 @@ class Graphic extends Component
 		_tileData[index++] = transform.y;
 		_tileData[index++] = _tileID;
 		
-		layer = _screen.addToDraw(layer, _tileData);
+		layer = _tileSheetLayer.addToDraw(layer, _tileData);
 	}
 }

@@ -1,5 +1,5 @@
-package boxed.action.game;
-import boxed.action.item.PickStar;
+package action.game;
+import action.item.PickStar;
 import ze.component.core.Component;
 import ze.component.physics.BoxCollider;
 import ze.component.tilesheet.Sprite;

@@ -15,22 +15,26 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
+    <class path="C:\HaxeToolkit\haxe\lib\ze2d\git" />
+    <class path="C:\HaxeToolkit\haxe\lib\lime\1,0,0" />
+    <class path="C:\HaxeToolkit\haxe\lib\lime-tools\1,5,4" />
+    <class path="C:\HaxeToolkit\haxe\lib\openfl\2,0,0" />
     <class path="src" />
+    <class path="C:\HaxeToolkit\haxe\lib\openfl\2,0,0\backends\flash" />
     <class path="bin\flash\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="tools=1.2.6&#xA;display&#xA;web" />
+    <option directives="ze2d=0.3.0&#xA;lime=1.0.0&#xA;lime-tools=1.5.4&#xA;openfl=2.0.0&#xA;tools=1.5.4&#xA;openfl-flash&#xA;display&#xA;web" />
     <option flashStrict="True" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;-swf-version 11.8&#xA;#--remap nme:flash" />
+    <option additional="--no-output&#xA;-swf-version 11.8" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="openfl" />
-    <library name="ze2d" />
+    <!-- example: <library name="..." /> -->
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>

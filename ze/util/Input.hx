@@ -1,8 +1,7 @@
 package ze.util;
-
-import flash.display.Stage;
-import flash.events.KeyboardEvent;
-import flash.events.MouseEvent;
+import openfl.display.Stage;
+import openfl.events.KeyboardEvent;
+import openfl.events.MouseEvent;
 
 /**
  * Input for handling keypresses and mouse

@@ -19,6 +19,28 @@ class Scene extends Node
 		screen = new Screen(this);
 	}
 	
+	override private function update():Void 
+	{
+		if (!enable || _child == null)
+		{
+			return;
+		}
+		
+		super.update();
+		var node:Node = _child.first;
+		
+		while (node != null)
+		{
+			if (node.enable)
+			{
+				node.update();
+			}
+			node = node._next;
+		}
+		
+		screen.draw();
+	}
+	
 	public function createGameObject(name:String, component:Component = null, components:Array<Component> = null, x:Float = 0, y:Float = 0):GameObject
 	{
 		var gameObject:GameObject = new GameObject(name, x, y);
@@ -109,28 +131,6 @@ class Scene extends Node
 			}
 		}
 		return gameObjects;
-	}
-	
-	override private function update():Void 
-	{
-		if (!enable || _child == null)
-		{
-			return;
-		}
-		
-		super.update();
-		var node:Node = _child.first;
-		
-		while (node != null)
-		{
-			if (node.enable)
-			{
-				node.update();
-			}
-			node = node._next;
-		}
-		
-		screen.draw();
 	}
 	
 	override private function removed():Void 

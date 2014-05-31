@@ -1,11 +1,9 @@
-package boxed.action.item;
-
-import boxed.action.item.PickItem;
-import boxed.action.player.CharacterController;
-import boxed.action.player.CountDown;
+package action.item;
+import action.item.PickItem;
+import action.player.CharacterController;
+import action.player.CountDown;
 import ze.component.physics.Collider;
 import ze.component.sounds.Audio;
-import ze.object.GameObject;
 
 /**
  * ...

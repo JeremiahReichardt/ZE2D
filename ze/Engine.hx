@@ -1,10 +1,10 @@
 package ze;
-import flash.display.MovieClip;
-import flash.display.StageAlign;
-import flash.display.StageScaleMode;
-import flash.events.Event;
-import flash.Lib;
-import flash.system.System;
+import openfl.display.MovieClip;
+import openfl.display.StageAlign;
+import openfl.display.StageScaleMode;
+import openfl.events.Event;
+import openfl.Lib;
+import openfl.system.System;
 import ze.object.Node;
 import ze.object.Scene;
 import ze.util.Input;

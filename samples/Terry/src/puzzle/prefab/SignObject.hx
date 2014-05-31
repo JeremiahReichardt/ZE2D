@@ -32,13 +32,11 @@ class SignObject extends GameObject
 		switch (_signIndex)
 		{
 			case 0:
-				_sign.addText("Press Enter/Space to shoot, press again to teleport.");
+				_sign.addText("Press Enter/Space to shoot, press again\n to teleport.");
 			case 1:
 				_sign.addText("If you die, respawn from here.");
 			case 2:
 				_sign.addText("Press W to aim up.");
-			case 3:
-				_sign.addText("Shoot up, shoot left, before you die, press up again.\nYou can still press space after respawn.");
 		}
 	}
 }

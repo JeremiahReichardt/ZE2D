@@ -1,0 +1,7 @@
+<TextureAtlas imagePath="sheet.png">
+	<SubTexture type="single" name="Player" x="258" y="33" width="32" height="32"/>
+	<SubTexture type="single" name="Star" x="258" y="0" width="32" height="31"/>
+	<SubTexture type="multiple" name="Checker" x="0" y="0" width="256" height="256" tileWidth="32" tileHeight="32"/>
+	<SubTexture type="multiple" name="PlayBtn" x="0" y="258" width="128" height="64" tileWidth="128" tileHeight="32"/>
+	<SubTexture type="multiple" name="QuitBtn" x="130" y="258" width="128" height="64" tileWidth="128" tileHeight="32"/>
+</TextureAtlas>

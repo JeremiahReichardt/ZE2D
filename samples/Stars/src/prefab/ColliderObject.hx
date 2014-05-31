@@ -1,5 +1,4 @@
-package boxed.prefab;
-
+package prefab;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 

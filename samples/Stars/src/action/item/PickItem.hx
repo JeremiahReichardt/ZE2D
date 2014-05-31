@@ -1,8 +1,7 @@
-package boxed.action.item;
-
-import boxed.action.game.ItemManager;
-import boxed.action.player.CharacterController;
-import boxed.action.player.CountDown;
+package action.item;
+import action.game.ItemManager;
+import action.player.CharacterController;
+import action.player.CountDown;
 import ze.component.core.Component;
 import ze.component.physics.Collider;
 

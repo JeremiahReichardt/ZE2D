@@ -72,7 +72,7 @@ class OgmoLoader
 		_entities[_current].push(new EntityProperties(entityName, cls));
 	}
 	
-	public function loadTiles():Void
+	public function loadTiles(gridFn:Int->Int->Void = null):Void
 	{
 		var mapWidth:Float = Std.parseFloat(_levelXML.get("width"));
 		var mapHeight:Float = Std.parseFloat(_levelXML.get("height"));
@@ -89,7 +89,10 @@ class OgmoLoader
 				var ty:Int = Std.parseInt(tiles.get("ty"));
 				
 				tileSprite.setTile(x, y, tx, ty);
-				//trace(x, y, tx, ty);
+				if (gridFn != null)
+				{
+					gridFn(x, y);
+				}
 			}
 		}
 	}

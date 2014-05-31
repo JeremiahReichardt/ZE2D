@@ -1,7 +1,7 @@
 package puzzle.prefab;
-import flash.display.BitmapData;
-import flash.geom.Rectangle;
 import openfl.Assets;
+import openfl.display.BitmapData;
+import openfl.geom.Rectangle;
 import puzzle.scene.MainScene;
 import ze.component.rendering.Image;
 import ze.object.GameObject;

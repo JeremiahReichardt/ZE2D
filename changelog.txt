@@ -1,5 +1,12 @@
 ###Changelog###
 DD/MM/YY
+(31/5/14)
+- Added bitmap font.
+- Introduced a TileSheetLayer system for screen to manage multiple tilesheets and TileSheetLayer handle their own rendering layer.
+- New sample project demoing the TileSheetLayer system and text system
+
+(20/5/14)
+- Happy Birthday!!! ZE2D is developed for 2 years. Mainly just for fun and learning.
 
 (4/5/14)
 - Decided to remove all the displayObject stuffs and reimplemented the rendering stuffs using only Tilesheet.

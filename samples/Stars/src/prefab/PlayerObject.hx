@@ -1,7 +1,6 @@
-package boxed.prefab;
-
-import boxed.action.game.MouseSelectMovement;
-import boxed.action.player.CharacterController;
+package prefab;
+import action.game.MouseSelectMovement;
+import action.player.CharacterController;
 import ze.component.physics.BoxCollider;
 import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;

@@ -1,6 +1,5 @@
 package ze.component.tilesheet;
 import haxe.ds.StringMap;
-import ze.util.Screen;
 import ze.util.Time;
 
 /**
@@ -22,10 +21,10 @@ class AnimatedSprite extends Graphic
 	override function added():Void 
 	{
 		super.added();
-		_animationData = new AnimationData(_screen.getTileIndices(_name));
+		_animationData = new AnimationData(_tileSheetLayer.getSpriteIndices(_name));
 	}
 	
-	override private function update():Void 
+	override private function update():Void
 	{
 		super.update();
 		if (!playing)

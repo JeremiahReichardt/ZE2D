@@ -2,7 +2,6 @@
   <Entities>
     <Sign id="3" x="32" y="32" signIndex="0" />
     <Player id="0" x="40" y="48" />
-    <Sign id="4" x="448" y="608" signIndex="3" />
     <VerticalGate id="5" x="704" y="192" gateIndex="0" />
     <Sign id="7" x="736" y="288" signIndex="2" />
     <Respawn id="8" x="384" y="88" />
@@ -559,6 +558,7 @@
     <rect x="368" y="512" w="16" h="64" />
     <rect x="384" y="624" w="64" h="16" />
     <rect x="480" y="112" w="192" h="16" />
+    <rect x="512" y="640" w="32" h="96" />
     <rect x="640" y="752" w="64" h="16" />
     <rect x="672" y="544" w="64" h="16" />
     <rect x="672" y="592" w="64" h="16" />

@@ -1,5 +1,5 @@
 package puzzle.actions;
-import flash.geom.Point;
+import openfl.geom.Point;
 import ze.component.core.Component;
 
 /**
