@@ -1,5 +1,5 @@
-package puzzle.prefab;
-import puzzle.actions.Respawn;
+package prefab;
+import actions.Respawn;
 import ze.component.physics.BoxCollider;
 import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;

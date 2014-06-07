@@ -1,4 +1,4 @@
-package puzzle.actions;
+package actions;
 import openfl.geom.Point;
 import ze.component.core.Component;
 

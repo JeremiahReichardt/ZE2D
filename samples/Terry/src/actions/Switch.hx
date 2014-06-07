@@ -1,4 +1,4 @@
-package puzzle.actions;
+package actions;
 import ze.component.core.Component;
 import ze.component.physics.Collider;
 import ze.component.tilesheet.AnimatedSprite;

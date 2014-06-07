@@ -1,15 +1,15 @@
-package puzzle.scene;
+package scene;
+import actions.Grid;
 import openfl.Assets;
-import puzzle.actions.Grid;
-import puzzle.prefab.ColliderObject;
-import puzzle.prefab.ExitObject;
-import puzzle.prefab.HorizontalGateObject;
-import puzzle.prefab.PlayerObject;
-import puzzle.prefab.RespawnObject;
-import puzzle.prefab.SignObject;
-import puzzle.prefab.SpikeObject;
-import puzzle.prefab.SwitchObject;
-import puzzle.prefab.VerticalGateObject;
+import prefab.ColliderObject;
+import prefab.ExitObject;
+import prefab.HorizontalGateObject;
+import prefab.PlayerObject;
+import prefab.RespawnObject;
+import prefab.SignObject;
+import prefab.SpikeObject;
+import prefab.SwitchObject;
+import prefab.VerticalGateObject;
 import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
@@ -31,7 +31,9 @@ class MainScene extends Scene
 	{
 		super.added();
 		
-		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
+		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/game");
+		screen.addLayer(tileSheetLayer);
+		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/ui");
 		screen.addLayer(tileSheetLayer);
 		
 		startLevel();

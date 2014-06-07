@@ -1,6 +1,5 @@
-package puzzle;
-
-import puzzle.scene.MainScene;
+package;
+import scene.MainScene;
 import ze.Engine;
 
 /**

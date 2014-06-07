@@ -1,5 +1,10 @@
 ###Changelog###
 DD/MM/YY
+
+(7/6/2014)
+- Terry project demo using 2 atlas, one for UI and one for game.
+- Terry project and Stars project package reorganized.
+
 (31/5/14)
 - Added bitmap font.
 - Introduced a TileSheetLayer system for screen to manage multiple tilesheets and TileSheetLayer handle their own rendering layer.

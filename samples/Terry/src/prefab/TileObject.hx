@@ -1,4 +1,4 @@
-package puzzle.prefab;
+package prefab;
 import openfl.Assets;
 import openfl.display.BitmapData;
 import openfl.geom.Rectangle;

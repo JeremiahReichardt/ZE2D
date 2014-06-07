@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"tags": ["openFL", "2d", "flash", "game", "component", "entity"],
 	"description": "An openfl gameobject/component system game framework for Haxe.",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"releasenote": "See changelog",
 	"contributors": [ "zine92" ],
 	"dependencies": {

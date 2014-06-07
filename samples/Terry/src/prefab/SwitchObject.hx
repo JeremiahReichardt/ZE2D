@@ -1,5 +1,5 @@
-package puzzle.prefab;
-import puzzle.actions.Switch;
+package prefab;
+import actions.Switch;
 import ze.component.physics.BoxCollider;
 import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;

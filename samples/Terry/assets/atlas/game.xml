@@ -1,0 +1,11 @@
+<TextureAtlas imagePath="game.png">
+	<SubTexture type="single" name="Bullet" x="125" y="296" width="5" height="5"/>
+	<SubTexture type="single" name="HorizontalGate" x="128" y="256" width="64" height="32"/>
+	<SubTexture type="single" name="VerticalGate" x="256" y="0" width="32" height="64"/>
+	<SubTexture type="single" name="Player" x="224" y="256" width="16" height="16"/>
+	<SubTexture type="single" name="Sign" x="192" y="256" width="32" height="32"/>
+	<SubTexture type="multiple" name="Checker" x="0" y="0" width="256" height="256" tileWidth="32" tileHeight="32"/>
+	<SubTexture type="multiple" name="Exit" x="0" y="256" width="128" height="32" tileWidth="32" tileHeight="32"/>
+	<SubTexture type="multiple" name="Respawn" x="125" y="288" width="64" height="8" tileWidth="32" tileHeight="8"/>
+	<SubTexture type="multiple" name="Switch" x="0" y="288" width="125" height="13" tileWidth="25" tileHeight="13"/>
+</TextureAtlas>

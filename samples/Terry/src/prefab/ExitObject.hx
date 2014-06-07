@@ -1,5 +1,5 @@
-package puzzle.prefab;
-import puzzle.actions.Exit;
+package prefab;
+import actions.Exit;
 import ze.component.physics.BoxCollider;
 import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;

@@ -1,4 +1,4 @@
-package puzzle.actions;
+package actions;
 import ze.component.core.Component;
 import ze.component.physics.Collider;
 import ze.component.tilesheet.Sprite;
@@ -31,11 +31,9 @@ class Sign extends Component
 		
 		_text = new Text("Grobold");
 		_dialogText.addComponent(_text);
-		_text.layer = 3;
 		
 		_background = new Sprite("Dialog");
 		_dialog.addComponent(_background);
-		_background.layer = 2;
 		
 		collider.registerCallback(hitSign, exitSign);
 		hideDialog();

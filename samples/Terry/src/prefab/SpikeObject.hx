@@ -1,6 +1,5 @@
-package puzzle.prefab;
-
-import puzzle.actions.Spikes;
+package prefab;
+import actions.Spikes;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 

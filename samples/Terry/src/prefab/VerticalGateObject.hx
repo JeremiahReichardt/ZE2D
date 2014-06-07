@@ -1,4 +1,4 @@
-package puzzle.prefab;
+package prefab;
 import ze.component.physics.BoxCollider;
 import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;

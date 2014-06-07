@@ -1,6 +1,5 @@
-package puzzle.actions;
-
-import puzzle.scene.MainScene;
+package actions;
+import scene.MainScene;
 import ze.component.core.Component;
 import ze.component.physics.Collider;
 
