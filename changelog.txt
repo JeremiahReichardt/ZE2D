@@ -1,6 +1,11 @@
 ###Changelog###
 DD/MM/YY
 
+(22/6/2014)
+- Added back displayObject again.
+- Some refactoring for Render codes.
+- Tilesheet's sprite can allow flipping and rotating.
+
 (7/6/2014)
 - Terry project demo using 2 atlas, one for UI and one for game.
 - Terry project and Stars project package reorganized.

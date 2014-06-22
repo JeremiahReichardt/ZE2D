@@ -1,4 +1,4 @@
-package scene;
+package scenes;
 import action.game.ItemManager;
 import openfl.display.BitmapData;
 import prefab.ColliderObject;

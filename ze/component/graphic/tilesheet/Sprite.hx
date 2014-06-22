@@ -1,12 +1,10 @@
-package ze.component.tilesheet;
-import ze.component.core.Component;
-import ze.util.Screen;
+package ze.component.graphic.tilesheet;
 
 /**
  * ...
  * @author Goh Zi He
  */
-class Sprite extends Graphic
+class Sprite extends TilesheetObject
 {
 	override function added():Void 
 	{

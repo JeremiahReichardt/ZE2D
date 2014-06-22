@@ -1,6 +1,6 @@
 package ze.component.core;
+import ze.component.graphic.Graphic;
 import ze.component.physics.Collider;
-import ze.component.tilesheet.Graphic;
 import ze.object.GameObject;
 import ze.object.Node;
 import ze.object.Scene;

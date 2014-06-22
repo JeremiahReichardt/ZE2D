@@ -1,8 +1,8 @@
 package action.game;
 import action.item.PickStar;
 import ze.component.core.Component;
+import ze.component.graphic.tilesheet.Sprite;
 import ze.component.physics.BoxCollider;
-import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
 import ze.object.Node;
 import ze.util.Ops;

@@ -1,8 +1,8 @@
 package prefab;
 import action.game.MouseSelectMovement;
 import action.player.CharacterController;
+import ze.component.graphic.tilesheet.Sprite;
 import ze.component.physics.BoxCollider;
-import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
 
 /**
@@ -16,13 +16,11 @@ class PlayerObject extends GameObject
 	{
 		super("player" + params.playerIndex, params.x, params.y);
 		_playerIndex = params.playerIndex;
-		
 	}
 	
 	override private function added():Void 
 	{
 		super.added();
-		
 		addComponent(new BoxCollider(32, 32, true));
 		addComponent(new CharacterController(_playerIndex));
 		addComponent(new Sprite("Player"));

@@ -1,5 +1,5 @@
 package actions;
-import scene.MainScene;
+import scenes.MainScene;
 import ze.component.core.Component;
 import ze.component.physics.Collider;
 

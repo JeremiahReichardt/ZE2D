@@ -1,7 +1,7 @@
 package actions;
 import ze.component.core.Component;
+import ze.component.graphic.tilesheet.AnimatedSprite;
 import ze.component.physics.Collider;
-import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;
 
 /**

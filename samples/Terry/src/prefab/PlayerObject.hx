@@ -2,8 +2,8 @@ package prefab;
 import actions.MouseSelectMovement;
 import actions.Player;
 import ze.component.core.CharacterController;
+import ze.component.graphic.tilesheet.Sprite;
 import ze.component.physics.BoxCollider;
-import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
 
 /**

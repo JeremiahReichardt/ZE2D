@@ -1,8 +1,8 @@
 package ze.object;
 import ze.component.core.Component;
 import ze.component.core.Transform;
+import ze.component.graphic.Graphic;
 import ze.component.physics.Collider;
-import ze.component.tilesheet.Graphic;
 
 /**
  * @author Goh Zi He

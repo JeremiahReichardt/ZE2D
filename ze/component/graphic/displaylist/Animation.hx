@@ -1,5 +1,9 @@
-package ze.component.tilesheet;
-import haxe.ds.StringMap;
+package ze.component.graphic.displaylist;
+import openfl.Assets;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import openfl.geom.Point;
+import openfl.geom.Rectangle;
 import ze.util.Time;
 
 /**
@@ -7,7 +11,7 @@ import ze.util.Time;
  * @author Goh Zi He
  */
 
-class AnimatedSprite extends Graphic
+class Animation extends BitmapObject
 {
 	public var currentFrame(default, null):Int;
 	public var currentFrameLabel(default, null):String;
@@ -18,13 +22,23 @@ class AnimatedSprite extends Graphic
 	private var _animationData:AnimationData;
 	private var _playOnce:Bool;
 	
-	override function added():Void 
+	private static var _animationCache:Map<String, AnimationData> = new Map<String, AnimationData>();
+	
+	public function new(imageLabel:String, imagePath:String = "", animationWidth:Int = 1, animationHeight:Int = 1) 
 	{
-		super.added();
-		_animationData = new AnimationData(_tileSheetLayer.getSpriteIndices(_name));
+		super();
+		
+		var animationData:AnimationData = _animationCache.get(imageLabel);
+		if (animationData == null)
+		{
+			animationData = createAnimation(imageLabel, imagePath, animationWidth, animationHeight);
+		}
+		
+		_animationData = animationData.cloneAnimationData();
+		setBitmapData(animationData.getFrame(currentFrame));
 	}
 	
-	override private function update():Void
+	override private function update():Void 
 	{
 		super.update();
 		if (!playing)
@@ -52,12 +66,11 @@ class AnimatedSprite extends Graphic
 					currentFrame = (_animationData.totalFrames - currentFrame);
 				}
 			}
-			
-			_tileID = _animationData.getFrame(currentFrame);
+			setBitmapData(_animationData.getFrame(currentFrame));
 		}
 	}
 	
-	public function play(label:String, fps:Int = 30, startFrame:Int = 0):AnimatedSprite
+	public function play(label:String, fps:Int = 30, startFrame:Int = 0):Animation
 	{
 		_animationData.setCurrentAnimation(label);
 		_animationData.fps = fps;
@@ -68,7 +81,7 @@ class AnimatedSprite extends Graphic
 		return this;
 	}
 	
-	public function playOnce(label:String, fps:Int = 30):AnimatedSprite
+	public function playOnce(label:String, fps:Int = 30):Animation
 	{
 		_playOnce = true;
 		return play(label, fps);
@@ -101,7 +114,7 @@ class AnimatedSprite extends Graphic
 		playing = true;
 	}
 	
-	public function addAnimationFromFrame(animationName:String, startFrame:Int = 0, endFrame:Int = 1):AnimatedSprite
+	public function addAnimationFromFrame(animationName:String, startFrame:Int = 0, endFrame:Int = 1):Animation
 	{
 		var animationArray:Array<Int> = [];
 		for (i in startFrame ... endFrame)
@@ -112,10 +125,44 @@ class AnimatedSprite extends Graphic
 		return this;
 	}
 	
-	public function addAnimation(animationName:String, animationArray:Array<Int>):AnimatedSprite
+	public function addAnimation(animationName:String, animationArray:Array<Int>):Animation
 	{
-		_tileID = _animationData.addAnimation(animationName, animationArray).getFrame(currentFrame);
+		_animationData.addAnimation(animationName, animationArray);
 		return this;
+	}
+	
+	private static function createAnimation(imageLabel:String, imagePath:String, animationWidth:Int, animationHeight:Int):AnimationData
+	{
+		// Get the name of the image and then cache it so all the same animations can use it
+		if (_animationCache.exists(imagePath))
+		{
+			trace("Animation already existed, removing first animation");
+			_animationCache.remove(imagePath);
+		}
+		
+		var bitmap:Bitmap = new Bitmap(Assets.getBitmapData(imagePath));
+		var row:Int = Math.floor(bitmap.width / animationWidth);
+		var column:Int = Math.floor(bitmap.height / animationHeight);
+		var bitmapDataArray:Array<BitmapData> = [];
+		var animationData:AnimationData;
+		
+		for (i in 0 ... row)
+		{
+			for (j in 0 ... column)
+			{
+				var bitmapData:BitmapData = new BitmapData(animationWidth, animationHeight);
+				var sourceRect:Rectangle = new Rectangle(i * animationWidth, j * animationHeight, animationWidth, animationHeight);
+				var destPoint:Point = new Point(0, 0);
+				
+				bitmapData.copyPixels(bitmap.bitmapData, sourceRect, destPoint);
+				bitmapDataArray.push(bitmapData);
+			}
+		}
+		
+		animationData = new AnimationData(bitmapDataArray);
+		_animationCache.set(imageLabel, animationData);
+		
+		return animationData;
 	}
 	
 	override private function destroyed():Void 
@@ -133,15 +180,15 @@ class AnimationData
 	public var fps(default, default):Int;
 	public var timePerFrame(get, null):Float;
 	
-	private var _animationData:Array<Int>;
+	private var _animationData:Array<BitmapData>;
 	private var _animationFrames:Array<Int>;
-	private var _animationLabel:StringMap<Array<Int>>;
+	private var _animationLabel:Map<String, Array<Int>>;
 	
-	public function new(animationData:Array<Int>)
+	public function new(animationData:Array<BitmapData>)
 	{
 		_animationData = animationData;
 		_animationFrames = [];
-		_animationLabel = new StringMap<Array<Int>>();
+		_animationLabel = new Map<String, Array<Int>>();
 	}
 	
 	private function get_timePerFrame():Float
@@ -162,12 +209,15 @@ class AnimationData
 		}
 		else
 		{
-			trace("Warning: Animation label [" + animation + "] don't exist.");
-			return;
+			trace("Warning: Animation label [" + animation + "] don't exist, using random animation.");
+			for (anim in _animationLabel.iterator())
+			{
+				_animationFrames = anim;
+			}
 		}
 	}
 	
-	public function getFrame(currentFrame:Int):Int
+	public function getFrame(currentFrame:Int):BitmapData
 	{
 		return _animationData[_animationFrames[currentFrame]];
 	}

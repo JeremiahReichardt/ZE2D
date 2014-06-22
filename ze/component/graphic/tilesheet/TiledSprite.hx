@@ -1,10 +1,10 @@
-package ze.component.tilesheet;
+package ze.component.graphic.tilesheet;
 
 /**
  * ...
  * @author Goh Zi He
  */
-class TiledSprite extends Graphic
+class TiledSprite extends TilesheetObject
 {
 	private var _indices:Array<Array<Int>>;
 	private var _mapWidth:Float;
@@ -72,6 +72,10 @@ class TiledSprite extends Graphic
 				_tileData[index++] = x + (column * _tileWidth);
 				_tileData[index++] = y + (row * _tileHeight);
 				_tileData[index++] = _indices[row][column];
+				_tileData[index++] = 1;
+				_tileData[index++] = 0;
+				_tileData[index++] = 0;
+				_tileData[index++] = 1;
 				_tileSheetLayer.addToDraw(layer, _tileData);
 			}
 		}

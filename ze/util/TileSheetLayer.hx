@@ -1,10 +1,10 @@
 package ze.util;
-import openfl.display.Graphics;
-import openfl.geom.Rectangle;
 import haxe.ds.StringMap;
 import openfl.Assets;
+import openfl.display.Graphics;
 import openfl.display.Tilesheet;
-import ze.component.tilesheet.Text;
+import openfl.geom.Rectangle;
+import ze.component.graphic.tilesheet.Text;
 
 /**
  * ...
@@ -138,7 +138,10 @@ class TileSheetLayer extends Tilesheet
 			{
 				continue;
 			}
-			drawTiles(graphics, _layer[i]);
+			var drawFlag = 0;
+			drawFlag |= Tilesheet.TILE_TRANS_2x2;
+			
+			drawTiles(graphics, _layer[i], false, drawFlag);
 			_layer[i] = [];
 		}
 	}

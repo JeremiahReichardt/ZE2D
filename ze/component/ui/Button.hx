@@ -1,5 +1,5 @@
 package ze.component.ui;
-import ze.component.tilesheet.AnimatedSprite;
+import ze.component.graphic.tilesheet.AnimatedSprite;
 import ze.util.Input;
 
 /**

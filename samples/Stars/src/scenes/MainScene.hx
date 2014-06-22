@@ -1,4 +1,4 @@
-package scene;
+package scenes;
 import openfl.system.System;
 import ze.component.ui.Button;
 import ze.object.Scene;

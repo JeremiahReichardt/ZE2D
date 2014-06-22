@@ -1,13 +1,13 @@
-package ze.component.tilesheet;
+package ze.component.graphic.tilesheet;
 import haxe.ds.StringMap;
 import openfl.text.Font;
-import ze.component.tilesheet.Text.Char;
+import ze.component.graphic.tilesheet.Text.Char;
 import ze.util.TileSheetLayer;
 /**
  * ...
  * @author Goh Zi He
  */
-class Text extends Graphic
+class Text extends TilesheetObject
 {
 	public var text(default, set):String;
 	
@@ -60,6 +60,10 @@ class Text extends Graphic
 			_tileData[index++] = x;
 			_tileData[index++] = y;
 			_tileData[index++] = _charData[i].index;
+			_tileData[index++] = 1;
+			_tileData[index++] = 0;
+			_tileData[index++] = 0;
+			_tileData[index++] = 1;
 			_tileSheetLayer.addToDraw(layer, _tileData);
 			
 			x += _charData[i].width;

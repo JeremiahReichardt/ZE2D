@@ -1,6 +1,6 @@
 package scenes;
-import ze.component.tilesheet.Sprite;
-import ze.component.tilesheet.Text;
+import ze.component.graphic.tilesheet.Sprite;
+import ze.component.graphic.tilesheet.Text;
 import ze.object.GameObject;
 import ze.object.Scene;
 import ze.util.TileSheetLayer;

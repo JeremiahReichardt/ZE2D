@@ -1,6 +1,6 @@
 package ze.util;
 import openfl.Assets;
-import ze.component.tilesheet.TiledSprite;
+import ze.component.graphic.tilesheet.TiledSprite;
 import ze.object.GameObject;
 import ze.object.Scene;
 

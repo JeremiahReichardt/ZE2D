@@ -6,6 +6,12 @@ An openfl gameobject/component system game framework for Haxe. Inspired by Flash
 ###Purpose
 Aims to create a simple and working proof of concept engine/framework for easy usage for creating games in flash/haxe/openfl context.
 
+###What works currently?
+* Component Entity system
+* Rendering - Tilesheet(layered)/DisplayList(non-layered)
+* Basic Physics - AABB and Grid based
+* Audio
+* Debug - Can pause game and uses mouse to drag game object around
 
 ###Hello, World!
 1. Create a blank main.hx.
@@ -18,7 +24,7 @@ Aims to create a simple and working proof of concept engine/framework for easy u
 2. Create a blank MyScene.hx.
         
         package;
-        import ze.component.rendering.Text;
+        import ze.component.graphic.displaylist.Text;
         import ze.object.GameObject;
         import ze.object.Scene;
         import ze.util.Color;
@@ -30,11 +36,14 @@ Aims to create a simple and working proof of concept engine/framework for easy u
 
             override private function added():Void
             {
-                _text = new Text("Hello, World!", Color.WHITE);             //Create a new component called Text
-                _gameObject = new GameObject("GameObject", 300, 300);       //Create a new gameObject called GameObject
-                _gameObject.addComponent(_text);                            //Add the component to gameObject
-                
-                addGameObject(_gameObject);                                 //Add the gameObject to scene
+                super.added();
+				
+				// Note: Always addGameObject() first before adding any component.
+				_gameObject = new GameObject("GameObject", 300, 300);       //Create a new gameObject called GameObject
+				addGameObject(_gameObject);                                 //Add the gameObject to scene
+				
+				_text = new Text("Hello, World!", Color.WHITE);             //Create a new component called Text
+				_gameObject.addComponent(_text);                            //Add the component to gameObject
             }
         }
         
@@ -46,7 +55,7 @@ There you have your first attempt at using Ze2D.
 
 
         package;
-        import ze.component.rendering.Text;
+        import ze.component.graphic.displaylist.Text;
         import ze.object.GameObject;
         import ze.util.Color;
         
@@ -55,6 +64,7 @@ There you have your first attempt at using Ze2D.
             private var _text:Text;
             override private function added():Void
             {
+				super.added();
                 _text = new Text("Hello, World!", Color.WHITE);
                 addComponent(_text);
             }

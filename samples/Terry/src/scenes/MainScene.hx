@@ -1,4 +1,4 @@
-package scene;
+package scenes;
 import actions.Grid;
 import openfl.Assets;
 import prefab.ColliderObject;

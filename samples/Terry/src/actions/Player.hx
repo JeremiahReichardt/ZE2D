@@ -1,9 +1,9 @@
 package actions;
 import ze.component.core.CharacterController;
 import ze.component.core.Component;
+import ze.component.graphic.tilesheet.Sprite;
 import ze.component.physics.BoxCollider;
 import ze.component.sounds.Audio;
-import ze.component.tilesheet.Sprite;
 import ze.object.GameObject;
 import ze.util.Input;
 import ze.util.Key;

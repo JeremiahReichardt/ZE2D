@@ -1,7 +1,7 @@
 package prefab;
 import actions.Switch;
+import ze.component.graphic.tilesheet.AnimatedSprite;
 import ze.component.physics.BoxCollider;
-import ze.component.tilesheet.AnimatedSprite;
 import ze.object.GameObject;
 
 /**

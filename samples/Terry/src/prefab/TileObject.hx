@@ -2,7 +2,7 @@ package prefab;
 import openfl.Assets;
 import openfl.display.BitmapData;
 import openfl.geom.Rectangle;
-import puzzle.scene.MainScene;
+import puzzle.samples.Stars.src.scenes.MainScene;
 import ze.component.rendering.Image;
 import ze.object.GameObject;
 
