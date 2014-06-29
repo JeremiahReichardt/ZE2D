@@ -1,6 +1,12 @@
 ###Changelog###
 DD/MM/YY
 
+(29/6/2014)
+- Engine now extends Sprite.
+- Object now uses public instead of private for added(), removed() and update().
+- Renamed addChildNode and removeChildNode to attachChild and detachChild to avoid confusion.
+- Some fixes with displayObject font.
+
 (22/6/2014)
 - Added back displayObject again.
 - Some refactoring for Render codes.
