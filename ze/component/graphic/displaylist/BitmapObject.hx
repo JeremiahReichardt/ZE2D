@@ -22,7 +22,7 @@ class BitmapObject extends DisplayListObject
 		_bitmap.bitmapData = bitmapData;
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
 		

@@ -15,7 +15,7 @@ class ExitObject extends GameObject
 		super("exit", params.x, params.y);
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		addComponent(new BoxCollider(32, 32, true));

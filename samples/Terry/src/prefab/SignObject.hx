@@ -19,10 +19,9 @@ class SignObject extends GameObject
 		_signIndex = params.signIndex;
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
-		
 		addComponent(new BoxCollider(32, 32, true));
 		addComponent(new Sprite("Sign"));
 		

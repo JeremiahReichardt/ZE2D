@@ -22,7 +22,7 @@ class Button extends UI
 		super(width, height);
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		_animatedSprite = new AnimatedSprite(_name);

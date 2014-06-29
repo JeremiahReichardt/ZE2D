@@ -14,7 +14,7 @@ class Blank extends BitmapObject
 		setBitmapData(new BitmapData(width, height, true, color));
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		_bitmap.bitmapData.dispose();
 		super.destroyed();

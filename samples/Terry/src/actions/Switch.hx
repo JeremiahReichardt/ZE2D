@@ -19,7 +19,7 @@ class Switch extends Component
 		_switchIndex = switchIndex;
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		collider.registerCallback(hitSwitch);

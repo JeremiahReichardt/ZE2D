@@ -38,14 +38,13 @@ class TiledSprite extends TilesheetObject
 		}
 	}
 	
-	override function added():Void 
-	{
-		super.added();
-	}
-	
 	public function setTile(column:Int, row:Int, tx:Float, ty:Float):Void
 	{
 		var tiles:Array<Int> = _tileSheetLayer.getSpriteIndices(_name);
+		if (_indices[row] == null)
+		{
+			return;
+		}
 		_indices[row][column] = tiles[Math.floor(tx + (ty * _tileRow))];
 		_tileID = _indices[row][column];
 	}

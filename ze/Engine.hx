@@ -1,10 +1,6 @@
 package ze;
-import openfl.display.MovieClip;
-import openfl.display.StageAlign;
-import openfl.display.StageScaleMode;
+import openfl.display.Sprite;
 import openfl.events.Event;
-import openfl.Lib;
-import openfl.system.System;
 import ze.object.Node;
 import ze.object.Scene;
 import ze.util.Input;
@@ -15,26 +11,22 @@ import ze.util.Time;
  * ...
  * @author Goh Zi He
  */
-class Engine extends Node 
+class Engine extends Sprite 
 {
 	private static var removeList:Array<Node>;
-	
-	public var current(default, null):MovieClip;
+	private var _currentScene:Scene;
+	private var _enable:Bool;
 	
 	public function new(initScene:Scene) 
 	{
 		super();
 		removeList = [];
-		current = Lib.current;
-		current.stage.align = StageAlign.LEFT;
-		current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
-		current.addEventListener(Event.DEACTIVATE, deactivate);
-		current.addEventListener(Event.ACTIVATE, activate);
-		
-		Input.init(current.stage);
-		Reflect.setProperty(initScene, "engine", this);
-		addChildNode(initScene);
+		_enable = true;
+		addEventListener(Event.ENTER_FRAME, onEnterFrame);
+		addEventListener(Event.DEACTIVATE, deactivate);
+		addEventListener(Event.ACTIVATE, activate);
+		Input.init(stage);
+		addScene(initScene);
 	}
 	
 	private function onEnterFrame(e:Event):Void 
@@ -43,22 +35,24 @@ class Engine extends Node
 		update();
 	}
 	
-	override private function update():Void 
+	public function update():Void 
 	{
-		if (!enable)
+		if (!_enable)
 		{
 			return;
 		}
 		
-		if (_child.enable)
+		if (_currentScene.enable)
 		{
-			_child.update();
+			_currentScene.update();
 		}
 		
+		#if (flash || windows)
 		if (Input.keyPressed(Key.ESCAPE)) 
 		{
-			System.exit(0);
+			openfl.system.System.exit(0);
 		}
+		#end
 		
 		while (removeList.length > 0)
 		{
@@ -70,9 +64,13 @@ class Engine extends Node
 	
 	public function addScene(scene:Scene):Scene
 	{
-		removeChildNode(_child);
+		if (_currentScene != null)
+		{
+			_currentScene.removed();
+		}
 		Reflect.setProperty(scene, "engine", this);
-		addChildNode(scene);
+		scene.added();
+		_currentScene = scene;
 		return scene;
 	}
 	
@@ -83,11 +81,11 @@ class Engine extends Node
 	
 	private function activate(event:Event):Void
 	{
-		enable = true;
+		_enable = true;
 	}
 	
 	private function deactivate(event:Event):Void
 	{
-		enable = false;
+		_enable = false;
 	}
 }

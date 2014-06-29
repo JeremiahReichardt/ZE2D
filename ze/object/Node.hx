@@ -27,7 +27,7 @@ class Node extends Object
 	 * Use addGameObject/addComponent instead
 	 * @param	node
 	 */
-	private function addChildNode<T:Node>(node:T):T
+	private function attachChild<T:Node>(node:T):T
 	{
 		if (_child == null)
 		{
@@ -41,7 +41,6 @@ class Node extends Object
 		}
 		
 		node._parent = this;
-		
 		node.added();
 		return node;
 	}
@@ -51,7 +50,7 @@ class Node extends Object
 	 * Use removeGameObject/removeComponent instead
 	 * @param	node
 	 */
-	private function removeChildNode(node:Node):Void
+	private function detachChild(node:Node):Void
 	{
 		var prev:Node = node._previous;
 		var next:Node = node._next;
@@ -126,15 +125,15 @@ class Node extends Object
 		return value;
 	}
 	
-	private function added():Void
+	public function added():Void
 	{
 	}
 	
-	private function update():Void
+	public function update():Void
 	{
 	}
 	
-	private function removed():Void
+	public function removed():Void
 	{
 		enable = false;
 	}
@@ -158,7 +157,7 @@ class Node extends Object
 		removed();
 	}
 	
-	override private function destroyed():Void
+	override public function destroyed():Void
 	{
 		_next = null;
 		_previous = null;

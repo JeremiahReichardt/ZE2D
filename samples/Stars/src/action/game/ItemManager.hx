@@ -13,7 +13,7 @@ import ze.util.Ops;
  */
 class ItemManager extends Component
 {
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		spawnStar();

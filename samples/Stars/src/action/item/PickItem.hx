@@ -13,7 +13,7 @@ class PickItem extends Component
 {
 	private var _itemManager:ItemManager;
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		collider.registerCallback(onCollide);

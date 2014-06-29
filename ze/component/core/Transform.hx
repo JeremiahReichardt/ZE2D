@@ -24,16 +24,20 @@ class Transform extends Component
 	public function new() 
 	{
 		super();
-		
-		x = y = rotation = 0;
-		scaleX = scaleY = 1;
-		_moveX = _moveY = _diffX = _diffY = 0;
+		x = 0;
+		y = 0;
+		rotation = 0;
+		scaleX = 1;
+		scaleY = 1;
+		_moveX = 0;
+		_moveY = 0;
+		_diffX = 0;
+		_diffY = 0;
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
-		
 		if (_attached != null)
 		{
 			x = _attached.x - _diffX;
@@ -148,10 +152,9 @@ class Transform extends Component
 		scaleY += sizeY;
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		super.removed();
-		
 		_attached = null;
 	}
 }

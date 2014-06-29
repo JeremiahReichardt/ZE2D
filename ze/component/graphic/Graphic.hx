@@ -61,4 +61,10 @@ class Graphic extends Component
 		layer = value;
 		return value;
 	}
+	
+	private function set_flipped(value:Bool):Bool
+	{
+		flipped = value;
+		return flipped;
+	}
 }

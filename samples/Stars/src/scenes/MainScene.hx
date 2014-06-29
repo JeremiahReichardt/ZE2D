@@ -12,7 +12,7 @@ class MainScene extends Scene
 {
 	private var _clicked:Bool;
 	
-	override private function added():Void
+	override public function added():Void
 	{
 		super.added();
 		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");

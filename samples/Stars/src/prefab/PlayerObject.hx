@@ -18,7 +18,7 @@ class PlayerObject extends GameObject
 		_playerIndex = params.playerIndex;
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		addComponent(new BoxCollider(32, 32, true));

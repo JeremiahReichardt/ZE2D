@@ -6,10 +6,10 @@ import ze.Engine;
  * ...
  * @author Goh Zi He
  */
-class Main
+class Main extends Engine
 {
-	public static function main() 
+	public function new()
 	{
-		new Engine(new MainScene());
+		super(new MainScene());
 	}
 }

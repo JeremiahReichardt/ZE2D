@@ -18,13 +18,13 @@ class AnimatedSprite extends TilesheetObject
 	private var _animationData:AnimationData;
 	private var _playOnce:Bool;
 	
-	override function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		_animationData = new AnimationData(_tileSheetLayer.getSpriteIndices(_name));
 	}
 	
-	override private function update():Void
+	override public function update():Void
 	{
 		super.update();
 		if (!playing)
@@ -118,7 +118,7 @@ class AnimatedSprite extends TilesheetObject
 		return this;
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
 		

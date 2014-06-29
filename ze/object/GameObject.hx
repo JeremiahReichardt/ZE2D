@@ -26,7 +26,7 @@ class GameObject extends Node
 		addComponent(transform);
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		if (!enable)
 		{
@@ -64,7 +64,7 @@ class GameObject extends Node
 	
 	public function addComponent<T:Node>(component:T):T 
 	{
-		addChildNode(component);
+		attachChild(component);
 		if (Std.is(component, Graphic))
 		{
 			graphic = cast(component, Graphic);
@@ -83,7 +83,7 @@ class GameObject extends Node
 	
 	public function removeComponent(node:Node):Void 
 	{
-		removeChildNode(node);
+		detachChild(node);
 	}
 	
 	private function get_transform():Transform
@@ -118,18 +118,16 @@ class GameObject extends Node
 		return (cast(_parent, Scene));
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		_child.removeAll();
 		scene.engine.addToRemoveList(this);
-		
 		super.removed();
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
-		
 		transform = null;
 		collider = null;
 		graphic = null;

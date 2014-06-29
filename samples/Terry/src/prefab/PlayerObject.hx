@@ -17,7 +17,7 @@ class PlayerObject extends GameObject
 		super("player", params.x, params.y);
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		var image:Sprite = new Sprite("Player");

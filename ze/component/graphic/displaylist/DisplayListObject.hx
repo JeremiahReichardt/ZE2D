@@ -14,14 +14,14 @@ class DisplayListObject extends Graphic
 	public var scrollRect(default, set):Rectangle;
 	public var displayObject(default, null):DisplayObject;
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
-		scene.engine.current.addChild(displayObject);
+		scene.engine.addChild(displayObject);
 		update();
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		if (displayObject == null)
@@ -50,13 +50,13 @@ class DisplayListObject extends Graphic
 		displayObject.rotation = transform.rotation;
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		super.removed();
-		scene.engine.current.remove(displayObject);
+		scene.engine.removeChild(displayObject);
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
 		displayObject = null;

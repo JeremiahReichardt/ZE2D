@@ -15,7 +15,7 @@ class PickStar extends PickItem
 	private var _spawnStarSfx:Audio;
 	private var _characterController:CharacterController;
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		_pickStarSfx = new Audio("hit star", "sfx/Pickup_Coin2.wav");

@@ -55,7 +55,7 @@ class CharacterController extends Component
 		}
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		_moveX = 0;
@@ -70,7 +70,7 @@ class CharacterController extends Component
 		collider.registerCallback(hitPlayer);
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		collider.setPos(transform.x, transform.y + 1);// , render.width, render.height);
@@ -177,7 +177,7 @@ class CharacterController extends Component
 		}
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		super.removed();
 		

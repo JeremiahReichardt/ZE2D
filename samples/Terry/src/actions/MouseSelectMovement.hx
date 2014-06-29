@@ -11,13 +11,13 @@ class MouseSelectMovement extends Component
 	private var _isMoving:Bool;
 	private var _player:Player;
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		_player = getComponent(Player);
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		if (Input.leftMouseDown() && inEntity())
 		{

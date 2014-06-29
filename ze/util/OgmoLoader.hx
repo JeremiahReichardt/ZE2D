@@ -74,8 +74,8 @@ class OgmoLoader
 	
 	public function loadTiles(gridFn:Int->Int->Void = null):Void
 	{
-		var mapWidth:Float = Std.parseFloat(_levelXML.get("width"));
-		var mapHeight:Float = Std.parseFloat(_levelXML.get("height"));
+		var mapWidth:Int = Std.parseInt(_levelXML.get("width"));
+		var mapHeight:Int = Std.parseInt(_levelXML.get("height"));
 		var tileSprite:TiledSprite = new TiledSprite("Checker", 32, 32, mapWidth, mapHeight, 8, 8);
 		_scene.createGameObject("tiles", tileSprite);
 		

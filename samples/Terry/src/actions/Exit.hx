@@ -9,7 +9,7 @@ import ze.component.physics.Collider;
  */
 class Exit extends Component
 {
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		collider.registerCallback(hitExit);

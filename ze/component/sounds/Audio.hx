@@ -110,7 +110,7 @@ class Audio extends Component
 		_soundTransform.volume = volume;
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		removeFromSoundPool(_soundTransform);
 		_sound = null;

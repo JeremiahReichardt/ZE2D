@@ -31,9 +31,9 @@ class Screen
 		_x = 0;
 		_y = 0;
 		_scene = scene;
-		_graphics = scene.engine.current.graphics;
+		_graphics = scene.engine.graphics;
 		
-		var stage:Stage = scene.engine.current.stage;
+		var stage:Stage = scene.engine.stage;
 		offsetX = midX = stage.stageWidth >> 1;
 		offsetY = midY = stage.stageHeight >> 1;
 		
@@ -81,7 +81,7 @@ class Screen
 	
 	private function get_bottom():Float
 	{
-		return (_y + _scene.engine.current.stage.stageHeight);
+		return (_y + _scene.engine.stage.stageHeight);
 	}
 	
 	private function get_left():Float
@@ -91,7 +91,7 @@ class Screen
 	
 	private function get_right():Float
 	{
-		return (_x + _scene.engine.current.stage.stageWidth);
+		return (_x + _scene.engine.stage.stageWidth);
 	}
 	
 	private function get_midX():Float
@@ -106,11 +106,11 @@ class Screen
 	
 	private function get_width():Float
 	{
-		return _scene.engine.current.stage.stageWidth;
+		return _scene.engine.stage.stageWidth;
 	}
 	
 	private function get_height():Float
 	{
-		return _scene.engine.current.stage.stageHeight;
+		return _scene.engine.stage.stageHeight;
 	}
 }

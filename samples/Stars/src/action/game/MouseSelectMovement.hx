@@ -12,13 +12,13 @@ class MouseSelectMovement extends Component
 	private var _isMoving:Bool;
 	private var _characterController:CharacterController;
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		_characterController = getComponent(CharacterController);
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		if (collider == null && graphic == null)
 		{

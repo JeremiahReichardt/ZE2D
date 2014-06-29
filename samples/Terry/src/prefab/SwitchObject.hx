@@ -17,7 +17,7 @@ class SwitchObject extends GameObject
 		_switchIndex = params.switchIndex;
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		addComponent(new BoxCollider(25, 13, true));

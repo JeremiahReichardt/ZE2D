@@ -43,7 +43,7 @@ class Bullet extends Component
 		}
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		collider.registerCallback(hitBullet);
@@ -58,7 +58,7 @@ class Bullet extends Component
 		}
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		transform.move(_directionX, _directionY);

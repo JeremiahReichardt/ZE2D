@@ -38,7 +38,7 @@ class Animation extends BitmapObject
 		setBitmapData(animationData.getFrame(currentFrame));
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		if (!playing)
@@ -165,10 +165,9 @@ class Animation extends BitmapObject
 		return animationData;
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
-		
 		_animationData.destroy();
 		_animationData = null;
 	}

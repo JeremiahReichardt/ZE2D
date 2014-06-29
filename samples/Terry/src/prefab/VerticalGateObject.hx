@@ -14,7 +14,7 @@ class VerticalGateObject extends GameObject
 		super("gate" + params.gateIndex, params.x, params.y);
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		addComponent(new BoxCollider(32, 64));

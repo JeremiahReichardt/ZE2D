@@ -19,7 +19,7 @@ class UI extends Component
 		_height = height;
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		

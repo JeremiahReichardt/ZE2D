@@ -32,16 +32,15 @@ class Collider extends Component
 		y = 0;
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		allColliders.push(this);
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
-		
 		x = transform.x;
 		y = transform.y;
 		
@@ -180,17 +179,15 @@ class Collider extends Component
 		this.y = y;
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		super.removed();
-		
 		allColliders.remove(this);
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
-		
 		_enterCallback = null;
 		_exitCallback = null;
 		_stayCallback = null;

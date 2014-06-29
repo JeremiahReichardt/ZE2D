@@ -19,7 +19,7 @@ class SpikeObject extends GameObject
 		_height = params.h;
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		addComponent(new BoxCollider(_width, _height, true));

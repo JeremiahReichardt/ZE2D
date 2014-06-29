@@ -15,7 +15,7 @@ class RespawnObject extends GameObject
 		super("respawn", params.x, params.y);
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		var animation:AnimatedSprite = new AnimatedSprite("Respawn");

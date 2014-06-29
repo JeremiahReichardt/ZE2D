@@ -9,7 +9,7 @@ class CharacterController extends Component
 	public var isGrounded(default, null):Bool;
 	public var hitTop(default, null):Bool;
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		if (graphic == null)
@@ -18,7 +18,7 @@ class CharacterController extends Component
 		}
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		collider.setPos(transform.x, transform.y + 1);

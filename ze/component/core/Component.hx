@@ -50,12 +50,12 @@ class Component extends Node
 	
 	public function addComponent<T:Node>(node:T):T 
 	{
-		return gameObject.addChildNode(node);
+		return gameObject.attachChild(node);
 	}
 	
 	public function removeComponent(component:Node):Void 
 	{
-		removeChildNode(component);
+		detachChild(component);
 	}
 	
 	private function get_gameObject():GameObject
@@ -68,16 +68,15 @@ class Component extends Node
 		return gameObject.scene;
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		super.removed();
 		scene.engine.addToRemoveList(this);
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
-		
 		transform = null;
 		collider = null;
 		graphic = null;

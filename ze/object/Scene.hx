@@ -13,13 +13,13 @@ class Scene extends Node
 	public var screen(default, null):Screen;
 	public var engine(default, null):Engine;
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		screen = new Screen(this);
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		if (!enable || _child == null)
 		{
@@ -62,13 +62,13 @@ class Scene extends Node
 	
 	public function addGameObject(gameObject:GameObject):GameObject
 	{
-		addChildNode(gameObject);
+		attachChild(gameObject);
 		return gameObject;
 	}
 	
 	public function removeGameObject(gameObject:GameObject):Void 
 	{
-		removeChildNode(gameObject);
+		detachChild(gameObject);
 	}
 	
 	public function getGameObjectByName(name:String):GameObject
@@ -133,7 +133,7 @@ class Scene extends Node
 		return gameObjects;
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		_child.removeAll();
 		engine.addToRemoveList(this);

@@ -27,7 +27,7 @@ class CountDown extends Component
 		onEnd();
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		if (Time.currentTime - _lastTime > duration)
@@ -42,7 +42,7 @@ class CountDown extends Component
 		return ((duration - (Time.currentTime - _lastTime)) / duration);
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		super.removed();
 		

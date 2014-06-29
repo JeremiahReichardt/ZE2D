@@ -1,7 +1,9 @@
 package ze.component.graphic.displaylist;
 import openfl.Assets;
+import openfl.text.Font;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
+import openfl.text.TextFieldType;
 import openfl.text.TextFormat;
 import ze.util.Color;
 
@@ -14,7 +16,7 @@ class Text extends DisplayListObject
 	private var _textField:TextField;
 	private var _format:TextFormat;
 	
-	private static inline var defaultFont:String = "assets/font/GROBOLD";
+	private static inline var defaultFont:String = "font/GROBOLD.ttf";
 	
 	public function new(text:String = "", color:Int = Color.BLACK, size:Float = 20)
 	{
@@ -23,18 +25,19 @@ class Text extends DisplayListObject
 		_textField = new TextField();
 		displayObject = _textField;
 		
-		if (Assets.getFont("font/GROBOLD.ttf") == null)
+		var font:Font = Assets.getFont(defaultFont);
+		if (font == null)
 		{
 			trace("Remember to put GROBOLD.ttf into assets/font/");
 		}
-		_format = new TextFormat(defaultFont, size, color);
+		_format = new TextFormat(font.fontName, size, color);
 		
 		_textField.text = text;
 		_textField.embedFonts = true;
 		_textField.setTextFormat(_format);
 		_textField.autoSize = TextFieldAutoSize.CENTER;
-		_textField.selectable = false;
-		_textField.cacheAsBitmap = true;
+		_textField.selectable = true;
+		_textField.type = TextFieldType.INPUT;
 	}
 	
 	public function setFont(fontPath:String):Void
@@ -48,10 +51,9 @@ class Text extends DisplayListObject
 		_textField.setTextFormat(_format);
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
-		
 		_textField = null;
 		_format = null;
 	}

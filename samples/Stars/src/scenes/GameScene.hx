@@ -21,7 +21,7 @@ class GameScene extends Scene
 	private var _tileset:BitmapData;
 	private var _ogmoLoader:OgmoLoader;
 	
-	override private function added():Void
+	override public function added():Void
 	{
 		super.added();
 		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
@@ -45,7 +45,7 @@ class GameScene extends Scene
 		_ogmoLoader.loadAll();
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		

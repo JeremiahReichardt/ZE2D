@@ -20,7 +20,7 @@ class Sign extends Component
 		super();
 	}
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		_dialog = new GameObject("dialog", 100, 250);

@@ -14,10 +14,9 @@ class MainScene extends Scene
 	private static inline var startX:Float = 90;
 	private static inline var spacingX:Float = 32;
 	
-	override private function added():Void
+	override public function added():Void
 	{
 		super.added();
-		
 		var tileSheetLayer1:TileSheetLayer = new TileSheetLayer("atlas/TS1");
 		var tileSheetLayer2:TileSheetLayer = new TileSheetLayer("atlas/TS2");
 		var fontLayer:TileSheetLayer = new TileSheetLayer("atlas/Font");
@@ -55,7 +54,7 @@ class MainScene extends Scene
 		}
 	}
 	
-	private function createFont()
+	private function createFont():Void
 	{
 		var text:Text = new Text("Grobold");
 		var goText:GameObject = createGameObject("Text", text);

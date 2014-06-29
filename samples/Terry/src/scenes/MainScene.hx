@@ -27,7 +27,7 @@ class MainScene extends Scene
 	private static var _level:Int = 1;
 	private var _start:Bool;
 	
-	override private function added():Void
+	override public function added():Void
 	{
 		super.added();
 		
@@ -73,7 +73,7 @@ class MainScene extends Scene
 		grid.setGrid(x, y);
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		if (Input.keyPressed(Key.N)) 

@@ -13,8 +13,7 @@ class Object
 		enable = true;
 	}
 	
-	private function destroyed():Void 
+	public function destroyed():Void 
 	{
-		enable = false;
 	}
 }

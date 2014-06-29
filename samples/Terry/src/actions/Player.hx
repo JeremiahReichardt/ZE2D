@@ -36,7 +36,7 @@ class Player extends Component
 	private var _dieSfx:Audio;
 
 	
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		_moveX = 0;
@@ -53,7 +53,7 @@ class Player extends Component
 		_dieSfx = new Audio("Die", "sfx/Hit_Hurt5.wav");
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		movement();
@@ -207,13 +207,13 @@ class Player extends Component
 		bullet = null;
 	}
 	
-	override private function removed():Void 
+	override public function removed():Void 
 	{
 		disableBullet();
 		super.removed();
 	}
 	
-	override private function destroyed():Void 
+	override public function destroyed():Void 
 	{
 		super.destroyed();
 		_characterController = null;

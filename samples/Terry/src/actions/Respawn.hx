@@ -10,7 +10,7 @@ import ze.object.GameObject;
  */
 class Respawn extends Component
 {
-	override private function added():Void 
+	override public function added():Void 
 	{
 		super.added();
 		collider.registerCallback(hit);
