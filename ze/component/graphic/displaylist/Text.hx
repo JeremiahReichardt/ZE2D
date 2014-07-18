@@ -3,7 +3,6 @@ import openfl.Assets;
 import openfl.text.Font;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
-import openfl.text.TextFieldType;
 import openfl.text.TextFormat;
 import ze.util.Color;
 
@@ -36,8 +35,6 @@ class Text extends DisplayListObject
 		_textField.embedFonts = true;
 		_textField.setTextFormat(_format);
 		_textField.autoSize = TextFieldAutoSize.CENTER;
-		_textField.selectable = true;
-		_textField.type = TextFieldType.INPUT;
 	}
 	
 	public function setFont(fontPath:String):Void
