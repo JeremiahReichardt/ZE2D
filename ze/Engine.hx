@@ -42,10 +42,7 @@ class Engine extends Sprite
 			return;
 		}
 		
-		if (_currentScene.enable)
-		{
-			_currentScene.update();
-		}
+		_currentScene.update();
 		
 		#if (flash || windows)
 		if (Input.keyPressed(Key.ESCAPE)) 

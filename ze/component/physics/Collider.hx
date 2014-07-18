@@ -1,5 +1,4 @@
 package ze.component.physics;
-
 import ze.component.core.Component;
 import ze.util.Color;
 import ze.util.Ops;
@@ -94,6 +93,11 @@ class Collider extends Component
 	
 	public function registerCallback(enterCallBack:Collider -> Void = null, exitCallBack:Collider -> Void = null, stayCallBack:Collider -> Void = null):Void
 	{
+		if (!isTrigger)
+		{
+			trace("This collider is not a trigger and will not be able to registered");
+			return;
+		}
 		_enterCallback = enterCallBack;
 		_exitCallback = exitCallBack;
 		_stayCallback = stayCallBack;

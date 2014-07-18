@@ -1,6 +1,7 @@
 package ze.util;
 
 /**
+ * Note: HTML5 targets only have 0xFFFFFF instead of 0xFFFFFFFF, no alpha
  * @author Goh Zi He
  */
 class Color
@@ -39,7 +40,6 @@ class Color
 		hexString = "0x" + hexString;
 		
 		return hexString;
-		//return red << 16 ^ green << 8 ^ blue;	
 	}
 	
 	private static inline function getHex(decimal:Int):String
@@ -105,6 +105,22 @@ class Color
 	/**
 	 * Static const colors (Feel free to define more)
 	 */
+	#if js
+	public static inline var RED:Int = 0xFF0000;
+	public static inline var LIMEGREEN:Int = 0xAEF02A;
+	public static inline var GREEN:Int = 0x00FF00;
+	public static inline var BLUE:Int = 0x0000FF;
+	public static inline var BLACK:Int = 0x000000;
+	public static inline var WHITE:Int = 0xFFFFFF;
+	public static inline var YELLOW:Int = 0xFFFF00;
+	public static inline var CYAN:Int = 0x00FFFF;
+	public static inline var PINK:Int = 0xFF9191;
+	public static inline var GREY:Int = 0x646464;
+	public static inline var LIGHTGREY:Int = 0x969696;
+	public static inline var BROWN:Int = 0x8B4513;
+	public static inline var BEIGE:Int = 0xE6D59E;
+	public static inline var CARAMEL:Int = 0xFFEF21;
+	#else
 	public static inline var RED:Int = 0xFFFF0000;
 	public static inline var LIMEGREEN:Int = 0xFFAEF02A;
 	public static inline var GREEN:Int = 0xFF00FF00;
@@ -117,7 +133,7 @@ class Color
 	public static inline var GREY:Int = 0xFF646464;
 	public static inline var LIGHTGREY:Int = 0xFF969696;
 	public static inline var BROWN:Int = 0xFF8B4513;
-	public static inline var LIGHTRED:Int = 0xFFFF9696;
 	public static inline var BEIGE:Int = 0xFFE6D59E;
 	public static inline var CARAMEL:Int = 0xFFFFEF21;
+	#end
 }

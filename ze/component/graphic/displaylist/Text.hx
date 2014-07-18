@@ -28,7 +28,7 @@ class Text extends DisplayListObject
 		var font:Font = Assets.getFont(defaultFont);
 		if (font == null)
 		{
-			trace("Remember to put GROBOLD.ttf into assets/font/");
+			trace("Remember to put " + defaultFont + " into assets/");
 		}
 		_format = new TextFormat(font.fontName, size, color);
 		

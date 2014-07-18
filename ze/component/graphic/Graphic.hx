@@ -13,9 +13,12 @@ class Graphic extends Component
 	public var offsetY(default, default):Float;
 	public var width(get, null):Float;
 	public var height(get, null):Float;
+	public var halfWidth(get, null):Float;
+	public var halfHeight(get, null):Float;
 	public var layer(default, set):Int;
 	public var flipped(default, default):Bool;
-	public var visible(default, default):Bool;
+	public var visible(default, set):Bool;
+	public var centered(default, set):Bool;
 	
 	public function new()
 	{
@@ -29,11 +32,7 @@ class Graphic extends Component
 		layer = 0;
 		flipped = false;
 		visible = true;
-	}
-	
-	override function removed():Void 
-	{
-		super.removed();
+		centered = false;
 	}
 	
 	private function get_x():Float
@@ -56,6 +55,16 @@ class Graphic extends Component
 		return height;
 	}
 	
+	private function get_halfWidth():Float
+	{
+		return (width * 0.5);
+	}
+	
+	private function get_halfHeight():Float
+	{
+		return (height * 0.5);
+	}
+	
 	private function set_layer(value:Int):Int
 	{
 		layer = value;
@@ -66,5 +75,27 @@ class Graphic extends Component
 	{
 		flipped = value;
 		return flipped;
+	}
+	
+	private function set_centered(value:Bool):Bool
+	{
+		centered = value;
+		if (centered)
+		{
+			offsetX = -halfWidth;
+			offsetY = -halfHeight;
+		}
+		else
+		{
+			offsetX = 0;
+			offsetY = 0;
+		}
+		return centered;
+	}
+	
+	private function set_visible(value:Bool):Bool
+	{
+		visible = value;
+		return visible;
 	}
 }

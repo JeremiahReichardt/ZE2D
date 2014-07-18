@@ -7,7 +7,7 @@ import ze.object.Scene;
  */
 class MainScene extends Scene
 {
-	override private function added():Void
+	override public function added():Void
 	{
 		super.added();
 	}

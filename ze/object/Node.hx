@@ -52,6 +52,11 @@ class Node extends Object
 	 */
 	private function detachChild(node:Node):Void
 	{
+		if (!node.enable)
+		{
+			return;
+		}
+		
 		var prev:Node = node._previous;
 		var next:Node = node._next;
 		

@@ -1,6 +1,15 @@
 ###Changelog###
 DD/MM/YY
 
+(18/7/2014)
+- Fixed colors format not correct in HTML5.
+- Added new sample project Plane.
+
+(13/7/2014)
+- Added options for graphics to be centered.
+- Engine will not check if scene is enabled or not to run. It will instead check if it's enabled, it will not update it's gameObject.
+- Added checks in detachChild() when attempting to detachChild with no valid parent.
+
 (29/6/2014)
 - Engine now extends Sprite.
 - Object now uses public instead of private for added(), removed() and update().

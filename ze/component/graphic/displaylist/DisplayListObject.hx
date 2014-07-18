@@ -38,16 +38,16 @@ class DisplayListObject extends Graphic
 			displayObject.x = transform.x + offsetX;
 		}
 		
+		displayObject.y = transform.y + offsetY;
+		displayObject.scaleX = transform.scaleX;
+		displayObject.scaleY = transform.scaleY;
+		displayObject.rotation = transform.rotation;
+		
 		if (width == 0 || height == 0)
 		{
 			width = displayObject.width;
 			height = displayObject.height;
 		}
-		displayObject.visible = visible;
-		displayObject.scaleX = transform.scaleX;
-		displayObject.scaleY = transform.scaleY;
-		displayObject.y = transform.y + offsetY;
-		displayObject.rotation = transform.rotation;
 	}
 	
 	override public function removed():Void 
@@ -108,5 +108,14 @@ class DisplayListObject extends Graphic
 	{
 		scrollRect = displayObject.scrollRect = value;
 		return value;
+	}
+	
+	override function set_visible(value:Bool):Bool 
+	{
+		if (displayObject != null)
+		{
+			displayObject.visible = value;
+		}
+		return super.set_visible(value);
 	}
 }
