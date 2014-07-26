@@ -1,6 +1,6 @@
 package ze.component.physics;
+import openfl.display.Shape;
 import ze.component.core.Component;
-import ze.util.Color;
 import ze.util.Ops;
 
 /**
@@ -14,6 +14,12 @@ class Collider extends Component
 	public var x(default, null):Float;
 	public var y(default, null):Float;
 	
+	public var enableDebugShape(default, set):Bool;
+	private var _debugShape:Shape;
+	
+	private var _xOffset:Float;
+	private var _yOffset:Float;
+	
 	private var _colliderList:Array<Collider>;
 	private var _enterCallback:Collider -> Void;
 	private var _exitCallback:Collider -> Void;
@@ -26,9 +32,7 @@ class Collider extends Component
 		super();
 		_colliderList = [];
 		isTrigger = trigger;
-		
-		x = 0;
-		y = 0;
+		x = y = _xOffset = _yOffset = 0;
 	}
 	
 	override public function added():Void 
@@ -40,8 +44,13 @@ class Collider extends Component
 	override public function update():Void 
 	{
 		super.update();
-		x = transform.x;
-		y = transform.y;
+		x = transform.x + _xOffset;
+		y = transform.y + _yOffset;
+		
+		if (enableDebugShape)
+		{
+			drawDebugShape();
+		}
 		
 		if (isTrigger)
 		{
@@ -181,11 +190,14 @@ class Collider extends Component
 	{
 		this.x = x;
 		this.y = y;
+		//this.x = x + _xOffset;
+		//this.y = y + _yOffset;
 	}
 	
 	override public function removed():Void 
 	{
 		super.removed();
+		enableDebugShape = false;
 		allColliders.remove(this);
 	}
 	
@@ -196,5 +208,32 @@ class Collider extends Component
 		_exitCallback = null;
 		_stayCallback = null;
 		_colliderList = null;
+		_debugShape = null;
+	}
+	
+	private function drawDebugShape():Void
+	{
+	}
+	
+	private function set_enableDebugShape(value:Bool):Bool
+	{
+		if (_debugShape == null)
+		{
+			_debugShape = new Shape();
+			if (_debugShape.parent == null)
+			{
+				scene.engine.addChild(_debugShape);
+			}
+		}
+		_debugShape.visible = enableDebugShape = value;
+		return value;
+	}
+	
+	public static function toggleAllDebugShape(enable:Bool = true):Void
+	{
+		for (collider in allColliders)
+		{
+			collider.enableDebugShape = enable;
+		}
 	}
 }

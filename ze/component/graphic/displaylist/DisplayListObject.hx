@@ -31,16 +31,16 @@ class DisplayListObject extends Graphic
 		
 		if (flipped)
 		{
+			transform.scaleX = displayObject.scaleX = -1;
 			displayObject.x = transform.x + displayObject.width + offsetX;
 		}
 		else
 		{
+			transform.scaleX = displayObject.scaleX = 1;
 			displayObject.x = transform.x + offsetX;
 		}
 		
 		displayObject.y = transform.y + offsetY;
-		displayObject.scaleX = transform.scaleX;
-		displayObject.scaleY = transform.scaleY;
 		displayObject.rotation = transform.rotation;
 		
 		if (width == 0 || height == 0)
@@ -60,20 +60,6 @@ class DisplayListObject extends Graphic
 	{
 		super.destroyed();
 		displayObject = null;
-	}
-	
-	override private function set_flipped(value:Bool):Bool
-	{
-		if (flipped == value) 
-		{
-			return flipped;
-		}
-		
-		flipped = value;
-		displayObject.scaleX = (value) ? -1 : 1;
-		transform.scaleX = displayObject.scaleX;
-		displayObject.x = (value) ? transform.x - scene.screen.offsetX + displayObject.width : transform.x - scene.screen.offsetX;
-		return value;
 	}
 	
 	override private function get_width():Float

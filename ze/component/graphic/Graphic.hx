@@ -29,6 +29,11 @@ class Graphic extends Component
 		offsetY = 0;
 		width = 0;
 		height = 0;
+	}
+	
+	override public function added():Void 
+	{
+		super.added();
 		layer = 0;
 		flipped = false;
 		visible = true;
@@ -69,12 +74,6 @@ class Graphic extends Component
 	{
 		layer = value;
 		return value;
-	}
-	
-	private function set_flipped(value:Bool):Bool
-	{
-		flipped = value;
-		return flipped;
 	}
 	
 	private function set_centered(value:Bool):Bool

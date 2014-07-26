@@ -1,4 +1,6 @@
 package ze.component.core;
+import ze.component.physics.BoxCollider;
+import ze.component.physics.Collider;
 
 /**
  * ...
@@ -15,6 +17,10 @@ class CharacterController extends Component
 		if (graphic == null)
 		{
 			trace("Add a graphic component");
+		}
+		if (collider == null)
+		{
+			trace("Add a collider component");
 		}
 	}
 	

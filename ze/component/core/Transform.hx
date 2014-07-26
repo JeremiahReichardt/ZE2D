@@ -82,16 +82,11 @@ class Transform extends Component
 		while (xDir != 0)
 		{
 			collider.setPos(x + _direction, y);
-			
-			if (collider.checkCollisionWith() == null)
-			{
-				x += _direction;
-			}
-			else
+			if (collider.checkCollisionWith() != null)
 			{
 				break;
 			}
-			
+			x += _direction;
 			xDir -= _direction;
 		}
 		
@@ -99,16 +94,11 @@ class Transform extends Component
 		while (yDir != 0)
 		{
 			collider.setPos(x, y + _direction);
-			
-			if (collider.checkCollisionWith() == null)
-			{
-				y += _direction;
-			}
-			else
+			if (collider.checkCollisionWith() != null)
 			{
 				break;
 			}
-			
+			y += _direction;
 			yDir -= _direction;
 		}
 	}

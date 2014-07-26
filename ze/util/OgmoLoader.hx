@@ -72,11 +72,11 @@ class OgmoLoader
 		_entities[_current].push(new EntityProperties(entityName, cls));
 	}
 	
-	public function loadTiles(gridFn:Int->Int->Void = null):Void
+	public function loadTiles(tileImage:String, tileWidth:Float, tileHeight:Float, tileRow:Int, tileColumn:Int, gridFn:Int->Int->Void = null):Void
 	{
 		var mapWidth:Int = Std.parseInt(_levelXML.get("width"));
 		var mapHeight:Int = Std.parseInt(_levelXML.get("height"));
-		var tileSprite:TiledSprite = new TiledSprite("Checker", 32, 32, mapWidth, mapHeight, 8, 8);
+		var tileSprite:TiledSprite = new TiledSprite(tileImage, tileWidth, tileHeight, mapWidth, mapHeight, tileRow, tileColumn);
 		_scene.createGameObject("tiles", tileSprite);
 		
 		for (element in _levelXML.elementsNamed("Tiles"))

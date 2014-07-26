@@ -34,7 +34,7 @@ class GameScene extends Scene
 		_ogmoLoader = new OgmoLoader(this);
 		_ogmoLoader.setOEL("level/Level " + level + ".oel");
 		
-		_ogmoLoader.loadTiles();
+		_ogmoLoader.loadTiles("Checker", 32, 32, 8, 8);
 		
 		_ogmoLoader.setLayer("Entities");
 		_ogmoLoader.setEntity("Player", PlayerObject);

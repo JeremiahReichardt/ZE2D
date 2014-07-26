@@ -1,6 +1,6 @@
 package prefab;
 import actions.MouseSelectMovement;
-import actions.Player;
+import actions.gameObjects.Player;
 import ze.component.core.CharacterController;
 import ze.component.graphic.tilesheet.Sprite;
 import ze.component.physics.BoxCollider;

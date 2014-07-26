@@ -76,7 +76,7 @@ class Scene extends Node
 		var node:Node = _child.first;
 		while (node != null)
 		{
-			var gameObject:GameObject = cast (node, GameObject);
+			var gameObject:GameObject = cast(node, GameObject);
 			if (gameObject.name == name)
 			{
 				return gameObject;
@@ -92,7 +92,7 @@ class Scene extends Node
 		var gameObjectsWithName:Array<GameObject> = [];
 		while (node != null)
 		{
-			var current:GameObject = cast (node, GameObject);
+			var current:GameObject = cast(node, GameObject);
 			if (current.name == name)
 			{
 				gameObjectsWithName.push(current);
