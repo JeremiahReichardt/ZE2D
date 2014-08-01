@@ -1,5 +1,14 @@
 ###Changelog###
 DD/MM/YY
+(26/7/2014)
+- Fixed some Graphics not updating properly if there's offset.
+- Fixed Collider not updating properly if there's offset.
+- Added nextLevel() function to scene. 
+- Fixed GDebug.
+
+(19/7/2014)
+- Removed "Checker.png" as hardcoded texture to load when using OgmoLoader.
+- Added show debug options for Collider.
 
 (18/7/2014)
 - Fixed colors format not correct in HTML5.

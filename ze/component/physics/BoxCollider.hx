@@ -33,28 +33,28 @@ class BoxCollider extends Collider
 	{
 		this.width = width;
 		this.height = height;
-		_xOffset = xOffset;
-		_yOffset = yOffset;
+		this.offsetX = xOffset;
+		this.offsetY = yOffset;
 	}
 	
 	private function get_left():Float
 	{
-		return x + _xOffset;
+		return x + offsetX;
 	}
 	
 	private function get_right():Float
 	{
-		return x + _xOffset + width;
+		return x + offsetX + width;
 	}
 	
 	private function get_top():Float
 	{
-		return y + _yOffset;
+		return y + offsetY;
 	}
 	
 	private function get_bottom():Float
 	{
-		return y + _yOffset + height;
+		return y + offsetY + height;
 	}
 	
 	override function drawDebugShape():Void 
@@ -62,7 +62,7 @@ class BoxCollider extends Collider
 		super.drawDebugShape();
 		_debugShape.graphics.clear();
 		_debugShape.graphics.beginFill(Color.PINK, 0.4);
-		_debugShape.graphics.drawRect(left, top, width, height);
+		_debugShape.graphics.drawRect(transform.x + offsetX, transform.y + offsetY, width, height);
 		_debugShape.graphics.endFill();
 	}
 }

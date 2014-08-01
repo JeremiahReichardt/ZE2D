@@ -82,7 +82,7 @@ class MainScene extends Scene
 		}
 	}
 	
-	public function nextLevel():Void
+	override public function nextLevel():Void
 	{
 		++_level;
 		engine.addScene(new MainScene());

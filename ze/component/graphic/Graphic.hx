@@ -9,8 +9,8 @@ class Graphic extends Component
 {
 	public var x(get, null):Float;
 	public var y(get, null):Float;
-	public var offsetX(default, default):Float;
-	public var offsetY(default, default):Float;
+	public var offsetX:Float;
+	public var offsetY:Float;
 	public var width(get, null):Float;
 	public var height(get, null):Float;
 	public var halfWidth(get, null):Float;
@@ -42,12 +42,12 @@ class Graphic extends Component
 	
 	private function get_x():Float
 	{
-		return transform.x - offsetX;
+		return transform.x + offsetX;
 	}
 	
 	private function get_y():Float
 	{
-		return transform.x - offsetY;
+		return transform.x + offsetY;
 	}
 	
 	private function get_width():Float

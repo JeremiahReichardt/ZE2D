@@ -17,6 +17,6 @@ class Exit extends Component
 	
 	private function hitExit(collider:Collider):Void 
 	{
-		cast(scene, MainScene).nextLevel();
+		scene.nextLevel();
 	}
 }

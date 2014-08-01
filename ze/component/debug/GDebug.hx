@@ -1,8 +1,9 @@
 package ze.component.debug;
-import flash.system.System;
 import haxe.Timer;
+import openfl.system.System;
 import ze.component.core.Component;
-import ze.component.rendering.Text;
+import ze.component.graphic.displaylist.Text;
+import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 import ze.object.Node;
 import ze.util.Color;
@@ -25,28 +26,25 @@ class GDebug extends Component
 	private var _times:Array<Float>;
 	private var _memory:Float;
 	
-	override private function added():Void 
+	private var _fpsGameObject:GameObject;
+	private var _debugGameObject:GameObject;
+	
+	override public function added():Void 
 	{
 		super.added();
 		
 		_times = [];
 		
-		transform.x = scene.screen.left;
-		transform.y = scene.screen.top;
-		
 		_fpsText = new Text("FPS: ", Color.WHITE);
-		addComponent(_fpsText);
+		_fpsGameObject = scene.createGameObject("fps", _fpsText);
 		
 		_debugText = new Text("Paused", Color.WHITE);
-		_debugText.offsetX = scene.screen.right - 75;
-		
-		addComponent(_debugText);
-		
+		_debugGameObject = scene.createGameObject("debug", _debugText, scene.screen.right - 75, 0);
 		_debugMode = false;
 		_debugText.visible = _debugMode;
 	}
 	
-	override private function update():Void 
+	override public function update():Void 
 	{
 		super.update();
 		showFPS();
@@ -75,9 +73,10 @@ class GDebug extends Component
 			{
 				if (_selectedGameObject != null)
 				{
-					_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.draw.width * 0.5);
-					_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.draw.height * 0.5);
-					_selectedGameObject.draw.update();
+					_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.graphic.width * 0.5);
+					_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.graphic.height * 0.5);
+					_selectedGameObject.graphic.update();
+					_selectedGameObject.collider.update();
 				}
 			}
 			
@@ -111,12 +110,38 @@ class GDebug extends Component
 		while (node != null)
 		{
 			var current:GameObject = cast (node, GameObject);
-			if (current.draw != null)
+			if (current.graphic != null)
 			{
-				var x:Float = current.transform.x;
-				var y:Float = current.transform.y;
-				var width:Float = current.draw.width;
-				var height:Float = current.draw.height;
+				var x:Float = current.transform.x + current.graphic.offsetX;
+				var y:Float = current.transform.y + current.graphic.offsetY;
+				var width:Float = current.graphic.width;
+				var height:Float = current.graphic.height;
+				
+				if (mouseX > x)
+				{
+					if (mouseX < x + width)
+					{
+						if (mouseY > y)
+						{
+							if (mouseY < y + height)
+							{
+								_selectedGameObject = current;
+								if (_debugCallBack != null)
+								{
+									_debugCallBack(current);
+								}
+								return;
+							}
+						}
+					}
+				}
+			}
+			else if (current.collider != null && Std.is(current.collider, BoxCollider))
+			{
+				var x:Float = current.transform.x + current.collider.offsetX;
+				var y:Float = current.transform.y + current.collider.offsetY;
+				var width:Float = cast(current.collider, BoxCollider).width;
+				var height:Float = cast(current.collider, BoxCollider).height;
 				
 				if (mouseX > x)
 				{
@@ -153,7 +178,8 @@ class GDebug extends Component
 			gameObject.enable = true;
 			node = node._next;
 		}
-		return null;
+		_fpsGameObject.enable = false;
+		_debugGameObject.enable = false;
 	}
 	
 	private function disableAllGameObject():Void
@@ -170,11 +196,12 @@ class GDebug extends Component
 			}
 			node = node._next;
 		}
-		return null;
+		_fpsGameObject.enable = true;
+		_debugGameObject.enable = true;
 	}
 	
-	public function registerCallBack(_debugCallBack:GameObject -> Void):Void
+	public function registerCallBack(debugCallBack:GameObject -> Void):Void
 	{
-		this._debugCallBack = _debugCallBack;	
+		_debugCallBack = debugCallBack;	
 	}
 }

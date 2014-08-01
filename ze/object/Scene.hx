@@ -133,6 +133,10 @@ class Scene extends Node
 		return gameObjects;
 	}
 	
+	public function nextLevel():Void
+	{
+	}
+	
 	override public function removed():Void 
 	{
 		_child.removeAll();

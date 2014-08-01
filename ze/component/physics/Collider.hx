@@ -13,12 +13,11 @@ class Collider extends Component
 	public var isTrigger(default, null):Bool;
 	public var x(default, null):Float;
 	public var y(default, null):Float;
+	public var offsetX:Float;
+	public var offsetY:Float;
 	
 	public var enableDebugShape(default, set):Bool;
 	private var _debugShape:Shape;
-	
-	private var _xOffset:Float;
-	private var _yOffset:Float;
 	
 	private var _colliderList:Array<Collider>;
 	private var _enterCallback:Collider -> Void;
@@ -32,7 +31,7 @@ class Collider extends Component
 		super();
 		_colliderList = [];
 		isTrigger = trigger;
-		x = y = _xOffset = _yOffset = 0;
+		x = y = offsetX = offsetY = 0;
 	}
 	
 	override public function added():Void 
@@ -44,8 +43,8 @@ class Collider extends Component
 	override public function update():Void 
 	{
 		super.update();
-		x = transform.x + _xOffset;
-		y = transform.y + _yOffset;
+		x = transform.x + offsetX;
+		y = transform.y + offsetY;
 		
 		if (enableDebugShape)
 		{
@@ -190,8 +189,6 @@ class Collider extends Component
 	{
 		this.x = x;
 		this.y = y;
-		//this.x = x + _xOffset;
-		//this.y = y + _yOffset;
 	}
 	
 	override public function removed():Void 
@@ -227,6 +224,16 @@ class Collider extends Component
 		}
 		_debugShape.visible = enableDebugShape = value;
 		return value;
+	}
+	
+	private function get_x():Float
+	{
+		return transform.x + offsetX;
+	}
+	
+	private function get_y():Float
+	{
+		return transform.x + offsetY;
 	}
 	
 	public static function toggleAllDebugShape(enable:Bool = true):Void
