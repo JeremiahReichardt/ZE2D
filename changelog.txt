@@ -1,5 +1,13 @@
 ###Changelog###
 DD/MM/YY
+
+(8/3/2014)
+- Added touch support.
+- Fixed Color now displaying properly when compiling for js and c++.
+- Corrected Text to be displayed aligned to left. This fixes problem when running in Android.
+- Added console text to GDebug.
+- Renamed parameters for Image.
+
 (26/7/2014)
 - Fixed some Graphics not updating properly if there's offset.
 - Fixed Collider not updating properly if there's offset.

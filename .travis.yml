@@ -15,6 +15,7 @@ before_install:
   - cd $(pwd)/samples/
   
 script:
+  - haxelib run openfl build Plane/application.xml flash
   - haxelib run openfl build Stars/application.xml flash
   - haxelib run openfl build Terry/application.xml flash
   - haxelib run openfl build TileSheetLayer/application.xml flash

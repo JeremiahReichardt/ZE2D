@@ -34,7 +34,7 @@ class Text extends DisplayListObject
 		_textField.text = text;
 		_textField.embedFonts = true;
 		_textField.setTextFormat(_format);
-		_textField.autoSize = TextFieldAutoSize.CENTER;
+		_textField.autoSize = TextFieldAutoSize.LEFT;
 	}
 	
 	public function setFont(fontPath:String):Void

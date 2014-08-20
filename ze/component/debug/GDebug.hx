@@ -1,6 +1,5 @@
 package ze.component.debug;
 import haxe.Timer;
-import openfl.system.System;
 import ze.component.core.Component;
 import ze.component.graphic.displaylist.Text;
 import ze.component.physics.BoxCollider;
@@ -17,17 +16,18 @@ import ze.util.Key;
 class GDebug extends Component
 {
 	private var _debugMode:Bool;
-	private var _debugText:Text;
 	private var _debugCallBack:GameObject -> Void;
 	
-	private var _selectedGameObject:GameObject;
-	
+	private var _pausedText:Text;
 	private var _fpsText:Text;
-	private var _times:Array<Float>;
-	private var _memory:Float;
+	private static var _consoleText:Text;
 	
 	private var _fpsGameObject:GameObject;
 	private var _debugGameObject:GameObject;
+	private var _selectedGameObject:GameObject;
+	
+	private var _times:Array<Float>;
+	private var _memory:Float;
 	
 	override public function added():Void 
 	{
@@ -38,10 +38,13 @@ class GDebug extends Component
 		_fpsText = new Text("FPS: ", Color.WHITE);
 		_fpsGameObject = scene.createGameObject("fps", _fpsText);
 		
-		_debugText = new Text("Paused", Color.WHITE);
-		_debugGameObject = scene.createGameObject("debug", _debugText, scene.screen.right - 75, 0);
+		_pausedText = new Text("Paused", Color.WHITE);
+		_debugGameObject = scene.createGameObject("debug", _pausedText, scene.screen.right - 75, 0);
 		_debugMode = false;
-		_debugText.visible = _debugMode;
+		_pausedText.visible = _debugMode;
+		
+		_consoleText = new Text("", Color.WHITE);
+		scene.createGameObject("Console", _consoleText, 0, scene.screen.bottom - 22);
 	}
 	
 	override public function update():Void 
@@ -59,7 +62,7 @@ class GDebug extends Component
 			{
 				disableAllGameObject();
 			}
-			_debugText.visible = _debugMode;
+			_pausedText.visible = _debugMode;
 		}
 		
 		if (_debugMode)
@@ -97,7 +100,9 @@ class GDebug extends Component
 			_times.shift();
 		}
 		
-		_memory = Math.ffloor(System.totalMemory / 1024 / 512);
+		#if flash
+		_memory = Math.ffloor(openfl.system.System.totalMemory / 1024 / 512);
+		#end
 		_fpsText.setText("FPS: " + _times.length + " Memory: " + _memory + " MB");
 	}
 	
@@ -203,5 +208,15 @@ class GDebug extends Component
 	public function registerCallBack(debugCallBack:GameObject -> Void):Void
 	{
 		_debugCallBack = debugCallBack;	
+	}
+	
+	public static function log(item:Dynamic):Void
+	{
+		var message:String = "Debug: ";
+		if (Std.is(item, Int) || Std.is(item, Float) || Std.is(item, String))
+		{
+			message += item;
+		}
+		_consoleText.setText(message);
 	}
 }

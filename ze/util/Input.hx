@@ -2,6 +2,7 @@ package ze.util;
 import openfl.display.Stage;
 import openfl.events.KeyboardEvent;
 import openfl.events.MouseEvent;
+import openfl.events.TouchEvent;
 
 /**
  * Input for handling keypresses and mouse
@@ -12,6 +13,8 @@ class Input
 {
 	public static var mouseX(get, null):Float;
 	public static var mouseY(get, null):Float;
+	public static var touchX(default, null):Float;
+	public static var touchY(default, null):Float;
 	
 	private static var _mouseX:Float;
 	private static var _mouseY:Float;
@@ -29,9 +32,14 @@ class Input
 	private static var _leftMouseDown:Bool;
 	private static var _leftMousePressed:Bool;
 	private static var _leftMouseReleased:Bool;
+	
 	private static var _rightMouseDown:Bool;
 	private static var _rightMousePressed:Bool;
 	private static var _rightMouseReleased:Bool;
+	
+	private static var _touchDown:Bool;
+	private static var _touchPressed:Bool;
+	private static var _touchReleased:Bool;
 	
 	private static var _keyMap:Map < String, Array<Int> > ;
 	
@@ -51,6 +59,8 @@ class Input
 		
 		mouseX = 0;
 		mouseY = 0;
+		touchX = 0;
+		touchY = 0;
 		
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownEvent);
 		stage.addEventListener(KeyboardEvent.KEY_UP, keyUpEvent);
@@ -61,7 +71,10 @@ class Input
 		stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, rightMouseDownEvent);
 		stage.addEventListener(MouseEvent.RIGHT_MOUSE_UP, rightMouseUpEvent);
 		
-		addKey("left", [Key.A, Key.LEFT]);
+		//Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+		stage.addEventListener(TouchEvent.TOUCH_BEGIN, touchBeginEvent);
+		stage.addEventListener(TouchEvent.TOUCH_MOVE, touchMoveEvent);
+		stage.addEventListener(TouchEvent.TOUCH_END, touchEndEvent);
 	}
 	
 	public static function update():Void
@@ -84,6 +97,16 @@ class Input
 		if (_rightMouseReleased)
 		{
 			_rightMouseReleased = false;
+		}
+		
+		if (_touchPressed)
+		{
+			_touchPressed = false;
+		}
+		
+		if (_touchReleased)
+		{
+			_touchReleased = false;
 		}
 		
 		_mouseX = _stage.mouseX;
@@ -234,6 +257,29 @@ class Input
 		_rightMouseReleased = true;
 	}
 	
+	private static function touchBeginEvent(event:TouchEvent):Void
+	{
+		_touchDown = true;
+		_touchPressed = true;
+		_touchReleased = false;
+		
+		touchX = event.stageX;
+		touchY = event.stageY;
+	}
+	
+	private static function touchMoveEvent(event:TouchEvent):Void
+	{
+		touchX = event.stageX;
+		touchY = event.stageY;
+	}
+	
+	private static function touchEndEvent(event:TouchEvent):Void
+	{
+		_touchDown = false;
+		_touchPressed = false;
+		_touchReleased = true;
+	}
+	
 	public static function leftMouseReleased():Bool
 	{
 		return _leftMouseReleased;
@@ -262,6 +308,21 @@ class Input
 	public static function rightMousePressed():Bool
 	{
 		return _rightMousePressed;
+	}
+	
+	public static function touchReleased():Bool
+	{
+		return _touchReleased;
+	}
+	
+	public static function touchDown():Bool
+	{
+		return _touchDown;
+	}
+	
+	public static function touchPressed():Bool
+	{
+		return _touchPressed;
 	}
 	
 	public static function mouseMoved():Bool

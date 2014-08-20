@@ -18,6 +18,11 @@ class Component extends Node
 	public var gameObject(get, null):GameObject;
 	public var scene(get, null):Scene;
 	
+	public function new()
+	{
+		super();
+	}
+	
 	public function getComponent<T:Component>(componentType:Class<T>):T
 	{
 		return gameObject.getComponent(componentType);

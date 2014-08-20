@@ -13,21 +13,21 @@ class Image extends BitmapObject
 {
 	private static var _imageCache:Map<String, BitmapData> = new Map<String, BitmapData>();
 	
-	public function new(label:String, imagePath:String = "",  imageData:BitmapData = null, rectangle:Rectangle = null) 
+	public function new(imageName:String, imagePath:String = "",  imageData:BitmapData = null, rectangle:Rectangle = null) 
 	{
 		super();
-		var cacheData:BitmapData = _imageCache.get(label);
+		var cacheData:BitmapData = _imageCache.get(imageName);
 		if (cacheData == null)
 		{
-			cacheData = createImage(label, imagePath, imageData, rectangle);
+			cacheData = createImage(imageName, imagePath, imageData, rectangle);
 		}
 		
 		setBitmapData(cacheData);
 	}
 	
-	private static function createImage(label:String, imagePath:String = "", imageData:BitmapData = null, rectangle:Rectangle = null):BitmapData
+	private static function createImage(imageName:String, imagePath:String = "", imageData:BitmapData = null, rectangle:Rectangle = null):BitmapData
 	{
-		if (!_imageCache.exists(label))
+		if (!_imageCache.exists(imageName))
 		{
 			if (imageData == null) 
 			{
@@ -42,7 +42,7 @@ class Image extends BitmapObject
 				imageData = croppedImage;
 			}
 			
-			_imageCache.set(label, imageData);
+			_imageCache.set(imageName, imageData);
 		}
 		
 		return imageData;
