@@ -1,7 +1,24 @@
 ###Changelog###
 DD/MM/YY
 
-(8/3/2014)
+(28/12/2014)
+- Changed TileSprite to only accept all Ints.
+- Created new Displaylist object TileMap.
+- Created new function for loading TileMap in ogmoloader.
+- Fixed graphics not removed when going to next level in Terry.
+- Fixed W/M/m/w having extra lines on the font.
+
+(23/12/2014)
+- Added checks to GDebug for gameObject without collider
+- Refactored codes
+- Added 2 new utils, Delay and Vec2
+- Delay is a simple wrapper for setting a delay and checks
+- Vec2 is a simple vector 2d class
+- Renamed openfl to lime in Run.bat
+- Changed atlas's xml files
+- Escape key now only works in debug mode
+
+(3/8/2014)
 - Added touch support.
 - Fixed Color now displaying properly when compiling for js and c++.
 - Corrected Text to be displayed aligned to left. This fixes problem when running in Android.

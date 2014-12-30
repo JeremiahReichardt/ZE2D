@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <OgmoVersion>2.1.0.6</OgmoVersion>
+  <OgmoVersion>2.1.0.7</OgmoVersion>
   <Name>Game</Name>
   <BackgroundColor A="255" R="125" G="160" B="255" />
   <GridColor A="255" R="255" G="240" B="90" />
@@ -16,7 +16,7 @@
     <Width>1280</Width>
     <Height>800</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\ZiHe\Documents\ZE2D\assets\level\Game.oep</Filename>
+  <Filename>C:\HaxeToolkit\haxe\lib\ze2d\git\samples\Stars\assets\level\Game.oep</Filename>
   <AngleMode>Degrees</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>

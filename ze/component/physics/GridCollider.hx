@@ -6,21 +6,18 @@ package ze.component.physics;
  */
 class GridCollider extends Collider
 {
-	private var _grid:Array<Int>;
-	private var _tileWidth:Float;
-	private var _tileHeight:Float;
-	private var _row:Int;
-	private var _column:Int;
-	
 	public static inline var NO_COLLISION_LAYER:Int = 0;
 	public static inline var COLLISION_LAYER:Int = 1;
+	
+	private var _row:Int;
+	private var _column:Int;
+	private var _grid:Array<Int>;
 	
 	public function new(row:Int, column:Int, width:Float, height:Float, trigger:Bool = false)
 	{
 		super(trigger);
-		
-		_tileWidth = width;
-		_tileHeight = height;
+		this.width = width;
+		this.height = height;
 		_row = row;
 		_column = column;
 		_grid = [];
@@ -58,10 +55,10 @@ class GridCollider extends Collider
 	{
 		var cx:Float = x - collider.x;
 		var cy:Float = y - collider.y;
-		var rx:Int = Std.int(cx % _tileWidth);
-		var ry:Int = Std.int(cy % _tileHeight);
-		var row:Int = Std.int((cy - ry) / _tileHeight);
-		var column:Int = Std.int((cx - rx) / _tileWidth);
+		var rx:Int = Std.int(cx % width);
+		var ry:Int = Std.int(cy % height);
+		var row:Int = Std.int((cy - ry) / height);
+		var column:Int = Std.int((cx - rx) / width);
 		
 		return _grid[row * _column + column];
 	}

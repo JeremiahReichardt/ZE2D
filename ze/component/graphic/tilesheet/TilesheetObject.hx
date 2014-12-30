@@ -11,10 +11,10 @@ import ze.util.TileSheetLayer;
  */
 class TilesheetObject extends Graphic
 {
-	private var _screen:Screen;
-	private var _tileData:Array<Float>;
 	private var _name:String;
 	private var _tileID:Int;
+	private var _screen:Screen;
+	private var _tileData:Array<Float>;
 	private var _tileSheetLayer:TileSheetLayer;
 	
 	public function new(name:String) 

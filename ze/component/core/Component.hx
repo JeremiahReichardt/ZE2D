@@ -12,20 +12,27 @@ import ze.object.Scene;
 
 class Component extends Node
 {
-	public var transform(get, null):Transform;
-	public var collider(get, null):Collider;
-	public var graphic(get, null):Graphic;
-	public var gameObject(get, null):GameObject;
 	public var scene(get, null):Scene;
-	
-	public function new()
-	{
-		super();
-	}
+	public var graphic(get, null):Graphic;
+	public var collider(get, null):Collider;
+	public var transform(get, null):Transform;
+	public var gameObject(get, null):GameObject;
 	
 	public function getComponent<T:Component>(componentType:Class<T>):T
 	{
 		return gameObject.getComponent(componentType);
+	}
+	
+	private function isNamed(name:String):Bool
+	{
+		if (gameObject != null)
+		{
+			if (gameObject.name == name)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private function getGameObjectByName(name:String):GameObject
@@ -36,6 +43,11 @@ class Component extends Node
 	private function getGameObjectsByName(name:String):Array<GameObject>
 	{
 		return scene.getGameObjectsByName(name);
+	}
+	
+	public function getAllGameObjects():Array<GameObject>
+	{
+		return scene.getAllGameObjects();
 	}
 	
 	private function get_transform():Transform

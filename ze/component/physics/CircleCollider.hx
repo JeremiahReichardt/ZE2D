@@ -8,9 +8,11 @@ import ze.component.physics.Collider;
 class CircleCollider extends Collider
 {
 	public var radius(default, null):Float;
+	
 	public function new(radius:Float, trigger:Bool = false) 
 	{
 		super(trigger);
 		this.radius = radius;
+		width = height = radius;
 	}
 }

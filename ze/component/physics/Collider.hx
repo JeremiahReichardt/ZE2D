@@ -10,15 +10,16 @@ import ze.util.Ops;
 
 class Collider extends Component
 {
-	public var isTrigger(default, null):Bool;
-	public var x(default, null):Float;
-	public var y(default, null):Float;
 	public var offsetX:Float;
 	public var offsetY:Float;
-	
+	public var x(default, null):Float;
+	public var y(default, null):Float;
+	public var width(default, null):Float;
+	public var height(default, null):Float;
+	public var isTrigger(default, null):Bool;
 	public var enableDebugShape(default, set):Bool;
-	private var _debugShape:Shape;
 	
+	private var _debugShape:Shape;
 	private var _colliderList:Array<Collider>;
 	private var _enterCallback:Collider -> Void;
 	private var _exitCallback:Collider -> Void;
@@ -31,7 +32,10 @@ class Collider extends Component
 		super();
 		_colliderList = [];
 		isTrigger = trigger;
-		x = y = offsetX = offsetY = 0;
+		x = 0;
+		y = 0;
+		offsetX = 0;
+		offsetY = 0;
 	}
 	
 	override public function added():Void 
@@ -149,17 +153,15 @@ class Collider extends Component
 				return otherCollider;
 			}
 		}
-		
 		return null;
 	}
 	
 	private function hitTest(collider:Collider):Bool
 	{
-		if (Std.is(this, BoxCollider) && Std.is(collider, BoxCollider))
+		var colliderA:BoxCollider = cast (this, BoxCollider);
+		var colliderB:BoxCollider = cast (collider, BoxCollider);
+		if (colliderA != null && colliderB != null)
 		{
-			var colliderA:BoxCollider = cast (this, BoxCollider);
-			var colliderB:BoxCollider = cast (collider, BoxCollider);
-			
 			if (colliderA.right <= colliderB.left) return false;
 			if (colliderA.bottom <= colliderB.top) return false;
 			if (colliderA.left >= colliderB.right) return false;

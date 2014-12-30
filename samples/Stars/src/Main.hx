@@ -1,5 +1,6 @@
 package;
 import scenes.MainScene;
+import ze.component.physics.Collider;
 import ze.Engine;
 
 /**

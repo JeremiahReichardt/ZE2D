@@ -8,18 +8,17 @@ import ze.util.Input;
  */
 class Button extends UI
 {
+	private var _name:String;
 	private var _enterCallback:Void -> Void;
 	private var _exitCallback:Void -> Void;
 	private var _overCallback:Void -> Void;
 	private var _clickCallback:Void -> Void;
-	
 	private var _animatedSprite:AnimatedSprite;
-	private var _name:String;
 	
 	public function new(name:String, width:Float, height:Float = null)
 	{
-		_name = name;
 		super(width, height);
+		_name = name;
 	}
 	
 	override public function added():Void 

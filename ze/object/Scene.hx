@@ -38,7 +38,10 @@ class Scene extends Node
 			node = node._next;
 		}
 		
-		screen.draw();
+		if (screen != null)
+		{
+			screen.draw();
+		}
 	}
 	
 	public function createGameObject(name:String, component:Component = null, components:Array<Component> = null, x:Float = 0, y:Float = 0):GameObject
@@ -133,14 +136,30 @@ class Scene extends Node
 		return gameObjects;
 	}
 	
+	public function getAllGameObjects():Array<GameObject>
+	{
+		var node:Node = _child.first;
+		var gameObjects:Array<GameObject> = [];
+		while (node != null)
+		{
+			var current:GameObject = cast(node, GameObject);
+			gameObjects.push(current);
+			node = node._next;
+		}
+		return gameObjects;
+	}
+	
 	public function nextLevel():Void
 	{
 	}
 	
 	override public function removed():Void 
 	{
+		screen.removed();
 		_child.removeAll();
 		engine.addToRemoveList(this);
+		screen = null;
+		engine = null;
 		super.removed();
 	}
 }

@@ -25,7 +25,6 @@ class BitmapObject extends DisplayListObject
 	override public function destroyed():Void 
 	{
 		super.destroyed();
-		
 		_bitmap.bitmapData = null;
 		_bitmap = null;
 	}

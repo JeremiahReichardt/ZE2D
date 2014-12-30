@@ -11,10 +11,10 @@ class Text extends TilesheetObject
 {
 	public var text(default, set):String;
 	
-	private static var _fonts:StringMap<Font>;
-	
 	private var _font:Font;
 	private var _charData:Array<Char>;
+	
+	private static var _fonts:StringMap<Font>;
 	
 	public function new(name:String)
 	{

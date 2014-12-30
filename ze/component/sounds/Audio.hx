@@ -13,16 +13,16 @@ import ze.component.core.Component;
 
 class Audio extends Component
 {
-	public var volume(get, null):Float;
 	public var pan(get, null):Float;
+	public var volume(get, null):Float;
 	public var playing(default, null):Bool;
 	
-	private var _sound:Sound;
-	private var _soundChannel:SoundChannel;
-	private var _soundTransform:SoundTransform;
 	private var _play:Bool;
 	private var _loop:Bool;
+	private var _sound:Sound;
 	private var _position:Float;
+	private var _soundChannel:SoundChannel;
+	private var _soundTransform:SoundTransform;
 	
 	private static var _globalMuted:Bool;
 	private static var _soundPool:Array<SoundTransform> = [];
@@ -116,7 +116,6 @@ class Audio extends Component
 		_sound = null;
 		_soundChannel = null;
 		_soundTransform = null;
-		
 		super.removed();
 	}
 	

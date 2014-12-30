@@ -1,9 +1,9 @@
 package ze.component.core;
-import ze.component.physics.BoxCollider;
-import ze.component.physics.Collider;
 
 /**
- * ...
+ * This is for typcial platformer character codes, it includes
+ * isGrounded checks for character that is standing on a platform
+ * and also a hitTop for character if it hit the ceiling.
  * @author Goh Zi He
  */
 class CharacterController extends Component
@@ -14,10 +14,6 @@ class CharacterController extends Component
 	override public function added():Void 
 	{
 		super.added();
-		if (graphic == null)
-		{
-			trace("Add a graphic component");
-		}
 		if (collider == null)
 		{
 			trace("Add a collider component");

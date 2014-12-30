@@ -49,7 +49,7 @@ class MainScene extends Scene
 		if (!Assets.exists("level/Puzzle " + _level + ".oel")) _level = 1;
 		
 		_ogmoLoader.setOEL("level/Puzzle " + _level + ".oel");
-		_ogmoLoader.loadTiles("Checker", 32, 32, 8, 8, setGrid);
+		_ogmoLoader.loadTiledSprite("Checker", 32, 32, 8, 8, setGrid);
 		_ogmoLoader.setLayer("Collision");
 		_ogmoLoader.setEntity("rect", ColliderObject);
 		

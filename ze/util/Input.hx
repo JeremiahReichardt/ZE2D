@@ -1,8 +1,10 @@
 package ze.util;
+import haxe.ds.StringMap;
 import openfl.display.Stage;
 import openfl.events.KeyboardEvent;
 import openfl.events.MouseEvent;
 import openfl.events.TouchEvent;
+import ze.object.Scene;
 
 /**
  * Input for handling keypresses and mouse
@@ -11,23 +13,18 @@ import openfl.events.TouchEvent;
 
 class Input 
 {
-	public static var mouseX(get, null):Float;
-	public static var mouseY(get, null):Float;
+	public static var mouseX(default, null):Float;
+	public static var mouseY(default, null):Float;
 	public static var touchX(default, null):Float;
 	public static var touchY(default, null):Float;
 	
-	private static var _mouseX:Float;
-	private static var _mouseY:Float;
-	
 	private static var _init:Bool;
 	private static var _stage:Stage;
-	
+	private static var _keyCode:Int;
+	private static var _keys:Array<Bool>;
+	private static var _lastKeyPressed:Int;
 	private static var _currentKeyPressed:Int;
 	private static var _currentKeyReleased:Int;
-	private static var _lastKeyPressed:Int;
-	private static var _keyCode:Int;
-	
-	private static var _keys:Array<Bool>;
 	
 	private static var _leftMouseDown:Bool;
 	private static var _leftMousePressed:Bool;
@@ -41,7 +38,7 @@ class Input
 	private static var _touchPressed:Bool;
 	private static var _touchReleased:Bool;
 	
-	private static var _keyMap:Map < String, Array<Int> > ;
+	private static var _keyMap:StringMap<Array<Int>>;
 	
 	public static function init(stage:Stage):Void
 	{
@@ -54,7 +51,7 @@ class Input
 		
 		_keys = [];
 		_stage = stage;
-		_keyMap = new Map < String, Array<Int> > ();
+		_keyMap = new StringMap<Array<Int>>();
 		_currentKeyPressed = _keyCode = -1;
 		
 		mouseX = 0;
@@ -77,7 +74,7 @@ class Input
 		stage.addEventListener(TouchEvent.TOUCH_END, touchEndEvent);
 	}
 	
-	public static function update():Void
+	public static function update(scene:Scene):Void
 	{
 		if (_leftMousePressed)
 		{
@@ -109,8 +106,8 @@ class Input
 			_touchReleased = false;
 		}
 		
-		_mouseX = _stage.mouseX;
-		_mouseY = _stage.mouseY;
+		mouseX = _stage.mouseX + scene.screen.left;
+		mouseY = _stage.mouseY + scene.screen.top;
 		_lastKeyPressed = _currentKeyPressed;
 	}
 	
@@ -325,32 +322,8 @@ class Input
 		return _touchPressed;
 	}
 	
-	public static function mouseMoved():Bool
-	{
-		if (_mouseX != _stage.mouseX || _mouseY != _stage.mouseY)
-		{
-			_mouseX = _stage.mouseX;
-			_mouseY = _stage.mouseY;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
 	public static function keyCode():Int
 	{
 		return _keyCode;
-	}
-	
-	private static function get_mouseX():Float
-	{
-		return _stage.mouseX;
-	}
-	
-	private static function get_mouseY():Float
-	{
-		return _stage.mouseY;
 	}
 }

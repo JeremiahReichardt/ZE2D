@@ -10,8 +10,6 @@ import ze.util.Color;
 
 class BoxCollider extends Collider
 {
-	public var width(default, null):Float;
-	public var height(default, null):Float;
 	public var left(get, null):Float;
 	public var right(get, null):Float;
 	public var top(get, null):Float;

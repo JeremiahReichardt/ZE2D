@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension>
 	<include haxelib="openfl" />
+	<template path="templates" />
+	<sample path="samples" />
 </extension>

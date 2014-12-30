@@ -1,11 +1,12 @@
-<TextureAtlas imagePath="game.png">
-	<SubTexture type="single" name="Bullet" x="125" y="296" width="5" height="5"/>
-	<SubTexture type="single" name="HorizontalGate" x="128" y="256" width="64" height="32"/>
-	<SubTexture type="single" name="VerticalGate" x="256" y="0" width="32" height="64"/>
-	<SubTexture type="single" name="Player" x="224" y="256" width="16" height="16"/>
-	<SubTexture type="single" name="Sign" x="192" y="256" width="32" height="32"/>
-	<SubTexture type="multiple" name="Checker" x="0" y="0" width="256" height="256" tileWidth="32" tileHeight="32"/>
-	<SubTexture type="multiple" name="Exit" x="0" y="256" width="128" height="32" tileWidth="32" tileHeight="32"/>
-	<SubTexture type="multiple" name="Respawn" x="125" y="288" width="64" height="8" tileWidth="32" tileHeight="8"/>
-	<SubTexture type="multiple" name="Switch" x="0" y="288" width="125" height="13" tileWidth="25" tileHeight="13"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="game" width="260" height="360">
+    <sprite type="single" n="Bullet" x="220" y="294" w="5" h="5" pX="0.5" pY="0.5"/>
+    <sprite type="single" n="Player" x="202" y="294" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite type="single" n="Sign" x="168" y="294" w="32" h="32" pX="0.5" pY="0.5"/>
+    <sprite type="single" n="VerticalGate" x="134" y="294" w="32" h="64" pX="0.5" pY="0.5"/>
+    <sprite type="single" n="HorizontalGate" x="68" y="294" w="64" h="32" pX="0.5" pY="0.5"/>
+    <sprite type="multiple" n="Checker" x="2" y="2" w="256" h="256" pX="0.5" pY="0.5" tw="32" th="32"/>
+    <sprite type="multiple" n="Exit" x="2" y="260" w="128" h="32" pX="0.5" pY="0.5" tw="32" th="32"/>
+    <sprite type="multiple" n="Respawn" x="2" y="294" w="64" h="8" pX="0.5" pY="0.5" tw="32" th="8"/>
+    <sprite type="multiple" n="Switch" x="132" y="260" w="125" h="13" pX="0.5" pY="0.5" tw="25" th="13"/>/>
 </TextureAtlas>

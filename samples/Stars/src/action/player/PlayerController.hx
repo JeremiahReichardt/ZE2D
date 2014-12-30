@@ -1,5 +1,6 @@
 package action.player;
-import ze.component.core.Component;
+import ze.component.core.CharacterController;
+import ze.component.physics.BoxCollider;
 import ze.component.physics.Collider;
 import ze.component.sounds.Audio;
 import ze.util.Input;
@@ -10,32 +11,27 @@ import ze.util.Time;
  * ...
  * @author Goh Zi He
  */
-class CharacterController extends Component
+class PlayerController extends CharacterController
 {
-	public var currentPlayerIndex(default, null):Int;
-	
 	public var haveStar:Bool;
-	
-	private static inline var GRAVITY:Float = 50;
-	public static inline var JUMP_HEIGHT:Float = 500;
-	public static inline var WALKING_SPEED:Float = 200;
-	private static inline var MAX_SPEED:Float = 1000;
-	
-	private var _gravity:Float;
-	
-	private var _isGrounded:Bool;
-	private var _hitTop:Bool;
-	
-	private var _moveX:Float;
-	private var _moveY:Float;
+	public var currentPlayerIndex(default, null):Int;
 	
 	private var _keyLeft:Int;
 	private var _keyRight:Int;
 	private var _keyJump:Int;
 	private var _jump:Int;
 	
+	private var _gravity:Float;
+	private var _moveX:Float;
+	private var _moveY:Float;
+	
 	private var _jumpSfx:Audio;
 	private var _touchPlayerSfx:Audio;
+	
+	private static inline var JUMP_HEIGHT:Float = 500;
+	private static inline var WALKING_SPEED:Float = 200;
+	private static inline var GRAVITY:Float = 50;
+	private static inline var MAX_SPEED:Float = 1000;
 	
 	public function new(playerIndex:Int)
 	{
@@ -73,10 +69,7 @@ class CharacterController extends Component
 	override public function update():Void 
 	{
 		super.update();
-		collider.setPos(transform.x, transform.y + 1);// , render.width, render.height);
-		_isGrounded = (collider.checkCollisionWith() != null);
-		
-		if (_isGrounded) 
+		if (isGrounded) 
 		{
 			_moveY = 0;
 			_jump = 0;
@@ -114,10 +107,7 @@ class CharacterController extends Component
 			_jumpSfx.play(0.2);
 		}
 		
-		collider.setPos(transform.x, transform.y - 1);
-		_hitTop = collider.checkCollisionWith() != null;
-		
-		if (_hitTop)
+		if (hitTop)
 		{
 			_moveY = 0;
 		}
@@ -173,6 +163,23 @@ class CharacterController extends Component
 				_touchPlayerSfx.play();
 				getComponent(CountDown).stopCountDown();
 				haveStar = false;
+			}
+		}
+		else if (collider.gameObject.name == "collisionbox")
+		{
+			var dir:Int = (collider.transform.x - transform.x) > 0 ? 1 : -1;
+			
+			if (dir == 1)
+			{
+				transform.setPos(collider.transform.x - 1, transform.y);
+			}
+			else
+			{
+				var box:BoxCollider = cast(collider, BoxCollider);
+				if (box != null)
+				{
+					transform.setPos(collider.transform.x + box.width + 1, transform.y);
+				}
 			}
 		}
 	}

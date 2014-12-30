@@ -1,7 +1,7 @@
 <TextureAtlas imagePath="sprites.png">
-	<SubTexture type="multiple" name="Checker" x="0" y="0" width="256" height="256" tileWidth="32" tileHeight="32"/>
-	<SubTexture type="multiple" name="PlayBtn" x="0" y="259" width="128" height="64" tileWidth="128" tileHeight="32"/>
-	<SubTexture type="single" name="Player" x="258" y="33" width="32" height="32"/>
-	<SubTexture type="multiple" name="QuitBtn" x="130.5" y="259" width="128" height="64" tileWidth="128" tileHeight="32"/>
-	<SubTexture type="single" name="Star" x="258" y="0" width="32" height="31"/>
+	<sprite type="multiple" n="Checker" x="0" y="0" w="256" h="256" tw="32" th="32"/>
+	<sprite type="multiple" n="PlayBtn" x="0" y="259" w="128" h="64" tw="128" th="32"/>
+	<sprite type="single" n="Player" x="258" y="33" w="32" h="32"/>
+	<sprite type="multiple" n="QuitBtn" x="130.5" y="259" w="128" h="64" tw="128" th="32"/>
+	<sprite type="single" n="Star" x="258" y="0" w="32" h="31"/>
 </TextureAtlas>

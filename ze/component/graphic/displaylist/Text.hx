@@ -12,15 +12,14 @@ import ze.util.Color;
  */
 class Text extends DisplayListObject
 {
-	private var _textField:TextField;
 	private var _format:TextFormat;
+	private var _textField:TextField;
 	
 	private static inline var defaultFont:String = "font/GROBOLD.ttf";
 	
 	public function new(text:String = "", color:Int = Color.BLACK, size:Float = 20)
 	{
 		super();
-		
 		_textField = new TextField();
 		displayObject = _textField;
 		

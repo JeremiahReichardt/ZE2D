@@ -6,15 +6,15 @@ package ze.component.graphic.tilesheet;
  */
 class TiledSprite extends TilesheetObject
 {
-	private var _indices:Array<Array<Int>>;
+	private var _tileRow:Int;
+	private var _tileColumn:Int;
 	private var _mapWidth:Float;
 	private var _mapHeight:Float;
 	private var _tileWidth:Float;
 	private var _tileHeight:Float;
-	private var _tileRow:Int;
-	private var _tileColumn:Int;
+	private var _indices:Array<Array<Int>>;
 	
-	public function new(name:String, tileWidth:Float, tileHeight:Float, mapWidth:Float, mapHeight:Float, tileRow:Int, tileColumn:Int)
+	public function new(name:String, tileWidth:Int, tileHeight:Int, mapWidth:Int, mapHeight:Int, tileRow:Int, tileColumn:Int)
 	{
 		super(name);
 		_indices = [[]];
@@ -38,14 +38,14 @@ class TiledSprite extends TilesheetObject
 		}
 	}
 	
-	public function setTile(column:Int, row:Int, tx:Float, ty:Float):Void
+	public function setTile(column:Int, row:Int, tx:Int, ty:Int):Void
 	{
 		var tiles:Array<Int> = _tileSheetLayer.getSpriteIndices(_name);
 		if (_indices[row] == null)
 		{
 			return;
 		}
-		_indices[row][column] = tiles[Math.floor(tx + (ty * _tileRow))];
+		_indices[row][column] = tiles[tx + (ty * _tileRow)];
 		_tileID = _indices[row][column];
 	}
 	

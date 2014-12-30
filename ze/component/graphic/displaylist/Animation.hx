@@ -13,21 +13,20 @@ import ze.util.Time;
 
 class Animation extends BitmapObject
 {
+	public var playing(default, null):Bool;
 	public var currentFrame(default, null):Int;
 	public var currentFrameLabel(default, null):String;
-	public var playing(default, null):Bool;
 	
 	private var _timer:Int;
 	private var _lastTime:Int;
-	private var _animationData:AnimationData;
 	private var _playOnce:Bool;
+	private var _animationData:AnimationData;
 	
 	private static var _animationCache:Map<String, AnimationData> = new Map<String, AnimationData>();
 	
 	public function new(imageLabel:String, imagePath:String = "", animationWidth:Int = 1, animationHeight:Int = 1) 
 	{
 		super();
-		
 		var animationData:AnimationData = _animationCache.get(imageLabel);
 		if (animationData == null)
 		{

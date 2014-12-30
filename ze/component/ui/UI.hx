@@ -22,7 +22,6 @@ class UI extends Component
 	override public function update():Void 
 	{
 		super.update();
-		
 		if (inUI())
 		{
 			if (!_entered)

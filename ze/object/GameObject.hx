@@ -10,10 +10,10 @@ import ze.component.physics.Collider;
 
 class GameObject extends Node
 {
-	public var transform(get, null):Transform;
-	public var collider(get, null):Collider;
-	public var graphic(get, null):Graphic;
 	public var scene(get, null):Scene;
+	public var graphic(get, null):Graphic;
+	public var collider(get, null):Collider;
+	public var transform(get, null):Transform;
 	public var name(default, default):String;
 	
 	public function new(name:String = "", x:Float = 0, y:Float = 0) 
@@ -32,9 +32,7 @@ class GameObject extends Node
 		{
 			return;
 		}
-		
 		super.update();
-		
 		var node:Node = _child.first;
 		while (node != null)
 		{
@@ -44,6 +42,22 @@ class GameObject extends Node
 			}
 			node = node._next;
 		}
+	}
+	
+	override public function removed():Void 
+	{
+		_child.removeAll();
+		scene.engine.addToRemoveList(this);
+		super.removed();
+	}
+	
+	override public function destroyed():Void 
+	{
+		super.destroyed();
+		transform = null;
+		collider = null;
+		graphic = null;
+		scene = null;
 	}
 	
 	public function getComponent<T:Component>(componentType:Class<T>):T
@@ -86,6 +100,15 @@ class GameObject extends Node
 		detachChild(node);
 	}
 	
+	/**
+	 * Will remove this gameObject from the scene, same as calling
+	 * scene.removeGameObject(this);
+	 */
+	public function kill():Void
+	{
+		scene.removeGameObject(this);
+	}
+	
 	private function get_transform():Transform
 	{
 		if (transform == null)
@@ -116,21 +139,5 @@ class GameObject extends Node
 	private function get_scene():Scene
 	{
 		return (cast(_parent, Scene));
-	}
-	
-	override public function removed():Void 
-	{
-		_child.removeAll();
-		scene.engine.addToRemoveList(this);
-		super.removed();
-	}
-	
-	override public function destroyed():Void 
-	{
-		super.destroyed();
-		transform = null;
-		collider = null;
-		graphic = null;
-		scene = null;
 	}
 }

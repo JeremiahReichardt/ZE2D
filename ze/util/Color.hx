@@ -120,6 +120,7 @@ class Color
 	public static inline var BROWN:Int = 0xFF8B4513;
 	public static inline var BEIGE:Int = 0xFFE6D59E;
 	public static inline var CARAMEL:Int = 0xFFFFEF21;
+	public static inline var TRANSPARENT:Int = 0x00FFFFFF;
 	#else
 	public static inline var RED:Int = 0xFF0000;
 	public static inline var LIMEGREEN:Int = 0xAEF02A;

@@ -1,5 +1,6 @@
 package scenes;
 import action.game.ItemManager;
+import action.Grid;
 import openfl.display.BitmapData;
 import prefab.ColliderObject;
 import prefab.PlayerObject;
@@ -20,6 +21,7 @@ class GameScene extends Scene
 	
 	private var _tileset:BitmapData;
 	private var _ogmoLoader:OgmoLoader;
+	private var _grid:Grid;
 	
 	override public function added():Void
 	{
@@ -27,14 +29,13 @@ class GameScene extends Scene
 		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
 		screen.addLayer(tileSheetLayer);
 		
-		Audio.mute();
-		
-		createGameObject("item_manager", new ItemManager());
+		_grid = new Grid(1280, 800, 32);
+		createGameObject("grid", _grid);
 		
 		_ogmoLoader = new OgmoLoader(this);
 		_ogmoLoader.setOEL("level/Level " + level + ".oel");
 		
-		_ogmoLoader.loadTiles("Checker", 32, 32, 8, 8);
+		_ogmoLoader.loadTiledSprite("Checker", 32, 32, 8, 8, _grid.setGrid);
 		
 		_ogmoLoader.setLayer("Entities");
 		_ogmoLoader.setEntity("Player", PlayerObject);
@@ -43,6 +44,13 @@ class GameScene extends Scene
 		_ogmoLoader.setEntity("rect", ColliderObject);
 		
 		_ogmoLoader.loadAll();
+		
+		createGameObject("item_manager", new ItemManager());
+	}
+	
+	public function getGridAt(x, y):Bool
+	{
+		return _grid.hasGridCollision(x, y);
 	}
 	
 	override public function update():Void 

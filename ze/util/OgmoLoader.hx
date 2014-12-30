@@ -1,5 +1,6 @@
 package ze.util;
 import openfl.Assets;
+import ze.component.graphic.displaylist.TileMap;
 import ze.component.graphic.tilesheet.TiledSprite;
 import ze.object.GameObject;
 import ze.object.Scene;
@@ -10,14 +11,12 @@ import ze.object.Scene;
  */
 class OgmoLoader
 {
-	private var _levelDirectory:String;
-	private var _levelXML:Xml;
-	
 	private var _current:Int;
+	private var _scene:Scene;
+	private var _levelXML:Xml;
+	private var _levelDirectory:String;
 	private var _layers:Array<String>;
 	private var _entities:Array<Array<EntityProperties>>;
-	
-	private var _scene:Scene;
 	
 	public function new(scene:Scene)
 	{
@@ -72,10 +71,37 @@ class OgmoLoader
 		_entities[_current].push(new EntityProperties(entityName, cls));
 	}
 	
-	public function loadTiles(tileImage:String, tileWidth:Float, tileHeight:Float, tileRow:Int, tileColumn:Int, gridFn:Int->Int->Void = null):Void
+	public function loadTileMap(tileImage:String, tileWidth:Int, tileHeight:Int, tileRow:Int, tileColumn:Int, gridFn:Int->Int->Void = null):Void
 	{
 		var mapWidth:Int = Std.parseInt(_levelXML.get("width"));
 		var mapHeight:Int = Std.parseInt(_levelXML.get("height"));
+		
+		var tileMap:TileMap = new TileMap(tileImage, tileWidth, tileHeight, mapWidth, mapHeight, tileRow, tileColumn);
+		_scene.createGameObject("tiles", tileMap);
+		
+		for (element in _levelXML.elementsNamed("Tiles"))
+		{
+			for (tiles in element.elements())
+			{
+				var x:Int = Std.parseInt(tiles.get("x"));
+				var y:Int = Std.parseInt(tiles.get("y"));
+				var tx:Int = Std.parseInt(tiles.get("tx"));
+				var ty:Int = Std.parseInt(tiles.get("ty"));
+				
+				tileMap.setTile(x, y, tx, ty);
+				if (gridFn != null)
+				{
+					gridFn(x, y);
+				}
+			}
+		}
+	}
+	
+	public function loadTiledSprite(tileImage:String, tileWidth:Int, tileHeight:Int, tileRow:Int, tileColumn:Int, gridFn:Int->Int->Void = null):Void
+	{
+		var mapWidth:Int = Std.parseInt(_levelXML.get("width"));
+		var mapHeight:Int = Std.parseInt(_levelXML.get("height"));
+		
 		var tileSprite:TiledSprite = new TiledSprite(tileImage, tileWidth, tileHeight, mapWidth, mapHeight, tileRow, tileColumn);
 		_scene.createGameObject("tiles", tileSprite);
 		

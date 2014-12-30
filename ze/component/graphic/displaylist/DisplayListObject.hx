@@ -10,14 +10,14 @@ import ze.component.graphic.Graphic;
 class DisplayListObject extends Graphic
 {
 	public var alpha(get, set):Float;
-	public var mask(default, set):DisplayListObject;
 	public var scrollRect(default, set):Rectangle;
+	public var mask(default, set):DisplayListObject;
 	public var displayObject(default, null):DisplayObject;
 	
 	override public function added():Void 
 	{
 		super.added();
-		scene.engine.addChild(displayObject);
+		scene.screen.addChild(displayObject);
 		update();
 	}
 	
@@ -31,12 +31,12 @@ class DisplayListObject extends Graphic
 		
 		if (flipped)
 		{
-			transform.scaleX = displayObject.scaleX = -1;
+			displayObject.scaleX = -1;
 			displayObject.x = transform.x + displayObject.width + offsetX;
 		}
 		else
 		{
-			transform.scaleX = displayObject.scaleX = 1;
+			displayObject.scaleX = 1;
 			displayObject.x = transform.x + offsetX;
 		}
 		
@@ -53,7 +53,7 @@ class DisplayListObject extends Graphic
 	override public function removed():Void 
 	{
 		super.removed();
-		scene.engine.removeChild(displayObject);
+		scene.screen.removeChild(displayObject);
 	}
 	
 	override public function destroyed():Void 

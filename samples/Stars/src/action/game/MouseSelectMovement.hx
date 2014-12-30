@@ -1,5 +1,5 @@
 package action.game;
-import action.player.CharacterController;
+import action.player.PlayerController;
 import ze.component.core.Component;
 import ze.util.Input;
 
@@ -10,12 +10,12 @@ import ze.util.Input;
 class MouseSelectMovement extends Component
 {
 	private var _isMoving:Bool;
-	private var _characterController:CharacterController;
+	private var _characterController:PlayerController;
 	
 	override public function added():Void 
 	{
 		super.added();
-		_characterController = getComponent(CharacterController);
+		_characterController = getComponent(PlayerController);
 	}
 	
 	override public function update():Void 

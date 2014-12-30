@@ -9,14 +9,14 @@ import ze.util.Time;
 
 class AnimatedSprite extends TilesheetObject
 {
+	public var playing(default, null):Bool;
 	public var currentFrame(default, null):Int;
 	public var currentFrameLabel(default, null):String;
-	public var playing(default, null):Bool;
 	
 	private var _timer:Int;
 	private var _lastTime:Int;
-	private var _animationData:AnimationData;
 	private var _playOnce:Bool;
+	private var _animationData:AnimationData;
 	
 	override public function added():Void 
 	{

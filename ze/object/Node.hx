@@ -5,20 +5,20 @@ import ze.Engine;
  * ...
  * @author Goh Zi He
  */
-class Node extends Object
+class Node
 {
+	public var enable(default, default):Bool;
+	
 	private var _next:Node;
 	private var _previous:Node;
-	
 	private var _parent:Node;
 	private var _child:Node;
-	
 	private var first(get, set):Node;
 	private var last(get, set):Node;
 	
 	public function new() 
 	{
-		super();
+		enable = true;
 		last = first = this;
 	}
 	
@@ -162,7 +162,7 @@ class Node extends Object
 		removed();
 	}
 	
-	override public function destroyed():Void
+	public function destroyed():Void
 	{
 		_next = null;
 		_previous = null;

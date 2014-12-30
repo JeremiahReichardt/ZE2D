@@ -1,7 +1,7 @@
 package action.item;
 import action.game.ItemManager;
-import action.player.CharacterController;
 import action.player.CountDown;
+import action.player.PlayerController;
 import ze.component.core.Component;
 import ze.component.physics.Collider;
 
@@ -22,7 +22,7 @@ class PickItem extends Component
 	
 	private function onCollide(collider:Collider):Bool
 	{
-		if (collider.getComponent(CharacterController) != null)
+		if (collider.getComponent(PlayerController) != null)
 		{
 			collider.addComponent(new CountDown());
 			return true;

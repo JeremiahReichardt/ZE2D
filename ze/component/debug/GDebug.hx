@@ -10,38 +10,40 @@ import ze.util.Input;
 import ze.util.Key;
 
 /**
- * ...
+ * Game Debug. Include FPS information and also pausing/resume game(tab key).
+ * When in pause mode, gameObject can be selected with mouse and move while
+ * holding down shift/z key.
  * @author Goh Zi He
  */
 class GDebug extends Component
 {
 	private var _debugMode:Bool;
+	private var _memory:Float;
+	private var _fpsText:Text;
+	private var _pausedText:Text;
+	private var _positionText:Text;
+	private var _times:Array<Float>;
+	private var _selectedGameObject:GameObject;
 	private var _debugCallBack:GameObject -> Void;
 	
-	private var _pausedText:Text;
-	private var _fpsText:Text;
 	private static var _consoleText:Text;
-	
-	private var _fpsGameObject:GameObject;
-	private var _debugGameObject:GameObject;
-	private var _selectedGameObject:GameObject;
-	
-	private var _times:Array<Float>;
-	private var _memory:Float;
 	
 	override public function added():Void 
 	{
 		super.added();
-		
 		_times = [];
+		_debugMode = false;
 		
 		_fpsText = new Text("FPS: ", Color.WHITE);
-		_fpsGameObject = scene.createGameObject("fps", _fpsText);
+		scene.createGameObject("fps", _fpsText);
 		
 		_pausedText = new Text("Paused", Color.WHITE);
-		_debugGameObject = scene.createGameObject("debug", _pausedText, scene.screen.right - 75, 0);
-		_debugMode = false;
 		_pausedText.visible = _debugMode;
+		scene.createGameObject("debug", _pausedText, scene.screen.right - 75, 0);
+		
+		_positionText = new Text("X: 100 Y: 100", Color.WHITE);
+		_positionText.visible = _debugMode;
+		scene.createGameObject("Position", _positionText, scene.screen.right - 140, scene.screen.bottom - 22);
 		
 		_consoleText = new Text("", Color.WHITE);
 		scene.createGameObject("Console", _consoleText, 0, scene.screen.bottom - 22);
@@ -76,10 +78,20 @@ class GDebug extends Component
 			{
 				if (_selectedGameObject != null)
 				{
+					_positionText.setText("X: " + _selectedGameObject.transform.x + " Y: " + _selectedGameObject.transform.y);
+					
 					_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.graphic.width * 0.5);
 					_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.graphic.height * 0.5);
-					_selectedGameObject.graphic.update();
-					_selectedGameObject.collider.update();
+					
+					if (_selectedGameObject.graphic != null)
+					{
+						_selectedGameObject.graphic.update();
+					}
+					
+					if (_selectedGameObject.collider != null)
+					{
+						_selectedGameObject.collider.update();
+					}
 				}
 			}
 			
@@ -102,8 +114,10 @@ class GDebug extends Component
 		
 		#if flash
 		_memory = Math.ffloor(openfl.system.System.totalMemory / 1024 / 512);
-		#end
 		_fpsText.setText("FPS: " + _times.length + " Memory: " + _memory + " MB");
+		#else
+		_fpsText.setText("FPS: " + _times.length);
+		#end
 	}
 	
 	private function selectGameObject():Void
@@ -131,6 +145,8 @@ class GDebug extends Component
 							if (mouseY < y + height)
 							{
 								_selectedGameObject = current;
+								_positionText.visible = true;
+								
 								if (_debugCallBack != null)
 								{
 									_debugCallBack(current);
@@ -157,6 +173,8 @@ class GDebug extends Component
 							if (mouseY < y + height)
 							{
 								_selectedGameObject = current;
+								_positionText.visible = true;
+								
 								if (_debugCallBack != null)
 								{
 									_debugCallBack(current);
@@ -169,12 +187,14 @@ class GDebug extends Component
 			}
 			node = node._next;
 		}
+		_positionText.visible = false;
 		return null;
 	}
 	
 	private function enableAllGameObject():Void
 	{
 		_debugMode = false;
+		_positionText.visible = false;
 		
 		var node:Node = scene._child.first;
 		while (node != null)
@@ -183,8 +203,6 @@ class GDebug extends Component
 			gameObject.enable = true;
 			node = node._next;
 		}
-		_fpsGameObject.enable = false;
-		_debugGameObject.enable = false;
 	}
 	
 	private function disableAllGameObject():Void
@@ -201,8 +219,6 @@ class GDebug extends Component
 			}
 			node = node._next;
 		}
-		_fpsGameObject.enable = true;
-		_debugGameObject.enable = true;
 	}
 	
 	public function registerCallBack(debugCallBack:GameObject -> Void):Void

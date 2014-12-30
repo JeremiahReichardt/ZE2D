@@ -12,10 +12,10 @@ import ze.component.graphic.tilesheet.Text;
  */
 class TileSheetLayer extends Tilesheet
 {
-	private var _sprites:StringMap<Array<Int>>;
-	private var _layer:Array<Array<Float>>;
-	
 	public var graphics(default, default):Graphics;
+	
+	private var _layer:Array<Array<Float>>;
+	private var _sprites:StringMap<Array<Int>>;
 	
 	public function new(name:String)
 	{
@@ -33,18 +33,18 @@ class TileSheetLayer extends Tilesheet
 		for (sprite in root.elements())
 		{
 			var type:String = sprite.get("type");
-			var tileName:String = sprite.get("name");
+			var tileName:String = sprite.get("n");
 			var x:Float = Std.parseFloat(sprite.get("x"));
 			var y:Float = Std.parseFloat(sprite.get("y"));
-			var width:Float = Std.parseFloat(sprite.get("width"));
-			var height:Float = Std.parseFloat(sprite.get("height"));
+			var width:Float = Std.parseFloat(sprite.get("w"));
+			var height:Float = Std.parseFloat(sprite.get("h"));
 			
 			var data:Array<Int> = [];
 			
 			if (type == "multiple")
 			{
-				var tileWidth:Float = Std.parseFloat(sprite.get("tileWidth"));
-				var tileHeight:Float = Std.parseFloat(sprite.get("tileHeight"));
+				var tileWidth:Float = Std.parseFloat(sprite.get("tw"));
+				var tileHeight:Float = Std.parseFloat(sprite.get("th"));
 				var totalWidth:Int = Math.floor(width / tileWidth);
 				var totalHeight:Int = Math.floor(height / tileHeight);
 				

@@ -1,6 +1,6 @@
 package prefab;
 import action.game.MouseSelectMovement;
-import action.player.CharacterController;
+import action.player.PlayerController;
 import ze.component.graphic.tilesheet.Sprite;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
@@ -22,7 +22,7 @@ class PlayerObject extends GameObject
 	{
 		super.added();
 		addComponent(new BoxCollider(32, 32, true));
-		addComponent(new CharacterController(_playerIndex));
+		addComponent(new PlayerController(_playerIndex));
 		addComponent(new Sprite("Player"));
 		addComponent(new MouseSelectMovement());
 	}

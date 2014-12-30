@@ -1,4 +1,4 @@
 <TextureAtlas imagePath="ui.png">
-	<SubTexture type="font" name="Grobold" x="0" y="300" width="256" height="256" tileWidth="32" tileHeight="32" letters="$j?()W!MAVQGiXOC3SK69gY@ZDN02ROU48TJL%I/1&BHbdp5qFE7hkflyt+woxacvusrzmen=:;_,'&quot;&quot;-." />
-	<SubTexture type="single" name="Dialog" x="0" y="0" width="600" height="300"/>
+	<SubTexture type="font" n="Grobold" x="0" y="301" w="256" h="256" tw="32" th="32" letters="$j?()W!MAVQGiXOC3SK69gY@ZDN02ROU48TJL%I/1&BHbdp5qFE7hkflyt+woxacvusrzmen=:;_,'&quot;&quot;-." />
+	<SubTexture type="single" n="Dialog" x="0" y="0" w="600" h="300"/>
 </TextureAtlas>

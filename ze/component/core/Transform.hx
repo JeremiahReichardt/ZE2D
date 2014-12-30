@@ -1,17 +1,15 @@
 package ze.component.core;
-import ze.component.core.Transform;
 
 /**
- * ...
+ * Transform component that includes moving, scaling, rotating of a gameobject
  * @author Goh Zi He
  */
-
 class Transform extends Component
 {
 	public var x(default, default):Float;
 	public var y(default, default):Float;
-	public var scaleX(default, default):Float;
-	public var scaleY(default, default):Float;
+	public var width(get, null):Float;
+	public var height(get, null):Float;
 	public var rotation(default, null):Float;
 	
 	private var _direction:Int;
@@ -24,15 +22,15 @@ class Transform extends Component
 	public function new() 
 	{
 		super();
-		x = 0;
-		y = 0;
-		rotation = 0;
-		scaleX = 1;
-		scaleY = 1;
 		_moveX = 0;
 		_moveY = 0;
 		_diffX = 0;
 		_diffY = 0;
+		x = 0;
+		y = 0;
+		width = 0;
+		height = 0;
+		rotation = 0;
 	}
 	
 	override public function update():Void 
@@ -57,7 +55,7 @@ class Transform extends Component
 	}
 	
 	/**
-	 * Move the gameObject in the x/y axis (With collision, Slow)
+	 * Move the gameObject in the x/y axis (With collision, slower than move)
 	 * @param	x
 	 * @param	y
 	 */
@@ -103,6 +101,10 @@ class Transform extends Component
 		}
 	}
 	
+	/**
+	 * Attach this gameObject to another gameObject's transform
+	 * @param	toTransform
+	 */
 	public function attachTo(toTransform:Transform):Void
 	{
 		_attached = toTransform;
@@ -110,20 +112,34 @@ class Transform extends Component
 		_diffY = toTransform.y - y;
 	}
 	
+	/**
+	 * Helper function to set the x and y of this transform. Same as setting
+	 * transform.x and transform.y manually
+	 * @param	xPos
+	 * @param	yPos
+	 */
 	public function setPos(xPos:Float, yPos:Float):Void
 	{
 		x = xPos;
 		y = yPos;
 	}
 	
+	/**
+	 * Rotate this gameObject by angle
+	 * @param	angle
+	 */
 	public function rotate(angle:Float):Void
 	{
 		setRot(rotation + angle);
 	}
 	
-	public function setRot(angle:Float):Void
+	/**
+	 * Helper function to set the rotation of this gameObject
+	 * @param	newAngle
+	 */
+	public function setRot(newAngle:Float):Void
 	{
-		rotation = angle;
+		rotation = newAngle;
 		if (rotation >= 360)
 		{
 			var exceed:Float = rotation - 360;
@@ -136,15 +152,41 @@ class Transform extends Component
 		}
 	}
 	
-	public function resize(sizeX:Float = 0, sizeY:Float = 0):Void
-	{
-		scaleX += sizeX;
-		scaleY += sizeY;
-	}
-	
 	override public function removed():Void 
 	{
 		super.removed();
 		_attached = null;
+	}
+	
+	private function get_width():Float
+	{
+		if (width == 0)
+		{
+			if (collider != null)
+			{
+				width = collider.width;
+			}
+			else if (graphic != null)
+			{
+				width = graphic.width;
+			}
+		}
+		return width;
+	}
+	
+	private function get_height():Float
+	{
+		if (height == 0)
+		{
+			if (collider != null)
+			{
+				height = collider.height;
+			}
+			else if (graphic != null)
+			{
+				height = graphic.height;
+			}
+		}
+		return height;
 	}
 }

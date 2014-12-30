@@ -1,7 +1,7 @@
 package action.item;
 import action.item.PickItem;
-import action.player.CharacterController;
 import action.player.CountDown;
+import action.player.PlayerController;
 import ze.component.physics.Collider;
 import ze.component.sounds.Audio;
 
@@ -13,7 +13,7 @@ class PickStar extends PickItem
 {
 	private var _pickStarSfx:Audio;
 	private var _spawnStarSfx:Audio;
-	private var _characterController:CharacterController;
+	private var _player:PlayerController;
 	
 	override public function added():Void 
 	{
@@ -29,6 +29,12 @@ class PickStar extends PickItem
 	
 	override private function onCollide(collider:Collider):Bool
 	{
+		//if (collider.gameObject.name == "collisionbox")
+		//{
+			//gameObject.kill();
+			//_itemManager.spawnStar();
+		//}
+		
 		if (super.onCollide(collider))
 		{
 			// Play sound
@@ -41,8 +47,8 @@ class PickStar extends PickItem
 			countDown.onEnd = end;
 			countDown.startCountDown();
 			
-			_characterController = collider.getComponent(CharacterController);
-			_characterController.haveStar = true;
+			_player = collider.getComponent(PlayerController);
+			_player.haveStar = true;
 			
 			// destroy itself
 			scene.removeGameObject(gameObject);
@@ -60,6 +66,6 @@ class PickStar extends PickItem
 	private function end():Void
 	{
 		_itemManager.spawnStar();
-		_characterController.haveStar = false;
+		_player.haveStar = false;
 	}
 }

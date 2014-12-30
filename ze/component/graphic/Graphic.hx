@@ -7,18 +7,18 @@ import ze.component.core.Component;
  */
 class Graphic extends Component
 {
-	public var x(get, null):Float;
-	public var y(get, null):Float;
 	public var offsetX:Float;
 	public var offsetY:Float;
+	public var x(get, null):Float;
+	public var y(get, null):Float;
 	public var width(get, null):Float;
 	public var height(get, null):Float;
+	public var layer(default, set):Int;
 	public var halfWidth(get, null):Float;
 	public var halfHeight(get, null):Float;
-	public var layer(default, set):Int;
-	public var flipped(default, default):Bool;
 	public var visible(default, set):Bool;
 	public var centered(default, set):Bool;
+	public var flipped(default, default):Bool;
 	
 	public function new()
 	{
@@ -29,11 +29,6 @@ class Graphic extends Component
 		offsetY = 0;
 		width = 0;
 		height = 0;
-	}
-	
-	override public function added():Void 
-	{
-		super.added();
 		layer = 0;
 		flipped = false;
 		visible = true;

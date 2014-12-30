@@ -1,10 +1,12 @@
 package actions;
+import openfl.Lib;
 import ze.component.core.CharacterController;
 import ze.component.core.Component;
 import ze.component.graphic.tilesheet.Sprite;
 import ze.component.physics.BoxCollider;
 import ze.component.sounds.Audio;
 import ze.object.GameObject;
+import ze.util.Delay;
 import ze.util.Input;
 import ze.util.Key;
 import ze.util.Time;
@@ -20,6 +22,7 @@ class Player extends Component
 	private static inline var GRAVITY:Float = 20;
 	private static inline var WALKING_SPEED:Float = 100;
 	private static inline var MAX_SPEED:Float = 500;
+	private static inline var DEATH_SPAWN_DELAY:Int = 500;
 	
 	private static var bullet:GameObject;
 	private static var flippedRender:Bool;
@@ -34,15 +37,18 @@ class Player extends Component
 	private var _shootSfx:Audio;
 	private var _teleportSfx:Audio;
 	private var _dieSfx:Audio;
-
+	
+	private var _deadTime:Int;
 	
 	override public function added():Void 
 	{
 		super.added();
+		_deadTime = Lib.getTimer() - DEATH_SPAWN_DELAY;
 		_moveX = 0;
 		_moveY = 0;
 		_startX = transform.x;
 		_startY = transform.y;
+		
 		_characterController = getComponent(CharacterController);
 		_grid = getGameObjectByName("grid").getComponent(Grid);
 		
@@ -56,6 +62,12 @@ class Player extends Component
 	override public function update():Void 
 	{
 		super.update();
+		
+		if (Lib.getTimer() - _deadTime < DEATH_SPAWN_DELAY)
+		{
+			return;
+		}
+		
 		movement();
 		
 		var direction:Bullet.BulletDirection;
@@ -186,6 +198,8 @@ class Player extends Component
 		{
 			return;
 		}
+		
+		_deadTime = Lib.getTimer();
 		_dieSfx.play();
 		teleportToRespawn();
 		flippedRender = graphic.flipped;

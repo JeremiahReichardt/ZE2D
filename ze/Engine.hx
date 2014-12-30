@@ -13,18 +13,22 @@ import ze.util.Time;
  */
 class Engine extends Sprite 
 {
-	private static var removeList:Array<Node>;
 	private var _currentScene:Scene;
 	private var _enable:Bool;
+	
+	private static var removeList:Array<Node>;
 	
 	public function new(initScene:Scene) 
 	{
 		super();
 		removeList = [];
 		_enable = true;
+		
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		addEventListener(Event.DEACTIVATE, deactivate);
 		addEventListener(Event.ACTIVATE, activate);
+		
+		// Initialization must be done first before calling scene.added()
 		Input.init(stage);
 		addScene(initScene);
 	}
@@ -44,7 +48,7 @@ class Engine extends Sprite
 		
 		_currentScene.update();
 		
-		#if (flash || windows)
+		#if ((flash || windows) && debug)
 		if (Input.keyPressed(Key.ESCAPE)) 
 		{
 			openfl.system.System.exit(0);
@@ -56,7 +60,7 @@ class Engine extends Sprite
 			removeList[removeList.length - 1].destroyed();
 			removeList.pop();
 		}
-		Input.update();
+		Input.update(_currentScene);
 	}
 	
 	public function addScene(scene:Scene):Scene
