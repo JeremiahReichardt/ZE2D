@@ -11,7 +11,7 @@ class Blank extends BitmapObject
 	public function new(width:Int, height:Int, color:Int = Color.WHITE) 
 	{
 		super();
-		setBitmapData(new BitmapData(width, height, true, color));
+		setBitmapData(new BitmapData(width, height, false, color));
 	}
 	
 	override public function destroyed():Void 

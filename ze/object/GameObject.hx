@@ -1,6 +1,7 @@
 package ze.object;
 import ze.component.core.Component;
 import ze.component.core.Transform;
+import ze.component.debug.GDebug;
 import ze.component.graphic.Graphic;
 import ze.component.physics.Collider;
 
@@ -139,5 +140,10 @@ class GameObject extends Node
 	private function get_scene():Scene
 	{
 		return (cast(_parent, Scene));
+	}
+	
+	private function log(msg:Dynamic):Void
+	{
+		GDebug.logMsg(msg);
 	}
 }

@@ -13,6 +13,8 @@ import ze.util.Time;
  */
 class Engine extends Sprite 
 {
+	public static var version(default, null):String = "0.0.0";
+	
 	private var _currentScene:Scene;
 	private var _enable:Bool;
 	

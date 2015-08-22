@@ -22,6 +22,8 @@ class GDebug extends Component
 	private var _fpsText:Text;
 	private var _pausedText:Text;
 	private var _positionText:Text;
+	private var _helpText:Text;
+	
 	private var _times:Array<Float>;
 	private var _selectedGameObject:GameObject;
 	private var _debugCallBack:GameObject -> Void;
@@ -34,19 +36,25 @@ class GDebug extends Component
 		_times = [];
 		_debugMode = false;
 		
-		_fpsText = new Text("FPS: ", Color.WHITE);
-		scene.createGameObject("fps", _fpsText);
+		_fpsText = new Text("FPS: ", Color.WHITE, 15);
+		scene.createGameObject("fps", _fpsText, 300);
 		
-		_pausedText = new Text("Paused", Color.WHITE);
+		_pausedText = new Text("Paused", Color.WHITE, 15);
 		_pausedText.visible = _debugMode;
-		scene.createGameObject("debug", _pausedText, scene.screen.right - 75, 0);
+		scene.createGameObject("debug", _pausedText, scene.screen.right - 60, 0);
 		
-		_positionText = new Text("X: 100 Y: 100", Color.WHITE);
+		_positionText = new Text("X: - Y: - ", Color.WHITE, 15);
 		_positionText.visible = _debugMode;
-		scene.createGameObject("Position", _positionText, scene.screen.right - 140, scene.screen.bottom - 22);
+		scene.createGameObject("Position", _positionText, scene.screen.right - 110, scene.screen.bottom - 20);
 		
-		_consoleText = new Text("", Color.WHITE);
-		scene.createGameObject("Console", _consoleText, 0, scene.screen.bottom - 22);
+		_helpText = new Text("Select with mouse and move item when Z/Ctrl key is pressed.", Color.WHITE, 15);
+		_helpText.visible = _debugMode;
+		scene.createGameObject("Help", _helpText, 0, scene.screen.bottom - 20);
+		
+		_consoleText = new Text("Debug: Press Tab/Tilde key to enable debug console.", Color.WHITE, 15);
+		scene.createGameObject("Console", _consoleText, 0, scene.screen.bottom - 20);
+		
+		scene.createGameObject("Logo", new Text("ZE2D Game Engine v" + Engine.version, Color.WHITE, 15));
 	}
 	
 	override public function update():Void 
@@ -54,7 +62,7 @@ class GDebug extends Component
 		super.update();
 		showFPS();
 		
-		if (Input.keyPressed(Key.TAB))
+		if (Input.keyPressed(Key.TAB) || Input.keyPressed(Key.BACKTICK))
 		{
 			if (_debugMode)
 			{
@@ -64,7 +72,12 @@ class GDebug extends Component
 			{
 				disableAllGameObject();
 			}
+			
+			// Show/Hide the text
 			_pausedText.visible = _debugMode;
+			_positionText.visible = _debugMode;
+			_helpText.visible = _debugMode;
+			_consoleText.visible = !_debugMode;
 		}
 		
 		if (_debugMode)
@@ -74,12 +87,10 @@ class GDebug extends Component
 				selectGameObject();
 			}
 			
-			if (Input.leftMouseDown() && (Input.keyDown(Key.Z) || Input.keyDown(Key.SHIFT)))
+			if (Input.leftMouseDown() && (Input.keyDown(Key.Z) || Input.keyDown(Key.SHIFT) || Input.keyDown(Key.CTRL)))
 			{
 				if (_selectedGameObject != null)
-				{
-					_positionText.setText("X: " + _selectedGameObject.transform.x + " Y: " + _selectedGameObject.transform.y);
-					
+				{	
 					_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.graphic.width * 0.5);
 					_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.graphic.height * 0.5);
 					
@@ -97,6 +108,10 @@ class GDebug extends Component
 			
 			if (Input.leftMouseReleased())
 			{
+				if (_selectedGameObject != null)	
+				{
+					printSelectObjectPosition();
+				}
 				_selectedGameObject = null;
 			}
 		}
@@ -145,7 +160,7 @@ class GDebug extends Component
 							if (mouseY < y + height)
 							{
 								_selectedGameObject = current;
-								_positionText.visible = true;
+								printSelectObjectPosition();
 								
 								if (_debugCallBack != null)
 								{
@@ -173,7 +188,7 @@ class GDebug extends Component
 							if (mouseY < y + height)
 							{
 								_selectedGameObject = current;
-								_positionText.visible = true;
+								printSelectObjectPosition();
 								
 								if (_debugCallBack != null)
 								{
@@ -187,14 +202,14 @@ class GDebug extends Component
 			}
 			node = node._next;
 		}
-		_positionText.visible = false;
+		
+		_positionText.setText("X: - Y: - ");
 		return null;
 	}
 	
 	private function enableAllGameObject():Void
 	{
 		_debugMode = false;
-		_positionText.visible = false;
 		
 		var node:Node = scene._child.first;
 		while (node != null)
@@ -212,10 +227,10 @@ class GDebug extends Component
 		var node:Node = scene._child.first;
 		while (node != null)
 		{
-			var gameObject:GameObject = cast (node, GameObject);
-			if (gameObject != this.gameObject && gameObject.enable)
+			var current:GameObject = cast (node, GameObject);
+			if (current != gameObject && current.enable)
 			{
-				gameObject.enable = false;
+				current.enable = false;
 			}
 			node = node._next;
 		}
@@ -226,13 +241,20 @@ class GDebug extends Component
 		_debugCallBack = debugCallBack;	
 	}
 	
-	public static function log(item:Dynamic):Void
+	public static function logMsg(item:Dynamic):Void
 	{
+		#if debug
 		var message:String = "Debug: ";
 		if (Std.is(item, Int) || Std.is(item, Float) || Std.is(item, String))
 		{
 			message += item;
 		}
 		_consoleText.setText(message);
+		#end
+	}
+	
+	private function printSelectObjectPosition():Void
+	{
+		_positionText.setText("X: " + Math.round(_selectedGameObject.transform.x) + " Y: " + Math.round(_selectedGameObject.transform.y));
 	}
 }

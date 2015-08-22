@@ -1,4 +1,5 @@
 package ze.component.core;
+import ze.component.debug.GDebug;
 import ze.component.graphic.Graphic;
 import ze.component.physics.Collider;
 import ze.object.GameObject;
@@ -99,5 +100,10 @@ class Component extends Node
 		graphic = null;
 		scene = null;
 		gameObject = null;
+	}
+	
+	private function log(msg:Dynamic):Void
+	{
+		GDebug.logMsg(msg);
 	}
 }

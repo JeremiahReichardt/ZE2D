@@ -1,6 +1,12 @@
 ###Changelog###
 DD/MM/YY
 
+(22/8/2015)
+- Added GDebug support into scene
+- Made position text change appropriately when choosing gameObject.
+- Updated README.md, added a few examples.
+- Fixed a bug where blank component is rendered as transparent in HTML5 target.
+
 (28/12/2014)
 - Changed TileSprite to only accept all Ints.
 - Created new Displaylist object TileMap.

@@ -1,5 +1,6 @@
 package ze.object;
 import ze.component.core.Component;
+import ze.component.debug.GDebug;
 import ze.object.GameObject;
 import ze.object.Node;
 import ze.util.Screen;
@@ -13,10 +14,18 @@ class Scene extends Node
 	public var screen(default, null):Screen;
 	public var engine(default, null):Engine;
 	
+	private var _gDebug:GDebug;
+	
 	override public function added():Void 
 	{
 		super.added();
 		screen = new Screen(this);
+		
+		// Enable GDebug
+		#if debug
+		_gDebug = new GDebug();
+		createGameObject("GDebug", _gDebug);
+		#end
 	}
 	
 	override public function update():Void 
@@ -161,5 +170,10 @@ class Scene extends Node
 		screen = null;
 		engine = null;
 		super.removed();
+	}
+	
+	private function log(msg:Dynamic):Void
+	{
+		GDebug.logMsg(msg);
 	}
 }

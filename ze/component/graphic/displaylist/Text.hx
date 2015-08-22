@@ -17,7 +17,9 @@ class Text extends DisplayListObject
 	
 	private static inline var defaultFont:String = "font/GROBOLD.ttf";
 	
-	public function new(text:String = "", color:Int = Color.BLACK, size:Float = 20)
+	public var length(default, null):Int;
+	
+	public function new(text:String = "", color:Int = Color.BLACK, size:Int = 20)
 	{
 		super();
 		_textField = new TextField();
@@ -34,6 +36,8 @@ class Text extends DisplayListObject
 		_textField.embedFonts = true;
 		_textField.setTextFormat(_format);
 		_textField.autoSize = TextFieldAutoSize.LEFT;
+		
+		length = _textField.length;
 	}
 	
 	public function setFont(fontPath:String):Void
@@ -45,6 +49,7 @@ class Text extends DisplayListObject
 	{
 		_textField.text = text;
 		_textField.setTextFormat(_format);
+		length = _textField.length;
 	}
 	
 	override public function destroyed():Void 
