@@ -26,6 +26,8 @@ class Input
 	private static var _currentKeyPressed:Int;
 	private static var _currentKeyReleased:Int;
 	
+	private static var _mouseMoved:Bool;
+	
 	private static var _leftMouseDown:Bool;
 	private static var _leftMousePressed:Bool;
 	private static var _leftMouseReleased:Bool;
@@ -62,6 +64,7 @@ class Input
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownEvent);
 		stage.addEventListener(KeyboardEvent.KEY_UP, keyUpEvent);
 		
+		stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveEvent);
 		stage.addEventListener(MouseEvent.MOUSE_DOWN, leftMouseDownEvent);
 		stage.addEventListener(MouseEvent.MOUSE_UP, leftMouseUpEvent);
 		
@@ -104,6 +107,11 @@ class Input
 		if (_touchReleased)
 		{
 			_touchReleased = false;
+		}
+		
+		if (_mouseMoved)
+		{
+			_mouseMoved = false;
 		}
 		
 		mouseX = _stage.mouseX + scene.screen.left;
@@ -169,13 +177,13 @@ class Input
 		return false;
 	}
 	
-	public static function anyKeyPressed():Bool 
+	public static function anyKeyDown():Bool 
 	{
 		for (key in _keys)
 		{
 			if (key)
 			{
-				return key;
+				return true;
 			}
 		}
 		return false;
@@ -224,6 +232,11 @@ class Input
 		{
 			return false;
 		}
+	}
+	
+	private static function mouseMoveEvent(event:MouseEvent):Void
+	{
+		_mouseMoved = true;
 	}
 	
 	private static function leftMouseDownEvent(event:MouseEvent):Void
@@ -325,5 +338,10 @@ class Input
 	public static function keyCode():Int
 	{
 		return _keyCode;
+	}
+	
+	public static function mouseMoved():Bool
+	{
+		return _mouseMoved;
 	}
 }

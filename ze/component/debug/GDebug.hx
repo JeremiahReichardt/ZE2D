@@ -51,7 +51,7 @@ class GDebug extends Component
 		_helpText.visible = _debugMode;
 		scene.createGameObject("Help", _helpText, 0, scene.screen.bottom - 20);
 		
-		_consoleText = new Text("Debug: Press Tab/Tilde key to enable debug console.", Color.WHITE, 15);
+		_consoleText = new Text("Debug: Press Tilde key to pause game and move things around.", Color.WHITE, 15);
 		scene.createGameObject("Console", _consoleText, 0, scene.screen.bottom - 20);
 		
 		scene.createGameObject("Logo", new Text("ZE2D Game Engine v" + Engine.version, Color.WHITE, 15));
@@ -62,7 +62,7 @@ class GDebug extends Component
 		super.update();
 		showFPS();
 		
-		if (Input.keyPressed(Key.TAB) || Input.keyPressed(Key.BACKTICK))
+		if (Input.keyPressed(Key.BACKTICK))
 		{
 			if (_debugMode)
 			{
@@ -250,6 +250,7 @@ class GDebug extends Component
 			message += item;
 		}
 		_consoleText.setText(message);
+		trace(message);
 		#end
 	}
 	

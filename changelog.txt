@@ -1,6 +1,10 @@
 ###Changelog###
 DD/MM/YY
 
+(23/8/2015)
+- Added a IMGUI library
+- Added mouse move checks to Input
+
 (22/8/2015)
 - Added GDebug support into scene
 - Made position text change appropriately when choosing gameObject.
