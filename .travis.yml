@@ -22,6 +22,7 @@ install:
   - haxelib install lime > log.txt || cat log.txt
   - haxelib install lime-tools > log.txt || cat log.txt
   - haxelib install format > log.txt || cat log.txt
+  - haxelib git ze2d https://github.com/zine92/ZE2D
   - if [[ $TARGET == 'cpp' ]]; then haxelib run lime rebuild linux -release -64 -nocffi > log.txt || cat log.txt; fi
   - if [[ $TARGET == 'cpp' ]]; then haxelib run lime rebuild linux -release -64 -Dlegacy -nocffi > log.txt || cat log.txt ; fi
   - haxelib run lime rebuild tools -nocffi
