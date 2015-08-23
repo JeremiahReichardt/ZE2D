@@ -1,42 +1,21 @@
-language: haxe
-
-haxe:
-  - "3.2.0"
-
-env: 
-  - TARGET=flash
-  - TARGET=cpp
-  - TARGET=html5
-
-sudo: false
+language: c++
 
 before_install:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x32 -extension GLX
-  - export AUDIODEV=null
-
-install:
-  - haxelib install openfl > log.txt || cat log.txt
-  - haxelib install hxcpp > log.txt || cat log.txt
-  - haxelib install lime > log.txt || cat log.txt
-  - haxelib install lime-tools > log.txt || cat log.txt
-  - haxelib install format > log.txt || cat log.txt
-  - if [[ $TARGET == 'cpp' ]]; then haxelib run lime rebuild linux -release -64 -nocffi > log.txt || cat log.txt; fi
-  - if [[ $TARGET == 'cpp' ]]; then haxelib run lime rebuild linux -release -64 -Dlegacy -nocffi > log.txt || cat log.txt ; fi
-  - haxelib run lime rebuild tools -nocffi
-  
-
-script:
+  - sudo add-apt-repository ppa:eyecreate/haxe -y
+  - sudo apt-get update
+  - sudo apt-get install haxe -y --force-yes
+  - sudo apt-get install g++-multilib gcc-multilib
+  - mkdir ~/haxelib
+  - haxelib setup ~/haxelib
+  - haxelib -notimeout install openfl
+  - haxelib -notimeout install hxcpp
+  - haxelib -notimeout install lime
+  - haxelib -notimeout install lime-tools
+  - haxelib -notimeout git ze2d https://github.com/zine92/ZE2D
   - cd $(pwd)/samples/
-  - if [[ $TARGET == 'flash' ]]; 
-      then 
-        haxelib run openfl build Plane/application.xml flash;
-        haxelib run openfl build Stars/application.xml flash;
-        haxelib run openfl build Terry/application.xml flash
-        haxelib run openfl build TileSheetLayer/application.xml flash
-    fi
-    
-cache:
-  directories:
-    - $HOME/haxe/lib
+  
+script:
+  - haxelib run openfl build Plane/application.xml flash
+  - haxelib run openfl build Stars/application.xml flash
+  - haxelib run openfl build Terry/application.xml flash
+  - haxelib run openfl build TileSheetLayer/application.xml flash
