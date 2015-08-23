@@ -32,11 +32,29 @@ script:
   - if [[ $TARGET == 'flash' ]]; 
       then 
         haxelib run openfl build Plane/application.xml flash;
+        haxelib run openfl build Simple\ Tutorial/application.xml flash;
         haxelib run openfl build Stars/application.xml flash;
         haxelib run openfl build Terry/application.xml flash;
         haxelib run openfl build TileSheetLayer/application.xml flash;
     fi
-    
+  
+  - if [[ $TARGET == 'cpp' ]]; 
+      then 
+        haxelib run openfl build Plane/application.xml windows;
+        haxelib run openfl build Simple\ Tutorial/application.xml windows;
+        haxelib run openfl build Stars/application.xml windows;
+        haxelib run openfl build Terry/application.xml windows;
+        haxelib run openfl build TileSheetLayer/application.xml windows;
+    fi
+  
+  - if [[ $TARGET == 'html5' ]]; 
+      then 
+        haxelib run openfl build Plane/application.xml html5;
+        haxelib run openfl build Simple\ Tutorial/application.xml html5;
+        haxelib run openfl build Stars/application.xml html5;
+        haxelib run openfl build Terry/application.xml html5;
+        haxelib run openfl build TileSheetLayer/application.xml html5;
+    fi
 cache:
   directories:
     - $HOME/haxe/lib
