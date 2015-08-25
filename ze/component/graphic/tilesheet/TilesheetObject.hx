@@ -31,10 +31,10 @@ class TilesheetObject extends Graphic
 		_tileSheetLayer = _screen.getLayer(_name);
 	}
 	
-	override function update():Void 
+	override function draw():Void 
 	{
-		super.update();
-		if (!visible || _tileSheetLayer == null)
+		super.draw();
+		if (_tileSheetLayer == null)
 		{
 			return;
 		}

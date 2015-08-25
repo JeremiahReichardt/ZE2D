@@ -1,6 +1,5 @@
 package;
-import scenes.MainScene;
-import ze.component.physics.Collider;
+import scenes.SplashScene;
 import ze.Engine;
 
 /**
@@ -11,6 +10,6 @@ class Main extends Engine
 {
 	public function new()
 	{
-		super(new MainScene());
+		super(new SplashScene());
 	}
 }

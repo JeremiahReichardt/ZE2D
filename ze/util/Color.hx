@@ -136,5 +136,8 @@ class Color
 	public static inline var BROWN:Int = 0x8B4513;
 	public static inline var BEIGE:Int = 0xE6D59E;
 	public static inline var CARAMEL:Int = 0xFFEF21;
+	
+	// Fake transparent
+	public static inline var TRANSPARENT:Int = WHITE;
 	#end
 }

@@ -1,6 +1,14 @@
 ###Changelog###
 DD/MM/YY
 
+(25/8/15)
+- Fixed Stars spawning position.
+- Added extra draw function alongside update, so that GDebug will not pause UI rendering.
+- GDebug able to see collision debug draw.
+- Changed level size of stars.
+- Added Splash screen.
+- Fixed a bug where changing scene would crashed the game.
+
 (23/8/2015)
 - Added a IMGUI library
 - Added mouse move checks to Input

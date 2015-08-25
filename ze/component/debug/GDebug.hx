@@ -3,6 +3,7 @@ import haxe.Timer;
 import ze.component.core.Component;
 import ze.component.graphic.displaylist.Text;
 import ze.component.physics.BoxCollider;
+import ze.component.physics.Collider;
 import ze.object.GameObject;
 import ze.object.Node;
 import ze.util.Color;
@@ -72,6 +73,9 @@ class GDebug extends Component
 			{
 				disableAllGameObject();
 			}
+			
+			// Toggle collider debug shapes
+			Collider.toggleAllDebugShape(_debugMode);
 			
 			// Show/Hide the text
 			_pausedText.visible = _debugMode;

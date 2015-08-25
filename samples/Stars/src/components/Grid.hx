@@ -1,4 +1,4 @@
-package action;
+package components;
 import openfl.geom.Point;
 import ze.component.core.Component;
 
@@ -34,18 +34,24 @@ class Grid extends Component
 		_grid[y][x] = 1;
 	}
 	
-	public function hasGridCollision(x:Float, y:Float):Bool
+	/**
+	 * Checks the cell on the grid, if the cell is 1, it is occupied.
+	 * @param	x	The x index of the cell
+	 * @param	y	The y index of the cell
+	 * @return	True if the cell is occupied, equals to 1
+	 */
+	public function hasGridCollision(x:Int, y:Int):Bool
 	{
-		var gridX:Int = Std.int(getGridPoint(x));
-		var gridY:Int = Std.int(getGridPoint(y));
+		x = pointToGrid(x);
+		y = pointToGrid(y);
 		
-		return _grid[gridY][gridX] == 1;
+		return _grid[y][x] == 1;
 	}
 	
-	public function gridCollision(x:Float, y:Float):Point
+	public function gridCollision(x:Int, y:Int):Point
 	{
-		var gridX:Int = Std.int(getGridPoint(x));
-		var gridY:Int = Std.int(getGridPoint(y));
+		var gridX:Int = pointToGrid(x);
+		var gridY:Int = pointToGrid(y);
 		var point:Point = new Point();
 		
 		if (_grid[gridY][gridX] == 1)
@@ -67,18 +73,24 @@ class Grid extends Component
 		return point;
 	}
 	
-	private function getGridPoint(point:Float):Float
+	/**
+	 * Converts real point coordinate to grid cell coordinate
+	 * @param	point
+	 * @return
+	 */
+	private inline function pointToGrid(point:Int):Int
 	{
-		var remainder:Float = point % _tileSize;
-		point -= remainder;
-		point /= _tileSize;
-		return point;
+		return Std.int(snapPoints(point) / _tileSize);
 	}
 	
-	public function getPoint(point:Float):Float
+	/**
+	 * Snaps the point to the wall of the cells of the grid.
+	 * @param	point
+	 * @return
+	 */
+	public inline function snapPoints(point:Int):Int
 	{
-		var remainder:Float = point % _tileSize;
-		point -= remainder;
-		return point;
+		var remainder:Int = point % _tileSize;
+		return (point - remainder);
 	}
 }

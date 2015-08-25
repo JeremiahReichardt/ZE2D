@@ -1,12 +1,12 @@
-package action.game;
-import action.item.PickStar;
+package components.game;
+import components.Grid;
+import components.item.PickStar;
 import scenes.GameScene;
 import ze.component.core.Component;
 import ze.component.graphic.tilesheet.Sprite;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
-import ze.object.Node;
-import ze.util.Ops;
+import ze.util.MathUtil;
 
 /**
  * ...
@@ -32,17 +32,15 @@ class ItemManager extends Component
 		gameObject.addComponent(new BoxCollider(32, 32, true));
 		gameObject.addComponent(new PickStar());
 		
-		var gameScene:GameScene = cast(scene, GameScene);
+		var grid:Grid = cast(scene, GameScene).grid;
 		while (true)
 		{
-			x = Ops.randomInt(column);
-			y = Ops.randomInt(row);
+			x = MathUtil.randomInt(column);
+			y = MathUtil.randomInt(row);
 			
-			gameObject.transform.setPos(x, y);
-			gameObject.collider.setPos(x, y);
-			
-			if (!gameScene.getGridAt(x, y))
+			if (!grid.hasGridCollision(x, y))
 			{
+				gameObject.transform.setPos(grid.snapPoints(x), grid.snapPoints(y));
 				gameObject.addComponent(new Sprite("Star"));
 				break;
 			}

@@ -3,7 +3,7 @@ import scenes.MainScene;
 import ze.component.graphic.displaylist.Image;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
-import ze.util.Ops;
+import ze.util.MathUtil;
 
 /**
  * ...
@@ -17,7 +17,7 @@ class Alien extends GameObject
 		super.added();
 		addComponent(new Image("Alien", "gfx/Alien.png"));
 		addComponent(new BoxCollider(32, 24, true));
-		_speed = Ops.randomFloat(4, 1);
+		_speed = MathUtil.randomFloat(4, 1);
 	}
 	
 	override public function update():Void 

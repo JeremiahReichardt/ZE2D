@@ -1,7 +1,7 @@
-package action.item;
-import action.item.PickItem;
-import action.player.CountDown;
-import action.player.PlayerController;
+package components.item;
+import components.item.PickItem;
+import components.player.CountDown;
+import components.player.PlayerController;
 import ze.component.physics.Collider;
 import ze.component.sounds.Audio;
 

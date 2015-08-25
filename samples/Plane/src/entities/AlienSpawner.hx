@@ -1,6 +1,6 @@
 package entities;
 import ze.object.GameObject;
-import ze.util.Ops;
+import ze.util.MathUtil;
 import ze.util.Time;
 
 /**
@@ -24,7 +24,7 @@ class AlienSpawner extends GameObject
 		if (Time.currentTime - _lastTime > delay)
 		{
 			_lastTime = Time.currentTime;
-			scene.addGameObject(new Alien("Alien", Ops.randomFloat(scene.screen.width - 30, 30), Ops.randomFloat(120)));
+			scene.addGameObject(new Alien("Alien", MathUtil.randomFloat(scene.screen.width - 30, 30), MathUtil.randomFloat(120)));
 		}
 	}
 }

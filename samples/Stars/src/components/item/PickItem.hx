@@ -1,7 +1,7 @@
-package action.item;
-import action.game.ItemManager;
-import action.player.CountDown;
-import action.player.PlayerController;
+package components.item;
+import components.game.ItemManager;
+import components.player.CountDown;
+import components.player.PlayerController;
 import ze.component.core.Component;
 import ze.component.physics.Collider;
 

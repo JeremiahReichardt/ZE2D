@@ -92,4 +92,9 @@ class Graphic extends Component
 		visible = value;
 		return visible;
 	}
+	
+	public function draw():Void
+	{
+		
+	}
 }

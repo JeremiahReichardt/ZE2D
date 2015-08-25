@@ -49,9 +49,9 @@ class TiledSprite extends TilesheetObject
 		_tileID = _indices[row][column];
 	}
 	
-	override function update():Void 
+	override public function draw():Void 
 	{
-		if (!visible || _tileSheetLayer == null)
+		if (_tileSheetLayer == null)
 		{
 			return;
 		}

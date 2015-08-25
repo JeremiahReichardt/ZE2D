@@ -13,9 +13,14 @@ class Image extends BitmapObject
 {
 	private static var _imageCache:Map<String, BitmapData> = new Map<String, BitmapData>();
 	
-	public function new(imageName:String, imagePath:String = "",  imageData:BitmapData = null, rectangle:Rectangle = null) 
+	public function new(imageName:String, imagePath:String = null,  imageData:BitmapData = null, rectangle:Rectangle = null) 
 	{
 		super();
+		if (imagePath == null)
+		{
+			imagePath = "gfx/" + imageName + ".png";
+		}
+		
 		var cacheData:BitmapData = _imageCache.get(imageName);
 		if (cacheData == null)
 		{

@@ -1,5 +1,5 @@
-package action.game;
-import action.player.PlayerController;
+package components.game;
+import components.player.PlayerController;
 import ze.component.core.Component;
 import ze.util.Input;
 

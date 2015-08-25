@@ -1,8 +1,5 @@
 <level width="640" height="480">
-  <Entities>
-    <Player id="0" x="192" y="96" playerIndex="0" />
-    <Player id="1" x="416" y="96" playerIndex="1" />
-  </Entities>
+  <Entities />
   <Tiles tileset="Tile" exportMode="XMLCoords">
     <tile x="0" y="0" tx="4" ty="0" />
     <tile x="0" y="1" tx="3" ty="1" />
@@ -10,8 +7,8 @@
     <tile x="0" y="3" tx="3" ty="1" />
     <tile x="0" y="4" tx="3" ty="1" />
     <tile x="0" y="5" tx="3" ty="1" />
-    <tile x="0" y="6" tx="4" ty="1" />
-    <tile x="0" y="7" tx="4" ty="0" />
+    <tile x="0" y="6" tx="3" ty="1" />
+    <tile x="0" y="7" tx="3" ty="1" />
     <tile x="0" y="8" tx="3" ty="1" />
     <tile x="0" y="9" tx="3" ty="1" />
     <tile x="0" y="10" tx="3" ty="1" />
@@ -20,76 +17,40 @@
     <tile x="0" y="13" tx="3" ty="1" />
     <tile x="0" y="14" tx="4" ty="1" />
     <tile x="1" y="0" tx="2" ty="1" />
-    <tile x="1" y="6" tx="2" ty="0" />
-    <tile x="1" y="7" tx="2" ty="1" />
     <tile x="1" y="14" tx="2" ty="0" />
     <tile x="2" y="0" tx="2" ty="1" />
-    <tile x="2" y="6" tx="1" ty="0" />
-    <tile x="2" y="7" tx="1" ty="1" />
     <tile x="2" y="14" tx="2" ty="0" />
     <tile x="3" y="0" tx="2" ty="1" />
     <tile x="3" y="14" tx="2" ty="0" />
     <tile x="4" y="0" tx="2" ty="1" />
-    <tile x="4" y="10" tx="0" ty="0" />
-    <tile x="4" y="11" tx="0" ty="1" />
     <tile x="4" y="14" tx="2" ty="0" />
     <tile x="5" y="0" tx="2" ty="1" />
-    <tile x="5" y="10" tx="2" ty="0" />
-    <tile x="5" y="11" tx="2" ty="1" />
     <tile x="5" y="14" tx="2" ty="0" />
     <tile x="6" y="0" tx="2" ty="1" />
-    <tile x="6" y="5" tx="1" ty="2" />
-    <tile x="6" y="10" tx="2" ty="0" />
-    <tile x="6" y="11" tx="2" ty="1" />
     <tile x="6" y="14" tx="2" ty="0" />
     <tile x="7" y="0" tx="2" ty="1" />
-    <tile x="7" y="5" tx="1" ty="2" />
-    <tile x="7" y="10" tx="2" ty="0" />
-    <tile x="7" y="11" tx="2" ty="1" />
     <tile x="7" y="14" tx="2" ty="0" />
     <tile x="8" y="0" tx="2" ty="1" />
-    <tile x="8" y="5" tx="1" ty="2" />
-    <tile x="8" y="10" tx="1" ty="0" />
-    <tile x="8" y="11" tx="1" ty="1" />
     <tile x="8" y="14" tx="2" ty="0" />
     <tile x="9" y="0" tx="2" ty="1" />
-    <tile x="9" y="5" tx="1" ty="2" />
     <tile x="9" y="14" tx="2" ty="0" />
     <tile x="10" y="0" tx="2" ty="1" />
-    <tile x="10" y="5" tx="1" ty="2" />
     <tile x="10" y="14" tx="2" ty="0" />
     <tile x="11" y="0" tx="2" ty="1" />
-    <tile x="11" y="5" tx="1" ty="2" />
-    <tile x="11" y="10" tx="0" ty="0" />
-    <tile x="11" y="11" tx="0" ty="1" />
     <tile x="11" y="14" tx="2" ty="0" />
     <tile x="12" y="0" tx="2" ty="1" />
-    <tile x="12" y="5" tx="1" ty="2" />
-    <tile x="12" y="10" tx="2" ty="0" />
-    <tile x="12" y="11" tx="2" ty="1" />
     <tile x="12" y="14" tx="2" ty="0" />
     <tile x="13" y="0" tx="2" ty="1" />
-    <tile x="13" y="5" tx="1" ty="2" />
-    <tile x="13" y="10" tx="2" ty="0" />
-    <tile x="13" y="11" tx="2" ty="1" />
     <tile x="13" y="14" tx="2" ty="0" />
     <tile x="14" y="0" tx="2" ty="1" />
-    <tile x="14" y="10" tx="2" ty="0" />
-    <tile x="14" y="11" tx="2" ty="1" />
     <tile x="14" y="14" tx="2" ty="0" />
     <tile x="15" y="0" tx="2" ty="1" />
-    <tile x="15" y="10" tx="1" ty="0" />
-    <tile x="15" y="11" tx="1" ty="1" />
     <tile x="15" y="14" tx="2" ty="0" />
     <tile x="16" y="0" tx="2" ty="1" />
     <tile x="16" y="14" tx="2" ty="0" />
     <tile x="17" y="0" tx="2" ty="1" />
-    <tile x="17" y="6" tx="0" ty="0" />
-    <tile x="17" y="7" tx="0" ty="1" />
     <tile x="17" y="14" tx="2" ty="0" />
     <tile x="18" y="0" tx="2" ty="1" />
-    <tile x="18" y="6" tx="2" ty="0" />
-    <tile x="18" y="7" tx="2" ty="1" />
     <tile x="18" y="14" tx="2" ty="0" />
     <tile x="19" y="0" tx="5" ty="0" />
     <tile x="19" y="1" tx="3" ty="0" />
@@ -97,8 +58,8 @@
     <tile x="19" y="3" tx="3" ty="0" />
     <tile x="19" y="4" tx="3" ty="0" />
     <tile x="19" y="5" tx="3" ty="0" />
-    <tile x="19" y="6" tx="5" ty="1" />
-    <tile x="19" y="7" tx="5" ty="0" />
+    <tile x="19" y="6" tx="3" ty="0" />
+    <tile x="19" y="7" tx="3" ty="0" />
     <tile x="19" y="8" tx="3" ty="0" />
     <tile x="19" y="9" tx="3" ty="0" />
     <tile x="19" y="10" tx="3" ty="0" />
@@ -107,16 +68,5 @@
     <tile x="19" y="13" tx="3" ty="0" />
     <tile x="19" y="14" tx="5" ty="1" />
   </Tiles>
-  <Collision exportMode="Rectangles">
-    <rect x="0" y="0" w="640" h="32" />
-    <rect x="0" y="32" w="32" h="448" />
-    <rect x="32" y="192" w="64" h="64" />
-    <rect x="32" y="448" w="608" h="32" />
-    <rect x="128" y="320" w="160" h="64" />
-    <rect x="192" y="160" w="256" h="32" />
-    <rect x="352" y="320" w="160" h="64" />
-    <rect x="544" y="192" w="96" h="64" />
-    <rect x="608" y="32" w="32" h="160" />
-    <rect x="608" y="256" w="32" h="192" />
-  </Collision>
+  <Collision exportMode="Rectangles" />
 </level>

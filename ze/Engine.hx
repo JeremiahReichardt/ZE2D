@@ -39,6 +39,7 @@ class Engine extends Sprite
 	{
 		Time.update();
 		update();
+		draw();
 	}
 	
 	public function update():Void 
@@ -63,6 +64,11 @@ class Engine extends Sprite
 			removeList.pop();
 		}
 		Input.update(_currentScene);
+	}
+	
+	public function draw():Void
+	{
+		_currentScene.draw();
 	}
 	
 	public function addScene(scene:Scene):Scene

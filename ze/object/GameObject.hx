@@ -29,11 +29,13 @@ class GameObject extends Node
 	
 	override public function update():Void 
 	{
-		if (!enable)
+		if (_child == null)
 		{
 			return;
 		}
+		
 		super.update();
+		
 		var node:Node = _child.first;
 		while (node != null)
 		{
@@ -42,6 +44,14 @@ class GameObject extends Node
 				node.update();
 			}
 			node = node._next;
+		}
+	}
+	
+	public function draw():Void 
+	{
+		if (graphic != null && graphic.visible)
+		{
+			graphic.draw();
 		}
 	}
 	

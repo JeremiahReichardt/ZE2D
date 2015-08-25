@@ -1,4 +1,4 @@
-package action.player;
+package components.player;
 import ze.component.core.Component;
 import ze.util.Time;
 

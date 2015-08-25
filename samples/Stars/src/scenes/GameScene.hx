@@ -1,6 +1,6 @@
 package scenes;
-import action.game.ItemManager;
-import action.Grid;
+import components.game.ItemManager;
+import components.Grid;
 import openfl.display.BitmapData;
 import prefab.ColliderObject;
 import prefab.PlayerObject;
@@ -21,7 +21,8 @@ class GameScene extends Scene
 	
 	private var _tileset:BitmapData;
 	private var _ogmoLoader:OgmoLoader;
-	private var _grid:Grid;
+	
+	public var grid(default, null):Grid;
 	
 	override public function added():Void
 	{
@@ -29,13 +30,13 @@ class GameScene extends Scene
 		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
 		screen.addLayer(tileSheetLayer);
 		
-		_grid = new Grid(1280, 800, 32);
-		createGameObject("grid", _grid);
+		grid = new Grid(1280, 800, 32);
+		createGameObject("grid", grid);
 		
 		_ogmoLoader = new OgmoLoader(this);
 		_ogmoLoader.setOEL("level/Level " + level + ".oel");
 		
-		_ogmoLoader.loadTiledSprite("Checker", 32, 32, 8, 8, _grid.setGrid);
+		_ogmoLoader.loadTiledSprite("Checker", 32, 32, 8, 8, grid.setGrid);
 		
 		_ogmoLoader.setLayer("Entities");
 		_ogmoLoader.setEntity("Player", PlayerObject);
@@ -48,11 +49,6 @@ class GameScene extends Scene
 		createGameObject("item_manager", new ItemManager());
 	}
 	
-	public function getGridAt(x, y):Bool
-	{
-		return _grid.hasGridCollision(x, y);
-	}
-	
 	override public function update():Void 
 	{
 		super.update();
@@ -62,6 +58,7 @@ class GameScene extends Scene
 		if (Input.keyPressed(Key.DIGIT_3)) { level = 3; engine.addScene(new GameScene()); }
 		if (Input.keyPressed(Key.DIGIT_4)) { level = 4; engine.addScene(new GameScene()); }
 		if (Input.keyPressed(Key.DIGIT_5)) { level = 5; engine.addScene(new GameScene()); }
-		if (Input.keyPressed(Key.M)) Audio.toggleMute();
+		if (Input.keyPressed(Key.M)) { Audio.toggleMute(); }
+		if (Input.keyPressed(Key.BACKSPACE)) { engine.addScene(new MainScene()); }
 	}
 }

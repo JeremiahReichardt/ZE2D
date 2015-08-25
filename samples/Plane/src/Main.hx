@@ -1,6 +1,6 @@
 package;
 import ze.Engine;
-import scenes.MainScene;
+import scenes.SplashScene;
 
 /**
  * ...
@@ -10,6 +10,6 @@ class Main extends Engine
 {
 	public function new()
 	{
-		super(new MainScene());
+		super(new SplashScene());
 	}
 }

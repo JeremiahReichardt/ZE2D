@@ -19,13 +19,13 @@ class MainScene extends Scene
 		screen.addLayer(tileSheetLayer);
 		
 		var btn:Button = new Button("PlayBtn", 128, 32);
-		createGameObject("playBtn", btn, 1100, 700);
+		createGameObject("playBtn", btn, 265, 300);
 		btn.addButtonState(ButtonState.EXIT, [0]);
 		btn.addButtonState(ButtonState.ENTER, [1]);
 		btn.registerCallback(null, null, null, click);
 		
 		var btn:Button = new Button("QuitBtn", 128, 32);
-		createGameObject("quitBtn", btn, 1132, 732);
+		createGameObject("quitBtn", btn, 265, 340);
 		btn.addButtonState(ButtonState.EXIT, [0]);
 		btn.addButtonState(ButtonState.ENTER, [1]);
 		btn.registerCallback(null, null, null, quit);

@@ -1,7 +1,7 @@
 package ze.component.physics;
 import openfl.display.Shape;
 import ze.component.core.Component;
-import ze.util.Ops;
+import ze.util.MathUtil;
 
 /**
  * ...
@@ -17,9 +17,10 @@ class Collider extends Component
 	public var width(default, null):Float;
 	public var height(default, null):Float;
 	public var isTrigger(default, null):Bool;
-	public var enableDebugShape(default, set):Bool;
 	
 	private var _debugShape:Shape;
+	private var enableDebugShape(default, set):Bool;
+	
 	private var _colliderList:Array<Collider>;
 	private var _enterCallback:Collider -> Void;
 	private var _exitCallback:Collider -> Void;
@@ -49,11 +50,6 @@ class Collider extends Component
 		super.update();
 		x = transform.x + offsetX;
 		y = transform.y + offsetY;
-		
-		if (enableDebugShape)
-		{
-			drawDebugShape();
-		}
 		
 		if (isTrigger)
 		{
@@ -172,7 +168,7 @@ class Collider extends Component
 		{
 			var colliderA:CircleCollider = cast (this, CircleCollider);
 			var colliderB:CircleCollider = cast (collider, CircleCollider);
-			if (Ops.distance(x, y, collider.x, collider.y) >= colliderA.radius + colliderB.radius) return false;
+			if (MathUtil.distance(x, y, collider.x, collider.y) >= colliderA.radius + colliderB.radius) return false;
 		}
 		else if (Std.is(this, BoxCollider) && Std.is(collider, GridCollider))
 		{
@@ -243,6 +239,7 @@ class Collider extends Component
 		for (collider in allColliders)
 		{
 			collider.enableDebugShape = enable;
+			collider.drawDebugShape();
 		}
 	}
 }

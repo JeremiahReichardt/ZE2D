@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><project>	<app main="Main" file="Game" />	<window width="640" height="480" fps="30" background="0x000000" />		<source path="src" />		<haxelib name="openfl" />	<haxelib name="ze2d" />		<assets path="assets/font" rename="font" />	<assets path="assets/gfx" rename="gfx" />	</project>

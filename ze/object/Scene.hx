@@ -30,20 +30,42 @@ class Scene extends Node
 	
 	override public function update():Void 
 	{
-		if (!enable || _child == null)
+		if (_child == null)
 		{
 			return;
 		}
 		
 		super.update();
-		var node:Node = _child.first;
 		
+		var node:Node = _child.first;
 		while (node != null)
 		{
 			if (node.enable)
 			{
 				node.update();
 			}
+			node = node._next;
+		}
+		
+		if (screen != null)
+		{
+			screen.draw();
+		}
+	}
+	
+	public function draw()
+	{
+		if (_child == null)
+		{
+			return;
+		}
+		
+		var node:Node = _child.first;
+		var gameObject:GameObject;
+		while (node != null)
+		{
+			gameObject = cast(node, GameObject);
+			gameObject.draw();
 			node = node._next;
 		}
 		
@@ -162,10 +184,12 @@ class Scene extends Node
 	{
 	}
 	
-	override public function removed():Void 
+	override public function removed():Void
 	{
-		screen.removed();
+		// Make sure to remove all the nodes before removing stuff from the screen
 		_child.removeAll();
+		screen.removed();
+		
 		engine.addToRemoveList(this);
 		screen = null;
 		engine = null;

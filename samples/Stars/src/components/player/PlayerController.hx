@@ -1,4 +1,4 @@
-package action.player;
+package components.player;
 import ze.component.core.CharacterController;
 import ze.component.physics.BoxCollider;
 import ze.component.physics.Collider;

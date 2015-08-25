@@ -4,7 +4,7 @@ package ze.util;
  * ...
  * @author Goh Zi He
  */
-class Ops
+class MathUtil
 {
 	public static inline function distance(x1:Float, x2:Float, y1:Float, y2:Float):Float
 	{
