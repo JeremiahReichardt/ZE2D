@@ -30,7 +30,8 @@ class Scene extends Node
 	
 	override public function update():Void 
 	{
-		if (_child == null)
+		// Check enable here so that when scene is disabled, only the updating for game objects is paused
+		if (!enable || _child == null)
 		{
 			return;
 		}
@@ -102,6 +103,7 @@ class Scene extends Node
 	
 	public function removeGameObject(gameObject:GameObject):Void 
 	{
+		//trace(0);
 		detachChild(gameObject);
 	}
 	

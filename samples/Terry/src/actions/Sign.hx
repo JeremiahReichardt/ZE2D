@@ -1,7 +1,7 @@
 package actions;
 import ze.component.core.Component;
-import ze.component.graphic.tilesheet.Sprite;
-import ze.component.graphic.tilesheet.Text;
+import ze.component.graphic.tilesheet.TilesheetSprite;
+import ze.component.graphic.tilesheet.TilesheetText;
 import ze.component.physics.Collider;
 import ze.object.GameObject;
 
@@ -12,8 +12,8 @@ import ze.object.GameObject;
 class Sign extends Component
 {
 	private var _dialog:GameObject;
-	private var _text:Text;
-	private var _background:Sprite;
+	private var _text:TilesheetText;
+	private var _background:TilesheetSprite;
 	
 	public function new()
 	{
@@ -29,10 +29,10 @@ class Sign extends Component
 		var _dialogText:GameObject = new GameObject("dialogText", 130, 300);
 		scene.addGameObject(_dialogText);
 		
-		_text = new Text("Grobold");
+		_text = new TilesheetText("Grobold");
 		_dialogText.addComponent(_text);
 		
-		_background = new Sprite("Dialog");
+		_background = new TilesheetSprite("Dialog");
 		_dialog.addComponent(_background);
 		
 		collider.registerCallback(hitSign, exitSign);

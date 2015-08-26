@@ -1,6 +1,6 @@
 package prefab;
 import actions.Sign;
-import ze.component.graphic.tilesheet.Sprite;
+import ze.component.graphic.tilesheet.TilesheetSprite;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 
@@ -23,7 +23,7 @@ class SignObject extends GameObject
 	{
 		super.added();
 		addComponent(new BoxCollider(32, 32, true));
-		addComponent(new Sprite("Sign"));
+		addComponent(new TilesheetSprite("Sign"));
 		
 		_sign = new Sign();
 		addComponent(_sign);

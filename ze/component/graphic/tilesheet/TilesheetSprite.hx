@@ -4,7 +4,7 @@ package ze.component.graphic.tilesheet;
  * ...
  * @author Goh Zi He
  */
-class Sprite extends TilesheetObject
+class TilesheetSprite extends TilesheetObject
 {
 	override function added():Void 
 	{

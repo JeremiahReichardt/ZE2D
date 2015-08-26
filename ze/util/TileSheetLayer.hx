@@ -4,7 +4,7 @@ import openfl.Assets;
 import openfl.display.Graphics;
 import openfl.display.Tilesheet;
 import openfl.geom.Rectangle;
-import ze.component.graphic.tilesheet.Text;
+import ze.component.graphic.tilesheet.TilesheetText;
 
 /**
  * ...
@@ -67,7 +67,7 @@ class TileSheetLayer extends Tilesheet
 			}
 			else if (type == "font")
 			{
-				var font:Font = Text.registerFont(tileName, this);
+				var font:TilesheetTextFont = TilesheetText.registerFont(tileName, this);
 				var xml:Xml = Xml.parse(Assets.getText("font/" + tileName + ".xml"));
 				for (element in xml.firstElement().elementsNamed("chars"))
 				{

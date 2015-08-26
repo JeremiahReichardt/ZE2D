@@ -82,12 +82,9 @@ class Node
 			}
 		}
 		
-		if (!Std.is(node, Type.typeof(this)))
+		if (node == _child)
 		{
-			if (node == _child)
-			{
-				_child = next;
-			}
+			_child = next;
 		}
 		
 		node.removed();	

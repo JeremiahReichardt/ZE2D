@@ -1,1 +1,7 @@
+flash/*
 bin/*
+haxe/*
+obj/*
+*.build
+*.swf
+*.hxml

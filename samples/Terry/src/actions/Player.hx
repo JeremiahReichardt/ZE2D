@@ -2,11 +2,10 @@ package actions;
 import openfl.Lib;
 import ze.component.core.CharacterController;
 import ze.component.core.Component;
-import ze.component.graphic.tilesheet.Sprite;
+import ze.component.graphic.tilesheet.TilesheetSprite;
 import ze.component.physics.BoxCollider;
 import ze.component.sounds.Audio;
 import ze.object.GameObject;
-import ze.util.Delay;
 import ze.util.Input;
 import ze.util.Key;
 import ze.util.Time;
@@ -147,7 +146,7 @@ class Player extends Component
 			scene.addGameObject(bullet);
 			bullet.addComponent(new BoxCollider(5, 5, true));
 			bullet.addComponent(new Bullet(direction, this));
-			bullet.addComponent(new Sprite("Bullet"));
+			bullet.addComponent(new TilesheetSprite("Bullet"));
 			
 			_shootSfx.play();
 		}

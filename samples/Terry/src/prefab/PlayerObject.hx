@@ -2,7 +2,7 @@ package prefab;
 import actions.MouseSelectMovement;
 import actions.Player;
 import ze.component.core.CharacterController;
-import ze.component.graphic.tilesheet.Sprite;
+import ze.component.graphic.tilesheet.TilesheetSprite;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 
@@ -20,7 +20,7 @@ class PlayerObject extends GameObject
 	override public function added():Void 
 	{
 		super.added();
-		var image:Sprite = new Sprite("Player");
+		var image:TilesheetSprite = new TilesheetSprite("Player");
 		addComponent(image);
 		image.layer = 1;
 		addComponent(new BoxCollider(16, 16));

@@ -1,6 +1,6 @@
 package scenes;
-import ze.component.graphic.tilesheet.Sprite;
-import ze.component.graphic.tilesheet.Text;
+import ze.component.graphic.tilesheet.TilesheetSprite;
+import ze.component.graphic.tilesheet.TilesheetText;
 import ze.object.GameObject;
 import ze.object.Scene;
 import ze.util.TileSheetLayer;
@@ -42,7 +42,7 @@ class MainScene extends Scene
 			for (i in 1 ... 6)
 			{
 				var name:String = layer + "x" + i;
-				var go:GameObject = createGameObject(name, new Sprite(name));
+				var go:GameObject = createGameObject(name, new TilesheetSprite(name));
 				go.graphic.layer = i + 1;
 				
 				go.transform.x = x;
@@ -56,7 +56,7 @@ class MainScene extends Scene
 	
 	private function createFont():Void
 	{
-		var text:Text = new Text("Grobold");
+		var text:TilesheetText = new TilesheetText("Grobold");
 		var goText:GameObject = createGameObject("Text", text);
 		text.text = "TileSheetLayer demo ";
 	}

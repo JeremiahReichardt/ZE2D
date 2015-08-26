@@ -1,6 +1,12 @@
 ###Changelog###
 DD/MM/YY
 
+(26/8/15)
+- Fixed enable/disable that will affect the updating of scene.
+- Fixed a bug where removing object in html5 will crash.
+- Edited logo.
+- Some name changes to Tilesheet's Sprite and Text.
+
 (25/8/15)
 - Fixed Stars spawning position.
 - Added extra draw function alongside update, so that GDebug will not pause UI rendering.

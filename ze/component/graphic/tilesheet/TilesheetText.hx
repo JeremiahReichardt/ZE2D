@@ -1,20 +1,19 @@
 package ze.component.graphic.tilesheet;
 import haxe.ds.StringMap;
 import openfl.text.Font;
-import ze.component.graphic.tilesheet.Text.Char;
 import ze.util.TileSheetLayer;
 /**
  * ...
  * @author Goh Zi He
  */
-class Text extends TilesheetObject
+class TilesheetText extends TilesheetObject
 {
 	public var text(default, set):String;
 	
-	private var _font:Font;
+	private var _font:TilesheetTextFont;
 	private var _charData:Array<Char>;
 	
-	private static var _fonts:StringMap<Font>;
+	private static var _fonts:StringMap<TilesheetTextFont>;
 	
 	public function new(name:String)
 	{
@@ -80,20 +79,20 @@ class Text extends TilesheetObject
 		return text;
 	}
 	
-	public static function registerFont(fontName:String, tileSheetLayer:TileSheetLayer):Font
+	public static function registerFont(fontName:String, tileSheetLayer:TileSheetLayer):TilesheetTextFont
 	{
 		if (_fonts == null)
 		{
-			_fonts = new StringMap<Font>();
+			_fonts = new StringMap<TilesheetTextFont>();
 		}
 		
-		var font:Font = new Font(tileSheetLayer);
+		var font:TilesheetTextFont = new TilesheetTextFont(tileSheetLayer);
 		_fonts.set(fontName, font);
 		return font;
 	}
 }
 
-class Font
+class TilesheetTextFont
 {
 	private var _characters(default, null):StringMap<Char>;
 	public var tileSheetLayer(default, null):TileSheetLayer;
@@ -120,7 +119,7 @@ class Font
 	}
 }
 
-class Char
+private class Char
 {
 	public var width(default, null):Float;
 	public var height(default, null):Float;

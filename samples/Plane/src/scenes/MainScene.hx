@@ -79,6 +79,7 @@ class MainScene extends Scene
 	
 	private function endGame():Void
 	{
+		// When scene is disabled, it still can update but entities will not
 		enable = false;
 		_overLay.graphic.visible = true;
 		_replayText.graphic.visible = true;
