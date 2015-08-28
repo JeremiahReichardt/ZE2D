@@ -1,4 +1,4 @@
-package actions;
+package components;
 import openfl.geom.Point;
 import ze.component.core.Component;
 

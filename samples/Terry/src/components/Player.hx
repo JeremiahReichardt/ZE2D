@@ -1,4 +1,4 @@
-package actions;
+package components;
 import openfl.Lib;
 import ze.component.core.CharacterController;
 import ze.component.core.Component;

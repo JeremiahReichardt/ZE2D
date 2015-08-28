@@ -43,6 +43,8 @@ class Collider extends Component
 	{
 		super.added();
 		allColliders.push(this);
+		
+		setPos(transform.x + offsetX, transform.y + offsetY);
 	}
 	
 	override public function update():Void 

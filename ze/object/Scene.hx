@@ -122,7 +122,7 @@ class Scene extends Node
 		return null;
 	}
 	
-	public function getGameObjectsByName(name:String):Array<GameObject>
+	public function getAllGameObjectsByName(name:String):Array<GameObject>
 	{
 		var node:Node = _child.first;
 		var gameObjectsWithName:Array<GameObject> = [];
@@ -153,7 +153,7 @@ class Scene extends Node
 		return null;
 	}
 	
-	public function getGameObjectsByComponent(component:Class<Component>):Array<GameObject>
+	public function getAllGameObjectsByComponent(component:Class<Component>):Array<GameObject>
 	{
 		var gameObjects:Array<GameObject> = [];
 		var gameObject:GameObject;
@@ -165,6 +165,7 @@ class Scene extends Node
 			{
 				gameObjects.push(gameObject);
 			}
+			node = node._next;
 		}
 		return gameObjects;
 	}

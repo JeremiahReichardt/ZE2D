@@ -43,7 +43,7 @@ class Component extends Node
 	
 	private function getGameObjectsByName(name:String):Array<GameObject>
 	{
-		return scene.getGameObjectsByName(name);
+		return scene.getAllGameObjectsByName(name);
 	}
 	
 	public function getAllGameObjects():Array<GameObject>

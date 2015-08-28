@@ -1,8 +1,12 @@
 package ze.util;
+import haxe.ds.ArraySort;
 import openfl.display.DisplayObject;
 import openfl.display.Graphics;
 import openfl.display.Sprite;
 import openfl.display.Stage;
+import ze.component.graphic.displaylist.DisplayListObject;
+import ze.component.graphic.Graphic;
+import ze.object.GameObject;
 import ze.object.Scene;
 
 /**
@@ -70,6 +74,35 @@ class Screen
 		}
 		
 		return null;
+	}
+	
+	public function sortDisplayObject():Void
+	{
+		// Get all display list object
+		var displayList:Array<GameObject> = _scene.getAllGameObjectsByComponent(DisplayListObject);
+		
+		// Remove all of them from the display list
+		for (gameObject in displayList)
+		{
+			removeChild(cast(gameObject.graphic, DisplayListObject).displayObject);
+		}
+		
+		// Sort the array
+		ArraySort.sort(displayList, compareDisplayObjectLayer);
+		
+		// Re add them back to display list
+		for (gameObject in displayList)
+		{
+			addChild(cast(gameObject.graphic, DisplayListObject).displayObject);
+		}
+	}
+	
+	private function compareDisplayObjectLayer(a:GameObject, b:GameObject):Int
+	{
+		var aLayer:Int = a.graphic.layer;
+		var bLayer:Int = b.graphic.layer;
+		
+		return (aLayer > bLayer) ? 1 : (aLayer < bLayer) ? -1 : 0;
 	}
 	
 	public function addChild(child:DisplayObject):DisplayObject

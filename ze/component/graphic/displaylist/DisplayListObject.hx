@@ -19,11 +19,12 @@ class DisplayListObject extends Graphic
 		super.added();
 		scene.screen.addChild(displayObject);
 		update();
+		layer = 0;
 	}
 	
-	override public function update():Void 
+	override public function draw():Void 
 	{
-		super.update();
+		super.draw();
 		if (displayObject == null)
 		{
 			return;
@@ -103,5 +104,11 @@ class DisplayListObject extends Graphic
 			displayObject.visible = value;
 		}
 		return super.set_visible(value);
+	}
+	
+	override function set_layer(value:Int):Int 
+	{
+		scene.screen.sortDisplayObject();
+		return super.set_layer(value);
 	}
 }

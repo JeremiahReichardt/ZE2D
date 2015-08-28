@@ -1,5 +1,5 @@
 package prefab;
-import actions.Spikes;
+import components.Spikes;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 

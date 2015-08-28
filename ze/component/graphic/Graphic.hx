@@ -29,10 +29,15 @@ class Graphic extends Component
 		offsetY = 0;
 		width = 0;
 		height = 0;
-		layer = 0;
 		flipped = false;
 		visible = true;
 		centered = false;
+	}
+	
+	public function setOffset(x:Float = 0, y:Float = 0):Void
+	{
+		offsetX = x;
+		offsetY = y;
 	}
 	
 	private function get_x():Float
@@ -95,6 +100,5 @@ class Graphic extends Component
 	
 	public function draw():Void
 	{
-		
 	}
 }

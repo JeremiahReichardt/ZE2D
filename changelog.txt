@@ -6,6 +6,12 @@ DD/MM/YY
 - Fixed a bug where removing object in html5 will crash.
 - Edited logo.
 - Some name changes to Tilesheet's Sprite and Text.
+- Added Splash screen skip with mouse/key press
+- Added anyKeyPress checks in input.
+- Added custom key checks for keyUp.
+- Added new IMGUI sample
+- Added layer ordering for bitmap objects.
+- Fixed mouse position updating.
 
 (25/8/15)
 - Fixed Stars spawning position.

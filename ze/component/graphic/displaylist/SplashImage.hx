@@ -8,7 +8,7 @@ class SplashImage extends Image
 	private var fadeSpeed:Float;
 	private var fadeEvent:FadeEvent;
 	
-	public function new(imageName:String, imagePath:String = null) 
+	public function new(imageName:String, imagePath:String = "") 
 	{
 		super(imageName, imagePath);
 	}

@@ -1,5 +1,6 @@
 package ze.component.debug;
 import haxe.Timer;
+import openfl.geom.Point;
 import ze.component.core.Component;
 import ze.component.graphic.displaylist.Text;
 import ze.component.physics.BoxCollider;
@@ -31,11 +32,15 @@ class GDebug extends Component
 	
 	private static var _consoleText:Text;
 	
+	private var _oldPos:Point;
+	
 	override public function added():Void 
 	{
 		super.added();
 		_times = [];
 		_debugMode = false;
+		
+		_oldPos = new Point();
 		
 		_fpsText = new Text("FPS: ", Color.WHITE, 15);
 		scene.createGameObject("fps", _fpsText, 300);
@@ -89,34 +94,47 @@ class GDebug extends Component
 			if (Input.leftMousePressed())
 			{
 				selectGameObject();
-			}
-			
-			if (Input.leftMouseDown() && (Input.keyDown(Key.Z) || Input.keyDown(Key.SHIFT) || Input.keyDown(Key.CTRL)))
-			{
-				if (_selectedGameObject != null)
-				{	
-					_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.graphic.width * 0.5);
-					_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.graphic.height * 0.5);
-					
-					if (_selectedGameObject.graphic != null)
-					{
-						_selectedGameObject.graphic.update();
-					}
-					
-					if (_selectedGameObject.collider != null)
-					{
-						_selectedGameObject.collider.update();
-					}
+				if (Input.keyDown(Key.SPACEBAR))
+				{
+					_oldPos.x = Input.mouseX;
+					_oldPos.y = Input.mouseY;
 				}
 			}
-			
-			if (Input.leftMouseReleased())
+			else if (Input.leftMouseDown())
+			{
+				if (Input.keyDown(Key.Z) || Input.keyDown(Key.SHIFT) || Input.keyDown(Key.CTRL))
+				{
+					if (_selectedGameObject != null)
+					{	
+						_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.graphic.width * 0.5);
+						_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.graphic.height * 0.5);
+						
+						if (_selectedGameObject.collider != null)
+						{
+							_selectedGameObject.collider.update();
+						}
+					}
+				}
+				else if (Input.keyDown(Key.SPACEBAR))
+				{
+					scene.screen.shift(_oldPos.x - Input.mouseX, _oldPos.y - Input.mouseY);
+					_oldPos.x = Input.mouseX;
+					_oldPos.y = Input.mouseY;
+				}
+			}
+			else if (Input.leftMouseReleased())
 			{
 				if (_selectedGameObject != null)	
 				{
 					printSelectObjectPosition();
 				}
 				_selectedGameObject = null;
+			}
+			
+			if (Input.keyPressed(Key.R))
+			{
+				// Reset view
+				scene.screen.setXY(0, 0);
 			}
 		}
 	}

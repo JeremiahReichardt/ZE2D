@@ -1,5 +1,5 @@
 package prefab;
-import actions.Sign;
+import components.Sign;
 import ze.component.graphic.tilesheet.TilesheetSprite;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;

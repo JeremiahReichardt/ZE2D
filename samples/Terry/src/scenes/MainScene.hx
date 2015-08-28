@@ -1,5 +1,5 @@
 package scenes;
-import actions.Grid;
+import components.Grid;
 import openfl.Assets;
 import prefab.ColliderObject;
 import prefab.ExitObject;

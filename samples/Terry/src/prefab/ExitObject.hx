@@ -1,5 +1,5 @@
 package prefab;
-import actions.Exit;
+import components.Exit;
 import ze.component.graphic.tilesheet.AnimatedSprite;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
