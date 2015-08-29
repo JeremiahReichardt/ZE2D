@@ -14,7 +14,7 @@ import ze.util.Key;
 /**
  * Game Debug. Include FPS information and also pausing/resume game(tab key).
  * When in pause mode, gameObject can be selected with mouse and move while
- * holding down shift/z key.
+ * holding down ctrl/z key, and snapping with shift key.
  * @author Goh Zi He
  */
 class GDebug extends Component
@@ -34,6 +34,8 @@ class GDebug extends Component
 	
 	private var _oldPos:Point;
 	
+	private static inline var TEXTLAYER:Int = 20;
+	
 	override public function added():Void 
 	{
 		super.added();
@@ -44,23 +46,30 @@ class GDebug extends Component
 		
 		_fpsText = new Text("FPS: ", Color.WHITE, 15);
 		scene.createGameObject("fps", _fpsText, 300);
+		_fpsText.layer = TEXTLAYER;
 		
 		_pausedText = new Text("Paused", Color.WHITE, 15);
-		_pausedText.visible = _debugMode;
 		scene.createGameObject("debug", _pausedText, scene.screen.right - 60, 0);
+		_pausedText.visible = _debugMode;
+		_pausedText.layer = TEXTLAYER;
 		
 		_positionText = new Text("X: - Y: - ", Color.WHITE, 15);
-		_positionText.visible = _debugMode;
 		scene.createGameObject("Position", _positionText, scene.screen.right - 110, scene.screen.bottom - 20);
+		_positionText.visible = _debugMode;
+		_positionText.layer = TEXTLAYER;
 		
 		_helpText = new Text("Select with mouse and move item when Z/Ctrl key is pressed.", Color.WHITE, 15);
-		_helpText.visible = _debugMode;
 		scene.createGameObject("Help", _helpText, 0, scene.screen.bottom - 20);
+		_helpText.visible = _debugMode;
+		_helpText.layer = TEXTLAYER;
 		
 		_consoleText = new Text("Debug: Press Tilde key to pause game and move things around.", Color.WHITE, 15);
 		scene.createGameObject("Console", _consoleText, 0, scene.screen.bottom - 20);
+		_consoleText.layer = TEXTLAYER;
 		
-		scene.createGameObject("Logo", new Text("ZE2D Game Engine v" + Engine.version, Color.WHITE, 15));
+		var logo:Text = new Text("ZE2D Game Engine v" + Engine.version, Color.WHITE, 15);
+		scene.createGameObject("Logo", logo);
+		logo.layer = TEXTLAYER;
 	}
 	
 	override public function update():Void 
@@ -80,7 +89,7 @@ class GDebug extends Component
 			}
 			
 			// Toggle collider debug shapes
-			Collider.toggleAllDebugShape(_debugMode);
+			toggleColliderDebugDraw(_debugMode);
 			
 			// Show/Hide the text
 			_pausedText.visible = _debugMode;
@@ -88,9 +97,23 @@ class GDebug extends Component
 			_helpText.visible = _debugMode;
 			_consoleText.visible = !_debugMode;
 		}
+		else if (Input.keyPressed(Key.PAGEUP))
+		{
+			toggleColliderDebugDraw(true);
+		}
+		else if (Input.keyPressed(Key.PAGEDOWN))
+		{
+			toggleColliderDebugDraw(false);
+		}
 		
 		if (_debugMode)
 		{
+			if (Input.keyPressed(Key.R))
+			{
+				// Reset view
+				scene.screen.setXY(0, 0);
+			}
+			
 			if (Input.leftMousePressed())
 			{
 				selectGameObject();
@@ -102,7 +125,7 @@ class GDebug extends Component
 			}
 			else if (Input.leftMouseDown())
 			{
-				if (Input.keyDown(Key.Z) || Input.keyDown(Key.SHIFT) || Input.keyDown(Key.CTRL))
+				if (Input.keyDown(Key.Z) || Input.keyDown(Key.CTRL))
 				{
 					if (_selectedGameObject != null)
 					{	
@@ -113,6 +136,35 @@ class GDebug extends Component
 						{
 							_selectedGameObject.collider.update();
 						}
+					}
+				}
+				else if (Input.keyDown(Key.SHIFT))
+				{
+					if (_selectedGameObject != null)
+					{
+						var width:Float;
+						var height:Float;
+						
+						// Do snapping
+						if (_selectedGameObject.graphic != null)
+						{
+							width = _selectedGameObject.graphic.width;
+							height = _selectedGameObject.graphic.height;
+						}
+						else if (_selectedGameObject.collider != null)
+						{
+							width = _selectedGameObject.collider.width;
+							height = _selectedGameObject.collider.height;
+						}
+						else 
+						{
+							return;
+						}
+						
+						var x:Float = Math.ffloor(Input.mouseX / width) * width;
+						var y:Float = Math.ffloor(Input.mouseY / height) * height;
+						
+						_selectedGameObject.transform.setPos(x, y);
 					}
 				}
 				else if (Input.keyDown(Key.SPACEBAR))
@@ -129,12 +181,6 @@ class GDebug extends Component
 					printSelectObjectPosition();
 				}
 				_selectedGameObject = null;
-			}
-			
-			if (Input.keyPressed(Key.R))
-			{
-				// Reset view
-				scene.screen.setXY(0, 0);
 			}
 		}
 	}
@@ -279,5 +325,10 @@ class GDebug extends Component
 	private function printSelectObjectPosition():Void
 	{
 		_positionText.setText("X: " + Math.round(_selectedGameObject.transform.x) + " Y: " + Math.round(_selectedGameObject.transform.y));
+	}
+	
+	private function toggleColliderDebugDraw(toggle:Bool):Void
+	{
+		Collider.toggleAllDebugShape(toggle);
 	}
 }

@@ -99,6 +99,9 @@ class Transform extends Component
 			y += _direction;
 			yDir -= _direction;
 		}
+		
+		// Reset collider position
+		collider.setPos(x, y);
 	}
 	
 	/**

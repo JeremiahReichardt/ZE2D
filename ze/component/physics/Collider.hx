@@ -53,6 +53,11 @@ class Collider extends Component
 		x = transform.x + offsetX;
 		y = transform.y + offsetY;
 		
+		if (enableDebugShape)
+		{
+			drawDebugShape();
+		}
+		
 		if (isTrigger)
 		{
 			for (collider in allColliders)

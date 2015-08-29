@@ -1,6 +1,11 @@
 ###Changelog###
 DD/MM/YY
 
+(28/8/15)
+- Snapping of objects can be done in debug mode when shift key is pressed.
+- Fixed a bug where collider is not reset after transform.moveBy is called.
+- Added toggle switch for collider debug draw.
+
 (26/8/15)
 - Fixed enable/disable that will affect the updating of scene.
 - Fixed a bug where removing object in html5 will crash.
