@@ -1,7 +1,6 @@
-flash/*
-bin/*
-haxe/*
-obj/*
-*.build
-*.swf
-*.hxml
+samples/Imgui/bin/*
+samples/Plane/bin/*
+samples/SimpleTutorial/bin/*
+samples/Stars/bin/*
+samples/Terry/bin/*
+samples/TileSheetLayer/bin/*
