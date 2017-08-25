@@ -29,8 +29,6 @@ class TileImage extends Graphic
       width = tileSheetLayer.getWidth(id);
       height = tileSheetLayer.getHeight(id);
     }
-    
-    
   }
   
   override public function draw():Void 

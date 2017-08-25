@@ -1,6 +1,7 @@
 package ze.component.graphic.tilesheet;
-import flash.display.Graphics;
 import haxe.ds.StringMap;
+import openfl.display.Tile;
+import ze.component.graphic.Graphic;
 import ze.util.Time;
 
 /**
@@ -8,7 +9,7 @@ import ze.util.Time;
  * @author Goh Zi He
  */
 
-class AnimatedSprite extends Graphics
+class TileAnimation extends Graphic
 {
 	public var playing(default, null):Bool;
 	public var currentFrame(default, null):Int;
@@ -18,11 +19,34 @@ class AnimatedSprite extends Graphics
 	private var _lastTime:Int;
 	private var _playOnce:Bool;
 	private var _animationData:AnimationData;
+  
+	var _tileName:String;
+	var _name:String;
+  var _tile:Tile;
+  
+  public function new(tileName:String, name:String)
+  {
+    _tileName = tileName;
+    _name = name;
+    super();
+  }
 	
 	override public function added():Void 
 	{
 		super.added();
-		_animationData = new AnimationData(_tileSheetLayer.getSpriteIndices(_name));
+    var tileSheetLayer = scene.screen.getTileSheet(_tileName);
+    if (tileSheetLayer != null)
+    {
+      var ids = tileSheetLayer.getIDs(_name);
+		  _animationData = new AnimationData(ids);
+      
+      var id = ids[0];
+      _tile = new Tile(id, transform.x, transform.y, 1, 1, transform.rotation);
+      tileSheetLayer.tileMap.addTile(_tile);
+      
+      width = tileSheetLayer.getWidth(id);
+      height = tileSheetLayer.getHeight(id);
+    }
 	}
 	
 	override public function update():Void
@@ -54,11 +78,11 @@ class AnimatedSprite extends Graphics
 				}
 			}
 			
-			_tileID = _animationData.getFrame(currentFrame);
+			_tile.id = _animationData.getFrame(currentFrame);
 		}
 	}
 	
-	public function play(label:String, fps:Int = 30, startFrame:Int = 0):AnimatedSprite
+	public function play(label:String, fps:Int = 30, startFrame:Int = 0):TileAnimation
 	{
 		_animationData.setCurrentAnimation(label);
 		_animationData.fps = fps;
@@ -69,7 +93,7 @@ class AnimatedSprite extends Graphics
 		return this;
 	}
 	
-	public function playOnce(label:String, fps:Int = 30):AnimatedSprite
+	public function playOnce(label:String, fps:Int = 30):TileAnimation
 	{
 		_playOnce = true;
 		return play(label, fps);
@@ -102,7 +126,7 @@ class AnimatedSprite extends Graphics
 		playing = true;
 	}
 	
-	public function addAnimationFromFrame(animationName:String, startFrame:Int = 0, endFrame:Int = 1):AnimatedSprite
+	public function addAnimationFromFrame(animationName:String, startFrame:Int = 0, endFrame:Int = 1):TileAnimation
 	{
 		var animationArray:Array<Int> = [];
 		for (i in startFrame ... endFrame)
@@ -113,9 +137,9 @@ class AnimatedSprite extends Graphics
 		return this;
 	}
 	
-	public function addAnimation(animationName:String, animationArray:Array<Int>):AnimatedSprite
+	public function addAnimation(animationName:String, animationArray:Array<Int>):TileAnimation
 	{
-		_tileID = _animationData.addAnimation(animationName, animationArray).getFrame(currentFrame);
+		_animationData.addAnimation(animationName, animationArray).getFrame(currentFrame);
 		return this;
 	}
 	

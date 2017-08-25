@@ -6,6 +6,7 @@ DD/MM/YY
 - Fixed collider debug draw not following after moving around (with spacebar)
 - Reimplementing Tile drawing with new OpenFL API, currently only image works
 - Input.mouseX and mouseY does not take screen left/top into consideration anymore
+- Ported old AnimatedSprite to TileAnimation
 
 (28/8/15)
 - Snapping of objects can be done in debug mode when shift key is pressed.

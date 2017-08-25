@@ -32,11 +32,13 @@ class TileSheetLayer
 		for (sprite in root.elements())
 		{
 			var type:String = sprite.get("type");
-			//var tileName:String = sprite.get("n");
+			var tileName:String = sprite.get("n");
 			var x:Float = Std.parseFloat(sprite.get("x"));
 			var y:Float = Std.parseFloat(sprite.get("y"));
 			var width:Float = Std.parseFloat(sprite.get("w"));
 			var height:Float = Std.parseFloat(sprite.get("h"));
+      
+      var data:Array<Int> = new Array<Int>();
       
 			if (type == "multiple")
 			{
@@ -52,7 +54,8 @@ class TileSheetLayer
 				{
 					for (column in 0 ... totalWidth)
 					{
-						_tileSet.addRect(new Rectangle(x + (column * tileWidth), y + (row * tileHeight), tileWidth, tileHeight));
+						var idx = _tileSet.addRect(new Rectangle(x + (column * tileWidth), y + (row * tileHeight), tileWidth, tileHeight));
+            data.push(idx);
 					}
 				}
 			}
@@ -61,7 +64,8 @@ class TileSheetLayer
         _tileWidth.push(width);
         _tileHeight.push(height);
         
-        _tileSet.addRect(new Rectangle(x, y, width, height));
+        var idx = _tileSet.addRect(new Rectangle(x, y, width, height));
+        data.push(idx);
 			}
 			//else if (type == "font")
 			//{
@@ -85,11 +89,16 @@ class TileSheetLayer
 				//}
 			//}
 			
-			//_sprites.set(tileName, data);
+			_tiles.set(tileName, data);
 		}
   }
   
-  public function getID(name:String)
+  public function getID(name:String):Int
+  {
+    return _tiles.get(name)[0];
+  }
+  
+  public function getIDs(name:String):Array<Int>
   {
     return _tiles.get(name);
   }
@@ -104,7 +113,7 @@ class TileSheetLayer
     return _tileHeight[id];
   }
   
-  var _tiles:StringMap<Int>;
+  var _tiles:StringMap<Array<Int>>;
   var _tileSet:Tileset;
   var _tileWidth:Array<Float>;
   var _tileHeight:Array<Float>;
