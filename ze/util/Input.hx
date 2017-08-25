@@ -492,7 +492,7 @@ class Input
 	 */
 	private static function get_mouseX():Float
 	{
-		return _stage.mouseX + _scene.screen.left;
+		return _stage.mouseX;// + _scene.screen.left;
 	}
 	
 	/**
@@ -501,7 +501,7 @@ class Input
 	 */
 	private static function get_mouseY():Float
 	{
-		return _stage.mouseY + _scene.screen.top;
+		return _stage.mouseY;// + _scene.screen.top;
 	}
 	/**
 	 * Checks if touch controls is released this frame.

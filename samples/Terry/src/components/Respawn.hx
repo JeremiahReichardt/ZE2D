@@ -28,7 +28,7 @@ class Respawn extends Component
 	
 	private function disableAllRespawnPoint():Void
 	{
-		var respawnPoints:Array<GameObject> = scene.getGameObjectsByName("respawn");
+		var respawnPoints:Array<GameObject> = scene.getAllGameObjectsByName("respawn");
 		for (go in respawnPoints)
 		{
 			var anim:AnimatedSprite = go.getComponent(AnimatedSprite);

@@ -41,7 +41,7 @@ class TilesheetObject extends Graphic
 		
 		if (width == 0 || height == 0)
 		{
-			var rect:Rectangle = _tileSheetLayer.getTileRect(_tileID);
+			var rect:Rectangle = _tileSheetLayer.getRect(_tileID);
 			width = rect.width;
 			height = rect.height;
 		}

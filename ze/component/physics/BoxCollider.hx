@@ -60,7 +60,7 @@ class BoxCollider extends Collider
 		super.drawDebugShape();
 		_debugShape.graphics.clear();
 		_debugShape.graphics.beginFill(Color.PINK, 0.4);
-		_debugShape.graphics.drawRect(transform.x + offsetX, transform.y + offsetY, width, height);
+		_debugShape.graphics.drawRect(transform.x + offsetX + scene.screen.left, transform.y + offsetY - scene.screen.top, width, height);
 		_debugShape.graphics.endFill();
 	}
 }

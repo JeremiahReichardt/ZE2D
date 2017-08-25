@@ -1,6 +1,12 @@
 ###Changelog###
 DD/MM/YY
 
+(25/8/17)
+- Fixed GDebug cannot move object when shifting canvas (with spacebar)
+- Fixed collider debug draw not following after moving around (with spacebar)
+- Reimplementing Tile drawing with new OpenFL API, currently only image works
+- Input.mouseX and mouseY does not take screen left/top into consideration anymore
+
 (28/8/15)
 - Snapping of objects can be done in debug mode when shift key is pressed.
 - Fixed a bug where collider is not reset after transform.moveBy is called.

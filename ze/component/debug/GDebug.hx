@@ -128,9 +128,10 @@ class GDebug extends Component
 				if (Input.keyDown(Key.Z) || Input.keyDown(Key.CTRL))
 				{
 					if (_selectedGameObject != null)
-					{	
-						_selectedGameObject.transform.x = Input.mouseX - (_selectedGameObject.graphic.width * 0.5);
-						_selectedGameObject.transform.y = Input.mouseY - (_selectedGameObject.graphic.height * 0.5);
+					{
+            var graphic = _selectedGameObject.graphic;
+						_selectedGameObject.transform.x = Input.mouseX - (graphic.width  * 0.5) - graphic.offsetX - scene.screen.left;
+						_selectedGameObject.transform.y = Input.mouseY - (graphic.height * 0.5) - graphic.offsetY + scene.screen.top;
 						
 						if (_selectedGameObject.collider != null)
 						{
@@ -172,6 +173,8 @@ class GDebug extends Component
 					scene.screen.shift(_oldPos.x - Input.mouseX, _oldPos.y - Input.mouseY);
 					_oldPos.x = Input.mouseX;
 					_oldPos.y = Input.mouseY;
+          
+          toggleColliderDebugDraw(true);
 				}
 			}
 			else if (Input.leftMouseReleased())
@@ -211,68 +214,58 @@ class GDebug extends Component
 		var node:Node = scene._child.first;
 		while (node != null)
 		{
-			var current:GameObject = cast (node, GameObject);
-			if (current.graphic != null)
+			var current:GameObject = cast(node, GameObject);
+      
+      // Select the object based on the biggest size item (collider/graphics)
+      var x:Float = 0.0;
+			var y:Float = 0.0;
+      var width:Float = 0.0;
+      var height:Float = 0.0;
+      
+      if (current.graphic != null)
 			{
-				var x:Float = current.transform.x + current.graphic.offsetX;
-				var y:Float = current.transform.y + current.graphic.offsetY;
-				var width:Float = current.graphic.width;
-				var height:Float = current.graphic.height;
-				
-				if (mouseX > x)
-				{
-					if (mouseX < x + width)
-					{
-						if (mouseY > y)
-						{
-							if (mouseY < y + height)
-							{
-								_selectedGameObject = current;
-								printSelectObjectPosition();
-								
-								if (_debugCallBack != null)
-								{
-									_debugCallBack(current);
-								}
-								return;
-							}
-						}
-					}
-				}
-			}
-			else if (current.collider != null && Std.is(current.collider, BoxCollider))
+				x = current.transform.x + current.graphic.offsetX;
+				y = current.transform.y + current.graphic.offsetY;
+				width = current.graphic.width;
+				height = current.graphic.height;
+      }
+			
+      if (current.collider != null && Std.is(current.collider, BoxCollider))
 			{
-				var x:Float = current.transform.x + current.collider.offsetX;
-				var y:Float = current.transform.y + current.collider.offsetY;
-				var width:Float = cast(current.collider, BoxCollider).width;
-				var height:Float = cast(current.collider, BoxCollider).height;
-				
-				if (mouseX > x)
-				{
-					if (mouseX < x + width)
-					{
-						if (mouseY > y)
-						{
-							if (mouseY < y + height)
-							{
-								_selectedGameObject = current;
-								printSelectObjectPosition();
-								
-								if (_debugCallBack != null)
-								{
-									_debugCallBack(current);
-								}
-								return;
-							}
-						}
-					}
-				}
-			}
+				x = current.transform.x + current.collider.offsetX;
+				y = current.transform.y + current.collider.offsetY;
+				width = Math.max(cast(current.collider, BoxCollider).width, width);
+				height = Math.max(cast(current.collider, BoxCollider).height, height);
+      }
+      
+      x += scene.screen.left;
+      y -= scene.screen.top;
+      
+      //trace(mouseX, mouseY, x, y);
+      if (mouseX > x)
+      {
+        if (mouseX < x + width)
+        {
+          if (mouseY > y)
+          {
+            if (mouseY < y + height)
+            {
+              _selectedGameObject = current;
+              printSelectObjectPosition();
+              
+              if (_debugCallBack != null)
+              {
+                _debugCallBack(current);
+              }
+              return;
+            }
+          }
+        }
+      }
 			node = node._next;
 		}
 		
 		_positionText.setText("X: - Y: - ");
-		return null;
 	}
 	
 	private function enableAllGameObject():Void

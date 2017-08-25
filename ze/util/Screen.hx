@@ -1,11 +1,11 @@
 package ze.util;
 import haxe.ds.ArraySort;
+import haxe.ds.StringMap;
 import openfl.display.DisplayObject;
 import openfl.display.Graphics;
 import openfl.display.Sprite;
 import openfl.display.Stage;
 import ze.component.graphic.displaylist.DisplayListObject;
-import ze.component.graphic.Graphic;
 import ze.object.GameObject;
 import ze.object.Scene;
 
@@ -30,7 +30,7 @@ class Screen
 	private var _scene:Scene;
 	private var _sprite:Sprite;
 	private var _graphics:Graphics;
-	private var _tileSheetLayers:Array<TileSheetLayer>;
+	private var _tileSheetLayers:StringMap<TileSheetLayer>;
 	
 	public function new(scene:Scene)
 	{
@@ -44,37 +44,50 @@ class Screen
 		var stage:Stage = scene.engine.stage;
 		midX = stage.stageWidth >> 1;
 		midY = stage.stageHeight >> 1;
-		
-		_tileSheetLayers = [];
+    _tileSheetLayers = new StringMap();
 	}
 	
 	public function draw():Void 
 	{
 		_graphics.clear();
-		for (layer in _tileSheetLayers)
+		//for (layer in _tileSheetLayers)
 		{
-			layer.draw();
+			//layer.draw();
 		}
 	}
+  
+  public function createTileSheet(name:String, file:String):Void
+  {
+    var layer = new TileSheetLayer(file, width, height);
+    _tileSheetLayers.set(name, layer);
+    addChild(layer.tileMap);
+  }
+  
+  public function getTileSheet(name:String):TileSheetLayer
+  {
+    return _tileSheetLayers.get(name);
+  }
 	
-	public function addLayer(layer:TileSheetLayer):Void
-	{
-		_tileSheetLayers.push(layer);
-		layer.graphics = _graphics;
-	}
+	//public function addLayer(layer:TileSheetLayer):Void
+	//{
+		//_tileSheetLayers.push(layer);
+		//layer.graphics = _graphics;
+    
+    //addChild(layer.tileMap);
+	//}
 	
-	public function getLayer(name:String):TileSheetLayer
-	{
-		for (layer in _tileSheetLayers)
-		{
-			if (layer.spriteExist(name))
-			{
-				return layer;
-			}
-		}
-		
-		return null;
-	}
+	//public function getLayer(name:String):TileSheetLayer
+	//{
+		//for (layer in _tileSheetLayers)
+		//{
+			//if (layer.spriteExist(name))
+			//{
+				//return layer;
+			//}
+		//}
+		//
+		//return null;
+	//}
 	
 	public function sortDisplayObject():Void
 	{
@@ -121,7 +134,7 @@ class Screen
 		_scene = null;
 		_graphics = null;
 		_sprite = null;
-		_tileSheetLayers = null;
+		//_tileSheetLayers = null;
 	}
 	
 	private function get_top():Float
@@ -166,8 +179,9 @@ class Screen
 	
 	public function shift(x:Float = 0, y:Float = 0):Void
 	{
+    _sprite.x -= x;
 		_sprite.y -= y;
-		_sprite.x -= x;
+		
 		_x = _sprite.x;
 		_y = -_sprite.y;
 	}

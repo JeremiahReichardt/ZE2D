@@ -49,8 +49,8 @@ class Graphic extends Component
 	{
 		return transform.x + offsetY;
 	}
-	
-	private function get_width():Float
+  
+  private function get_width():Float
 	{
 		return width;
 	}
