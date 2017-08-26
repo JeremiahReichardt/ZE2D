@@ -64,8 +64,8 @@ class MainScene extends Scene
 		{
 			_hearts[i].graphic.visible = true;
 		}
-		
-		for (gameObject in getGameObjectsByName("Alien"))
+    
+		for (gameObject in getAllGameObjectsByName("Alien"))
 		{
 			removeGameObject(gameObject);
 		}
