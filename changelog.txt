@@ -9,6 +9,7 @@ DD/MM/YY
 - Fixed IMGUI
 - Fixed Plane
 - Fixed SimpleTutorial
+- Ported old TileSprite to TileTiledMap
 
 (25/8/17)
 - Fixed GDebug cannot move object when shifting canvas (with spacebar)
