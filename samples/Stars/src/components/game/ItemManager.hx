@@ -3,7 +3,7 @@ import components.Grid;
 import components.item.PickStar;
 import scenes.GameScene;
 import ze.component.core.Component;
-import ze.component.graphic.tilesheet.TilesheetSprite;
+import ze.component.graphic.tilesheet.TileImage;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 import ze.util.MathUtil;
@@ -41,7 +41,7 @@ class ItemManager extends Component
 			if (!grid.hasGridCollision(x, y))
 			{
 				gameObject.transform.setPos(grid.snapPoints(x), grid.snapPoints(y));
-				gameObject.addComponent(new TilesheetSprite("Star"));
+				gameObject.addComponent(new TileImage("sprites", "Star"));
 				break;
 			}
 		}

@@ -57,7 +57,7 @@ class Engine extends Sprite
 			openfl.system.System.exit(0);
 		}
 		#end
-		
+    
 		while (removeList.length > 0)
 		{
 			removeList[removeList.length - 1].destroyed();

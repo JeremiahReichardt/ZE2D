@@ -1,5 +1,5 @@
 package ze.component.ui;
-import ze.component.graphic.tilesheet.AnimatedSprite;
+import ze.component.graphic.tilesheet.TileAnimation;
 import ze.util.Input;
 
 /**
@@ -8,23 +8,25 @@ import ze.util.Input;
  */
 class Button extends UI
 {
+	private var _atlas:String;
 	private var _name:String;
 	private var _enterCallback:Void -> Void;
 	private var _exitCallback:Void -> Void;
 	private var _overCallback:Void -> Void;
 	private var _clickCallback:Void -> Void;
-	private var _animatedSprite:AnimatedSprite;
+	private var _animatedSprite:TileAnimation;
 	
-	public function new(name:String, width:Float, height:Float = null)
+	public function new(atlas:String, name:String, width:Float, height:Float = null)
 	{
 		super(width, height);
-		_name = name;
+		_atlas = atlas;
+    _name = name;
 	}
 	
 	override public function added():Void 
 	{
 		super.added();
-		_animatedSprite = new AnimatedSprite(_name);
+		_animatedSprite = new TileAnimation(_atlas, _name);
 		addComponent(_animatedSprite);
 	}
 	

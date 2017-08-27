@@ -40,6 +40,17 @@ class TileImage extends Graphic
     _tile.rotation = transform.rotation;
   }
   
+  override public function removed()
+  {
+    super.removed();
+    
+    var tileSheetLayer = scene.screen.getTileSheet(_tileName);
+    if (tileSheetLayer != null)
+      _tile = tileSheetLayer.tileMap.removeTile(_tile);
+    
+    _tile = null;
+  }
+  
   var _tileName:String;
   var _name:String;
   var _tile:Tile;

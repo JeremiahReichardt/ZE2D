@@ -1,7 +1,7 @@
 package ze.util;
 import openfl.Assets;
 import ze.component.graphic.displaylist.TileMap;
-import ze.component.graphic.tilesheet.TiledSprite;
+import ze.component.graphic.tilesheet.TileTiledMap;
 import ze.object.GameObject;
 import ze.object.Scene;
 
@@ -97,12 +97,12 @@ class OgmoLoader
 		}
 	}
 	
-	public function loadTiledSprite(tileImage:String, tileWidth:Int, tileHeight:Int, tileRow:Int, tileColumn:Int, gridFn:Int->Int->Void = null):Void
+	public function loadTiledSprite(atlas:String, tileImage:String, tileWidth:Int, tileHeight:Int, tileRow:Int, tileColumn:Int, gridFn:Int->Int->Void = null):Void
 	{
 		var mapWidth:Int = Std.parseInt(_levelXML.get("width"));
 		var mapHeight:Int = Std.parseInt(_levelXML.get("height"));
 		
-		var tileSprite:TiledSprite = new TiledSprite(tileImage, tileWidth, tileHeight, mapWidth, mapHeight, tileRow, tileColumn);
+		var tileSprite:TileTiledMap = new TileTiledMap(atlas, 8);
 		_scene.createGameObject("tiles", tileSprite);
 		
 		for (element in _levelXML.elementsNamed("Tiles"))
@@ -114,7 +114,7 @@ class OgmoLoader
 				var tx:Int = Std.parseInt(tiles.get("tx"));
 				var ty:Int = Std.parseInt(tiles.get("ty"));
 				
-				tileSprite.setTile(x, y, tx, ty);
+				tileSprite.setTile(x * tileWidth, y * tileHeight, tx, ty);
 				if (gridFn != null)
 				{
 					gridFn(x, y);

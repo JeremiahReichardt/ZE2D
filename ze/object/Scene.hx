@@ -103,7 +103,6 @@ class Scene extends Node
 	
 	public function removeGameObject(gameObject:GameObject):Void 
 	{
-		//trace(0);
 		detachChild(gameObject);
 	}
 	

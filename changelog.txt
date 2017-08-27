@@ -1,6 +1,15 @@
 ###Changelog###
 DD/MM/YY
 
+(27/8/17)
+- Fixed Stars (Turns out OpenFL 6.0.1 has bug, when Tile is removed, it is still visible), please don't use 6.0.1
+- Engine now removes components before removing objects
+
+(26/8/17)
+- Fixed IMGUI
+- Fixed Plane
+- Fixed SimpleTutorial
+
 (25/8/17)
 - Fixed GDebug cannot move object when shifting canvas (with spacebar)
 - Fixed collider debug draw not following after moving around (with spacebar)

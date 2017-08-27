@@ -15,16 +15,16 @@ class MainScene extends Scene
 	override public function added():Void
 	{
 		super.added();
-		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
-		screen.addLayer(tileSheetLayer);
+    
+    screen.createTileSheet("sprites", "atlas/sprites");
 		
-		var btn:Button = new Button("PlayBtn", 128, 32);
+		var btn:Button = new Button("sprites", "PlayBtn", 128, 32);
 		createGameObject("playBtn", btn, 265, 300);
 		btn.addButtonState(ButtonState.EXIT, [0]);
 		btn.addButtonState(ButtonState.ENTER, [1]);
 		btn.registerCallback(null, null, null, click);
 		
-		var btn:Button = new Button("QuitBtn", 128, 32);
+		var btn:Button = new Button("sprites", "QuitBtn", 128, 32);
 		createGameObject("quitBtn", btn, 265, 340);
 		btn.addButtonState(ButtonState.EXIT, [0]);
 		btn.addButtonState(ButtonState.ENTER, [1]);

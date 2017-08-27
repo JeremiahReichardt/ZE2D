@@ -4,6 +4,8 @@ import components.player.CountDown;
 import components.player.PlayerController;
 import ze.component.physics.Collider;
 import ze.component.sounds.Audio;
+import ze.util.Input;
+import ze.util.Key;
 
 /**
  * ...
@@ -26,6 +28,16 @@ class PickStar extends PickItem
 		
 		_spawnStarSfx.play();
 	}
+  
+  override public function update():Void 
+  {
+    super.update();
+    
+    if (Input.keyPressed(Key.Y))
+    {
+      scene.removeGameObject(gameObject);
+    }
+  }
 	
 	override private function onCollide(collider:Collider):Bool
 	{

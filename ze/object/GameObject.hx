@@ -57,8 +57,8 @@ class GameObject extends Node
 	
 	override public function removed():Void 
 	{
-		_child.removeAll();
 		scene.engine.addToRemoveList(this);
+    _child.removeAll();
 		super.removed();
 	}
 	

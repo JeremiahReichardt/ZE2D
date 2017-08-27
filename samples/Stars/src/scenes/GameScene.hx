@@ -27,8 +27,8 @@ class GameScene extends Scene
 	override public function added():Void
 	{
 		super.added();
-		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/sprites");
-		screen.addLayer(tileSheetLayer);
+    
+    screen.createTileSheet("sprites", "atlas/sprites");
 		
 		grid = new Grid(1280, 800, 32);
 		createGameObject("grid", grid);
@@ -36,7 +36,7 @@ class GameScene extends Scene
 		_ogmoLoader = new OgmoLoader(this);
 		_ogmoLoader.setOEL("level/Level " + level + ".oel");
 		
-		_ogmoLoader.loadTiledSprite("Checker", 32, 32, 8, 8, grid.setGrid);
+		_ogmoLoader.loadTiledSprite("sprites", "Checker", 32, 32, 8, 8, grid.setGrid);
 		
 		_ogmoLoader.setLayer("Entities");
 		_ogmoLoader.setEntity("Player", PlayerObject);
