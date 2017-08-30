@@ -1,14 +1,21 @@
 ###Changelog###
 DD/MM/YY
 
+(30/8/17)
+- Fixed get width/height in TileImage and TileAnimation
+- Fixed Terry loading issue (Turns out xml needs to respect the image order)
+- Extracted core functionality to TileDisplayObject
+
 (27/8/17)
 - Fixed Stars (Turns out OpenFL 6.0.1 has bug, when Tile is removed, it is still visible), please don't use 6.0.1
 - Engine now removes components before removing objects
+- Ported TilesheetText to TileText
+- Fixed TileSheetLayer demo
 
 (26/8/17)
-- Fixed IMGUI
-- Fixed Plane
-- Fixed SimpleTutorial
+- Fixed IMGUI demo
+- Fixed Plane demo
+- Fixed SimpleTutorial demo
 - Ported old TileSprite to TileTiledMap
 
 (25/8/17)

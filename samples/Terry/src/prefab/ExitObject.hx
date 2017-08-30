@@ -1,6 +1,6 @@
 package prefab;
 import components.Exit;
-import ze.component.graphic.tilesheet.AnimatedSprite;
+import ze.component.graphic.tilesheet.TileAnimation;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 
@@ -19,7 +19,7 @@ class ExitObject extends GameObject
 	{
 		super.added();
 		addComponent(new BoxCollider(32, 32, true));
-		var animation:AnimatedSprite = new AnimatedSprite("Exit");
+		var animation:TileAnimation = new TileAnimation("game", "Exit");
 		addComponent(animation);
 		animation.addAnimation("idle", [0, 1, 2, 3]);
 		animation.play("idle", 4);

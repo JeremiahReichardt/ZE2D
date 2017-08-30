@@ -1,6 +1,6 @@
 package components;
 import ze.component.core.Component;
-import ze.component.graphic.tilesheet.AnimatedSprite;
+import ze.component.graphic.tilesheet.TileAnimation;
 import ze.component.physics.Collider;
 import ze.object.GameObject;
 
@@ -36,7 +36,7 @@ class Switch extends Component
 				scene.removeGameObject(_gate);
 				_gate = null;
 				
-				var animation:AnimatedSprite = cast (graphic, AnimatedSprite);
+				var animation:TileAnimation = cast (graphic, TileAnimation);
 				if (animation.currentFrameLabel != "idle")
 				{
 					animation.playOnce("idle", 2);

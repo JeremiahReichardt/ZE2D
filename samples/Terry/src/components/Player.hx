@@ -2,7 +2,7 @@ package components;
 import openfl.Lib;
 import ze.component.core.CharacterController;
 import ze.component.core.Component;
-import ze.component.graphic.tilesheet.TilesheetSprite;
+import ze.component.graphic.tilesheet.TileImage;
 import ze.component.physics.BoxCollider;
 import ze.component.sounds.Audio;
 import ze.object.GameObject;
@@ -141,12 +141,12 @@ class Player extends Component
 		{
 			var x:Float = transform.x + (graphic.width * 0.5) - 2.5;
 			var y:Float = transform.y;
-			
+      
 			bullet = new GameObject("bullet", x, y);
 			scene.addGameObject(bullet);
 			bullet.addComponent(new BoxCollider(5, 5, true));
 			bullet.addComponent(new Bullet(direction, this));
-			bullet.addComponent(new TilesheetSprite("Bullet"));
+			bullet.addComponent(new TileImage("game", "Bullet"));
 			
 			_shootSfx.play();
 		}

@@ -1,6 +1,6 @@
 package prefab;
 import components.Respawn;
-import ze.component.graphic.tilesheet.AnimatedSprite;
+import ze.component.graphic.tilesheet.TileAnimation;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 
@@ -18,7 +18,7 @@ class RespawnObject extends GameObject
 	override public function added():Void 
 	{
 		super.added();
-		var animation:AnimatedSprite = new AnimatedSprite("Respawn");
+		var animation:TileAnimation = new TileAnimation("game", "Respawn");
 		addComponent(animation);
 		animation.addAnimation("idle", [0]);
 		animation.addAnimation("activated", [1]);

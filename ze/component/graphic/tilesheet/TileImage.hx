@@ -1,18 +1,15 @@
 package ze.component.graphic.tilesheet;
 import openfl.display.Tile;
-import ze.component.graphic.Graphic;
 
 /**
  * ...
  * @author Goh Zi He
  */
-class TileImage extends Graphic
+class TileImage extends TileDisplayObject
 {
   public function new(tileName:String, name:String) 
   {
-    super();
-    _tileName = tileName;
-    _name = name;
+    super(tileName, name);
   }
   
   override public function added():Void 
@@ -26,32 +23,9 @@ class TileImage extends Graphic
       _tile = new Tile(id, transform.x, transform.y, 1, 1, transform.rotation);
       tileSheetLayer.tileMap.addTile(_tile);
       
-      width = tileSheetLayer.getWidth(id);
-      height = tileSheetLayer.getHeight(id);
+      width = tileSheetLayer.getWidth(_name);
+      height = tileSheetLayer.getHeight(_name);
     }
   }
-  
-  override public function draw():Void 
-  {
-    super.draw();
-    
-    _tile.x = transform.x;
-    _tile.y = transform.y;
-    _tile.rotation = transform.rotation;
-  }
-  
-  override public function removed()
-  {
-    super.removed();
-    
-    var tileSheetLayer = scene.screen.getTileSheet(_tileName);
-    if (tileSheetLayer != null)
-      _tile = tileSheetLayer.tileMap.removeTile(_tile);
-    
-    _tile = null;
-  }
-  
-  var _tileName:String;
-  var _name:String;
-  var _tile:Tile;
 }
+

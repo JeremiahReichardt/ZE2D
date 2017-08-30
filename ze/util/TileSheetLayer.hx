@@ -4,6 +4,8 @@ import openfl.Assets;
 import openfl.display.Tilemap;
 import openfl.display.Tileset;
 import openfl.geom.Rectangle;
+import ze.component.graphic.tilesheet.TileText;
+import ze.component.graphic.tilesheet.TileText.TileTextFont;
 
 /**
  * ...
@@ -17,8 +19,6 @@ class TileSheetLayer
     _tileSet = new Tileset(bmData);
     
     _tiles = new StringMap();
-    _tileWidth = new Array<Float>();
-    _tileHeight = new Array<Float>();
     
     loadXML(name + ".xml");
     tileMap = new Tilemap(width, height, _tileSet);
@@ -37,18 +37,18 @@ class TileSheetLayer
 			var y:Float = Std.parseFloat(sprite.get("y"));
 			var width:Float = Std.parseFloat(sprite.get("w"));
 			var height:Float = Std.parseFloat(sprite.get("h"));
-      
       var data:Array<Int> = new Array<Int>();
+      
+      var tileWidth:Float = width;
+      var tileHeight:Float = height;
       
 			if (type == "multiple")
 			{
-				var tileWidth:Float = Std.parseFloat(sprite.get("tw"));
-				var tileHeight:Float = Std.parseFloat(sprite.get("th"));
+				tileWidth = Std.parseFloat(sprite.get("tw"));
+				tileHeight = Std.parseFloat(sprite.get("th"));
+        
 				var totalWidth:Int = Math.floor(width / tileWidth);
 				var totalHeight:Int = Math.floor(height / tileHeight);
-        
-        _tileWidth.push(tileWidth);
-        _tileHeight.push(tileHeight);
 				
 				for (row in 0 ... totalHeight)
 				{
@@ -61,62 +61,72 @@ class TileSheetLayer
 			}
 			else if (type == "single")
 			{
-        _tileWidth.push(width);
-        _tileHeight.push(height);
-        
         var idx = _tileSet.addRect(new Rectangle(x, y, width, height));
         data.push(idx);
 			}
-			//else if (type == "font")
-			//{
-				//var font:TilesheetTextFont = TilesheetText.registerFont(tileName, this);
-				//var xml:Xml = Xml.parse(Assets.getText("font/" + tileName + ".xml"));
-				//for (element in xml.firstElement().elementsNamed("chars"))
-				//{
-					//for (char in element.elements())
-					//{
-						//var id:Int = Std.parseInt(char.get("id"));
-						//var charX:Float = Std.parseFloat(char.get("x"));
-						//var charY:Float = Std.parseFloat(char.get("y"));
-						//var charWidth:Float = Std.parseFloat(char.get("width"));
-						//var charHeight:Float = Std.parseFloat(char.get("height"));
-						//
-						//var rect:Rectangle = new Rectangle(x + charX, y + charY, charWidth, charHeight);
-						//var index:Int = addRect(rect);
-						//font.setChar(String.fromCharCode(id), charWidth, charHeight, index);
-						//data.push(index);
-					//}
-				//}
-			//}
+			else if (type == "font")
+			{
+				var font:TileTextFont = TileText.registerFont(tileName, this);
+				var xml:Xml = Xml.parse(Assets.getText("font/" + tileName + ".xml"));
+				for (element in xml.firstElement().elementsNamed("chars"))
+				{
+					for (char in element.elements())
+					{
+						var id:Int = Std.parseInt(char.get("id"));
+						var charX:Float = Std.parseFloat(char.get("x"));
+						var charY:Float = Std.parseFloat(char.get("y"));
+						var charWidth:Float = Std.parseFloat(char.get("width"));
+						var charHeight:Float = Std.parseFloat(char.get("height"));
+						
+						var rect:Rectangle = new Rectangle(x + charX, y + charY, charWidth, charHeight);
+						var index:Int = _tileSet.addRect(rect);
+						font.setChar(String.fromCharCode(id), charWidth, charHeight, index);
+						data.push(index);
+					}
+				}
+			}
 			
-			_tiles.set(tileName, data);
+      var imageInfo = new TileImageInfo(data, tileWidth, tileHeight);
+			_tiles.set(tileName, imageInfo);
 		}
   }
   
   public function getID(name:String):Int
   {
-    return _tiles.get(name)[0];
+    return _tiles.get(name).data[0];
   }
   
   public function getIDs(name:String):Array<Int>
   {
-    return _tiles.get(name);
+    return _tiles.get(name).data;
   }
   
-  public function getWidth(id:Int):Float
+  public function getWidth(name:String):Float
   {
-    return _tileWidth[id];
+    return _tiles.get(name).width;
   }
   
-  public function getHeight(id:Int):Float
+  public function getHeight(name:String):Float
   {
-    return _tileHeight[id];
+    return _tiles.get(name).height;
   }
   
-  var _tiles:StringMap<Array<Int>>;
+  var _tiles:StringMap<TileImageInfo>;
   var _tileSet:Tileset;
-  var _tileWidth:Array<Float>;
-  var _tileHeight:Array<Float>;
   
   public var tileMap(default, null):Tilemap;
+}
+
+class TileImageInfo
+{
+  public var data:Array<Int> = new Array<Int>();
+  public var width:Float;
+  public var height:Float;
+  
+  public function new(data:Array<Int>, width:Float, height:Float)
+  {
+    this.data = data;
+    this.width = width;
+    this.height = height;
+  }
 }

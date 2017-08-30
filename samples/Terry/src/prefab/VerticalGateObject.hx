@@ -1,5 +1,5 @@
 package prefab;
-import ze.component.graphic.tilesheet.TilesheetSprite;
+import ze.component.graphic.tilesheet.TileImage;
 import ze.component.physics.BoxCollider;
 import ze.object.GameObject;
 
@@ -18,7 +18,7 @@ class VerticalGateObject extends GameObject
 	{
 		super.added();
 		addComponent(new BoxCollider(32, 64));
-		var image:TilesheetSprite = new TilesheetSprite("VerticalGate");
+		var image:TileImage = new TileImage("game", "VerticalGate");
 		addComponent(image);
 		image.layer = 1;
 	}

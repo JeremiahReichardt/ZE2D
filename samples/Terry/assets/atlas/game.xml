@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TextureAtlas imagePath="game" width="260" height="360">
-    <sprite type="single" n="Bullet" x="220" y="294" w="5" h="5" pX="0.5" pY="0.5"/>
-    <sprite type="single" n="Player" x="202" y="294" w="16" h="16" pX="0.5" pY="0.5"/>
-    <sprite type="single" n="Sign" x="168" y="294" w="32" h="32" pX="0.5" pY="0.5"/>
-    <sprite type="single" n="VerticalGate" x="134" y="294" w="32" h="64" pX="0.5" pY="0.5"/>
-    <sprite type="single" n="HorizontalGate" x="68" y="294" w="64" h="32" pX="0.5" pY="0.5"/>
-    <sprite type="multiple" n="Checker" x="2" y="2" w="256" h="256" pX="0.5" pY="0.5" tw="32" th="32"/>
-    <sprite type="multiple" n="Exit" x="2" y="260" w="128" h="32" pX="0.5" pY="0.5" tw="32" th="32"/>
-    <sprite type="multiple" n="Respawn" x="2" y="294" w="64" h="8" pX="0.5" pY="0.5" tw="32" th="8"/>
-    <sprite type="multiple" n="Switch" x="132" y="260" w="125" h="13" pX="0.5" pY="0.5" tw="25" th="13"/>/>
+  <sprite type="multiple" n="Checker" x="0" y="0" w="256" h="256" pX="0.5" pY="0.5" tw="32" th="32"/>
+  <sprite type="multiple" n="Exit" x="2" y="260" w="128" h="32" pX="0.5" pY="0.5" tw="32" th="32"/> 
+  <sprite type="multiple" n="Switch" x="132" y="260" w="125" h="13" pX="0.5" pY="0.5" tw="25" th="13"/>
+  <sprite type="multiple" n="Respawn" x="2" y="294" w="64" h="8" pX="0.5" pY="0.5" tw="32" th="8"/>
+  <sprite type="single" n="HorizontalGate" x="68" y="294" w="64" h="32" pX="0.5" pY="0.5"/>
+  <sprite type="single" n="VerticalGate" x="134" y="294" w="32" h="64" pX="0.5" pY="0.5"/>
+  <sprite type="single" n="Sign" x="168" y="294" w="32" h="32" pX="0.5" pY="0.5"/>
+  <sprite type="single" n="Player" x="202" y="294" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite type="single" n="Bullet" x="220" y="294" w="5" h="5" pX="0.5" pY="0.5"/>
 </TextureAtlas>

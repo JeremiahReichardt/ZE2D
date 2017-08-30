@@ -1,7 +1,6 @@
 package ze.component.graphic.tilesheet;
 import haxe.ds.StringMap;
 import openfl.display.Tile;
-import ze.component.graphic.Graphic;
 import ze.util.Time;
 
 /**
@@ -9,7 +8,7 @@ import ze.util.Time;
  * @author Goh Zi He
  */
 
-class TileAnimation extends Graphic
+class TileAnimation extends TileDisplayObject
 {
 	public var playing(default, null):Bool;
 	public var currentFrame(default, null):Int;
@@ -20,15 +19,9 @@ class TileAnimation extends Graphic
 	private var _playOnce:Bool;
 	private var _animationData:AnimationData;
   
-	var _tileName:String;
-	var _name:String;
-  var _tile:Tile;
-  
   public function new(tileName:String, name:String)
   {
-    _tileName = tileName;
-    _name = name;
-    super();
+    super(tileName, name);
   }
 	
 	override public function added():Void 
@@ -44,8 +37,8 @@ class TileAnimation extends Graphic
       _tile = new Tile(id, transform.x, transform.y, 1, 1, transform.rotation);
       tileSheetLayer.tileMap.addTile(_tile);
       
-      width = tileSheetLayer.getWidth(id);
-      height = tileSheetLayer.getHeight(id);
+      width = tileSheetLayer.getWidth(_name);
+      height = tileSheetLayer.getHeight(_name);
     }
 	}
 	

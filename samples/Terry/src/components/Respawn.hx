@@ -1,6 +1,6 @@
 package components;
 import ze.component.core.Component;
-import ze.component.graphic.tilesheet.AnimatedSprite;
+import ze.component.graphic.tilesheet.TileAnimation;
 import ze.component.physics.Collider;
 import ze.object.GameObject;
 
@@ -31,7 +31,7 @@ class Respawn extends Component
 		var respawnPoints:Array<GameObject> = scene.getAllGameObjectsByName("respawn");
 		for (go in respawnPoints)
 		{
-			var anim:AnimatedSprite = go.getComponent(AnimatedSprite);
+			var anim:TileAnimation = go.getComponent(TileAnimation);
 			if (go == gameObject)
 			{
 				anim.play("activated", 10);

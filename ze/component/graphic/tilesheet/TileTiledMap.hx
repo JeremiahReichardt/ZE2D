@@ -9,7 +9,6 @@ import ze.util.TileSheetLayer;
 class TileTiledMap extends Graphic
 {
   var _tileName:String;
-  var _tile:Tile;
   var _tileSheetLayer:TileSheetLayer;
   var _numSpritesPerRow:Int;
 	
@@ -29,7 +28,16 @@ class TileTiledMap extends Graphic
 	public function setTile(x:Int, y:Int, tx:Int, ty:Int):Void
 	{
     var id = ty * _numSpritesPerRow + tx;
-    _tile = new Tile(id, x, y, 1, 1, transform.rotation);
-    _tileSheetLayer.tileMap.addTile(_tile);
+    var tile = new Tile(id, x, y, 1, 1, transform.rotation);
+    _tileSheetLayer.tileMap.addTile(tile);
 	}
+  
+  override public function removed()
+  {
+    super.removed();
+    
+    var tileSheetLayer = scene.screen.getTileSheet(_tileName);
+    if (tileSheetLayer != null)
+      tileSheetLayer.tileMap.removeTiles(0, tileSheetLayer.tileMap.numTiles);
+  }
 }

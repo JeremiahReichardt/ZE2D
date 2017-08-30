@@ -14,7 +14,6 @@ import ze.object.Scene;
 import ze.util.Input;
 import ze.util.Key;
 import ze.util.OgmoLoader;
-import ze.util.TileSheetLayer;
 
 /**
  * ...
@@ -31,10 +30,9 @@ class MainScene extends Scene
 	{
 		super.added();
 		
-		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/game");
-		screen.addLayer(tileSheetLayer);
-		var tileSheetLayer:TileSheetLayer = new TileSheetLayer("atlas/ui");
-		screen.addLayer(tileSheetLayer);
+    screen.createTileSheet("game", "atlas/game");
+    screen.createTileSheet("ui", "atlas/ui");
+    screen.createTileSheet("font", "atlas/font");
 		
 		startLevel();
 	}
@@ -49,7 +47,7 @@ class MainScene extends Scene
 		if (!Assets.exists("level/Puzzle " + _level + ".oel")) _level = 1;
 		
 		_ogmoLoader.setOEL("level/Puzzle " + _level + ".oel");
-		_ogmoLoader.loadTiledSprite("Checker", 32, 32, 8, 8, setGrid);
+		_ogmoLoader.loadTiledSprite("game", "Checker", 32, 32, 8, 8, setGrid);
 		_ogmoLoader.setLayer("Collision");
 		_ogmoLoader.setEntity("rect", ColliderObject);
 		
