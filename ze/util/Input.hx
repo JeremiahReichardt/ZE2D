@@ -281,7 +281,9 @@ class Input
 						return true;
 					}
 				}
-			}
+      }
+      else
+        trace("[Input] ", keyString, " is not found");
 		}
 		
 		return false;
@@ -315,6 +317,8 @@ class Input
 					}
 				}
 			}
+      else 
+        trace("[Input] ", keyString, " is not found");
 		}
 		
 		return false;

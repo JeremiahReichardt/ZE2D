@@ -69,14 +69,17 @@ class Animation extends BitmapObject
 		}
 	}
 	
-	public function play(label:String, fps:Int = 30, startFrame:Int = 0):Animation
+	public function play(label:String, fps:Int = 30, startFrame:Int = 0, restart:Bool = false):Animation
 	{
-		_animationData.setCurrentAnimation(label);
-		_animationData.fps = fps;
-		_lastTime = Time.currentTime;
-		currentFrame = startFrame;
-		currentFrameLabel = label;
-		playing = true;
+    if (restart || _animationData.currentAnimLabel != label)
+    {
+      _animationData.setCurrentAnimation(label);
+      _animationData.fps = fps;
+      _lastTime = Time.currentTime;
+      currentFrame = startFrame;
+      currentFrameLabel = label;
+      playing = true;
+    }
 		return this;
 	}
 	
@@ -133,10 +136,10 @@ class Animation extends BitmapObject
 	private static function createAnimation(imageLabel:String, imagePath:String, animationWidth:Int, animationHeight:Int):AnimationData
 	{
 		// Get the name of the image and then cache it so all the same animations can use it
-		if (_animationCache.exists(imagePath))
+		if (_animationCache.exists(imageLabel))
 		{
 			trace("Animation already existed, removing first animation");
-			_animationCache.remove(imagePath);
+			_animationCache.remove(imageLabel);
 		}
 		
 		var bitmap:Bitmap = new Bitmap(Assets.getBitmapData(imagePath));
@@ -177,8 +180,9 @@ class AnimationData
 	public var totalFrames(get, null):Int;
 	public var fps(default, default):Int;
 	public var timePerFrame(get, null):Float;
+	public var currentAnimLabel(default, null):String;
 	
-	private var _animationData:Array<BitmapData>;
+  private var _animationData:Array<BitmapData>;
 	private var _animationFrames:Array<Int>;
 	private var _animationLabel:Map<String, Array<Int>>;
 	
@@ -201,6 +205,7 @@ class AnimationData
 	
 	public function setCurrentAnimation(animation:String):Void
 	{
+    currentAnimLabel = animation;
 		if (_animationLabel.exists(animation))
 		{
 			_animationFrames = _animationLabel.get(animation);

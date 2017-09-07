@@ -1,5 +1,11 @@
 ###Changelog###
 DD/MM/YY
+(7/9/17)
+- Added HaxeDevelop template
+
+(4/9/17)
+- Print error if strings don't exist in input string map
+- Added restart to Play animation
 
 (30/8/17)
 - Fixed get width/height in TileImage and TileAnimation

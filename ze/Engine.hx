@@ -13,7 +13,7 @@ import ze.util.Time;
  */
 class Engine extends Sprite 
 {
-	public static var version(default, null):String = "0.0.0";
+	public static var version(default, null):String = "0.1.0";
 	
 	private var _currentScene:Scene;
 	private var _enable:Bool;
@@ -71,12 +71,18 @@ class Engine extends Sprite
 		_currentScene.draw();
 	}
 	
+  /**
+   * Add a new scene to be loaded by the engine
+   * @param scene The new scene to be loaded
+   * @return
+   */
 	public function addScene(scene:Scene):Scene
 	{
 		if (_currentScene != null)
 		{
 			_currentScene.removed();
 		}
+    
 		Reflect.setProperty(scene, "engine", this);
 		scene.added();
 		_currentScene = scene;

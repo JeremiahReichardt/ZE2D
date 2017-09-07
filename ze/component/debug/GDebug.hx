@@ -45,7 +45,7 @@ class GDebug extends Component
 		_oldPos = new Point();
 		
 		_fpsText = new Text("FPS: ", Color.WHITE, 15);
-		scene.createGameObject("fps", _fpsText, 300);
+		scene.createGameObject("fps", _fpsText, 240);
 		_fpsText.layer = TEXTLAYER;
 		
 		_pausedText = new Text("Paused", Color.WHITE, 15);
@@ -58,12 +58,12 @@ class GDebug extends Component
 		_positionText.visible = _debugMode;
 		_positionText.layer = TEXTLAYER;
 		
-		_helpText = new Text("Select with mouse and move item when Z/Ctrl key is pressed.", Color.WHITE, 15);
+		_helpText = new Text("Select and move item with Z/Ctrl.", Color.WHITE, 15);
 		scene.createGameObject("Help", _helpText, 0, scene.screen.bottom - 20);
 		_helpText.visible = _debugMode;
 		_helpText.layer = TEXTLAYER;
 		
-		_consoleText = new Text("Debug: Press Tilde key to pause game and move things around.", Color.WHITE, 15);
+		_consoleText = new Text("Press tilde to pause and move things around.", Color.WHITE, 15);
 		scene.createGameObject("Console", _consoleText, 0, scene.screen.bottom - 20);
 		_consoleText.layer = TEXTLAYER;
 		
@@ -200,7 +200,7 @@ class GDebug extends Component
 		
 		#if flash
 		_memory = Math.ffloor(openfl.system.System.totalMemory / 1024 / 512);
-		_fpsText.setText("FPS: " + _times.length + " Memory: " + _memory + " MB");
+		_fpsText.setText("FPS: " + _times.length + " Mem: " + _memory + " MB");
 		#else
 		_fpsText.setText("FPS: " + _times.length);
 		#end
