@@ -71,27 +71,27 @@ class Animation extends BitmapObject
 	
 	public function play(label:String, fps:Int = 30, startFrame:Int = 0, restart:Bool = false):Animation
 	{
-    if (restart || _animationData.currentAnimLabel != label)
-    {
-      _animationData.setCurrentAnimation(label);
-      _animationData.fps = fps;
-      _lastTime = Time.currentTime;
-      currentFrame = startFrame;
-      currentFrameLabel = label;
-      playing = true;
-    }
+		if (restart || _animationData.currentAnimLabel != label)
+		{
+		  _animationData.setCurrentAnimation(label);
+		  _animationData.fps = fps;
+		  _lastTime = Time.currentTime;
+		  currentFrame = startFrame;
+		  currentFrameLabel = label;
+		  playing = true;
+		}
 		return this;
 	}
 	
-	public function playOnce(label:String, fps:Int = 30):Animation
+	public function playOnce(label:String, fps:Int = 30, restart:Bool = false):Animation
 	{
 		_playOnce = true;
-		return play(label, fps);
+		return play(label, fps, 0, restart);
 	}
 	
-	public function playLast(fps:Int = 30):Void
+	public function playLast(fps:Int = 30, restart:Bool = false):Void
 	{
-		play(currentFrameLabel, fps);
+		play(currentFrameLabel, fps, 0, restart);
 	}
 	
 	/**
@@ -182,7 +182,7 @@ class AnimationData
 	public var timePerFrame(get, null):Float;
 	public var currentAnimLabel(default, null):String;
 	
-  private var _animationData:Array<BitmapData>;
+	private var _animationData:Array<BitmapData>;
 	private var _animationFrames:Array<Int>;
 	private var _animationLabel:Map<String, Array<Int>>;
 	
@@ -205,7 +205,7 @@ class AnimationData
 	
 	public function setCurrentAnimation(animation:String):Void
 	{
-    currentAnimLabel = animation;
+		currentAnimLabel = animation;
 		if (_animationLabel.exists(animation))
 		{
 			_animationFrames = _animationLabel.get(animation);

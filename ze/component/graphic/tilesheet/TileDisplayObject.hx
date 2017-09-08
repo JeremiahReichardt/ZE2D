@@ -42,6 +42,28 @@ class TileDisplayObject extends Graphic
     return super.set_visible(value);
   }
   
+	override function get_scaleX():Float 
+	{
+		return _tile.scaleX;
+	}
+	
+	override function set_scaleX(value:Float):Float 
+	{
+		_tile.scaleX = value;
+		return value;
+	}
+	
+	override function get_scaleY():Float 
+	{
+		return _tile.scaleY;
+	}
+	
+	override function set_scaleY(value:Float):Float 
+	{
+		_tile.scaleY = value;
+		return value;
+	}
+  
   var _tileName:String;
   var _name:String;
   var _tile:Tile;

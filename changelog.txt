@@ -1,7 +1,12 @@
 ###Changelog###
 DD/MM/YY
+
+(8/9/17)
+- Made scaling be centered
+
 (7/9/17)
 - Added HaxeDevelop template
+- Added scaling in Graphic
 
 (4/9/17)
 - Print error if strings don't exist in input string map

@@ -32,12 +32,12 @@ class DisplayListObject extends Graphic
 		
 		if (flipped)
 		{
-			displayObject.scaleX = -1;
+			displayObject.scaleX = -scaleX;
 			displayObject.x = transform.x + displayObject.width + offsetX;
 		}
 		else
 		{
-			displayObject.scaleX = 1;
+			displayObject.scaleX = scaleX;
 			displayObject.x = transform.x + offsetX;
 		}
 		
@@ -110,5 +110,29 @@ class DisplayListObject extends Graphic
 	{
 		scene.screen.sortDisplayObject();
 		return super.set_layer(value);
+	}
+	
+	override function get_scaleX():Float 
+	{
+		return displayObject.scaleX;
+	}
+	
+	override function set_scaleX(value:Float):Float 
+	{
+		displayObject.scaleX = value;
+		set_centered(true);
+		return value;
+	}
+	
+	override function get_scaleY():Float 
+	{
+		return displayObject.scaleY;
+	}
+	
+	override function set_scaleY(value:Float):Float 
+	{
+		displayObject.scaleY = value;
+		set_centered(true);
+		return value;
 	}
 }

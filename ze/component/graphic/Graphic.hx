@@ -19,6 +19,8 @@ class Graphic extends Component
 	public var visible(default, set):Bool;
 	public var centered(default, set):Bool;
 	public var flipped(default, default):Bool;
+	public var scaleX(get, set):Float;
+	public var scaleY(get, set):Float;
 	
 	public function new()
 	{
@@ -50,14 +52,14 @@ class Graphic extends Component
 		return transform.x + offsetY;
 	}
   
-  private function get_width():Float
+	private function get_width():Float
 	{
-		return width;
+		return width * scaleX;
 	}
 	
 	private function get_height():Float
 	{
-		return height;
+		return height * scaleY;
 	}
 	
 	private function get_halfWidth():Float
@@ -96,6 +98,26 @@ class Graphic extends Component
 	{
 		visible = value;
 		return visible;
+	}
+	
+	function get_scaleX():Float 
+	{
+		return 1.0;
+	}
+	
+	function set_scaleX(value:Float):Float 
+	{
+		return value;
+	}
+	
+	function get_scaleY():Float 
+	{
+		return 1.0;
+	}
+	
+	function set_scaleY(value:Float):Float 
+	{
+		return value;
 	}
 	
 	public function draw():Void
