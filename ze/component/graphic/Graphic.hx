@@ -19,8 +19,8 @@ class Graphic extends Component
 	public var visible(default, set):Bool;
 	public var centered(default, set):Bool;
 	public var flipped(default, default):Bool;
-	public var scaleX(get, set):Float;
-	public var scaleY(get, set):Float;
+	public var scaleX(default, default):Float;
+	public var scaleY(default, default):Float;
 	
 	public function new()
 	{
@@ -34,6 +34,8 @@ class Graphic extends Component
 		flipped = false;
 		visible = true;
 		centered = false;
+		
+		scaleX = scaleY = 1.0;
 	}
 	
 	public function setOffset(x:Float = 0, y:Float = 0):Void
@@ -98,26 +100,6 @@ class Graphic extends Component
 	{
 		visible = value;
 		return visible;
-	}
-	
-	function get_scaleX():Float 
-	{
-		return 1.0;
-	}
-	
-	function set_scaleX(value:Float):Float 
-	{
-		return value;
-	}
-	
-	function get_scaleY():Float 
-	{
-		return 1.0;
-	}
-	
-	function set_scaleY(value:Float):Float 
-	{
-		return value;
 	}
 	
 	public function draw():Void

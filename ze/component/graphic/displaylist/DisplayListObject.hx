@@ -20,6 +20,8 @@ class DisplayListObject extends Graphic
 		scene.screen.addChild(displayObject);
 		update();
 		layer = 0;
+		
+		scaleX = scaleY = 1.0;
 	}
 	
 	override public function draw():Void 
@@ -40,6 +42,7 @@ class DisplayListObject extends Graphic
 			displayObject.scaleX = scaleX;
 			displayObject.x = transform.x + offsetX;
 		}
+		displayObject.scaleY = scaleY;
 		
 		displayObject.y = transform.y + offsetY;
 		displayObject.rotation = transform.rotation;
@@ -48,6 +51,11 @@ class DisplayListObject extends Graphic
 		{
 			width = displayObject.width;
 			height = displayObject.height;
+		}
+		
+		if (centered)
+		{
+			set_centered(true);
 		}
 	}
 	
@@ -110,29 +118,5 @@ class DisplayListObject extends Graphic
 	{
 		scene.screen.sortDisplayObject();
 		return super.set_layer(value);
-	}
-	
-	override function get_scaleX():Float 
-	{
-		return displayObject.scaleX;
-	}
-	
-	override function set_scaleX(value:Float):Float 
-	{
-		displayObject.scaleX = value;
-		set_centered(true);
-		return value;
-	}
-	
-	override function get_scaleY():Float 
-	{
-		return displayObject.scaleY;
-	}
-	
-	override function set_scaleY(value:Float):Float 
-	{
-		displayObject.scaleY = value;
-		set_centered(true);
-		return value;
 	}
 }

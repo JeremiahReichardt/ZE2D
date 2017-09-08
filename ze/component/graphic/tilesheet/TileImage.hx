@@ -25,6 +25,8 @@ class TileImage extends TileDisplayObject
       
       width = tileSheetLayer.getWidth(_name);
       height = tileSheetLayer.getHeight(_name);
+	  
+	  scaleX = scaleY = 1.0;
     }
   }
 }

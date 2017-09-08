@@ -6,7 +6,7 @@ ZE2D[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.s
 An [OpenFL](https://github.com/openfl/openfl) entity/component system game framework for [Haxe](http://haxe.org/).
 
 # Purpose
-Aims to create a simple and working proof of concept engine for easy usage for creating games in flash/haxe/openfl context.
+Aims to create a simple and working proof of concept engine for easy usage for creating games for Flash/HTML5/Windows.
 
 # What works currently?
 * Component Entity System?
